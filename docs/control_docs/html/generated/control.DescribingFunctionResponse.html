@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.DescribingFunctionResponse &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.FrequencyResponseList" href="control.FrequencyResponseList.html" />
+    <link rel="prev" title="control.ControlPlot" href="control.ControlPlot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.ControlPlot.html">control.ControlPlot</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.DescribingFunctionResponse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.FrequencyResponseData.html">control.FrequencyResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.FrequencyResponseList.html">control.FrequencyResponseList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.NyquistResponseData.html">control.NyquistResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.PoleZeroData.html">control.PoleZeroData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.TimeResponseData.html">control.TimeResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.TimeResponseList.html">control.TimeResponseList</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.DescribingFunctionResponse</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.DescribingFunctionResponse.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-describingfunctionresponse">
+<h1>control.DescribingFunctionResponse<a class="headerlink" href="#control-describingfunctionresponse" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">DescribingFunctionResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intersections</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/descfcn.py#L221-L272"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.DescribingFunctionResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Results of describing function analysis.</p>
+<p>Describing functions allow analysis of a linear I/O systems with a
+static nonlinear feedback function.  The DescribingFunctionResponse
+class is used by the <a class="reference internal" href="control.describing_function_response.html#control.describing_function_response" title="control.describing_function_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">describing_function_response()</span></code></a>
+function to return the results of a describing function analysis.  The
+response object can be used to obtain information about the describing
+function analysis or generate a Nyquist plot showing the frequency
+response of the linear systems and the describing function for the
+nonlinear element.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse.response">
+<span class="sig-name descname"><span class="pre">response</span></span><a class="headerlink" href="#control.DescribingFunctionResponse.response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frequency response of the linear system component of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.FrequencyResponseData.html#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse.intersections">
+<span class="sig-name descname"><span class="pre">intersections</span></span><a class="headerlink" href="#control.DescribingFunctionResponse.intersections" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all amplitudes and frequencies in which
+<span class="math">H(j\omega) N(a) = -1</span>, where <span class="math">N(a)</span> is the describing
+function associated with <cite>F</cite>, or <cite>None</cite> if there are no such
+points.  Each pair represents a potential limit cycle for the
+closed loop system with amplitude given by the first value of the
+tuple and frequency given by the second value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>1D array of 2-tuples or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse.N_vals">
+<span class="sig-name descname"><span class="pre">N_vals</span></span><a class="headerlink" href="#control.DescribingFunctionResponse.N_vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complex value of the describing function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>complex array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse.positions">
+<span class="sig-name descname"><span class="pre">positions</span></span><a class="headerlink" href="#control.DescribingFunctionResponse.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Location of the intersections in the complex plane.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of complex</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N_vals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intersections</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/descfcn.py#L250-L255"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.DescribingFunctionResponse.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a describing function response data object.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.DescribingFunctionResponse.__init__" title="control.DescribingFunctionResponse.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(response, N_vals, positions, ...)</p></td>
+<td><p>Create a describing function response data object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.DescribingFunctionResponse.plot" title="control.DescribingFunctionResponse.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(**kwargs)</p></td>
+<td><p>Plot the results of a describing function analysis.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.DescribingFunctionResponse.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/descfcn.py#L257-L262"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.DescribingFunctionResponse.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the results of a describing function analysis.</p>
+<p>See <a class="reference internal" href="control.describing_function_plot.html#control.describing_function_plot" title="control.describing_function_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">describing_function_plot()</span></code></a> for details.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.ControlPlot.html" class="btn btn-neutral float-left" title="control.ControlPlot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.FrequencyResponseList.html" class="btn btn-neutral float-right" title="control.FrequencyResponseList" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

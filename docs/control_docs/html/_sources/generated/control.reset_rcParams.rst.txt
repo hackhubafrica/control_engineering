@@ -1,0 +1,6 @@
+﻿control.reset\_rcParams
+=======================
+
+.. currentmodule:: control
+
+.. autofunction:: reset_rcParams

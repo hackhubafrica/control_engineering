@@ -1,0 +1,6 @@
+﻿control.frd
+===========
+
+.. currentmodule:: control
+
+.. autofunction:: frd

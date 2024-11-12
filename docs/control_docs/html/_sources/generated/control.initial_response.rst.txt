@@ -1,0 +1,6 @@
+﻿control.initial\_response
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: initial_response

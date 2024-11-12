@@ -1,0 +1,6 @@
+﻿control.timebase
+================
+
+.. currentmodule:: control
+
+.. autofunction:: timebase

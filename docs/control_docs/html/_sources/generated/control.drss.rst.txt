@@ -1,0 +1,6 @@
+﻿control.drss
+============
+
+.. currentmodule:: control
+
+.. autofunction:: drss

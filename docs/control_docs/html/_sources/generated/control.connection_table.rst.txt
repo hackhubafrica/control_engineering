@@ -1,0 +1,6 @@
+﻿control.connection\_table
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: connection_table

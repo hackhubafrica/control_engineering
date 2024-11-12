@@ -1,0 +1,6 @@
+﻿control.matlab.negate
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: negate

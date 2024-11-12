@@ -1,0 +1,6 @@
+﻿control.matlab.hsvd
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: hsvd

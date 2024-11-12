@@ -1,0 +1,6 @@
+﻿control.hankel\_singular\_values
+================================
+
+.. currentmodule:: control
+
+.. autofunction:: hankel_singular_values

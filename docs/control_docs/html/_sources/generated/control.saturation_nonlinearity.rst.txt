@@ -1,0 +1,21 @@
+﻿control.saturation\_nonlinearity
+================================
+
+.. currentmodule:: control
+
+.. autoclass:: saturation_nonlinearity
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~saturation_nonlinearity.describing_function
+   
+   

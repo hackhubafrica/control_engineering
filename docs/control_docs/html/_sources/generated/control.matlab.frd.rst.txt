@@ -1,0 +1,6 @@
+﻿control.matlab.frd
+==================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: frd

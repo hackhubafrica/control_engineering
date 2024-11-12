@@ -1,0 +1,6 @@
+﻿control.forced\_response
+========================
+
+.. currentmodule:: control
+
+.. autofunction:: forced_response

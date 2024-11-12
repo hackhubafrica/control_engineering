@@ -1,0 +1,6 @@
+﻿control.nlsys
+=============
+
+.. currentmodule:: control
+
+.. autofunction:: nlsys

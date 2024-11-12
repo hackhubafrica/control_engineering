@@ -1,0 +1,23 @@
+﻿control.flatsys.BasisFamily
+===========================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: BasisFamily
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~BasisFamily.eval
+      ~BasisFamily.eval_deriv
+      ~BasisFamily.var_ncoefs
+   
+   

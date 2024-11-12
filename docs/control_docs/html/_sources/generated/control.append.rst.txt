@@ -1,0 +1,6 @@
+﻿control.append
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: append

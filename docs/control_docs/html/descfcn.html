@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Describing functions &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="control.DescribingFunctionNonlinearity" href="generated/control.DescribingFunctionNonlinearity.html" />
+    <link rel="prev" title="Input/output systems" href="iosys.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Describing functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pre-defined-nonlinearities">Pre-defined nonlinearities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-classes-and-functions">Module classes and functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.DescribingFunctionNonlinearity.html">control.DescribingFunctionNonlinearity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.friction_backlash_nonlinearity.html">control.friction_backlash_nonlinearity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.relay_hysteresis_nonlinearity.html">control.relay_hysteresis_nonlinearity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.saturation_nonlinearity.html">control.saturation_nonlinearity</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Describing functions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/descfcn.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="describing-functions">
+<span id="descfcn-module"></span><h1>Describing functions<a class="headerlink" href="#describing-functions" title="Permalink to this heading">¶</a></h1>
+<p>For nonlinear systems consisting of a feedback connection between a
+linear system and a static nonlinearity, it is possible to obtain a
+generalization of Nyquist’s stability criterion based on the idea of
+describing functions.  The basic concept involves approximating the
+response of a static nonlinearity to an input <span class="math">u = A e^{j \omega
+t}</span> as an output <span class="math">y = N(A) (A e^{j \omega t})</span>, where <span class="math">N(A)
+\in \mathbb{C}</span> represents the (amplitude-dependent) gain and phase
+associated with the nonlinearity.</p>
+<p>Stability analysis of a linear system <span class="math">H(s)</span> with a feedback
+nonlinearity <span class="math">F(x)</span> is done by looking for amplitudes <span class="math">A</span>
+and frequencies <span class="math">\omega</span> such that</p>
+<div class="math">
+<p><span class="math">H(j\omega) N(A) = -1</span></p>
+</div><p>If such an intersection exists, it indicates that there may be a limit
+cycle of amplitude <span class="math">A</span> with frequency <span class="math">\omega</span>.</p>
+<p>Describing function analysis is a simple method, but it is approximate
+because it assumes that higher harmonics can be neglected.</p>
+<div class="section" id="module-usage">
+<h2>Module usage<a class="headerlink" href="#module-usage" title="Permalink to this heading">¶</a></h2>
+<p>The function <a class="reference internal" href="generated/control.describing_function.html#control.describing_function" title="control.describing_function"><code class="xref py py-func docutils literal notranslate"><span class="pre">describing_function()</span></code></a> can be used to
+compute the describing function of a nonlinear function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">describing_function</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Stability analysis using describing functions is done by looking for
+amplitudes <span class="math">a</span> and frequencies :math`omega` such that</p>
+<div class="math">
+<p><span class="math">H(j\omega) = \frac{-1}{N(A)}</span></p>
+</div><p>These points can be determined by generating a Nyquist plot in which
+the transfer function <span class="math">H(j\omega)</span> intersections the negative
+reciprocal of the describing function <span class="math">N(A)</span>.  The
+<a class="reference internal" href="generated/control.describing_function_response.html#control.describing_function_response" title="control.describing_function_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">describing_function_response()</span></code></a> function computes the
+amplitude and frequency of any points of intersection:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">describing_function_response</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">amp_range</span><span class="p">[,</span> <span class="n">omega_range</span><span class="p">])</span>
+<span class="n">response</span><span class="o">.</span><span class="n">intersections</span>      <span class="c1"># frequency, amplitude pairs</span>
+</pre></div>
+</div>
+<p>A Nyquist plot showing the describing function and the intersections
+with the Nyquist curve can be generated using <cite>response.plot()</cite>, which
+calls the <a class="reference internal" href="generated/control.describing_function_plot.html#control.describing_function_plot" title="control.describing_function_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">describing_function_plot()</span></code></a> function.</p>
+</div>
+<div class="section" id="pre-defined-nonlinearities">
+<h2>Pre-defined nonlinearities<a class="headerlink" href="#pre-defined-nonlinearities" title="Permalink to this heading">¶</a></h2>
+<p>To facilitate the use of common describing functions, the following
+nonlinearity constructors are predefined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">friction_backlash_nonlinearity</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>     <span class="c1"># backlash nonlinearity with width b</span>
+<span class="n">relay_hysteresis_nonlinearity</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>   <span class="c1"># relay output of amplitude b with</span>
+                                      <span class="c1"># hysteresis of half-width c</span>
+<span class="n">saturation_nonlinearity</span><span class="p">(</span><span class="n">ub</span><span class="p">[,</span> <span class="n">lb</span><span class="p">])</span>     <span class="c1"># saturation nonlinearity with upper</span>
+                                      <span class="c1"># bound and (optional) lower bound</span>
+</pre></div>
+</div>
+<p>Calling these functions will create an object <cite>F</cite> that can be used for
+describing function analysis.  For example, to create a saturation
+nonlinearity:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">saturation_nonlinearity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>These functions use the
+<a class="reference internal" href="generated/control.DescribingFunctionNonlinearity.html#control.DescribingFunctionNonlinearity" title="control.DescribingFunctionNonlinearity"><code class="xref py py-class docutils literal notranslate"><span class="pre">DescribingFunctionNonlinearity</span></code></a>, which allows an
+analytical description of the describing function.</p>
+</div>
+<div class="section" id="module-classes-and-functions">
+<h2>Module classes and functions<a class="headerlink" href="#module-classes-and-functions" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.DescribingFunctionNonlinearity.html#control.DescribingFunctionNonlinearity" title="control.DescribingFunctionNonlinearity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DescribingFunctionNonlinearity</span></code></a>()</p></td>
+<td><p>Base class for nonlinear systems with a describing function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.friction_backlash_nonlinearity.html#control.friction_backlash_nonlinearity" title="control.friction_backlash_nonlinearity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">friction_backlash_nonlinearity</span></code></a>(b)</p></td>
+<td><p>Backlash nonlinearity for describing function analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.relay_hysteresis_nonlinearity.html#control.relay_hysteresis_nonlinearity" title="control.relay_hysteresis_nonlinearity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">relay_hysteresis_nonlinearity</span></code></a>(b, c)</p></td>
+<td><p>Relay w/ hysteresis nonlinearity for describing function analysis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.saturation_nonlinearity.html#control.saturation_nonlinearity" title="control.saturation_nonlinearity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saturation_nonlinearity</span></code></a>([ub, lb])</p></td>
+<td><p>Create saturation nonlinearity for use in describing function analysis.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="iosys.html" class="btn btn-neutral float-left" title="Input/output systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/control.DescribingFunctionNonlinearity.html" class="btn btn-neutral float-right" title="control.DescribingFunctionNonlinearity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

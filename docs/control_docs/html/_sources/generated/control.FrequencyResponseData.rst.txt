@@ -1,0 +1,62 @@
+﻿control.FrequencyResponseData
+=============================
+
+.. currentmodule:: control
+
+.. autoclass:: FrequencyResponseData
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FrequencyResponseData.__init__
+      ~FrequencyResponseData.bandwidth
+      ~FrequencyResponseData.copy
+      ~FrequencyResponseData.damp
+      ~FrequencyResponseData.dcgain
+      ~FrequencyResponseData.eval
+      ~FrequencyResponseData.feedback
+      ~FrequencyResponseData.find_input
+      ~FrequencyResponseData.find_inputs
+      ~FrequencyResponseData.find_output
+      ~FrequencyResponseData.find_outputs
+      ~FrequencyResponseData.find_state
+      ~FrequencyResponseData.find_states
+      ~FrequencyResponseData.freqresp
+      ~FrequencyResponseData.frequency_response
+      ~FrequencyResponseData.isctime
+      ~FrequencyResponseData.isdtime
+      ~FrequencyResponseData.ispassive
+      ~FrequencyResponseData.issiso
+      ~FrequencyResponseData.plot
+      ~FrequencyResponseData.set_inputs
+      ~FrequencyResponseData.set_outputs
+      ~FrequencyResponseData.set_states
+      ~FrequencyResponseData.to_pandas
+      ~FrequencyResponseData.update_names
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FrequencyResponseData.frequency
+      ~FrequencyResponseData.input_labels
+      ~FrequencyResponseData.kwargs_list
+      ~FrequencyResponseData.magnitude
+      ~FrequencyResponseData.ninputs
+      ~FrequencyResponseData.noutputs
+      ~FrequencyResponseData.nstates
+      ~FrequencyResponseData.output_labels
+      ~FrequencyResponseData.phase
+      ~FrequencyResponseData.response
+      ~FrequencyResponseData.state_labels
+   
+   

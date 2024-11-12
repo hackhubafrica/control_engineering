@@ -1,0 +1,6 @@
+﻿control.get\_output\_fb\_index
+==============================
+
+.. currentmodule:: control
+
+.. autofunction:: get_output_fb_index

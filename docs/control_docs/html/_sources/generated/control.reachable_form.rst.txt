@@ -1,0 +1,6 @@
+﻿control.reachable\_form
+=======================
+
+.. currentmodule:: control
+
+.. autofunction:: reachable_form

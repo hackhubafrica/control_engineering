@@ -1,0 +1,6 @@
+﻿control.matlab.gram
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: gram

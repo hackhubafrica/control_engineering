@@ -1,0 +1,44 @@
+﻿control.InterconnectedSystem
+============================
+
+.. currentmodule:: control
+
+.. autoclass:: InterconnectedSystem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~InterconnectedSystem.check_unused_signals
+      ~InterconnectedSystem.connection_table
+      ~InterconnectedSystem.copy
+      ~InterconnectedSystem.dynamics
+      ~InterconnectedSystem.feedback
+      ~InterconnectedSystem.find_input
+      ~InterconnectedSystem.find_inputs
+      ~InterconnectedSystem.find_output
+      ~InterconnectedSystem.find_outputs
+      ~InterconnectedSystem.find_state
+      ~InterconnectedSystem.find_states
+      ~InterconnectedSystem.isctime
+      ~InterconnectedSystem.isdtime
+      ~InterconnectedSystem.issiso
+      ~InterconnectedSystem.linearize
+      ~InterconnectedSystem.output
+      ~InterconnectedSystem.set_connect_map
+      ~InterconnectedSystem.set_input_map
+      ~InterconnectedSystem.set_inputs
+      ~InterconnectedSystem.set_output_map
+      ~InterconnectedSystem.set_outputs
+      ~InterconnectedSystem.set_states
+      ~InterconnectedSystem.unused_signals
+      ~InterconnectedSystem.update_names
+   
+   

@@ -1,0 +1,23 @@
+﻿control.optimal.OptimalControlProblem
+=====================================
+
+.. currentmodule:: control.optimal
+
+.. autoclass:: OptimalControlProblem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OptimalControlProblem.compute_mpc
+      ~OptimalControlProblem.compute_trajectory
+      ~OptimalControlProblem.create_mpc_iosystem
+   
+   

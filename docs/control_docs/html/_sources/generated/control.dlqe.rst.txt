@@ -1,0 +1,6 @@
+﻿control.dlqe
+============
+
+.. currentmodule:: control
+
+.. autofunction:: dlqe

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.matlab.nichols &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.matlab.margin" href="control.matlab.margin.html" />
+    <link rel="prev" title="control.matlab.nyquist" href="control.matlab.nyquist.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#creating-linear-models">Creating linear models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#utility-functions-and-conversions">Utility functions and conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#system-gain-and-dynamics">System gain and dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#time-domain-analysis">Time-domain analysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../matlab.html#frequency-domain-analysis">Frequency-domain analysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.bode.html">control.matlab.bode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.nyquist.html">control.matlab.nyquist</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.matlab.nichols</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.matlab.nichols"><code class="docutils literal notranslate"><span class="pre">nichols()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.margin.html">control.matlab.margin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.freqresp.html">control.matlab.freqresp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.evalfr.html">control.matlab.evalfr</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#compensator-design">Compensator design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#state-space-ss-models">State-space (SS) models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#model-simplification">Model simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#time-delays">Time delays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#matrix-equation-solvers-and-linear-algebra">Matrix equation solvers and linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#additional-functions">Additional functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#functions-imported-from-other-modules">Functions imported from other modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../matlab.html">MATLAB compatibility module</a></li>
+      <li class="breadcrumb-item active">control.matlab.nichols</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.matlab.nichols.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-matlab-nichols">
+<h1>control.matlab.nichols<a class="headerlink" href="#control-matlab-nichols" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.matlab.nichols">
+<span class="sig-prename descclassname"><span class="pre">control.matlab.</span></span><span class="sig-name descname"><span class="pre">nichols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nichols.py#L37-L174"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.matlab.nichols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nichols plot for a system.</p>
+<p>Plots a Nichols plot for the system over a (optional) frequency range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (list of <cite>FrequencyResponseData</cite> or <cite>LTI</cite>) – List of LTI systems or <code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code> objects.  A
+single system or frequency response can also be passed.</p></li>
+<li><p><strong>omega</strong> (<em>array_like</em>) – Range of frequencies (list or bounds) in rad/sec</p></li>
+<li><p><strong>*fmt</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot()</span></code></a> format string, optional) – Passed to <cite>matplotlib</cite> as the format string for all lines in the plot.
+The <cite>omega</cite> parameter must be present (use omega=None if needed).</p></li>
+<li><p><strong>grid</strong> (<em>boolean</em><em>, </em><em>optional</em>) – True if the plot should include a Nichols-chart grid. Default is True.</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot()</span></code></a> keyword properties, optional) – Additional keywords passed to <cite>matplotlib</cite> to specify line properties.</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><em>matplotlib.axes.Axes</em></a><em>, </em><em>optional</em>) – The matplotlib axes to draw the figure on.  If not specified and
+the current figure has a single axes, that axes is used.
+Otherwise, a new figure is created.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em> or </em><em>array_like</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – If present, replace automatically generated label(s) with given
+label(s).  If sysdata is a list, strings should be specified for each
+system.</p></li>
+<li><p><strong>legend_loc</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Include a legend in the given location. Default is ‘upper left’,
+with no legend for a single response.  Use False to suppress legend.</p></li>
+<li><p><strong>rcParams</strong> (<em>dict</em>) – Override the default parameters used for generating plots.
+Default is set by config.default[‘ctrlplot.rcParams’].</p></li>
+<li><p><strong>show_legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Force legend to be shown if <code class="docutils literal notranslate"><span class="pre">True</span></code> or hidden if <code class="docutils literal notranslate"><span class="pre">False</span></code>.  If
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, then show legend when there is more than one line on the
+plot or <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code> has been specified.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the title of the plot.  Defaults to plot type and system name(s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>cplt</strong> –</p>
+<blockquote>
+<div><p>Object containing the data that were plotted:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>cplt.lines: 1D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code></a> objects.
+The size of the array matches the number of systems and the
+value of the array is a list of Line2D objects for that system.</p></li>
+<li><p>cplt.axes: 2D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a> for the plot.</p></li>
+<li><p>cplt.figure: <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></a> containing the plot.</p></li>
+<li><p>cplt.legend: legend object(s) contained in the plot</p></li>
+</ul>
+</div></blockquote>
+<p>See <code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code> for more detailed information.</p>
+</div></blockquote>
+<p>lines : array of Line2D</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code> object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.matlab.nyquist.html" class="btn btn-neutral float-left" title="control.matlab.nyquist" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.matlab.margin.html" class="btn btn-neutral float-right" title="control.matlab.margin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

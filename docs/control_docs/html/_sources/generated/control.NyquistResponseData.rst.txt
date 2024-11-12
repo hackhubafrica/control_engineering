@@ -1,0 +1,23 @@
+﻿control.NyquistResponseData
+===========================
+
+.. currentmodule:: control
+
+.. autoclass:: NyquistResponseData
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NyquistResponseData.__init__
+      ~NyquistResponseData.plot
+   
+   
+
+   
+   
+   

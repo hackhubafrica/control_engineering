@@ -1,0 +1,6 @@
+﻿control.matlab.zero
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: zero

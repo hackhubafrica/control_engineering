@@ -1,0 +1,6 @@
+﻿control.lyap
+============
+
+.. currentmodule:: control
+
+.. autofunction:: lyap

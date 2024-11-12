@@ -1,0 +1,6 @@
+﻿control.phaseplot.streamlines
+=============================
+
+.. currentmodule:: control.phaseplot
+
+.. autofunction:: streamlines

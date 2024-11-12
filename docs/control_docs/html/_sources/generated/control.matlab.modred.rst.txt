@@ -1,0 +1,6 @@
+﻿control.matlab.modred
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: modred

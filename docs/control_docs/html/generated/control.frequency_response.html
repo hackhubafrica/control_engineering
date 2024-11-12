@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.frequency_response &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.get_input_ff_index" href="control.get_input_ff_index.html" />
+    <link rel="prev" title="control.describing_function" href="control.describing_function.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_response.html">control.describing_function_response</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.frequency_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.forced_response.html">control.forced_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.gangof4_response.html">control.gangof4_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.impulse_response.html">control.impulse_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.initial_response.html">control.initial_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nyquist_response.html">control.nyquist_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_map.html">control.pole_zero_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_map.html">control.root_locus_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_response.html">control.singular_values_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.step_response.html">control.step_response</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.frequency_response</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.frequency_response.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-frequency-response">
+<h1>control.frequency_response<a class="headerlink" href="#control-frequency-response" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.frequency_response">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">frequency_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sysdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L375-L513"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.frequency_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frequency response of an LTI system at multiple angular frequencies.</p>
+<p>In general the system may be multiple input, multiple output (MIMO), where
+<cite>m = sys.ninputs</cite> number of inputs and <cite>p = sys.noutputs</cite> number of
+outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sysdata</strong> (<em>LTI system</em><em> or </em><em>list</em><em> of </em><em>LTI systems</em>) – Linear system(s) for which frequency response is computed.</p></li>
+<li><p><strong>omega</strong> (<em>float</em><em> or </em><em>1D array_like</em><em>, </em><em>optional</em>) – Frequencies in radians/sec at which the system should be
+evaluated. Can be a single frequency or array of frequencies, which
+will be sorted before evaluation.  If None (default), a common set
+of frequencies that works across all given systems is computed.</p></li>
+<li><p><strong>omega_limits</strong> (<em>array_like</em><em> of </em><em>two values</em><em>, </em><em>optional</em>) – Limits to the range of frequencies, in rad/sec. Specifying
+<code class="docutils literal notranslate"><span class="pre">omega</span></code> as a list of two elements is equivalent to providing
+<code class="docutils literal notranslate"><span class="pre">omega_limits</span></code>.  Ignored if omega is provided.</p></li>
+<li><p><strong>omega_num</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of frequency samples at which to compute the response.
+Defaults to config.defaults[‘freqplot.number_of_samples’].  Ignored
+if omega is provided.</p></li>
+<li><p><strong>Hz</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, when computing frequency limits automatically set
+limits to full decades in Hz instead of rad/s. Omega is always
+returned in rad/sec.</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squeeze=True, remove single-dimensional entries from the shape of
+the output even if the system is not SISO. If squeeze=False, keep all
+indices (output, input and, if omega is array_like, frequency) even if
+the system is SISO. The default value can be set using
+config.defaults[‘control.squeeze_frequency_response’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>response</strong> – Frequency response data object representing the frequency response.
+This object can be assigned to a tuple using</p>
+<blockquote>
+<div><p>mag, phase, omega = response</p>
+</div></blockquote>
+<p>where <code class="docutils literal notranslate"><span class="pre">mag</span></code> is the magnitude (absolute value, not dB or log10) of
+the system frequency response, <code class="docutils literal notranslate"><span class="pre">phase</span></code> is the wrapped phase in
+radians of the system frequency response, and <code class="docutils literal notranslate"><span class="pre">omega</span></code> is the
+(sorted) frequencies at which the response was evaluated.  If the
+system is SISO and squeeze is not False, <code class="docutils literal notranslate"><span class="pre">magnitude</span></code> and <code class="docutils literal notranslate"><span class="pre">phase</span></code>
+are 1D, indexed by frequency.  If the system is not SISO or squeeze
+is False, the array is 3D, indexed by the output, input, and
+frequency.  If <code class="docutils literal notranslate"><span class="pre">squeeze</span></code> is True then single-dimensional axes are
+removed.</p>
+<p>Returns a list of <a class="reference internal" href="control.FrequencyResponseData.html#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a> objects if sys is
+a list of systems.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.FrequencyResponseData.html#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evalfr</span></code>, <a class="reference internal" href="control.bode_plot.html#control.bode_plot" title="control.bode_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bode_plot</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>This function is a wrapper for <a class="reference internal" href="control.StateSpace.html#control.StateSpace.frequency_response" title="control.StateSpace.frequency_response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">StateSpace.frequency_response()</span></code></a>
+and <a class="reference internal" href="control.TransferFunction.html#control.TransferFunction.frequency_response" title="control.TransferFunction.frequency_response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">TransferFunction.frequency_response()</span></code></a>.</p></li>
+<li><p>You can also use the lower-level methods <code class="docutils literal notranslate"><span class="pre">sys(s)</span></code> or <code class="docutils literal notranslate"><span class="pre">sys(z)</span></code> to
+generate the frequency response for a single system.</p></li>
+<li><p>All frequency data should be given in rad/sec.  If frequency limits
+are computed automatically, the <cite>Hz</cite> keyword can be used to ensure
+that limits are in factors of decades in Hz, so that Bode plots with
+<cite>Hz=True</cite> look better.</p></li>
+<li><p>The frequency response data can be plotted by calling the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">control_bode_plot()</span></code> function or using the <cite>plot</cite> method of
+the <a class="reference internal" href="control.FrequencyResponseData.html#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a> class.</p></li>
+</ol>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mag</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">freqresp</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Add example with MIMO system</p>
+<p>#&gt;&gt;&gt; sys = rss(3, 2, 2)
+#&gt;&gt;&gt; mag, phase, omega = freqresp(sys, [0.1, 1., 10.])
+#&gt;&gt;&gt; mag[0, 1, :]
+#array([ 55.43747231,  42.47766549,   1.97225895])
+#&gt;&gt;&gt; phase[1, 0, :]
+#array([-0.12611087, -1.14294316,  2.5764547 ])
+#&gt;&gt;&gt; # This is the magnitude of the frequency response from the 2nd
+#&gt;&gt;&gt; # input to the 1st output, and the phase (in radians) of the
+#&gt;&gt;&gt; # frequency response from the 1st input to the 2nd output, for
+#&gt;&gt;&gt; # s = 0.1i, i, 10i.</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.describing_function.html" class="btn btn-neutral float-left" title="control.describing_function" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.get_input_ff_index.html" class="btn btn-neutral float-right" title="control.get_input_ff_index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

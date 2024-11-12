@@ -1,0 +1,6 @@
+﻿control.white\_noise
+====================
+
+.. currentmodule:: control
+
+.. autofunction:: white_noise

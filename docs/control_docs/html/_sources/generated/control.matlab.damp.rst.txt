@@ -1,0 +1,6 @@
+﻿control.matlab.damp
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: damp

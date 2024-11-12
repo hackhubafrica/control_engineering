@@ -1,0 +1,6 @@
+﻿control.frequency\_response
+===========================
+
+.. currentmodule:: control
+
+.. autofunction:: frequency_response

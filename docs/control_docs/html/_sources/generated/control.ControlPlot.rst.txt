@@ -1,0 +1,30 @@
+﻿control.ControlPlot
+===================
+
+.. currentmodule:: control
+
+.. autoclass:: ControlPlot
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ControlPlot.__init__
+      ~ControlPlot.reshape
+      ~ControlPlot.set_plot_title
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ControlPlot.shape
+   
+   

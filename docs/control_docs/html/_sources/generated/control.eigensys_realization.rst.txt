@@ -1,0 +1,6 @@
+﻿control.eigensys\_realization
+=============================
+
+.. currentmodule:: control
+
+.. autofunction:: eigensys_realization

@@ -1,0 +1,6 @@
+﻿control.model\_reduction
+========================
+
+.. currentmodule:: control
+
+.. autofunction:: model_reduction

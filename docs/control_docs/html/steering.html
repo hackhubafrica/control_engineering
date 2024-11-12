@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vehicle steering &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Stochastic Response" href="stochresp.html" />
+    <link rel="prev" title="Simulating interconnections of systems" href="simulating_discrete_nonlinear.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Vehicle steering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Vehicle-steering-dynamics-(Example-3.11)">Vehicle steering dynamics (Example 3.11)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Vehicle-driving-on-a-curvy-road-(Figure-8.6a)">Vehicle driving on a curvy road (Figure 8.6a)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Linearization-of-lateral-steering-dynamics-(Example-6.13)">Linearization of lateral steering dynamics (Example 6.13)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Eigenvalue-placement-controller-design-(Example-7.4)">Eigenvalue placement controller design (Example 7.4)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Eigenvalue-placement-observer-design-(Example-8.3)">Eigenvalue placement observer design (Example 8.3)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Output-Feedback-Controller-(Example-8.4)">Output Feedback Controller (Example 8.4)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Trajectory-Generation-(Example-8.8)">Trajectory Generation (Example 8.8)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Vehicle-transfer-functions-for-forward-and-reverse-driving-(Example-10.11)">Vehicle transfer functions for forward and reverse driving (Example 10.11)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Feedforward-Compensation-(Example-12.6)">Feedforward Compensation (Example 12.6)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Fundamental-Limits-(Example-14.13)">Fundamental Limits (Example 14.13)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Vehicle steering</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/steering.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="Vehicle-steering">
+<h1>Vehicle steering<a class="headerlink" href="#Vehicle-steering" title="Permalink to this heading">¶</a></h1>
+<p>Karl J. Astrom and Richard M. Murray 23 Jul 2019</p>
+<p>This notebook contains the computations for the vehicle steering running example in <em>Feedback Systems</em>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">import</span> <span class="nn">control.optimal</span> <span class="k">as</span> <span class="nn">opt</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">use_fbs_defaults</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Vehicle-steering-dynamics-(Example-3.11)">
+<h2>Vehicle steering dynamics (Example 3.11)<a class="headerlink" href="#Vehicle-steering-dynamics-(Example-3.11)" title="Permalink to this heading">¶</a></h2>
+<p>The vehicle dynamics are given by a simple bicycle model. We take the state of the system as <span class="math">(x, y, \theta)</span> where <span class="math">(x, y)</span> is the position of the reference point of the vehicle in the plane and <span class="math">\theta</span> is the angle of the vehicle with respect to horizontal. The vehicle input is given by <span class="math">(v, \delta)</span> where <span class="math">v</span> is the forward velocity of the vehicle and <span class="math">\delta</span> is the angle of the steering wheel. We take as parameters the wheelbase <span class="math">b</span> and the offset
+<span class="math">a</span> between the rear wheels and the reference point. The model includes saturation of the vehicle steering angle (<code class="docutils literal notranslate"><span class="pre">maxsteer</span></code>).</p>
+<ul class="simple">
+<li><p>System state: <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">theta</span></code></p></li>
+<li><p>System input: <code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">delta</span></code></p></li>
+<li><p>System output: <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p>System parameters: <code class="docutils literal notranslate"><span class="pre">wheelbase</span></code>, <code class="docutils literal notranslate"><span class="pre">refoffset</span></code>, <code class="docutils literal notranslate"><span class="pre">maxsteer</span></code></p></li>
+</ul>
+<p>Assuming no slipping of the wheels, the motion of the vehicle is given by a rotation around a point O that depends on the steering angle <span class="math">\delta</span>. To compute the angle <span class="math">\alpha</span> of the velocity of the reference point with respect to the axis of the vehicle, we let the distance from the center of rotation O to the contact point of the rear wheel be <span class="math">r_\text{r}</span> and it the follows from Figure 3.17 in FBS that <span class="math">b = r_\text{r} \tan \delta</span> and
+<span class="math">a = r_\text{r} \tan \alpha</span>, which implies that <span class="math">\tan \alpha = (a/b) \tan \delta</span>.</p>
+<p>Reasonable limits for the steering angle depend on the speed. The physical limit is given in our model as 0.5 radians (about 30 degrees). However, this limit is rarely possible when the car is driving since it would cause the tires to slide on the pavement. We us a limit of 0.1 radians (about 6 degrees) at 10 m/s (<span class="math">\approx</span> 35 kph) and 0.05 radians (about 3 degrees) at 30 m/s (<span class="math">\approx</span> 110 kph). Note that a steering angle of 0.05 rad gives a cross acceleration of
+<span class="math">(v^2/b) \tan \delta \approx (100/3) 0.05 = 1.7</span> <span class="math">\text{m/s}^2</span> at 10 m/s and 15 <span class="math">\text{m/s}^2</span> at 30 m/s (<span class="math">\approx</span> 1.5 times the force of gravity).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">vehicle_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Get the parameters for the model</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;refoffset&#39;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>        <span class="c1"># offset to vehicle reference point</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>         <span class="c1"># vehicle wheelbase</span>
+    <span class="n">maxsteer</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;maxsteer&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># max steering angle (rad)</span>
+
+    <span class="c1"># Saturate the steering input</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">maxsteer</span><span class="p">,</span> <span class="n">maxsteer</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">),</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="c1"># Return the derivative of the state</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">),</span>    <span class="c1"># xdot = cos(theta + alpha) v</span>
+        <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">),</span>    <span class="c1"># ydot = sin(theta + alpha) v</span>
+        <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>      <span class="c1"># thdot = v/l tan(phi)</span>
+    <span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">vehicle_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Default vehicle parameters (including nominal velocity)</span>
+<span class="n">vehicle_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;refoffset&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;wheelbase&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+                <span class="s1">&#39;maxsteer&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span>
+
+<span class="c1"># Define the vehicle steering dynamics as an input/output system</span>
+<span class="n">vehicle</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+    <span class="n">vehicle_update</span><span class="p">,</span> <span class="n">vehicle_output</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;vehicle&#39;</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;delta&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="n">params</span><span class="o">=</span><span class="n">vehicle_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Vehicle-driving-on-a-curvy-road-(Figure-8.6a)">
+<h2>Vehicle driving on a curvy road (Figure 8.6a)<a class="headerlink" href="#Vehicle-driving-on-a-curvy-road-(Figure-8.6a)" title="Permalink to this heading">¶</a></h2>
+<p>To illustrate the dynamics of the system, we create an input that correspond to driving down a curvy road. This trajectory will be used in future simulations as a reference trajectory for estimation and control.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># System parameters</span>
+<span class="n">wheelbase</span> <span class="o">=</span> <span class="n">vehicle_params</span><span class="p">[</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">]</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="n">vehicle_params</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">]</span>
+
+<span class="c1"># Control inputs</span>
+<span class="n">T_curvy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">v_curvy</span> <span class="o">=</span> <span class="n">v0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T_curvy</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">delta_curvy</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">T_curvy</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">T_curvy</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0025</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">T_curvy</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">u_curvy</span> <span class="o">=</span> <span class="p">[</span><span class="n">v_curvy</span><span class="p">,</span> <span class="n">delta_curvy</span><span class="p">]</span>
+<span class="n">X0_curvy</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Simulate the system + estimator</span>
+<span class="n">t_curvy</span><span class="p">,</span> <span class="n">y_curvy</span><span class="p">,</span> <span class="n">x_curvy</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">vehicle</span><span class="p">,</span> <span class="n">T_curvy</span><span class="p">,</span> <span class="n">u_curvy</span><span class="p">,</span> <span class="n">X0_curvy</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">vehicle_params</span><span class="p">,</span> <span class="n">return_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configure matplotlib plots to be a bit bigger and optimize layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+
+<span class="c1"># Plot the resulting trajectory (and some road boundaries)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_curvy</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_curvy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_curvy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">9</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_curvy</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">y_curvy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_curvy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_curvy</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">y_curvy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_curvy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_curvy</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">y_curvy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x [m]&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;Equal&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the lateral position</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_curvy</span><span class="p">,</span> <span class="n">y_curvy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Lateral position $y$ [m]&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the steering angle</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_curvy</span><span class="p">,</span> <span class="n">delta_curvy</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Steering angle $</span><span class="se">\\</span><span class="s1">delta$ [rad]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t [sec]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_5_0.png" src="_images/steering_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Linearization-of-lateral-steering-dynamics-(Example-6.13)">
+<h2>Linearization of lateral steering dynamics (Example 6.13)<a class="headerlink" href="#Linearization-of-lateral-steering-dynamics-(Example-6.13)" title="Permalink to this heading">¶</a></h2>
+<p>We are interested in the motion of the vehicle about a straight-line path (<span class="math">\theta = \theta_0</span>) with constant velocity <span class="math">v_0 \neq 0</span>. To find the relevant equilibrium point, we first set <span class="math">\dot\theta = 0</span> and we see that we must have <span class="math">\delta = 0</span>, corresponding to the steering wheel being straight. The motion in the xy plane is by definition not at equilibrium and so we focus on lateral deviation of the vehicle from a straight line. For simplicity, we let
+<span class="math">\theta_\text{e} = 0</span>, which corresponds to driving along the <span class="math">x</span> axis. We can then focus on the equations of motion in the <span class="math">y</span> and <span class="math">\theta</span> directions with input <span class="math">u = \delta</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the lateral dynamics as a subset of the full vehicle steering dynamics</span>
+<span class="n">lateral</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">vehicle_update</span><span class="p">(</span>
+        <span class="n">t</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;velocity&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">params</span><span class="p">)[</span><span class="mi">1</span><span class="p">:],</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">vehicle_output</span><span class="p">(</span>
+        <span class="n">t</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;velocity&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">params</span><span class="p">)[</span><span class="mi">1</span><span class="p">:],</span>
+    <span class="n">states</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;lateral&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;phi&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Compute the linearization at velocity v0 = 15 m/sec</span>
+<span class="n">lateral_linearized</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">lateral</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="n">vehicle_params</span><span class="p">)</span>
+
+<span class="c1"># Normalize dynamics using state [x1/b, x2] and timescale v0 t / b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">vehicle_params</span><span class="p">[</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">]</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="n">vehicle_params</span><span class="p">[</span><span class="s1">&#39;velocity&#39;</span><span class="p">]</span>
+<span class="n">lateral_transformed</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">similarity_transform</span><span class="p">(</span>
+    <span class="n">lateral_linearized</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="o">/</span><span class="n">b</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="n">timescale</span><span class="o">=</span><span class="n">v0</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Set the output to be the normalized state x1/b</span>
+<span class="n">lateral_normalized</span> <span class="o">=</span> <span class="n">lateral_transformed</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Linearized system dynamics:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lateral_normalized</span><span class="p">)</span>
+
+<span class="c1"># Save the system matrices for later use</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">lateral_normalized</span><span class="o">.</span><span class="n">A</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">lateral_normalized</span><span class="o">.</span><span class="n">B</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">lateral_normalized</span><span class="o">.</span><span class="n">C</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Linearized system dynamics:
+
+A = [[0. 1.]
+     [0. 0.]]
+
+B = [[0.5]
+     [1. ]]
+
+C = [[1. 0.]]
+
+D = [[0.]]
+
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Eigenvalue-placement-controller-design-(Example-7.4)">
+<h2>Eigenvalue placement controller design (Example 7.4)<a class="headerlink" href="#Eigenvalue-placement-controller-design-(Example-7.4)" title="Permalink to this heading">¶</a></h2>
+<p>We want to design a controller that stabilizes the dynamics of the vehicle and tracks a given reference value <span class="math">r</span> of the lateral position of the vehicle. We use feedback to design the dynamics of the system to have the characteristic polynomial <span class="math">p(s) = s^2 + 2 \zeta_\text{c} \omega_\text{c} + \omega_\text{c}^2</span>.</p>
+<p>To find reasonable values of <span class="math">\omega_\text{c}</span> we observe that the initial response of the steering angle to a unit step change in the steering command is <span class="math">\omega_\text{c}^2 r</span>, where <span class="math">r</span> is the commanded lateral transition. Recall that the model is normalized so that the length unit is the wheelbase <span class="math">b</span> and the time unit is the time <span class="math">b/v_0</span> to travel one wheelbase. A typical car has a wheelbase of about 3 m and, assuming a speed of 30 m/s, a normalized time unit
+corresponds to 0.1 s. To determine a reasonable steering angle when making a gentle lane change, we assume that the turning radius is <span class="math">R</span> = 600 m. For a wheelbase of 3 m this corresponds to a steering angle <span class="math">\delta \approx 3/600 = 0.005</span> rad and a lateral acceleration of <span class="math">v^2/R</span> = 302/600 = 1.5 m/s<span class="math">^2</span>. Assuming that a lane change corresponds to a translation of one wheelbase we find <span class="math">\omega_\text{c} = \sqrt{0.005}</span> = 0.07 rad/s.</p>
+<p>The unit step responses for the closed loop system for different values of the design parameters are shown below. The effect of <span class="math">\omega_c</span> is shown on the left, which shows that the response speed increases with increasing <span class="math">\omega_\text{c}</span>. All responses have overshoot less than 5% (15 cm), as indicated by the dashed lines. The settling times range from 30 to 60 normalized time units, which corresponds to about 3–6 s, and are limited by the acceptable lateral acceleration of the
+vehicle. The effect of <span class="math">\zeta_\text{c}</span> is shown on the right. The response speed and the overshoot increase with decreasing damping. Using these plots, we conclude that a reasonable design choice is <span class="math">\omega_\text{c} = 0.07</span> and <span class="math">\zeta_\text{c} = 0.7</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility function to place poles for the normalized vehicle steering system</span>
+<span class="k">def</span> <span class="nf">normalized_place</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">zc</span><span class="p">):</span>
+    <span class="c1"># Get the dynamics and input matrices, for later use</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">lateral_normalized</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">lateral_normalized</span><span class="o">.</span><span class="n">B</span>
+
+    <span class="c1"># Compute the eigenvalues from the characteristic polynomial</span>
+    <span class="n">eigs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">zc</span><span class="o">*</span><span class="n">wc</span><span class="p">,</span> <span class="n">wc</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="c1"># Compute the feedback gain using eigenvalue placement</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">place_varga</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">eigs</span><span class="p">)</span>
+
+    <span class="c1"># Create a new system representing the closed loop response</span>
+    <span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">StateSpace</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="n">K</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">lateral_normalized</span><span class="o">.</span><span class="n">C</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Compute the feedforward gain based on the zero frequency gain of the closed loop</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">clsys</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="c1"># Scale the input by the feedforward gain</span>
+    <span class="n">clsys</span> <span class="o">*=</span> <span class="n">kf</span>
+
+    <span class="c1"># Return gains and closed loop system dynamics</span>
+    <span class="k">return</span> <span class="n">K</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">clsys</span>
+
+<span class="c1"># Utility function to plot simulation results for normalized vehicle steering system</span>
+<span class="k">def</span> <span class="nf">normalized_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inpfig</span><span class="p">,</span> <span class="n">outfig</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">outfig</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">inpfig</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Utility function to label plots of normalized vehicle steering system</span>
+<span class="k">def</span> <span class="nf">normalized_label</span><span class="p">(</span><span class="n">inpfig</span><span class="p">,</span> <span class="n">outfig</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">inpfig</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Normalized time $v_0 t / b$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Steering angle $\delta$ [rad]&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">outfig</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Lateral position $y/b$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Configure matplotlib plots to be a bit bigger and optimize layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+
+<span class="c1"># Explore range of values for omega_c, with zeta_c = 0.7</span>
+<span class="n">outfig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">inpfig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">zc</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="k">for</span> <span class="n">wc</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+    <span class="c1"># Place the poles of the system</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">normalized_place</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">zc</span><span class="p">)</span>
+
+    <span class="c1"># Compute the step response</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">clsys</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">return_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Compute the input used to generate the control response</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">kf</span> <span class="o">*</span> <span class="mi">1</span>
+
+    <span class="c1"># Plot the results</span>
+    <span class="n">normalized_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inpfig</span><span class="p">,</span> <span class="n">outfig</span><span class="p">)</span>
+
+<span class="c1"># Add labels to the figure</span>
+<span class="n">normalized_label</span><span class="p">(</span><span class="n">inpfig</span><span class="p">,</span> <span class="n">outfig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;$\omega_c = 0.5$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\omega_c = 0.7$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\omega_c = 0.1$&#39;</span><span class="p">))</span>
+
+<span class="c1"># Explore range of values for zeta_c, with omega_c = 0.07</span>
+<span class="n">outfig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">inpfig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="k">for</span> <span class="n">zc</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+    <span class="c1"># Place the poles of the system</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">normalized_place</span><span class="p">(</span><span class="n">wc</span><span class="p">,</span> <span class="n">zc</span><span class="p">)</span>
+
+    <span class="c1"># Compute the step response</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">clsys</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">return_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Compute the input used to generate the control response</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">@</span> <span class="n">x</span> <span class="o">+</span> <span class="n">kf</span> <span class="o">*</span> <span class="mi">1</span>
+
+    <span class="c1"># Plot the results</span>
+    <span class="n">normalized_plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">inpfig</span><span class="p">,</span> <span class="n">outfig</span><span class="p">)</span>
+
+<span class="c1"># Add labels to the figure</span>
+<span class="n">normalized_label</span><span class="p">(</span><span class="n">inpfig</span><span class="p">,</span> <span class="n">outfig</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;$\zeta_c = 0.5$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\zeta_c = 0.7$&#39;</span><span class="p">,</span> <span class="s1">&#39;$\zeta_c = 1$&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_9_0.png" src="_images/steering_9_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Eigenvalue-placement-observer-design-(Example-8.3)">
+<h2>Eigenvalue placement observer design (Example 8.3)<a class="headerlink" href="#Eigenvalue-placement-observer-design-(Example-8.3)" title="Permalink to this heading">¶</a></h2>
+<p>We construct an estimator for the (normalized) lateral dynamics by assigning the eigenvalues of the estimator dynamics to desired value, specifified in terms of the second order characteristic equation for the estimator dynamics.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the eigenvalue from the characteristic polynomial</span>
+<span class="n">wo</span> <span class="o">=</span> <span class="mi">1</span>          <span class="c1"># bandwidth for the observer</span>
+<span class="n">zo</span> <span class="o">=</span> <span class="mf">0.7</span>        <span class="c1"># damping ratio for the observer</span>
+<span class="n">eigs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">zo</span><span class="o">*</span><span class="n">wo</span><span class="p">,</span> <span class="n">wo</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Compute the estimator gain using eigenvalue placement</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span>
+    <span class="n">ct</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">C</span><span class="p">),</span> <span class="n">eigs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = &quot;</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+
+<span class="c1"># Create a linear model of the lateral dynamics driving the estimator</span>
+<span class="n">est</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">StateSpace</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">L</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span><span class="n">B</span><span class="p">,</span> <span class="n">L</span><span class="p">]]),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+L =  [[1.4]
+ [1. ]]
+</pre></div></div>
+</div>
+<div class="section" id="Linear-observer-applied-to-nonlinear-system-output">
+<h3>Linear observer applied to nonlinear system output<a class="headerlink" href="#Linear-observer-applied-to-nonlinear-system-output" title="Permalink to this heading">¶</a></h3>
+<p>A simulation of the observer for a vehicle driving on a curvy road is shown below. The first figure shows the trajectory of the vehicle on the road, as viewed from above. The response of the observer is shown on the right, where time is normalized to the vehicle length. We see that the observer error settles in about 4 vehicle lengths.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the curvy trajectory into normalized coordinates</span>
+<span class="n">x_ref</span> <span class="o">=</span> <span class="n">x_curvy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">wheelbase</span>
+<span class="n">y_ref</span> <span class="o">=</span> <span class="n">x_curvy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">wheelbase</span>
+<span class="n">theta_ref</span> <span class="o">=</span> <span class="n">x_curvy</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">*</span> <span class="n">T_curvy</span> <span class="o">/</span> <span class="n">b</span>
+
+<span class="c1"># Simulate the estimator, with a small initial error in y position</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y_est</span><span class="p">,</span> <span class="n">x_est</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">forced_response</span><span class="p">(</span><span class="n">est</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="p">[</span><span class="n">delta_curvy</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">return_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Configure matplotlib plots to be a bit bigger and optimize layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+
+<span class="c1"># Plot the actual and estimated states</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_est</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;actual&#39;</span><span class="p">,</span> <span class="s1">&#39;estimated&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Lateral position $y/b$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_est</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_ref</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Lateral error&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_ref</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_est</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Normalized time $v_0 t / b$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Vehicle angle $</span><span class="se">\\</span><span class="s1">theta$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_est</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">theta_ref</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Normalized time $v_0 t / b$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Angle error&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_13_0.png" src="_images/steering_13_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Output-Feedback-Controller-(Example-8.4)">
+<h2>Output Feedback Controller (Example 8.4)<a class="headerlink" href="#Output-Feedback-Controller-(Example-8.4)" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the feedback gains</span>
+<span class="c1"># K, kf, clsys = normalized_place(1, 0.707)     # Gains from MATLAB</span>
+<span class="c1"># K, kf, clsys = normalized_place(0.07, 0.707)  # Original gains</span>
+<span class="n">K</span><span class="p">,</span> <span class="n">kf</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">normalized_place</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.707</span><span class="p">)</span>       <span class="c1"># Final gains</span>
+
+<span class="c1"># Print out the gains</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K = &quot;</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kf = &quot;</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+
+<span class="c1"># Construct an output-based controller for the system</span>
+<span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">StateSpace</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span><span class="n">A</span><span class="p">,</span> <span class="o">-</span><span class="n">B</span><span class="nd">@K</span><span class="p">],</span> <span class="p">[</span><span class="n">L</span><span class="nd">@C</span><span class="p">,</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="nd">@K</span> <span class="o">-</span> <span class="n">L</span><span class="nd">@C</span><span class="p">]]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span><span class="n">B</span><span class="p">],</span> <span class="p">[</span><span class="n">B</span><span class="p">]])</span> <span class="o">*</span> <span class="n">kf</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([[</span><span class="n">C</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">C</span><span class="p">]]),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># Simulate the system</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">forced_response</span><span class="p">(</span><span class="n">clsys</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">return_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Calcaluate the input used to generate the control response</span>
+<span class="n">u_sfb</span> <span class="o">=</span> <span class="n">kf</span> <span class="o">*</span> <span class="n">y_ref</span> <span class="o">-</span> <span class="n">K</span> <span class="o">@</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">u_ofb</span> <span class="o">=</span> <span class="n">kf</span> <span class="o">*</span> <span class="n">y_ref</span> <span class="o">-</span> <span class="n">K</span> <span class="o">@</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># Configure matplotlib plots to be a bit bigger and optimize layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+
+<span class="c1"># Plot the actual and estimated states</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_ref</span><span class="p">,</span> <span class="s1">&#39;k-.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;state feedback&#39;</span><span class="p">,</span> <span class="s1">&#39;output feedback&#39;</span><span class="p">,</span> <span class="s1">&#39;reference&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Normalized time $v_0 t / b$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Lateral position $y/b$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">theta_ref</span><span class="p">,</span> <span class="s1">&#39;k-.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Vehicle angle $</span><span class="se">\\</span><span class="s1">theta$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u_sfb</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u_ofb</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_curvy</span><span class="p">,</span> <span class="s1">&#39;k-.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Normalized time $v_0 t / b$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Steering angle $</span><span class="se">\\</span><span class="s1">delta$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+K =  [[0.49   0.7448]]
+kf =  0.4899999999999182
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_15_1.png" src="_images/steering_15_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Trajectory-Generation-(Example-8.8)">
+<h2>Trajectory Generation (Example 8.8)<a class="headerlink" href="#Trajectory-Generation-(Example-8.8)" title="Permalink to this heading">¶</a></h2>
+<p>To illustrate how we can use a two degree-of-freedom design to improve the performance of the system, consider the problem of steering a car to change lanes on a road. We use the non-normalized form of the dynamics, which were derived in Example 3.11.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">control.flatsys</span> <span class="k">as</span> <span class="nn">fs</span>
+
+<span class="c1"># Function to take states, inputs and return the flat flag</span>
+<span class="k">def</span> <span class="nf">vehicle_flat_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="c1"># Get the parameter values</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+
+    <span class="c1"># Create a list of arrays to store the flat output and its derivatives</span>
+    <span class="n">zflag</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+
+    <span class="c1"># Flat output is the x, y position of the rear wheels</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># First derivatives of the flat output</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># dx/dt</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># dy/dt</span>
+
+    <span class="c1"># First derivative of the angle</span>
+    <span class="n">thdot</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Second derivatives of the flat output (setting vdot = 0)</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">thdot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">thdot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">zflag</span>
+
+<span class="c1"># Function to take the flat flag and return states, inputs</span>
+<span class="k">def</span> <span class="nf">vehicle_flat_reverse</span><span class="p">(</span><span class="n">zflag</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="c1"># Get the parameter values</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+
+    <span class="c1"># Create a vector to store the state and inputs</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Given the flat variables, solve for the state</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># x position</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># y position</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># tan(theta) = ydot/xdot</span>
+
+    <span class="c1"># And next solve for the inputs</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">thdot_v</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">thdot_v</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span>
+
+<span class="n">vehicle_flat</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">FlatSystem</span><span class="p">(</span><span class="n">vehicle_flat_forward</span><span class="p">,</span> <span class="n">vehicle_flat_reverse</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility function to plot lane change trajectory</span>
+<span class="k">def</span> <span class="nf">plot_vehicle_lanechange</span><span class="p">(</span><span class="n">traj</span><span class="p">):</span>
+    <span class="c1"># Create the trajectory</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Configure matplotlib plots to be a bit bigger and optimize layout</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>
+
+    <span class="c1"># Plot the trajectory in xy coordinate</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x [m]&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add lane lines and scale the axis</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">])</span>
+
+    <span class="c1"># Time traces of the state and input</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;theta [rad]&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t [sec]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;v [m/s]&#39;</span><span class="p">)</span>
+    <span class="c1"># plt.axis([0, t[-1], u0[0] - 1, uf[0] + 1])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t [sec]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\delta$ [rad]&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>To find a trajectory from an initial state <span class="math">x_0</span> to a final state <span class="math">x_\text{f}</span> in time <span class="math">T_\text{f}</span> we solve a point-to-point trajectory generation problem. We also set the initial and final inputs, which sets the vehicle velocity <span class="math">v</span> and steering wheel angle <span class="math">\delta</span> at the endpoints.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the endpoints of the trajectory</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">u0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">xf</span> <span class="o">=</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">uf</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="n">xf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">uf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Define a set of basis functions to use for the trajectories</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Find a trajectory between the initial condition and the final condition</span>
+<span class="n">traj1</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">plot_vehicle_lanechange</span><span class="p">(</span><span class="n">traj1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_20_0.png" src="_images/steering_20_0.png" />
+</div>
+</div>
+<div class="section" id="Change-of-basis-function">
+<h3>Change of basis function<a class="headerlink" href="#Change-of-basis-function" title="Permalink to this heading">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bezier</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">BezierFamily</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">traj2</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">bezier</span><span class="p">)</span>
+<span class="n">plot_vehicle_lanechange</span><span class="p">(</span><span class="n">traj2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_22_0.png" src="_images/steering_22_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Added-cost-function">
+<h3>Added cost function<a class="headerlink" href="#Added-cost-function" title="Permalink to this heading">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">traj_cost</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">quadratic_cost</span><span class="p">(</span>
+    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]),</span> <span class="n">x0</span><span class="o">=</span><span class="n">xf</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="n">uf</span><span class="p">)</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="n">opt</span><span class="o">.</span><span class="n">input_range_constraint</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span> <span class="p">]</span>
+
+<span class="n">traj3</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span>
+     <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="n">traj_cost</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">poly</span>
+<span class="p">)</span>
+<span class="n">plot_vehicle_lanechange</span><span class="p">(</span><span class="n">traj3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_24_0.png" src="_images/steering_24_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Vehicle-transfer-functions-for-forward-and-reverse-driving-(Example-10.11)">
+<h2>Vehicle transfer functions for forward and reverse driving (Example 10.11)<a class="headerlink" href="#Vehicle-transfer-functions-for-forward-and-reverse-driving-(Example-10.11)" title="Permalink to this heading">¶</a></h2>
+<p>The vehicle steering model has different properties depending on whether we are driving forward or in reverse. The figures below show step responses from steering angle to lateral translation for a the linearized model when driving forward (dashed) and reverse (solid). In this simulation we have added an extra pole with the time constant <span class="math">T=0.1</span> to approximately account for the dynamics in the steering system.</p>
+<p>With rear-wheel steering the center of mass first moves in the wrong direction and the overall response with rear-wheel steering is significantly delayed compared with that for front-wheel steering. (b) Frequency response for driving forward (dashed) and reverse (solid). Notice that the gain curves are identical, but the phase curve for driving in reverse has non-minimum phase.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Magnitude of the steering input (half maximum)</span>
+<span class="n">Msteer</span> <span class="o">=</span> <span class="n">vehicle_params</span><span class="p">[</span><span class="s1">&#39;maxsteer&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="c1"># Create a linearized model of the system going forward at 2 m/s</span>
+<span class="n">forward_lateral</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">lateral</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">forward_tf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss2tf</span><span class="p">(</span><span class="n">forward_lateral</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forward TF = &quot;</span><span class="p">,</span> <span class="n">forward_tf</span><span class="p">)</span>
+
+<span class="c1"># Create a linearized model of the system going in reverise at 1 m/s</span>
+<span class="n">reverse_lateral</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">lateral</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;velocity&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">2</span><span class="p">})</span>
+<span class="n">reverse_tf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss2tf</span><span class="p">(</span><span class="n">reverse_lateral</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reverse TF = &quot;</span><span class="p">,</span> <span class="n">reverse_tf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Forward TF =
+          s + 1.333
+-----------------------------
+s^2 + 7.828e-16 s - 1.848e-16
+
+Reverse TF =
+          -s + 1.333
+-----------------------------
+s^2 - 7.828e-16 s - 1.848e-16
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure matplotlib plots to be a bit bigger and optimize layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># Forward motion</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">forward_tf</span> <span class="o">*</span> <span class="n">Msteer</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Reverse motion</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">reverse_tf</span> <span class="o">*</span> <span class="n">Msteer</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add labels and reference lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;reverse&#39;</span><span class="p">],</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time $t$ [s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Lateral position [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plot the Bode plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">bode_plot</span><span class="p">(</span><span class="n">forward_tf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">bode_plot</span><span class="p">(</span><span class="n">reverse_tf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="s1">&#39;reverse&#39;</span><span class="p">));</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_27_0.png" src="_images/steering_27_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_27_1.png" src="_images/steering_27_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Feedforward-Compensation-(Example-12.6)">
+<h2>Feedforward Compensation (Example 12.6)<a class="headerlink" href="#Feedforward-Compensation-(Example-12.6)" title="Permalink to this heading">¶</a></h2>
+<p>For a lane transfer system we would like to have a nice response without overshoot, and we therefore consider the use of feedforward compensation to provide a reference trajectory for the closed loop system. We choose the desired response as <span class="math">F_\text{m}(s) = a^22/(s + a)^2</span>, where the response speed or aggressiveness of the steering is governed by the parameter <span class="math">a</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the desired response of the system</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss2tf</span><span class="p">(</span><span class="n">lateral_normalized</span><span class="p">)</span>
+<span class="n">Fm</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">TransferFunction</span><span class="p">([</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">Fr</span> <span class="o">=</span> <span class="n">Fm</span> <span class="o">/</span> <span class="n">P</span>
+
+<span class="c1"># Compute the step response of the feedforward components</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y_ffwd</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">Fm</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">delta_ffwd</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">Fr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="c1"># Scale and shift to correspond to lane change (-2 to +2)</span>
+<span class="n">y_ffwd</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">y_ffwd</span>
+<span class="n">delta_ffwd</span> <span class="o">*=</span> <span class="mi">1</span>
+
+<span class="c1"># Overhead view</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_ffwd</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">27</span><span class="p">])</span>
+
+<span class="c1"># Plot the response</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_ffwd</span><span class="p">)</span>
+<span class="c1"># plt.axis([0, 10, -5, 5])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized position y/b&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">delta_ffwd</span><span class="p">)</span>
+<span class="c1"># plt.axis([0, 10, -1, 1])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">delta$ [rad]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Normalized time $v_0 t / b$&#39;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_29_0.png" src="_images/steering_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Fundamental-Limits-(Example-14.13)">
+<h2>Fundamental Limits (Example 14.13)<a class="headerlink" href="#Fundamental-Limits-(Example-14.13)" title="Permalink to this heading">¶</a></h2>
+<p>Consider a controller based on state feedback combined with an observer where we want a faster closed loop system and choose <span class="math">\omega_\text{c} = 10</span>, <span class="math">\zeta_\text{c} = 0.707</span>, <span class="math">\omega_\text{o} = 20</span>, and <span class="math">\zeta_\text{o} = 0.707</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the feedback gain using eigenvalue placement</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">zc</span> <span class="o">=</span> <span class="mf">0.707</span>
+<span class="n">eigs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">zc</span><span class="o">*</span><span class="n">wc</span><span class="p">,</span> <span class="n">wc</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">eigs</span><span class="p">)</span>
+<span class="n">kr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">clsys</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K = &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">K</span><span class="p">))</span>
+
+<span class="c1"># Compute the estimator gain using eigenvalue placement</span>
+<span class="n">wo</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">zo</span> <span class="o">=</span> <span class="mf">0.707</span>
+<span class="n">eigs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">zo</span><span class="o">*</span><span class="n">wo</span><span class="p">,</span> <span class="n">wo</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span>
+    <span class="n">ct</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">C</span><span class="p">),</span> <span class="n">eigs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L = &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+
+<span class="c1"># Construct an output-based controller for the system</span>
+<span class="n">C1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss2tf</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">StateSpace</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="nd">@K</span> <span class="o">-</span> <span class="n">L</span><span class="nd">@C</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C(s) = &quot;</span><span class="p">,</span> <span class="n">C1</span><span class="p">)</span>
+
+<span class="c1"># Compute the loop transfer function and plot Nyquist, Bode</span>
+<span class="n">L1</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="n">C1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">ct</span><span class="o">.</span><span class="n">nyquist_plot</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">ct</span><span class="o">.</span><span class="n">bode_plot</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+K =  [100.   -35.86]
+L =  [ 28.28 400.  ]
+C(s) =
+-1.152e+04 s + 4e+04
+--------------------
+s^2 + 42.42 s + 6658
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_31_1.png" src="_images/steering_31_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_31_2.png" src="_images/steering_31_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modified control law</span>
+<span class="n">wc</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">zc</span> <span class="o">=</span> <span class="mf">2.6</span>
+<span class="n">eigs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">zc</span><span class="o">*</span><span class="n">wc</span><span class="p">,</span> <span class="n">wc</span><span class="o">**</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">eigs</span><span class="p">)</span>
+<span class="n">kr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">clsys</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K = &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">K</span><span class="p">))</span>
+
+<span class="c1"># Construct an output-based controller for the system</span>
+<span class="n">C2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss2tf</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">StateSpace</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span><span class="nd">@K</span> <span class="o">-</span> <span class="n">L</span><span class="nd">@C</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C(s) = &quot;</span><span class="p">,</span> <span class="n">C2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+K =  [100.   2.]
+C(s) =
+    3628 s + 4e+04
+---------------------
+s^2 + 80.28 s + 156.6
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the gang of four for the two designs</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">gangof4</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">gangof4</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/steering_33_0.png" src="_images/steering_33_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="simulating_discrete_nonlinear.html" class="btn btn-neutral float-left" title="Simulating interconnections of systems" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stochresp.html" class="btn btn-neutral float-right" title="Stochastic Response" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

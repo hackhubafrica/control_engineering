@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.FrequencyResponseData &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.NonlinearIOSystem" href="control.NonlinearIOSystem.html" />
+    <link rel="prev" title="control.TransferFunction" href="control.TransferFunction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.ControlPlot.html">control.ControlPlot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.DescribingFunctionResponse.html">control.DescribingFunctionResponse</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.FrequencyResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.FrequencyResponseList.html">control.FrequencyResponseList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.NyquistResponseData.html">control.NyquistResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.PoleZeroData.html">control.PoleZeroData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.TimeResponseData.html">control.TimeResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.TimeResponseList.html">control.TimeResponseList</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Control system classes</a></li>
+      <li class="breadcrumb-item active">control.FrequencyResponseData</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.FrequencyResponseData.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-frequencyresponsedata">
+<h1>control.FrequencyResponseData<a class="headerlink" href="#control-frequencyresponsedata" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.FrequencyResponseData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">FrequencyResponseData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="optional">[</span>, <em class="sig-param"><span class="n"><span class="pre">smooth</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L29-L676"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for models defined by frequency response data (FRD).</p>
+<p>The FrequencyResponseData (FRD) class is used to represent systems in
+frequency response data form.  It can be created manually using the
+class constructor, using the :func:~~control.frd` factory function
+(preferred), or via the <a class="reference internal" href="control.frequency_response.html#control.frequency_response" title="control.frequency_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">frequency_response()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>1D</em><em> or </em><em>3D complex array_like</em>) – The frequency response at each frequency point.  If 1D, the system is
+assumed to be SISO.  If 3D, the system is MIMO, with the first
+dimension corresponding to the output index of the FRD, the second
+dimension corresponding to the input index, and the 3rd dimension
+corresponding to the frequency points in omega</p></li>
+<li><p><strong>w</strong> (<em>iterable</em><em> of </em><em>real frequencies</em>) – List of frequency points for which data are available.</p></li>
+<li><p><strong>sysname</strong> (<em>str</em><em> or </em><em>None</em>) – Name of the system that generated the data.</p></li>
+<li><p><strong>smooth</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, create an interpolation function that allows the
+frequency response to be computed at any frequency within the range of
+frequencies give in <code class="docutils literal notranslate"><span class="pre">w</span></code>.  If <code class="docutils literal notranslate"><span class="pre">False</span></code> (default), frequency response
+can only be obtained at the frequencies specified in <code class="docutils literal notranslate"><span class="pre">w</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ninputs,</span> <span class="pre">noutputs</span></span></dt>
+<dd><p>Number of input and output variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.omega">
+<span class="sig-name descname"><span class="pre">omega</span></span><a class="headerlink" href="#control.FrequencyResponseData.omega" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frequency points of the response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>1D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.fresp">
+<span class="sig-name descname"><span class="pre">fresp</span></span><a class="headerlink" href="#control.FrequencyResponseData.fresp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frequency response, indexed by output index, input index, and
+frequency point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>3D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.dt">
+<span class="sig-name descname"><span class="pre">dt</span></span><a class="headerlink" href="#control.FrequencyResponseData.dt" title="Permalink to this definition">¶</a></dt>
+<dd><p>System timebase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float, True, or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="control.frd.html#control.frd" title="control.frd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frd</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>The main data members are ‘omega’ and ‘fresp’, where ‘omega’ is a 1D array
+of frequency points and and ‘fresp’ is a 3D array of frequency responses,
+with the first dimension corresponding to the output index of the FRD, the
+second dimension corresponding to the input index, and the 3rd dimension
+corresponding to the frequency points in omega.  For example,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">frdata</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.8</span><span class="o">-</span><span class="mf">0.2</span><span class="n">j</span><span class="p">,</span> <span class="mf">0.2</span><span class="o">-</span><span class="mf">0.8</span><span class="n">j</span><span class="p">])</span>   
+</pre></div>
+</div>
+<p>means that the frequency response from the 6th input to the 3rd output at
+the frequencies defined in omega is set to the array above, i.e. the rows
+represent the outputs and the columns represent the inputs.</p>
+<p>A frequency response data object is callable and returns the value of the
+transfer function evaluated at a point in the complex plane (must be on
+the imaginary access).  See <code class="xref py py-meth docutils literal notranslate"><span class="pre">__call__()</span></code>
+for a more detailed description.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L112-L224"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an FRD object.</p>
+<p>The default constructor is FRD(d, w), where w is an iterable of
+frequency points, and d is the matching frequency data.</p>
+<p>If d is a single list, 1D array, or tuple, a SISO system description
+is assumed. d can also be</p>
+<p>To call the copy constructor, call FRD(sys), where sys is a
+FRD object.</p>
+<p>To construct frequency response data for an existing LTI
+object, other than an FRD, call FRD(sys, omega).</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.__init__" title="control.FrequencyResponseData.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Construct an FRD object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.bandwidth" title="control.FrequencyResponseData.bandwidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bandwidth</span></code></a>([dbdrop])</p></td>
+<td><p>Evaluate the bandwidth of the LTI system for a given dB drop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.copy" title="control.FrequencyResponseData.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([name, use_prefix_suffix])</p></td>
+<td><p>Make a copy of an input/output system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.damp" title="control.FrequencyResponseData.damp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">damp</span></code></a>()</p></td>
+<td><p>Natural frequency, damping ratio of system poles</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.dcgain" title="control.FrequencyResponseData.dcgain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcgain</span></code></a>()</p></td>
+<td><p>Return the zero-frequency gain</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.eval" title="control.FrequencyResponseData.eval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code></a>(omega[, squeeze])</p></td>
+<td><p>Evaluate a transfer function at angular frequency omega.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.feedback" title="control.FrequencyResponseData.feedback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feedback</span></code></a>([other, sign])</p></td>
+<td><p>Feedback interconnection between two FRD objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.find_input" title="control.FrequencyResponseData.find_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_input</span></code></a>(name)</p></td>
+<td><p>Find the index for an input given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.find_inputs" title="control.FrequencyResponseData.find_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_inputs</span></code></a>(name_list)</p></td>
+<td><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.find_output" title="control.FrequencyResponseData.find_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_output</span></code></a>(name)</p></td>
+<td><p>Find the index for an output given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.find_outputs" title="control.FrequencyResponseData.find_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_outputs</span></code></a>(name_list)</p></td>
+<td><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.find_state" title="control.FrequencyResponseData.find_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_state</span></code></a>(name)</p></td>
+<td><p>Find the index for a state given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.find_states" title="control.FrequencyResponseData.find_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_states</span></code></a>(name_list)</p></td>
+<td><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.freqresp" title="control.FrequencyResponseData.freqresp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqresp</span></code></a>(omega)</p></td>
+<td><p>(deprecated) Evaluate transfer function at complex frequencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.frequency_response" title="control.FrequencyResponseData.frequency_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frequency_response</span></code></a>([omega, squeeze])</p></td>
+<td><p>Evaluate the linear time-invariant system at an array of angular frequencies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.isctime" title="control.FrequencyResponseData.isctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isctime</span></code></a>([strict])</p></td>
+<td><p>Check to see if a system is a continuous-time system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.isdtime" title="control.FrequencyResponseData.isdtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isdtime</span></code></a>([strict])</p></td>
+<td><p>Check to see if a system is a discrete-time system</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ispassive</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.issiso" title="control.FrequencyResponseData.issiso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">issiso</span></code></a>()</p></td>
+<td><p>Check to see if a system is single input, single output.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.plot" title="control.FrequencyResponseData.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>([plot_type])</p></td>
+<td><p>Plot the frequency response using a Bode plot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.set_inputs" title="control.FrequencyResponseData.set_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inputs</span></code></a>(inputs[, prefix])</p></td>
+<td><p>Set the number/names of the system inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.set_outputs" title="control.FrequencyResponseData.set_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outputs</span></code></a>(outputs[, prefix])</p></td>
+<td><p>Set the number/names of the system outputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.set_states" title="control.FrequencyResponseData.set_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_states</span></code></a>(states[, prefix])</p></td>
+<td><p>Set the number/names of the system states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.to_pandas" title="control.FrequencyResponseData.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
+<td><p>Convert response data to pandas data frame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.update_names" title="control.FrequencyResponseData.update_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_names</span></code></a>([name, inputs, outputs, states])</p></td>
+<td><p>Update signal and system names for an I/O system.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">frequency</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_labels</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwargs_list</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">magnitude</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.ninputs" title="control.FrequencyResponseData.ninputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ninputs</span></code></a></p></td>
+<td><p>Number of system inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.FrequencyResponseData.noutputs" title="control.FrequencyResponseData.noutputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">noutputs</span></code></a></p></td>
+<td><p>Number of system outputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.FrequencyResponseData.nstates" title="control.FrequencyResponseData.nstates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nstates</span></code></a></p></td>
+<td><p>Number of system states.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_labels</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">response</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_labels</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.bandwidth">
+<span class="sig-name descname"><span class="pre">bandwidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbdrop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-3</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L139-L199"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.bandwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the bandwidth of the LTI system for a given dB drop.</p>
+<p>Evaluate the first frequency that the response magnitude is lower than
+DC gain by dbdrop dB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dpdrop</strong> (<em>float</em><em>, </em><em>optional</em>) – A strictly negative scalar in dB (default = -3) defines the
+amount of gain drop for deciding bandwidth.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>bandwidth</strong> – The first frequency (rad/time-unit) where the gain drops below
+dbdrop of the dc gain of the system, or nan if the system has
+infinite dc gain, inf if the gain does not drop for all frequency</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – if ‘sys’ is not an SISO LTI instance</p></li>
+<li><p><strong>ValueError</strong> – if ‘dbdrop’ is not a negative scalar</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_prefix_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L247-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a copy of an input/output system</p>
+<p>A copy of the system is made, with a new name.  The <cite>name</cite> keyword
+can be used to specify a specific name for the system.  If no name
+is given and <cite>use_prefix_suffix</cite> is True, the name is constructed
+by prepending config.defaults[‘iosys.duplicate_system_name_prefix’]
+and appending config.defaults[‘iosys.duplicate_system_name_suffix’].
+Otherwise, a generic system name of the form <cite>sys[&lt;id&gt;]</cite> is used,
+where <cite>&lt;id&gt;</cite> is based on an internal counter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.damp">
+<span class="sig-name descname"><span class="pre">damp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L38-L58"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.damp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Natural frequency, damping ratio of system poles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>wn</strong> (<em>array</em>) – Natural frequency for each system pole</p></li>
+<li><p><strong>zeta</strong> (<em>array</em>) – Damping ratio for each system pole</p></li>
+<li><p><strong>poles</strong> (<em>array</em>) – System pole locations</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.dcgain">
+<span class="sig-name descname"><span class="pre">dcgain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L126-L129"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.dcgain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the zero-frequency gain</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.eval">
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L435-L491"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a transfer function at angular frequency omega.</p>
+<p>Note that a “normal” FRD only returns values for which there is an
+entry in the omega vector. An interpolating FRD can return
+intermediate values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em><em> or </em><em>1D array_like</em>) – Frequencies in radians per second</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squeeze=True, remove single-dimensional entries from the shape
+of the output even if the system is not SISO. If squeeze=False,
+keep all indices (output, input and, if omega is array_like,
+frequency) even if the system is SISO. The default value can be
+set using config.defaults[‘control.squeeze_frequency_response’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fresp</strong> – The frequency response of the system.  If the system is SISO and
+squeeze is not True, the shape of the array matches the shape of
+omega.  If the system is not SISO or squeeze is False, the first
+two dimensions of the array are indices for the output and input
+and the remaining dimensions match omega.  If <code class="docutils literal notranslate"><span class="pre">squeeze</span></code> is True
+then single-dimensional axes are removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.feedback">
+<span class="sig-name descname"><span class="pre">feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L609-L627"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedback interconnection between two FRD objects.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.find_input">
+<span class="sig-name descname"><span class="pre">find_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L292-L294"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.find_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an input given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.find_inputs">
+<span class="sig-name descname"><span class="pre">find_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L296-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.find_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.find_output">
+<span class="sig-name descname"><span class="pre">find_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L325-L327"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.find_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an output given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.find_outputs">
+<span class="sig-name descname"><span class="pre">find_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L329-L331"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.find_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.find_state">
+<span class="sig-name descname"><span class="pre">find_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L358-L360"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.find_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for a state given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.find_states">
+<span class="sig-name descname"><span class="pre">find_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L362-L364"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.find_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.freqresp">
+<span class="sig-name descname"><span class="pre">freqresp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L593-L607"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.freqresp" title="Permalink to this definition">¶</a></dt>
+<dd><p>(deprecated) Evaluate transfer function at complex frequencies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.frequency_response">
+<span class="sig-name descname"><span class="pre">frequency_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L60-L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.frequency_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the linear time-invariant system at an array of angular
+frequencies.</p>
+<p>For continuous time systems, computes the frequency response as</p>
+<blockquote>
+<div><p>G(j*omega) = mag * exp(j*phase)</p>
+</div></blockquote>
+<p>For discrete time systems, the response is evaluated around the
+unit circle such that</p>
+<blockquote>
+<div><p>G(exp(j*omega*dt)) = mag * exp(j*phase).</p>
+</div></blockquote>
+<p>In general the system may be multiple input, multiple output (MIMO),
+where <cite>m = self.ninputs</cite> number of inputs and <cite>p = self.noutputs</cite>
+number of outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em><em> or </em><em>1D array_like</em>) – A list, tuple, array, or scalar value of frequencies in
+radians/sec at which the system will be evaluated.</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squeeze=True, remove single-dimensional entries from the shape
+of the output even if the system is not SISO. If squeeze=False,
+keep all indices (output, input and, if omega is array_like,
+frequency) even if the system is SISO. The default value can be
+set using config.defaults[‘control.squeeze_frequency_response’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>response</strong> – Frequency response data object representing the frequency
+response.  This object can be assigned to a tuple using</p>
+<blockquote>
+<div><p>mag, phase, omega = response</p>
+</div></blockquote>
+<p>where <code class="docutils literal notranslate"><span class="pre">mag</span></code> is the magnitude (absolute value, not dB or log10)
+of the system frequency response, <code class="docutils literal notranslate"><span class="pre">phase</span></code> is the wrapped phase
+in radians of the system frequency response, and <code class="docutils literal notranslate"><span class="pre">omega</span></code> is
+the (sorted) frequencies at which the response was evaluated.
+If the system is SISO and squeeze is not True, <code class="docutils literal notranslate"><span class="pre">magnitude</span></code> and
+<code class="docutils literal notranslate"><span class="pre">phase</span></code> are 1D, indexed by frequency.  If the system is not
+SISO or squeeze is False, the array is 3D, indexed by the
+output, input, and, if omega is array_like, frequency.  If
+<code class="docutils literal notranslate"><span class="pre">squeeze</span></code> is True then single-dimensional axes are removed.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.isctime">
+<span class="sig-name descname"><span class="pre">isctime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L416-L431"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.isctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a continuous-time system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<em>Named I/O system</em>) – System to be checked</p></li>
+<li><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.isdtime">
+<span class="sig-name descname"><span class="pre">isdtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L433-L449"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.isdtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a discrete-time system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.issiso">
+<span class="sig-name descname"><span class="pre">issiso</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L451-L453"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.issiso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is single input, single output.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.ninputs">
+<span class="sig-name descname"><span class="pre">ninputs</span></span><a class="headerlink" href="#control.FrequencyResponseData.ninputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system inputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.noutputs">
+<span class="sig-name descname"><span class="pre">noutputs</span></span><a class="headerlink" href="#control.FrequencyResponseData.noutputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system outputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.nstates">
+<span class="sig-name descname"><span class="pre">nstates</span></span><a class="headerlink" href="#control.FrequencyResponseData.nstates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system states.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L630-L653"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the frequency response using a Bode plot.</p>
+<p>Plot the frequency response using either a standard Bode plot
+(default) or using a singular values plot (by setting <cite>plot_type</cite>
+to ‘svplot’).  See <a class="reference internal" href="control.bode_plot.html#control.bode_plot" title="control.bode_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">bode_plot()</span></code></a> and
+<a class="reference internal" href="control.singular_values_plot.html#control.singular_values_plot" title="control.singular_values_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">singular_values_plot()</span></code></a> for more detailed
+descriptions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.set_inputs">
+<span class="sig-name descname"><span class="pre">set_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L272-L290"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system inputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>inputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘u’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.set_outputs">
+<span class="sig-name descname"><span class="pre">set_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L305-L323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.set_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system outputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>outputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘y’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.set_states">
+<span class="sig-name descname"><span class="pre">set_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L338-L356"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.set_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system states.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>states</cite> is an integer, create the names of the states using
+the given prefix (default = ‘x’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.to_pandas">
+<span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/frdata.py#L656-L676"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.to_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert response data to pandas data frame.</p>
+<p>Creates a pandas data frame for the value of the frequency
+response at each <cite>omega</cite>.  The frequency response values are
+labeled in the form “H_{&lt;out&gt;, &lt;in&gt;}” where “&lt;out&gt;” and “&lt;in&gt;”
+are replaced with the output and input labels for the system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.FrequencyResponseData.update_names">
+<span class="sig-name descname"><span class="pre">update_names</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L372-L413"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.FrequencyResponseData.update_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update signal and system names for an I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – New system name.</p></li>
+<li><p><strong>inputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – List of strings that name the individual input signals.  If
+given as an integer or None, signal names default to the form
+<cite>u[i]</cite>.  See <a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a> for more information.</p></li>
+<li><p><strong>outputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of output signals; defaults to <cite>y[i]</cite>.</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of system states; defaults to <cite>x[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.TransferFunction.html" class="btn btn-neutral float-left" title="control.TransferFunction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.NonlinearIOSystem.html" class="btn btn-neutral float-right" title="control.NonlinearIOSystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

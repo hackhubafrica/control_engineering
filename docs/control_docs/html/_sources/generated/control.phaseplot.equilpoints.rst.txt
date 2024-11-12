@@ -1,0 +1,6 @@
+﻿control.phaseplot.equilpoints
+=============================
+
+.. currentmodule:: control.phaseplot
+
+.. autofunction:: equilpoints

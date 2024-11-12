@@ -1,0 +1,6 @@
+﻿control.markov
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: markov

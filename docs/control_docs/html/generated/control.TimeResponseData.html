@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.TimeResponseData &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.TimeResponseList" href="control.TimeResponseList.html" />
+    <link rel="prev" title="control.PoleZeroData" href="control.PoleZeroData.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.ControlPlot.html">control.ControlPlot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.DescribingFunctionResponse.html">control.DescribingFunctionResponse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.FrequencyResponseData.html">control.FrequencyResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.FrequencyResponseList.html">control.FrequencyResponseList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.NyquistResponseData.html">control.NyquistResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.PoleZeroData.html">control.PoleZeroData</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.TimeResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.TimeResponseList.html">control.TimeResponseList</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.TimeResponseData</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.TimeResponseData.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-timeresponsedata">
+<h1>control.TimeResponseData<a class="headerlink" href="#control-timeresponsedata" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.TimeResponseData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">TimeResponseData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">issiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sysname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/timeresp.py#L91-L733"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.TimeResponseData" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class for returning time responses.</p>
+<p>This class maintains and manipulates the data corresponding to the
+temporal response of an input/output system.  It is used as the return
+type for time domain simulations (step response, input/output response,
+etc).</p>
+<p>A time response consists of a time vector, an output vector, and
+optionally an input vector and/or state vector.  Inputs and outputs can
+be 1D (scalar input/output) or 2D (vector input/output).</p>
+<p>A time response can be stored for multiple input signals (called traces),
+with the output and state indexed by the trace number.  This allows for
+input/output response matrices, which is mainly useful for impulse and
+step responses for linear systems.  For multi-trace responses, the same
+time vector must be used for all traces.</p>
+<p>Time responses are accessed through either the raw data, stored as
+<a class="reference internal" href="#control.TimeResponseData.t" title="control.TimeResponseData.t"><code class="xref py py-attr docutils literal notranslate"><span class="pre">t</span></code></a>, <a class="reference internal" href="#control.TimeResponseData.y" title="control.TimeResponseData.y"><code class="xref py py-attr docutils literal notranslate"><span class="pre">y</span></code></a>, <a class="reference internal" href="#control.TimeResponseData.x" title="control.TimeResponseData.x"><code class="xref py py-attr docutils literal notranslate"><span class="pre">x</span></code></a>, <a class="reference internal" href="#control.TimeResponseData.u" title="control.TimeResponseData.u"><code class="xref py py-attr docutils literal notranslate"><span class="pre">u</span></code></a>, or using a set of properties
+<a class="reference internal" href="#control.TimeResponseData.time" title="control.TimeResponseData.time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">time</span></code></a>, <a class="reference internal" href="#control.TimeResponseData.outputs" title="control.TimeResponseData.outputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputs</span></code></a>, <a class="reference internal" href="#control.TimeResponseData.states" title="control.TimeResponseData.states"><code class="xref py py-attr docutils literal notranslate"><span class="pre">states</span></code></a>, <a class="reference internal" href="#control.TimeResponseData.inputs" title="control.TimeResponseData.inputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputs</span></code></a>.  When
+accessing time responses via their properties, squeeze processing is
+applied so that (by default) single-input, single-output systems will have
+the output and input indices suppressed.  This behavior is set using the
+<code class="docutils literal notranslate"><span class="pre">squeeze</span></code> keyword.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.t">
+<span class="sig-name descname"><span class="pre">t</span></span><a class="headerlink" href="#control.TimeResponseData.t" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time values of the input/output response(s).  This attribute is
+normally accessed via the <a class="reference internal" href="#control.TimeResponseData.time" title="control.TimeResponseData.time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">time</span></code></a> property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>1D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.y">
+<span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#control.TimeResponseData.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output response data, indexed either by output index and time (for
+single trace responses) or output, trace, and time (for multi-trace
+responses).  These data are normally accessed via the <a class="reference internal" href="#control.TimeResponseData.outputs" title="control.TimeResponseData.outputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputs</span></code></a>
+property, which performs squeeze processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>2D or 3D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.x">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#control.TimeResponseData.x" title="Permalink to this definition">¶</a></dt>
+<dd><p>State space data, indexed either by output number and time (for single
+trace responses) or output, trace, and time (for multi-trace
+responses).  If no state data are present, value is <code class="docutils literal notranslate"><span class="pre">None</span></code>. These
+data are normally accessed via the <a class="reference internal" href="#control.TimeResponseData.states" title="control.TimeResponseData.states"><code class="xref py py-attr docutils literal notranslate"><span class="pre">states</span></code></a> property, which
+performs squeeze processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>2D or 3D array, or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.u">
+<span class="sig-name descname"><span class="pre">u</span></span><a class="headerlink" href="#control.TimeResponseData.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input signal data, indexed either by input index and time (for single
+trace responses) or input, trace, and time (for multi-trace
+responses).  If no input data are present, value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.  These
+data are normally accessed via the <a class="reference internal" href="#control.TimeResponseData.inputs" title="control.TimeResponseData.inputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputs</span></code></a> property, which
+performs squeeze processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>2D or 3D array, or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.squeeze">
+<span class="sig-name descname"><span class="pre">squeeze</span></span><a class="headerlink" href="#control.TimeResponseData.squeeze" title="Permalink to this definition">¶</a></dt>
+<dd><p>By default, if a system is single-input, single-output (SISO)
+then the outputs (and inputs) are returned as a 1D array
+(indexed by time) and if a system is multi-input or
+multi-output, then the outputs are returned as a 2D array
+(indexed by output and time) or a 3D array (indexed by output,
+trace, and time).  If <code class="docutils literal notranslate"><span class="pre">squeeze=True</span></code>, access to the output
+response will remove single-dimensional entries from the shape
+of the inputs and outputs even if the system is not SISO. If
+<code class="docutils literal notranslate"><span class="pre">squeeze=False</span></code>, the output is returned as a 2D or 3D array
+(indexed by the output [if multi-input], trace [if multi-trace]
+and time) even if the system is SISO. The default value can be
+set using config.defaults[‘control.squeeze_time_response’].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.transpose">
+<span class="sig-name descname"><span class="pre">transpose</span></span><a class="headerlink" href="#control.TimeResponseData.transpose" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, transpose all input and output arrays (for backward
+compatibility with MATLAB and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lsim.html#scipy.signal.lsim" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.signal.lsim()</span></code></a>).  Default
+value is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.issiso">
+<span class="sig-name descname"><span class="pre">issiso</span></span><a class="headerlink" href="#control.TimeResponseData.issiso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set to <code class="docutils literal notranslate"><span class="pre">True</span></code> if the system generating the data is single-input,
+single-output.  If passed as <code class="docutils literal notranslate"><span class="pre">None</span></code> (default), the input data
+will be used to set the value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ninputs,</span> <span class="pre">noutputs,</span> <span class="pre">nstates</span></span></dt>
+<dd><p>Number of inputs, outputs, and states of the underlying system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">input_labels,</span> <span class="pre">output_labels,</span> <span class="pre">state_labels</span></span></dt>
+<dd><p>Names for the input, output, and state variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array of str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.success">
+<span class="sig-name descname"><span class="pre">success</span></span><a class="headerlink" href="#control.TimeResponseData.success" title="Permalink to this definition">¶</a></dt>
+<dd><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>, result may not be valid (see
+<a class="reference internal" href="control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">input_output_response()</span></code></a>).  Defaults to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#control.TimeResponseData.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Informational message if <code class="docutils literal notranslate"><span class="pre">success</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.sysname">
+<span class="sig-name descname"><span class="pre">sysname</span></span><a class="headerlink" href="#control.TimeResponseData.sysname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the system that created the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#control.TimeResponseData.params" title="Permalink to this definition">¶</a></dt>
+<dd><p>If system is a nonlinear I/O system, set parameter values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.plot_inputs">
+<span class="sig-name descname"><span class="pre">plot_inputs</span></span><a class="headerlink" href="#control.TimeResponseData.plot_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to plot the inputs by default (can be overridden in
+the plot() method)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.ntraces">
+<span class="sig-name descname"><span class="pre">ntraces</span></span><a class="headerlink" href="#control.TimeResponseData.ntraces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of independent traces represented in the input/output
+response.  If ntraces is 0 (default) then the data represents a
+single trace with the trace index surpressed in the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#control.TimeResponseData.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the title to use when plotting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.trace_labels">
+<span class="sig-name descname"><span class="pre">trace_labels</span></span><a class="headerlink" href="#control.TimeResponseData.trace_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Labels to use for traces (set to sysname it ntraces is 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array of string, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.TimeResponseData.trace_types">
+<span class="sig-name descname"><span class="pre">trace_types</span></span><a class="headerlink" href="#control.TimeResponseData.trace_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of trace.  Currently only ‘step’ is supported, which controls
+the way in which the signal is plotted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>array of string, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Notes</p>
+<ol class="arabic">
+<li><p>For backward compatibility with earlier versions of python-control,
+this class has an <code class="docutils literal notranslate"><span class="pre">__iter__</span></code> method that allows it to be assigned
+to a tuple with a variable number of elements.  This allows the
+following patterns to work:</p>
+<blockquote>
+<div><p>t, y = step_response(sys)
+t, y, x = step_response(sys, return_x=True)</p>
+</div></blockquote>
+<p>When using this (legacy) interface, the state vector is not affected by
+the <cite>squeeze</cite> parameter.</p>
+</li>
+<li><p>For backward compatibility with earlier version of python-control,
+this class has <code class="docutils literal notranslate"><span class="pre">__getitem__</span></code> and <code class="docutils literal notranslate"><span class="pre">__len__</span></code> methods that allow the
+return value to be indexed:</p>
+<blockquote>
+<div><p>response[0]: returns the time vector
+response[1]: returns the output vector
+response[2]: returns the state vector</p>
+</div></blockquote>
+<p>When using this (legacy) interface, the state vector is not affected by
+the <cite>squeeze</cite> parameter.</p>
+</li>
+<li><p>The default settings for <code class="docutils literal notranslate"><span class="pre">return_x</span></code>, <code class="docutils literal notranslate"><span class="pre">squeeze</span></code> and <code class="docutils literal notranslate"><span class="pre">transpose</span></code>
+can be changed by calling the class instance and passing new values:</p>
+<blockquote>
+<div><p>response(tranpose=True).input</p>
+</div></blockquote>
+<p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">TimeResponseData.__call__()</span></code> for more information.</p>
+</li>
+</ol>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.TimeResponseData.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">issiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace_types</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sysname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">success</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/timeresp.py#L238-L483"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.TimeResponseData.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an input/output time response object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>1D array</em>) – Time values of the output.  Ignored if None.</p></li>
+<li><p><strong>outputs</strong> (<em>ndarray</em>) – Output response of the system.  This can either be a 1D array
+indexed by time (for SISO systems or MISO systems with a specified
+input), a 2D array indexed by output and time (for MIMO systems
+with no input indexing, such as initial_response or forced
+response) or trace and time (for SISO systems with multiple
+traces), or a 3D array indexed by output, trace, and time (for
+multi-trace input/output responses).</p></li>
+<li><p><strong>states</strong> (<em>array</em><em>, </em><em>optional</em>) – Individual response of each state variable. This should be a 2D
+array indexed by the state index and time (for single trace
+systems) or a 3D array indexed by state, trace, and time.</p></li>
+<li><p><strong>inputs</strong> (<em>array</em><em>, </em><em>optional</em>) – Inputs used to generate the output.  This can either be a 1D
+array indexed by time (for SISO systems or MISO/MIMO systems
+with a specified input), a 2D array indexed either by input and
+time (for a multi-input system) or trace and time (for a
+single-input, multi-trace response), or a 3D array indexed by
+input, trace, and time.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optonal</em>) – Title of the data set (used as figure title in plotting).</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – By default, if a system is single-input, single-output (SISO)
+then the inputs and outputs are returned as a 1D array (indexed
+by time) and if a system is multi-input or multi-output, then
+the inputs are returned as a 2D array (indexed by input and
+time) and the outputs are returned as either a 2D array (indexed
+by output and time) or a 3D array (indexed by output, trace, and
+time).  If squeeze=True, access to the output response will
+remove single-dimensional entries from the shape of the inputs
+and outputs even if the system is not SISO. If squeeze=False,
+keep the input as a 2D or 3D array (indexed by the input (if
+multi-input), trace (if single input) and time) and the output
+as a 3D array (indexed by the output, trace, and time) even if
+the system is SISO. The default value can be set using
+config.defaults[‘control.squeeze_time_response’].</p></li>
+<li><p><strong>input_labels</strong> (<em>array</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Optional labels for the inputs, outputs, and states, given as a
+list of strings matching the appropriate signal dimension.</p></li>
+<li><p><strong>output_labels</strong> (<em>array</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Optional labels for the inputs, outputs, and states, given as a
+list of strings matching the appropriate signal dimension.</p></li>
+<li><p><strong>state_labels</strong> (<em>array</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Optional labels for the inputs, outputs, and states, given as a
+list of strings matching the appropriate signal dimension.</p></li>
+<li><p><strong>sysname</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the system that created the data.</p></li>
+<li><p><strong>transpose</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, transpose all input and output arrays (for backward
+compatibility with MATLAB and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lsim.html#scipy.signal.lsim" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.signal.lsim()</span></code></a>).
+Default value is False.</p></li>
+<li><p><strong>return_x</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return the state vector when enumerating result by
+assigning to a tuple (default = False).</p></li>
+<li><p><strong>plot_inputs</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to plot the inputs by default (can be overridden
+in the plot() method)</p></li>
+<li><p><strong>multi_trace</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, then 2D input array represents multiple traces.  For
+a MIMO system, the <code class="docutils literal notranslate"><span class="pre">input</span></code> attribute should then be set to
+indicate which trace is being specified.  Default is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><strong>success</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">False</span></code>, result may not be valid (see
+<a class="reference internal" href="control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">input_output_response()</span></code></a>).</p></li>
+<li><p><strong>message</strong> (<em>str</em><em>, </em><em>optional</em>) – Informational message if <code class="docutils literal notranslate"><span class="pre">success</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.TimeResponseData.__init__" title="control.TimeResponseData.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(time, outputs[, states, inputs, ...])</p></td>
+<td><p>Create an input/output time response object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.TimeResponseData.plot" title="control.TimeResponseData.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Plot the time response data objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.TimeResponseData.to_pandas" title="control.TimeResponseData.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
+<td><p>Convert response data to pandas data frame.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.TimeResponseData.inputs" title="control.TimeResponseData.inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inputs</span></code></a></p></td>
+<td><p>Time response input vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.TimeResponseData.outputs" title="control.TimeResponseData.outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">outputs</span></code></a></p></td>
+<td><p>Time response output vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.TimeResponseData.states" title="control.TimeResponseData.states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">states</span></code></a></p></td>
+<td><p>Time response state vector.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.TimeResponseData.time" title="control.TimeResponseData.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time</span></code></a></p></td>
+<td><p>Time vector.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="control.TimeResponseData.inputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#control.TimeResponseData.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time response input vector.</p>
+<p>Input(s) to the system, indexed by input (optiona), trace (optional),
+and time.  If a 1D vector is passed, the input corresponds to a
+scalar-valued input.  If a 2D vector is passed, then it can either
+represent multiple single-input traces or a single multi-input trace.
+The optional <code class="docutils literal notranslate"><span class="pre">multi_trace</span></code> keyword should be used to disambiguate
+the two.  If a 3D vector is passed, then it represents a multi-trace,
+multi-input signal, indexed by input, trace, and time.</p>
+<p>See <a class="reference internal" href="#control.TimeResponseData.squeeze" title="control.TimeResponseData.squeeze"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TimeResponseData.squeeze</span></code></a> for a description of how the
+dimensions of the input vector can be modified using the <cite>squeeze</cite>
+keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>1D or 2D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="control.TimeResponseData.outputs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#control.TimeResponseData.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time response output vector.</p>
+<p>Output response of the system, indexed by either the output and time
+(if only a single input is given) or the output, trace, and time
+(for multiple traces).  See <a class="reference internal" href="#control.TimeResponseData.squeeze" title="control.TimeResponseData.squeeze"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TimeResponseData.squeeze</span></code></a> for a
+description of how this can be modified using the <cite>squeeze</cite> keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>1D, 2D, or 3D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.TimeResponseData.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/timeresp.py#L726-L733"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.TimeResponseData.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the time response data objects.</p>
+<p>This method calls <a class="reference internal" href="control.time_response_plot.html#control.time_response_plot" title="control.time_response_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">time_response_plot()</span></code></a>, passing all arguments
+and keywords.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="control.TimeResponseData.states">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#control.TimeResponseData.states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time response state vector.</p>
+<p>Time evolution of the state vector, indexed indexed by either the
+state and time (if only a single trace is given) or the state, trace,
+and time (for multiple traces).  See <a class="reference internal" href="#control.TimeResponseData.squeeze" title="control.TimeResponseData.squeeze"><code class="xref py py-attr docutils literal notranslate"><span class="pre">TimeResponseData.squeeze</span></code></a>
+for a description of how this can be modified using the <cite>squeeze</cite>
+keyword.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>2D or 3D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="control.TimeResponseData.time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">time</span></span><a class="headerlink" href="#control.TimeResponseData.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time vector.</p>
+<p>Time values of the input/output response(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>1D array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.TimeResponseData.to_pandas">
+<span class="sig-name descname"><span class="pre">to_pandas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/timeresp.py#L700-L723"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.TimeResponseData.to_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert response data to pandas data frame.</p>
+<p>Creates a pandas data frame using the input, output, and state
+labels for the time response.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.PoleZeroData.html" class="btn btn-neutral float-left" title="control.PoleZeroData" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.TimeResponseList.html" class="btn btn-neutral float-right" title="control.TimeResponseList" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

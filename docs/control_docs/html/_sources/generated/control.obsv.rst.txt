@@ -1,0 +1,6 @@
+﻿control.obsv
+============
+
+.. currentmodule:: control
+
+.. autofunction:: obsv

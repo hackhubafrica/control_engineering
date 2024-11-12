@@ -1,0 +1,6 @@
+﻿control.phaseplot.vectorfield
+=============================
+
+.. currentmodule:: control.phaseplot
+
+.. autofunction:: vectorfield

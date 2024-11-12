@@ -1,0 +1,6 @@
+﻿control.tfdata
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: tfdata

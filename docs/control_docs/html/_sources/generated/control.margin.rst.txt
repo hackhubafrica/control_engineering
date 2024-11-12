@@ -1,0 +1,6 @@
+﻿control.margin
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: margin

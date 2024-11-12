@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.forced_response &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.reset_defaults" href="control.reset_defaults.html" />
+    <link rel="prev" title="control.impulse_response" href="control.impulse_response.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_response.html">control.describing_function_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.frequency_response.html">control.frequency_response</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.forced_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.gangof4_response.html">control.gangof4_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.impulse_response.html">control.impulse_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.initial_response.html">control.initial_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nyquist_response.html">control.nyquist_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_map.html">control.pole_zero_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_map.html">control.root_locus_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_response.html">control.singular_values_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.step_response.html">control.step_response</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../conventions.html">Library conventions</a></li>
+      <li class="breadcrumb-item active">control.forced_response</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.forced_response.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-forced-response">
+<h1>control.forced_response<a class="headerlink" href="#control-forced-response" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.forced_response">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">forced_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sysdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/timeresp.py#L928-L1263"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.forced_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the output of a linear system given the input.</p>
+<p>As a convenience for parameters <cite>U</cite>, <cite>X0</cite>:
+Numbers (scalars) are converted to constant arrays with the correct shape.
+The correct shape is inferred from arguments <cite>sys</cite> and <cite>T</cite>.</p>
+<p>For information on the <strong>shape</strong> of parameters <cite>U</cite>, <cite>T</cite>, <cite>X0</cite> and
+return values <cite>T</cite>, <cite>yout</cite>, <cite>xout</cite>, see <a class="reference internal" href="../conventions.html#time-series-convention"><span class="std std-ref">Time series data</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sysdata</strong> (<em>I/O system</em><em> or </em><em>list</em><em> of </em><em>I/O systems</em>) – I/O system(s) for which forced response is computed.</p></li>
+<li><p><strong>T</strong> (array_like, optional for discrete LTI <cite>sys</cite>) – <p>Time steps at which the input is defined; values must be evenly spaced.</p>
+<p>If None, <cite>U</cite> must be given and <cite>len(U)</cite> time steps of sys.dt are
+simulated. If sys.dt is None or True (undetermined time step), a time
+step of 1.0 is assumed.</p>
+</p></li>
+<li><p><strong>U</strong> (<em>array_like</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Input array giving input at each time <cite>T</cite>.
+If <cite>U</cite> is None or 0, <cite>T</cite> must be given, even for discrete
+time systems. In this case, for continuous time systems, a direct
+calculation of the matrix exponential is used, which is faster than the
+general interpolating algorithm used otherwise.</p></li>
+<li><p><strong>X0</strong> (<em>array_like</em><em> or </em><em>float</em><em>, </em><em>default=0.</em>) – Initial condition.</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – If system is a nonlinear I/O system, set parameter values.</p></li>
+<li><p><strong>transpose</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True, transpose all input and output arrays (for backward
+compatibility with MATLAB and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lsim.html#scipy.signal.lsim" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.signal.lsim()</span></code></a>).</p></li>
+<li><p><strong>interpolate</strong> (<em>bool</em><em>, </em><em>default=False</em>) – If True and system is a discrete time system, the input will
+be interpolated between the given time steps and the output
+will be given at system sampling rate.  Otherwise, only return
+the output at the times given in <cite>T</cite>.  No effect on continuous
+time simulations.</p></li>
+<li><p><strong>return_x</strong> (<em>bool</em><em>, </em><em>default=None</em>) – <p>Used if the time response data is assigned to a tuple:</p>
+<ul>
+<li><p>If False, return only the time and output vectors.</p></li>
+<li><p>If True, also return the the state vector.</p></li>
+<li><p>If None, determine the returned variables by
+config.defaults[‘forced_response.return_x’], which was True
+before version 0.9 and is False since then.</p></li>
+</ul>
+</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – By default, if a system is single-input, single-output (SISO) then
+the output response is returned as a 1D array (indexed by time).  If
+<cite>squeeze</cite> is True, remove single-dimensional entries from the shape of
+the output even if the system is not SISO. If <cite>squeeze</cite> is False, keep
+the output as a 2D array (indexed by the output number and time)
+even if the system is SISO. The default behavior can be overridden by
+config.defaults[‘control.squeeze_time_response’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>results</strong> – Time response represented as a <a class="reference internal" href="control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a> object or
+list of <a class="reference internal" href="control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a> objects containing the following
+properties:</p>
+<ul class="simple">
+<li><p>time (array): Time values of the output.</p></li>
+<li><p>outputs (array): Response of the system.  If the system is SISO and
+<cite>squeeze</cite> is not True, the array is 1D (indexed by time).  If the
+system is not SISO or <cite>squeeze</cite> is False, the array is 2D (indexed
+by output and time).</p></li>
+<li><p>states (array): Time evolution of the state vector, represented as
+a 2D array indexed by state and time.</p></li>
+<li><p>inputs (array): Input(s) to the system, indexed by input and time.</p></li>
+</ul>
+<p>The <cite>plot()</cite> method can be used to create a plot of the time
+response(s) (see <a class="reference internal" href="control.time_response_plot.html#control.time_response_plot" title="control.time_response_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">time_response_plot()</span></code></a> for more information).</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a> or <a class="reference internal" href="control.TimeResponseList.html#control.TimeResponseList" title="control.TimeResponseList"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseList</span></code></a></p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="control.step_response.html#control.step_response" title="control.step_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_response</span></code></a>, <a class="reference internal" href="control.initial_response.html#control.initial_response" title="control.initial_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initial_response</span></code></a>, <a class="reference internal" href="control.impulse_response.html#control.impulse_response" title="control.impulse_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impulse_response</span></code></a>, <a class="reference internal" href="control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_output_response</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>For discrete time systems, the input/output response is computed
+using the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dlsim.html#scipy.signal.dlsim" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.signal.dlsim()</span></code></a> function.</p></li>
+<li><p>For continuous time systems, the output is computed using the matrix
+exponential <cite>exp(A t)</cite> and assuming linear interpolation of the
+inputs between time points.</p></li>
+<li><p>If a nonlinear I/O system is passed to <cite>forced_response</cite>, the
+<cite>input_output_response</cite> function is called instead.  The main
+difference between <cite>input_output_response</cite> and <cite>forced_response</cite> is
+that <cite>forced_response</cite> is specialized (and optimized) for linear
+systems.</p></li>
+<li><dl class="simple">
+<dt>(legacy) The return value of the system can also be accessed by</dt><dd><p>assigning the function to a tuple of length 2 (time, output) or of
+length 3 (time, output, state) if <code class="docutils literal notranslate"><span class="pre">return_x</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ol>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">rss</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span><span class="p">,</span> <span class="n">yout</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">forced_response</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../conventions.html#time-series-convention"><span class="std std-ref">Time series data</span></a> and
+<a class="reference internal" href="../conventions.html#package-configuration-parameters"><span class="std std-ref">Package configuration parameters</span></a>.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.impulse_response.html" class="btn btn-neutral float-left" title="control.impulse_response" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.reset_defaults.html" class="btn btn-neutral float-right" title="control.reset_defaults" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

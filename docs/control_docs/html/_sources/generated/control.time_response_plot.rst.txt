@@ -1,0 +1,6 @@
+﻿control.time\_response\_plot
+============================
+
+.. currentmodule:: control
+
+.. autofunction:: time_response_plot

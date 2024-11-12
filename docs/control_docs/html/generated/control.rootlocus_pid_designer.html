@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.rootlocus_pid_designer &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.minimal_realization" href="control.minimal_realization.html" />
+    <link rel="prev" title="control.place_varga" href="control.place_varga.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../control.html">Function reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../control.html#available-subpackages">Available subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-creation">System creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#frequency-domain-plotting">Frequency domain plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#time-domain-simulation">Time domain simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-analysis">Control system analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#matrix-computations">Matrix computations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../control.html#control-system-synthesis">Control system synthesis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.acker.html">control.acker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.create_statefbk_iosystem.html">control.create_statefbk_iosystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.dlqr.html">control.dlqr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.h2syn.html">control.h2syn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.hinfsyn.html">control.hinfsyn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.lqr.html">control.lqr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.mixsyn.html">control.mixsyn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.place.html">control.place</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.place_varga.html">control.place_varga</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.rootlocus_pid_designer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.rootlocus_pid_designer"><code class="docutils literal notranslate"><span class="pre">rootlocus_pid_designer()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#model-simplification-tools">Model simplification tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#nonlinear-system-support">Nonlinear system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#stochastic-system-support">Stochastic system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#utility-functions-and-conversions">Utility functions and conversions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.rootlocus_pid_designer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.rootlocus_pid_designer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-rootlocus-pid-designer">
+<h1>control.rootlocus_pid_designer<a class="headerlink" href="#control-rootlocus-pid-designer" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.rootlocus_pid_designer">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">rootlocus_pid_designer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plant</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'P'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_signal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kp0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ki0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Kd0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deltaK</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_ff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derivative_in_feedback_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/sisotool.py#L252-L421"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.rootlocus_pid_designer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manual PID controller design based on root locus using Sisotool.</p>
+<p>Uses <cite>sisotool</cite> to investigate the effect of adding or subtracting an
+amount <cite>deltaK</cite> to the proportional, integral, or derivative (PID) gains of
+a controller. One of the PID gains, <cite>Kp</cite>, <cite>Ki</cite>, or <cite>Kd</cite>, respectively, can
+be modified at a time. <cite>Sisotool</cite> plots the step response, frequency
+response, and root locus of the closed-loop system controlling the
+dynamical system specified by <cite>plant</cite>. Can be used with either non-
+interactive plots (e.g. in a Jupyter Notebook), or interactive plots.</p>
+<p>To use non-interactively, choose starting-point PID gains <cite>Kp0</cite>, <cite>Ki0</cite>,
+and <cite>Kd0</cite> (you might want to start with all zeros to begin with), select
+which gain you would like to vary (e.g. gain=`’P’<cite>, `’I’</cite>, or <cite>‘D’</cite>), and
+choose a value of <cite>deltaK</cite> (default 0.001) to specify by how much you
+would like to change that gain. Repeatedly run <cite>rootlocus_pid_designer</cite>
+with different values of <cite>deltaK</cite> until you are satisfied with the
+performance for that gain. Then, to tune a different gain, e.g. <cite>‘I’</cite>,
+make sure to add your chosen <cite>deltaK</cite> to the previous gain you you were
+tuning.</p>
+<p>Example: to examine the effect of varying <cite>Kp</cite> starting from an intial
+value of 10, use the arguments <cite>gain=’P’, Kp0=10</cite> and try varying values
+of <cite>deltaK</cite>. Suppose a <cite>deltaK</cite> of 5 gives satisfactory performance. Then,
+to tune the derivative gain, add your selected <cite>deltaK</cite> to <cite>Kp0</cite> in the
+next call using the arguments <cite>gain=’D’, Kp0=15</cite>, to see how adding
+different values of <cite>deltaK</cite> to your derivative gain affects performance.</p>
+<p>To use with interactive plots, you will need to enable interactive mode
+if you are in a Jupyter Notebook, e.g. using <cite>%matplotlib</cite>. See
+<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.ion.html">Interactive Plots</a>
+for more information. Click on a branch of the root locus plot to try
+different values of <cite>deltaK</cite>. Each click updates plots and prints the
+corresponding <cite>deltaK</cite>. It may be helpful to zoom in using the magnifying
+glass on the plot to get more locations to click. Just make sure to
+deactivate magnification mode when you are done by clicking the magnifying
+glass. Otherwise you will not be able to be able to choose a gain on the
+root locus plot. When you are done, <cite>%matplotlib inline</cite> returns to inline,
+non-interactive ploting.</p>
+<p>By default, all three PID terms are in the forward path C_f in the diagram
+shown below, that is,</p>
+<p>C_f = Kp + Ki/s + Kd*s/(tau*s + 1).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="o">------&gt;</span> <span class="n">C_ff</span> <span class="o">------</span>    <span class="n">d</span>
+    <span class="o">|</span>                 <span class="o">|</span>    <span class="o">|</span>
+<span class="n">r</span>   <span class="o">|</span>     <span class="n">e</span>           <span class="n">V</span>    <span class="n">V</span>  <span class="n">u</span>         <span class="n">y</span>
+<span class="o">-------&gt;</span><span class="n">O</span><span class="o">---&gt;</span> <span class="n">C_f</span> <span class="o">---&gt;</span><span class="n">O</span><span class="o">---&gt;</span><span class="n">O</span><span class="o">---&gt;</span> <span class="n">plant</span> <span class="o">---&gt;</span>
+        <span class="o">^-</span>            <span class="o">^-</span>                <span class="o">|</span>
+        <span class="o">|</span>             <span class="o">|</span>                 <span class="o">|</span>
+        <span class="o">|</span>             <span class="o">-----</span> <span class="n">C_b</span> <span class="o">&lt;-------|</span>
+        <span class="o">---------------------------------</span>
+</pre></div>
+</div>
+<p>If <cite>plant</cite> is a discrete-time system, then the proportional, integral, and
+derivative terms are given instead by Kp, Ki*dt/2*(z+1)/(z-1), and
+Kd/dt*(z-1)/z, respectively.</p>
+<p>It is also possible to move the derivative term into the feedback path
+<cite>C_b</cite> using <cite>derivative_in_feedback_path=True</cite>. This may be desired to
+avoid that the plant is subject to an impulse function when the reference
+<cite>r</cite> is a step input. <cite>C_b</cite> is otherwise set to zero.</p>
+<p>If <cite>plant</cite> is a 2-input system, the disturbance <cite>d</cite> is fed directly into
+its second input rather than being added to <cite>u</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plant</strong> (<a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTI</span></code></a> (<a class="reference internal" href="control.TransferFunction.html#control.TransferFunction" title="control.TransferFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">TransferFunction</span></code></a> or <a class="reference internal" href="control.StateSpace.html#control.StateSpace" title="control.StateSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpace</span></code></a> system)) – The dynamical system to be controlled.</p></li>
+<li><p><strong>gain</strong> (<em>string</em><em>, </em><em>optional</em>) – Which gain to vary by <cite>deltaK</cite>. Must be one of <cite>‘P’</cite>, <cite>‘I’</cite>, or <cite>‘D’</cite>
+(proportional, integral, or derative).</p></li>
+<li><p><strong>sign</strong> (<em>int</em><em>, </em><em>optional</em>) – The sign of deltaK gain perturbation.</p></li>
+<li><p><strong>input_signal</strong> (<em>string</em><em>, </em><em>optional</em>) – The input used for the step response; must be <cite>‘r’</cite> (reference) or
+<cite>‘d’</cite> (disturbance) (see figure above).</p></li>
+<li><p><strong>Kp0</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial values for proportional, integral, and derivative gains,
+respectively.</p></li>
+<li><p><strong>Ki0</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial values for proportional, integral, and derivative gains,
+respectively.</p></li>
+<li><p><strong>Kd0</strong> (<em>float</em><em>, </em><em>optional</em>) – Initial values for proportional, integral, and derivative gains,
+respectively.</p></li>
+<li><p><strong>deltaK</strong> (<em>float</em><em>, </em><em>optional</em>) – Perturbation value for gain specified by the <cite>gain</cite> keywoard.</p></li>
+<li><p><strong>tau</strong> (<em>float</em><em>, </em><em>optional</em>) – The time constant associated with the pole in the continuous-time
+derivative term. This is required to make the derivative transfer
+function proper.</p></li>
+<li><p><strong>C_ff</strong> (float or <a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTI</span></code></a> system, optional) – Feedforward controller. If <a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><code class="xref py py-class docutils literal notranslate"><span class="pre">LTI</span></code></a>, must have timebase that is
+compatible with plant.</p></li>
+<li><p><strong>derivative_in_feedback_path</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to place the derivative term in feedback transfer function
+<cite>C_b</cite> instead of the forward transfer function <cite>C_f</cite>.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to create Sisotool interactive plot.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>closedloop</strong> – The closed-loop system using initial gains.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>class:<cite>StateSpace</cite> system</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>When running using iPython or Jupyter, use <cite>%matplotlib</cite> to configure
+the session for interactive support.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.place_varga.html" class="btn btn-neutral float-left" title="control.place_varga" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.minimal_realization.html" class="btn btn-neutral float-right" title="control.minimal_realization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

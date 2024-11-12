@@ -1,0 +1,23 @@
+﻿control.flatsys.BezierFamily
+============================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: BezierFamily
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~BezierFamily.eval
+      ~BezierFamily.eval_deriv
+      ~BezierFamily.var_ncoefs
+   
+   

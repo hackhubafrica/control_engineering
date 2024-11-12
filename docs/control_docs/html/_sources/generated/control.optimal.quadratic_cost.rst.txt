@@ -1,0 +1,6 @@
+﻿control.optimal.quadratic\_cost
+===============================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: quadratic_cost

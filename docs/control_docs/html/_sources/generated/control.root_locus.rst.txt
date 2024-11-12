@@ -1,0 +1,6 @@
+﻿control.root\_locus
+===================
+
+.. currentmodule:: control
+
+.. autofunction:: root_locus

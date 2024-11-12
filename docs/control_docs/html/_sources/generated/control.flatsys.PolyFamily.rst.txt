@@ -1,0 +1,23 @@
+﻿control.flatsys.PolyFamily
+==========================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: PolyFamily
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~PolyFamily.eval
+      ~PolyFamily.eval_deriv
+      ~PolyFamily.var_ncoefs
+   
+   

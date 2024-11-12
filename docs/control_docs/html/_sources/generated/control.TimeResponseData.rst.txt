@@ -1,0 +1,33 @@
+﻿control.TimeResponseData
+========================
+
+.. currentmodule:: control
+
+.. autoclass:: TimeResponseData
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TimeResponseData.__init__
+      ~TimeResponseData.plot
+      ~TimeResponseData.to_pandas
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TimeResponseData.inputs
+      ~TimeResponseData.outputs
+      ~TimeResponseData.states
+      ~TimeResponseData.time
+   
+   

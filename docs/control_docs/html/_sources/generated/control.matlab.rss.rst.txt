@@ -1,0 +1,6 @@
+﻿control.matlab.rss
+==================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: rss

@@ -1,0 +1,6 @@
+﻿control.optimal.gaussian\_likelihood\_cost
+==========================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: gaussian_likelihood_cost

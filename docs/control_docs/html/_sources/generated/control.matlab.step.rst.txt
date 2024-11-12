@@ -1,0 +1,6 @@
+﻿control.matlab.step
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: step

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differentially flat system - kinematic car &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule" href="mrac_siso_mit.html" />
+    <link rel="prev" title="Optimal control for vehicle steering (lane change)" href="steering-optimal.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="secord-matlab.html">Secord order system (MATLAB module example)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-nested.html">Inner/outer control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr.html">LQR control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss-balred.html">Balanced model reduction examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="phase_plane_plots.html">Phase  plot examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_siso.html">SISO robust control example (SP96, Example 2.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_mimo.html">MIMO robust control example (SP96, Example 3.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_H2_h2syn.html">H2 synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_Hinf_hinfsyn.html">Hinf synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cruise-control.html">Cruise control design example (as a nonlinear I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-gainsched.html">Gain scheduled control for vehicle steeering (I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-optimal.html">Optimal control for vehicle steering (lane change)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Differentially flat system - kinematic car</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_mit.html">Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_lyapunov.html">Model-Reference Adaptive Control (MRAC) SISO, direct Lyapunov rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="markov.html">Estimation of Makrov parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="era_msd.html">ERA example, mass spring damper system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Differentially flat system - kinematic car</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/kincar-flatsys.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="differentially-flat-system-kinematic-car">
+<h1>Differentially flat system - kinematic car<a class="headerlink" href="#differentially-flat-system-kinematic-car" title="Permalink to this heading">¶</a></h1>
+<p>This example demonstrates the use of the <cite>flatsys</cite> module for
+generating trajectories for differentially flat systems.  The example
+is drawn from Chapter 8 of FBS2e.</p>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># kincar-flatsys.py - differentially flat systems example</span>
+<span class="linenos">  2</span><span class="c1"># RMM, 3 Jul 2019</span>
+<span class="linenos">  3</span><span class="c1">#</span>
+<span class="linenos">  4</span><span class="c1"># This example demonstrates the use of the `flatsys` module for generating</span>
+<span class="linenos">  5</span><span class="c1"># trajectories for differnetially flat systems by computing a trajectory for a</span>
+<span class="linenos">  6</span><span class="c1"># kinematic (bicycle) model of a car changing lanes.</span>
+<span class="linenos">  7</span>
+<span class="linenos">  8</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="linenos">  9</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 10</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 11</span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="linenos"> 12</span><span class="kn">import</span> <span class="nn">control.flatsys</span> <span class="k">as</span> <span class="nn">fs</span>
+<span class="linenos"> 13</span><span class="kn">import</span> <span class="nn">control.optimal</span> <span class="k">as</span> <span class="nn">obc</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span><span class="c1">#</span>
+<span class="linenos"> 16</span><span class="c1"># System model and utility functions</span>
+<span class="linenos"> 17</span><span class="c1">#</span>
+<span class="linenos"> 18</span>
+<span class="linenos"> 19</span><span class="c1"># Function to take states, inputs and return the flat flag</span>
+<span class="linenos"> 20</span><span class="k">def</span> <span class="nf">vehicle_flat_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos"> 21</span>    <span class="c1"># Get the parameter values</span>
+<span class="linenos"> 22</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span>    <span class="c1"># Create a list of arrays to store the flat output and its derivatives</span>
+<span class="linenos"> 25</span>    <span class="n">zflag</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+<span class="linenos"> 26</span>
+<span class="linenos"> 27</span>    <span class="c1"># Flat output is the x, y position of the rear wheels</span>
+<span class="linenos"> 28</span>    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos"> 29</span>    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos"> 30</span>
+<span class="linenos"> 31</span>    <span class="c1"># First derivatives of the flat output</span>
+<span class="linenos"> 32</span>    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># dx/dt</span>
+<span class="linenos"> 33</span>    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># dy/dt</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span>    <span class="c1"># First derivative of the angle</span>
+<span class="linenos"> 36</span>    <span class="n">thdot</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span>    <span class="c1"># Second derivatives of the flat output (setting vdot = 0)</span>
+<span class="linenos"> 39</span>    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">thdot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos"> 40</span>    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">thdot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span>    <span class="k">return</span> <span class="n">zflag</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="c1"># Function to take the flat flag and return states, inputs</span>
+<span class="linenos"> 46</span><span class="k">def</span> <span class="nf">vehicle_flat_reverse</span><span class="p">(</span><span class="n">zflag</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos"> 47</span>    <span class="c1"># Get the parameter values</span>
+<span class="linenos"> 48</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span>    <span class="c1"># Create a vector to store the state and inputs</span>
+<span class="linenos"> 51</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="linenos"> 52</span>    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 53</span>
+<span class="linenos"> 54</span>    <span class="c1"># Given the flat variables, solve for the state</span>
+<span class="linenos"> 55</span>    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># x position</span>
+<span class="linenos"> 56</span>    <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># y position</span>
+<span class="linenos"> 57</span>    <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># tan(theta) = ydot/xdot</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span>    <span class="c1"># And next solve for the inputs</span>
+<span class="linenos"> 60</span>    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos"> 61</span>    <span class="n">thdot_v</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos"> 62</span>    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">thdot_v</span><span class="p">,</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span>    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span>
+<span class="linenos"> 65</span>
+<span class="linenos"> 66</span><span class="c1"># Function to compute the RHS of the system dynamics</span>
+<span class="linenos"> 67</span><span class="k">def</span> <span class="nf">vehicle_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="linenos"> 68</span>    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>             <span class="c1"># get parameter values</span>
+<span class="linenos"> 69</span>    <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="linenos"> 70</span>        <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="linenos"> 71</span>        <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+<span class="linenos"> 72</span>        <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 73</span>    <span class="p">])</span>
+<span class="linenos"> 74</span>    <span class="k">return</span> <span class="n">dx</span>
+<span class="linenos"> 75</span>
+<span class="linenos"> 76</span><span class="c1"># Plot the trajectory in xy coordinates</span>
+<span class="linenos"> 77</span><span class="k">def</span> <span class="nf">plot_results</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ud</span><span class="p">,</span> <span class="n">rescale</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="linenos"> 78</span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 79</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 80</span>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [m]&#39;</span><span class="p">)</span>
+<span class="linenos"> 81</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="k">if</span> <span class="n">rescale</span><span class="p">:</span>
+<span class="linenos"> 83</span>        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">x0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">xf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 84</span>
+<span class="linenos"> 85</span>    <span class="c1"># Time traces of the state and input</span>
+<span class="linenos"> 86</span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="linenos"> 87</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 88</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [m]&#39;</span><span class="p">)</span>
+<span class="linenos"> 89</span>
+<span class="linenos"> 90</span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="linenos"> 91</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="linenos"> 92</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;theta [rad]&#39;</span><span class="p">)</span>
+<span class="linenos"> 93</span>
+<span class="linenos"> 94</span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="linenos"> 95</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ud</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos"> 96</span>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t [sec]&#39;</span><span class="p">)</span>
+<span class="linenos"> 97</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;v [m/s]&#39;</span><span class="p">)</span>
+<span class="linenos"> 98</span>    <span class="k">if</span> <span class="n">rescale</span><span class="p">:</span>
+<span class="linenos"> 99</span>        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">u0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">uf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">100</span>
+<span class="linenos">101</span>    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="linenos">102</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ud</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">103</span>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time t [sec]&#39;</span><span class="p">)</span>
+<span class="linenos">104</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">delta$ [rad]&#39;</span><span class="p">)</span>
+<span class="linenos">105</span>    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="linenos">106</span>
+<span class="linenos">107</span><span class="c1">#</span>
+<span class="linenos">108</span><span class="c1"># Approach 1: point to point solution, no cost or constraints</span>
+<span class="linenos">109</span><span class="c1">#</span>
+<span class="linenos">110</span>
+<span class="linenos">111</span><span class="c1"># Create differentially flat input/output system</span>
+<span class="linenos">112</span><span class="n">vehicle_flat</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">FlatSystem</span><span class="p">(</span>
+<span class="linenos">113</span>    <span class="n">vehicle_flat_forward</span><span class="p">,</span> <span class="n">vehicle_flat_reverse</span><span class="p">,</span> <span class="n">vehicle_update</span><span class="p">,</span>
+<span class="linenos">114</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;delta&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span>
+<span class="linenos">115</span>    <span class="n">states</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">))</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span><span class="c1"># Define the endpoints of the trajectory</span>
+<span class="linenos">118</span><span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">u0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="linenos">119</span><span class="n">xf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">40.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">uf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="linenos">120</span><span class="n">Tf</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="linenos">121</span>
+<span class="linenos">122</span><span class="c1"># Define a set of basis functions to use for the trajectories</span>
+<span class="linenos">123</span><span class="n">poly</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="linenos">124</span>
+<span class="linenos">125</span><span class="c1"># Find a trajectory between the initial condition and the final condition</span>
+<span class="linenos">126</span><span class="n">traj1</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">poly</span><span class="p">)</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span><span class="c1"># Create the desired trajectory between the initial and final condition</span>
+<span class="linenos">129</span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="linenos">130</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">traj1</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">131</span>
+<span class="linenos">132</span><span class="c1"># Simulation the open system dynamics with the full input</span>
+<span class="linenos">133</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">134</span>    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">ud</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">return_x</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">135</span>
+<span class="linenos">136</span><span class="c1"># Plot the open loop system dynamics</span>
+<span class="linenos">137</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">138</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Open loop trajectory for kinematic car lane change&quot;</span><span class="p">)</span>
+<span class="linenos">139</span><span class="n">plot_results</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+<span class="linenos">140</span>
+<span class="linenos">141</span><span class="c1">#</span>
+<span class="linenos">142</span><span class="c1"># Approach #2: add cost function to make lane change quicker</span>
+<span class="linenos">143</span><span class="c1">#</span>
+<span class="linenos">144</span>
+<span class="linenos">145</span><span class="c1"># Define timepoints for evaluation plus basis function to use</span>
+<span class="linenos">146</span><span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="linenos">147</span><span class="n">basis</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="linenos">148</span>
+<span class="linenos">149</span><span class="c1"># Define the cost function (penalize lateral error and steering)</span>
+<span class="linenos">150</span><span class="n">traj_cost</span> <span class="o">=</span> <span class="n">obc</span><span class="o">.</span><span class="n">quadratic_cost</span><span class="p">(</span>
+<span class="linenos">151</span>    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">x0</span><span class="o">=</span><span class="n">xf</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="n">uf</span><span class="p">)</span>
+<span class="linenos">152</span>
+<span class="linenos">153</span><span class="c1"># Solve for an optimal solution</span>
+<span class="linenos">154</span><span class="n">traj2</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span>
+<span class="linenos">155</span>    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="n">traj_cost</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span>
+<span class="linenos">156</span><span class="p">)</span>
+<span class="linenos">157</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">traj2</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">158</span>
+<span class="linenos">159</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">160</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Lane change with lateral error + steering penalties&quot;</span><span class="p">)</span>
+<span class="linenos">161</span><span class="n">plot_results</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+<span class="linenos">162</span>
+<span class="linenos">163</span><span class="c1">#</span>
+<span class="linenos">164</span><span class="c1"># Approach #3: optimal cost with trajectory constraints</span>
+<span class="linenos">165</span><span class="c1">#</span>
+<span class="linenos">166</span><span class="c1"># Resolve the problem with constraints on the inputs</span>
+<span class="linenos">167</span><span class="c1">#</span>
+<span class="linenos">168</span>
+<span class="linenos">169</span><span class="c1"># Constraint the input values</span>
+<span class="linenos">170</span><span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">171</span>    <span class="n">obc</span><span class="o">.</span><span class="n">input_range_constraint</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span> <span class="p">]</span>
+<span class="linenos">172</span>
+<span class="linenos">173</span><span class="c1"># TEST: Change the basis to use B-splines</span>
+<span class="linenos">174</span><span class="n">basis</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">BSplineFamily</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Tf</span><span class="p">],</span> <span class="mi">6</span><span class="p">)</span>
+<span class="linenos">175</span>
+<span class="linenos">176</span><span class="c1"># Solve for an optimal solution</span>
+<span class="linenos">177</span><span class="n">traj3</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span>
+<span class="linenos">178</span>    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="n">traj_cost</span><span class="p">,</span>
+<span class="linenos">179</span>    <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span>
+<span class="linenos">180</span><span class="p">)</span>
+<span class="linenos">181</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">traj3</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">182</span>
+<span class="linenos">183</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="linenos">184</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Lane change with penalty + steering constraints&quot;</span><span class="p">)</span>
+<span class="linenos">185</span><span class="n">plot_results</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+<span class="linenos">186</span>
+<span class="linenos">187</span><span class="c1"># Show the results unless we are running in batch mode</span>
+<span class="linenos">188</span><span class="k">if</span> <span class="s1">&#39;PYCONTROL_TEST_EXAMPLES&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+<span class="linenos">189</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">190</span>
+<span class="linenos">191</span>
+<span class="linenos">192</span><span class="c1">#</span>
+<span class="linenos">193</span><span class="c1"># Approach #4: optimal trajectory, final cost with trajectory constraints</span>
+<span class="linenos">194</span><span class="c1">#</span>
+<span class="linenos">195</span><span class="c1"># Resolve the problem with constraints on the inputs and also replacing the</span>
+<span class="linenos">196</span><span class="c1"># point to point problem with one using a terminal cost to set the final</span>
+<span class="linenos">197</span><span class="c1"># state.</span>
+<span class="linenos">198</span><span class="c1">#</span>
+<span class="linenos">199</span>
+<span class="linenos">200</span><span class="c1"># Define the cost function (mainly penalize steering angle)</span>
+<span class="linenos">201</span><span class="n">traj_cost</span> <span class="o">=</span> <span class="n">obc</span><span class="o">.</span><span class="n">quadratic_cost</span><span class="p">(</span>
+<span class="linenos">202</span>    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]),</span> <span class="n">x0</span><span class="o">=</span><span class="n">xf</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="n">uf</span><span class="p">)</span>
+<span class="linenos">203</span>
+<span class="linenos">204</span><span class="c1"># Set terminal cost to bring us close to xf</span>
+<span class="linenos">205</span><span class="n">terminal_cost</span> <span class="o">=</span> <span class="n">obc</span><span class="o">.</span><span class="n">quadratic_cost</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">xf</span><span class="p">)</span>
+<span class="linenos">206</span>
+<span class="linenos">207</span><span class="c1"># Change the basis to use B-splines</span>
+<span class="linenos">208</span><span class="n">basis</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">BSplineFamily</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Tf</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="nb">vars</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">209</span>
+<span class="linenos">210</span><span class="c1"># Use a straight line as an initial guess for the trajectory</span>
+<span class="linenos">211</span><span class="n">initial_guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="linenos">212</span>    <span class="p">[</span><span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">timepts</span><span class="o">/</span><span class="n">Tf</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<span class="linenos">213</span>
+<span class="linenos">214</span><span class="c1"># Solve for an optimal solution</span>
+<span class="linenos">215</span><span class="n">traj4</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">solve_flat_ocp</span><span class="p">(</span>
+<span class="linenos">216</span>    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">cost</span><span class="o">=</span><span class="n">traj_cost</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span>
+<span class="linenos">217</span>    <span class="n">terminal_cost</span><span class="o">=</span><span class="n">terminal_cost</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span> <span class="n">initial_guess</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span>
+<span class="linenos">218</span>    <span class="c1"># minimize_kwargs={&#39;method&#39;: &#39;trust-constr&#39;},</span>
+<span class="linenos">219</span><span class="p">)</span>
+<span class="linenos">220</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">traj4</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">221</span>
+<span class="linenos">222</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">223</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Lane change with terminal cost + steering constraints&quot;</span><span class="p">)</span>
+<span class="linenos">224</span><span class="n">plot_results</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">,</span> <span class="n">rescale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># TODO: remove rescale</span>
+<span class="linenos">225</span>
+<span class="linenos">226</span><span class="c1"># Show the results unless we are running in batch mode</span>
+<span class="linenos">227</span><span class="k">if</span> <span class="s1">&#39;PYCONTROL_TEST_EXAMPLES&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+<span class="linenos">228</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
+<p>1. The environment variable <cite>PYCONTROL_TEST_EXAMPLES</cite> is used for
+testing to turn off plotting of the outputs.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="steering-optimal.html" class="btn btn-neutral float-left" title="Optimal control for vehicle steering (lane change)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mrac_siso_mit.html" class="btn btn-neutral float-right" title="Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

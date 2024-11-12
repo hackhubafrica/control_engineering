@@ -1,0 +1,6 @@
+﻿control.TransferFunction.\_\_call\_\_
+=====================================
+
+.. currentmodule:: control
+
+.. automethod:: TransferFunction.__call__

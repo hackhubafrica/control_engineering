@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differentially flat systems &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="control.flatsys.BasisFamily" href="generated/control.flatsys.BasisFamily.html" />
+    <link rel="prev" title="control.matlab.unwrap" href="generated/control.matlab.unwrap.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Differentially flat systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-differential-flatness">Overview of differential flatness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-classes-and-functions">Module classes and functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.BasisFamily.html">control.flatsys.BasisFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.BezierFamily.html">control.flatsys.BezierFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.BSplineFamily.html">control.flatsys.BSplineFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.FlatSystem.html">control.flatsys.FlatSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.LinearFlatSystem.html">control.flatsys.LinearFlatSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.PolyFamily.html">control.flatsys.PolyFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.SystemTrajectory.html">control.flatsys.SystemTrajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.flatsys.html">control.flatsys.flatsys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.point_to_point.html">control.flatsys.point_to_point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.solve_flat_ocp.html">control.flatsys.solve_flat_ocp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Differentially flat systems</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/flatsys.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-control.flatsys">
+<span id="differentially-flat-systems"></span><span id="flatsys-module"></span><h1>Differentially flat systems<a class="headerlink" href="#module-control.flatsys" title="Permalink to this heading">¶</a></h1>
+<p>Differentially flat systems sub-package.</p>
+<p>The <a class="reference internal" href="#module-control.flatsys" title="control.flatsys"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control.flatsys</span></code></a> sub-package contains a set of classes and
+functions to compute trajectories for differentially flat systems.</p>
+<p>A differentially flat system is defined by creating an object using the
+<a class="reference internal" href="generated/control.flatsys.FlatSystem.html#control.flatsys.FlatSystem" title="control.flatsys.FlatSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlatSystem</span></code></a> class, which has member functions for
+mapping the system state and input into and out of flat coordinates.  The
+<a class="reference internal" href="generated/control.flatsys.point_to_point.html#control.flatsys.point_to_point" title="control.flatsys.point_to_point"><code class="xref py py-func docutils literal notranslate"><span class="pre">point_to_point()</span></code></a> function can be used to create a
+trajectory between two endpoints, written in terms of a set of basis functions
+defined using the <a class="reference internal" href="generated/control.flatsys.BasisFamily.html#control.flatsys.BasisFamily" title="control.flatsys.BasisFamily"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasisFamily</span></code></a> class.  The resulting
+trajectory is return as a <a class="reference internal" href="generated/control.flatsys.SystemTrajectory.html#control.flatsys.SystemTrajectory" title="control.flatsys.SystemTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrajectory</span></code></a> object
+and can be evaluated using the <a class="reference internal" href="generated/control.flatsys.SystemTrajectory.html#control.flatsys.SystemTrajectory.eval" title="control.flatsys.SystemTrajectory.eval"><code class="xref py py-func docutils literal notranslate"><span class="pre">eval()</span></code></a>
+member function.  Alternatively, the <a class="reference internal" href="generated/control.flatsys.solve_flat_ocp.html#control.flatsys.solve_flat_ocp" title="control.flatsys.solve_flat_ocp"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_flat_ocp()</span></code></a>
+function can be used to solve an optimal control problem with trajectory and
+final costs or constraints.</p>
+<p>The docstring examples assume that the following import commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">control.flatsys</span> <span class="k">as</span> <span class="nn">fs</span>
+</pre></div>
+</div>
+<div class="section" id="overview-of-differential-flatness">
+<h2>Overview of differential flatness<a class="headerlink" href="#overview-of-differential-flatness" title="Permalink to this heading">¶</a></h2>
+<p>A nonlinear differential equation of the form</p>
+<div class="math">
+<p><span class="math">\dot x = f(x, u), \qquad x \in R^n, u \in R^m</span></p>
+</div><p>is <em>differentially flat</em> if there exists a function <span class="math">\alpha</span> such that</p>
+<div class="math">
+<p><span class="math">z = \alpha(x, u, \dot u\, \dots, u^{(p)})</span></p>
+</div><p>and we can write the solutions of the nonlinear system as functions of
+<span class="math">z</span> and a finite number of derivatives</p>
+<div class="math" id="equation-flat2state">
+<p><span class="eqno">(1)<a class="headerlink" href="#equation-flat2state" title="Permalink to this equation">¶</a></span><span class="math">x &amp;= \beta(z, \dot z, \dots, z^{(q)}) \\
+u &amp;= \gamma(z, \dot z, \dots, z^{(q)}).</span></p>
+</div><p>For a differentially flat system, all of the feasible trajectories for
+the system can be written as functions of a flat output <span class="math">z(\cdot)</span> and
+its derivatives.  The number of flat outputs is always equal to the
+number of system inputs.</p>
+<p>Differentially flat systems are useful in situations where explicit
+trajectory generation is required. Since the behavior of a flat system
+is determined by the flat outputs, we can plan trajectories in output
+space, and then map these to appropriate inputs.  Suppose we wish to
+generate a feasible trajectory for the nonlinear system</p>
+<div class="math">
+<p><span class="math">\dot x = f(x, u), \qquad x(0) = x_0,\, x(T) = x_f.</span></p>
+</div><p>If the system is differentially flat then</p>
+<div class="math">
+<p><span class="math">x(0) &amp;= \beta\bigl(z(0), \dot z(0), \dots, z^{(q)}(0) \bigr) = x_0, \\
+x(T) &amp;= \gamma\bigl(z(T), \dot z(T), \dots, z^{(q)}(T) \bigr) = x_f,</span></p>
+</div><p>and we see that the initial and final condition in the full state
+space depends on just the output <span class="math">z</span> and its derivatives at the
+initial and final times.  Thus any trajectory for <span class="math">z</span> that satisfies
+these boundary conditions will be a feasible trajectory for the
+system, using equation <a class="reference internal" href="#equation-flat2state">(1)</a> to determine the
+full state space and input trajectories.</p>
+<p>In particular, given initial and final conditions on <span class="math">z</span> and its
+derivatives that satisfy the initial and final conditions any curve
+<span class="math">z(\cdot)</span> satisfying those conditions will correspond to a feasible
+trajectory of the system.  We can parameterize the flat output trajectory
+using a set of smooth basis functions <span class="math">\psi_i(t)</span>:</p>
+<div class="math">
+<p><span class="math">z(t) = \sum_{i=1}^N c_i \psi_i(t), \qquad c_i \in R</span></p>
+</div><p>We seek a set of coefficients <span class="math">c_i</span>, <span class="math">i = 1, \dots, N</span> such
+that <span class="math">z(t)</span> satisfies the boundary conditions for <span class="math">x(0)</span> and
+<span class="math">x(T)</span>.  The derivatives of the flat output can be computed in terms of
+the derivatives of the basis functions:</p>
+<div class="math">
+<p><span class="math">\dot z(t) &amp;= \sum_{i=1}^N c_i \dot \psi_i(t) \\
+&amp;\,\vdots \\
+\dot z^{(q)}(t) &amp;= \sum_{i=1}^N c_i \psi^{(q)}_i(t).</span></p>
+</div><p>We can thus write the conditions on the flat outputs and their
+derivatives as</p>
+<div class="math">
+<p><span class="math">\begin{bmatrix}
+  \psi_1(0) &amp; \psi_2(0) &amp; \dots &amp; \psi_N(0) \\
+  \dot \psi_1(0) &amp; \dot \psi_2(0) &amp; \dots &amp; \dot \psi_N(0) \\
+  \vdots &amp; \vdots &amp; &amp; \vdots \\
+  \psi^{(q)}_1(0) &amp; \psi^{(q)}_2(0) &amp; \dots &amp; \psi^{(q)}_N(0) \\[1ex]
+  \psi_1(T) &amp; \psi_2(T) &amp; \dots &amp; \psi_N(T) \\
+  \dot \psi_1(T) &amp; \dot \psi_2(T) &amp; \dots &amp; \dot \psi_N(T) \\
+  \vdots &amp; \vdots &amp; &amp; \vdots \\
+  \psi^{(q)}_1(T) &amp; \psi^{(q)}_2(T) &amp; \dots &amp; \psi^{(q)}_N(T) \\
+\end{bmatrix}
+\begin{bmatrix} c_1 \\ \vdots \\ c_N \end{bmatrix} =
+\begin{bmatrix}
+  z(0) \\ \dot z(0) \\ \vdots \\ z^{(q)}(0) \\[1ex]
+  z(T) \\ \dot z(T) \\ \vdots \\ z^{(q)}(T) \\
+\end{bmatrix}</span></p>
+</div><p>This equation is a <em>linear</em> equation of the form</p>
+<div class="math">
+<p><span class="math">M c = \begin{bmatrix} \bar z(0) \\ \bar z(T) \end{bmatrix}</span></p>
+</div><p>where <span class="math">\bar z</span> is called the <em>flat flag</em> for the system.
+Assuming that <span class="math">M</span> has a sufficient number of columns and that it is full
+column rank, we can solve for a (possibly non-unique) <span class="math">\alpha</span> that
+solves the trajectory generation problem.</p>
+</div>
+<div class="section" id="module-usage">
+<h2>Module usage<a class="headerlink" href="#module-usage" title="Permalink to this heading">¶</a></h2>
+<p>To create a trajectory for a differentially flat system, a
+<a class="reference internal" href="generated/control.flatsys.FlatSystem.html#control.flatsys.FlatSystem" title="control.flatsys.FlatSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlatSystem</span></code></a> object must be created.  This is done
+using the <a class="reference internal" href="generated/control.flatsys.flatsys.html#control.flatsys.flatsys" title="control.flatsys.flatsys"><code class="xref py py-func docutils literal notranslate"><span class="pre">flatsys()</span></code></a> function:</p>
+<blockquote>
+<div><p>import control.flatsys as fs
+sys = fs.flatsys(forward, reverse)</p>
+</div></blockquote>
+<p>The <cite>forward</cite> and <cite>reverse</cite> parameters describe the mappings between the
+system state/input and the differentially flat outputs and their
+derivatives (“flat flag”).</p>
+<p>The <a class="reference internal" href="generated/control.flatsys.FlatSystem.html#control.flatsys.FlatSystem.forward" title="control.flatsys.FlatSystem.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">forward()</span></code></a> method computes the
+flat flag given a state and input:</p>
+<blockquote>
+<div><p>zflag = sys.forward(x, u)</p>
+</div></blockquote>
+<p>The <a class="reference internal" href="generated/control.flatsys.FlatSystem.html#control.flatsys.FlatSystem.reverse" title="control.flatsys.FlatSystem.reverse"><code class="xref py py-func docutils literal notranslate"><span class="pre">reverse()</span></code></a> method computes the state
+and input given the flat flag:</p>
+<blockquote>
+<div><p>x, u = sys.reverse(zflag)</p>
+</div></blockquote>
+<p>The flag <span class="math">\bar z</span> is implemented as a list of flat outputs <span class="math">z_i</span>
+and their derivatives up to order <span class="math">q_i</span>:</p>
+<blockquote>
+<div><p>zflag[i][j] = <span class="math">z_i^{(j)}</span></p>
+</div></blockquote>
+<p>The number of flat outputs must match the number of system inputs.</p>
+<p>For a linear system, a flat system representation can be generated by
+passing a <a class="reference internal" href="generated/control.StateSpace.html#control.StateSpace" title="control.StateSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpace</span></code></a> system to the
+<a class="reference internal" href="generated/control.flatsys.flatsys.html#control.flatsys.flatsys" title="control.flatsys.flatsys"><code class="xref py py-func docutils literal notranslate"><span class="pre">flatsys()</span></code></a> factory function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">flatsys</span><span class="p">(</span><span class="n">linsys</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="generated/control.flatsys.flatsys.html#control.flatsys.flatsys" title="control.flatsys.flatsys"><code class="xref py py-func docutils literal notranslate"><span class="pre">flatsys()</span></code></a> function also supports the use of
+named input, output, and state signals:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">flatsys</span><span class="p">(</span>
+    <span class="n">forward</span><span class="p">,</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;xn&#39;</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;um&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>In addition to the flat system description, a set of basis functions
+<span class="math">\phi_i(t)</span> must be chosen.  The <cite>FlatBasis</cite> class is used to
+represent the basis functions.  A polynomial basis function of the
+form 1, <span class="math">t</span>, <span class="math">t^2</span>, … can be computed using the
+<a class="reference internal" href="generated/control.flatsys.PolyFamily.html#control.flatsys.PolyFamily" title="control.flatsys.PolyFamily"><code class="xref py py-class docutils literal notranslate"><span class="pre">PolyFamily</span></code></a> class, which is initialized by
+passing the desired order of the polynomial basis set:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">basis</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additional basis function families include Bezier curves
+(<a class="reference internal" href="generated/control.flatsys.BezierFamily.html#control.flatsys.BezierFamily" title="control.flatsys.BezierFamily"><code class="xref py py-class docutils literal notranslate"><span class="pre">BezierFamily</span></code></a>) and B-splines
+(<a class="reference internal" href="generated/control.flatsys.BSplineFamily.html#control.flatsys.BSplineFamily" title="control.flatsys.BSplineFamily"><code class="xref py py-class docutils literal notranslate"><span class="pre">BSplineFamily</span></code></a>).</p>
+<p>Once the system and basis function have been defined, the
+<a class="reference internal" href="generated/control.flatsys.point_to_point.html#control.flatsys.point_to_point" title="control.flatsys.point_to_point"><code class="xref py py-func docutils literal notranslate"><span class="pre">point_to_point()</span></code></a> function can be used to compute a
+trajectory between initial and final states and inputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">traj</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span>
+    <span class="n">sys</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The returned object has class <a class="reference internal" href="generated/control.flatsys.SystemTrajectory.html#control.flatsys.SystemTrajectory" title="control.flatsys.SystemTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">SystemTrajectory</span></code></a> and
+can be used to compute the state and input trajectory between the initial and
+final condition:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>T</cite> is a list of times on which the trajectory should be evaluated
+(e.g., <cite>T = numpy.linspace(0, Tf, M)</cite>.</p>
+<p>The <a class="reference internal" href="generated/control.flatsys.point_to_point.html#control.flatsys.point_to_point" title="control.flatsys.point_to_point"><code class="xref py py-func docutils literal notranslate"><span class="pre">point_to_point()</span></code></a> function also allows the
+specification of a cost function and/or constraints, in the same
+format as <a class="reference internal" href="generated/control.optimal.solve_ocp.html#control.optimal.solve_ocp" title="control.optimal.solve_ocp"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_ocp()</span></code></a>.</p>
+<p>The <a class="reference internal" href="generated/control.flatsys.solve_flat_ocp.html#control.flatsys.solve_flat_ocp" title="control.flatsys.solve_flat_ocp"><code class="xref py py-func docutils literal notranslate"><span class="pre">solve_flat_ocp()</span></code></a> function can be used to
+solve an optimal control problem without a final state:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">traj</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">solve_flat_ocp</span><span class="p">(</span>
+    <span class="n">sys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">cost</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>cost</cite> parameter is a function with call signature
+<cite>cost(x, u)</cite> and should return the (incremental) cost at the given
+state, and input.  It will be evaluated at each point in the <cite>timepts</cite>
+vector.  The <cite>terminal_cost</cite> parameter can be used to specify a cost
+function for the final point in the trajectory.</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h2>
+<p>To illustrate how we can use a two degree-of-freedom design to improve the
+performance of the system, consider the problem of steering a car to change
+lanes on a road. We use the non-normalized form of the dynamics, which are
+derived in <em>Feedback Systems</em> by Astrom and Murray, Example 3.11.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">import</span> <span class="nn">control.flatsys</span> <span class="k">as</span> <span class="nn">fs</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Function to take states, inputs and return the flat flag</span>
+<span class="k">def</span> <span class="nf">vehicle_flat_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="c1"># Get the parameter values</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+
+    <span class="c1"># Create a list of arrays to store the flat output and its derivatives</span>
+    <span class="n">zflag</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+
+    <span class="c1"># Flat output is the x, y position of the rear wheels</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># First derivatives of the flat output</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># dx/dt</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># dy/dt</span>
+
+    <span class="c1"># First derivative of the angle</span>
+    <span class="n">thdot</span> <span class="o">=</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Second derivatives of the flat output (setting vdot = 0)</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">thdot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">thdot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">zflag</span>
+
+<span class="c1"># Function to take the flat flag and return states, inputs</span>
+<span class="k">def</span> <span class="nf">vehicle_flat_reverse</span><span class="p">(</span><span class="n">zflag</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="c1"># Get the parameter values</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>
+
+    <span class="c1"># Create a vector to store the state and inputs</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Given the flat variables, solve for the state</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># x position</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># y position</span>
+    <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># tan(theta) = ydot/xdot</span>
+
+    <span class="c1"># And next solve for the inputs</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">zflag</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">zflag</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])),</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span>
+
+<span class="n">vehicle_flat</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">flatsys</span><span class="p">(</span>
+    <span class="n">vehicle_flat_forward</span><span class="p">,</span> <span class="n">vehicle_flat_reverse</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;delta&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="n">states</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>To find a trajectory from an initial state <span class="math">x_0</span> to a final state
+<span class="math">x_\text{f}</span> in time <span class="math">T_\text{f}</span> we solve a point-to-point
+trajectory generation problem. We also set the initial and final inputs, which
+sets the vehicle velocity <span class="math">v</span> and steering wheel angle <span class="math">\delta</span> at
+the endpoints.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the endpoints of the trajectory</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">u0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">xf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">uf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Define a set of basis functions to use for the trajectories</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Find a trajectory between the initial condition and the final condition</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span><span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">poly</span><span class="p">)</span>
+
+<span class="c1"># Create the trajectory</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alternatively, we can solve an optimal control problem in which we
+minimize a cost function along the trajectory as well as a terminal
+cost:`</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the cost along the trajectory: penalize steering angle</span>
+<span class="n">traj_cost</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">optimal</span><span class="o">.</span><span class="n">quadratic_cost</span><span class="p">(</span>
+    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]),</span> <span class="n">u0</span><span class="o">=</span><span class="n">uf</span><span class="p">)</span>
+
+<span class="c1"># Define the terminal cost: penalize distance from the end point</span>
+<span class="n">term_cost</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">optimal</span><span class="o">.</span><span class="n">quadratic_cost</span><span class="p">(</span>
+    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1e3</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">]),</span> <span class="kc">None</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">xf</span><span class="p">)</span>
+
+<span class="c1"># Use a straight line as the initial guess</span>
+<span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">initial_guess</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x0</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">timepts</span><span class="o">/</span><span class="n">Tf</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+
+<span class="c1"># Solve the optimal control problem, evaluating cost at timepts</span>
+<span class="n">bspline</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">BSplineFamily</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Tf</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">solve_flat_ocp</span><span class="p">(</span>
+    <span class="n">vehicle_flat</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">traj_cost</span><span class="p">,</span>
+    <span class="n">terminal_cost</span><span class="o">=</span><span class="n">term_cost</span><span class="p">,</span> <span class="n">initial_guess</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">bspline</span><span class="p">)</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-classes-and-functions">
+<h2>Module classes and functions<a class="headerlink" href="#module-classes-and-functions" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.BasisFamily.html#control.flatsys.BasisFamily" title="control.flatsys.BasisFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BasisFamily</span></code></a>(N)</p></td>
+<td><p>Base class for implementing basis functions for flat systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.BezierFamily.html#control.flatsys.BezierFamily" title="control.flatsys.BezierFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BezierFamily</span></code></a>(N[, T])</p></td>
+<td><p>Bezier curve basis functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.BSplineFamily.html#control.flatsys.BSplineFamily" title="control.flatsys.BSplineFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BSplineFamily</span></code></a>(breakpoints, degree[, ...])</p></td>
+<td><p>B-spline basis functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.FlatSystem.html#control.flatsys.FlatSystem" title="control.flatsys.FlatSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FlatSystem</span></code></a>(forward, reverse[, updfcn, outfcn])</p></td>
+<td><p>Base class for representing a differentially flat system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.LinearFlatSystem.html#control.flatsys.LinearFlatSystem" title="control.flatsys.LinearFlatSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearFlatSystem</span></code></a>(linsys, **kwargs)</p></td>
+<td><p>Base class for a linear, differentially flat system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.PolyFamily.html#control.flatsys.PolyFamily" title="control.flatsys.PolyFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PolyFamily</span></code></a>(N[, T])</p></td>
+<td><p>Polynomial basis functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.SystemTrajectory.html#control.flatsys.SystemTrajectory" title="control.flatsys.SystemTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SystemTrajectory</span></code></a>(sys, basis[, coeffs, ...])</p></td>
+<td><p>Class representing a trajectory for a flat system.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.flatsys.html#control.flatsys.flatsys" title="control.flatsys.flatsys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys</span></code></a>(*args[, updfcn, outfcn])</p></td>
+<td><p>Create a differentially flat I/O system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.point_to_point.html#control.flatsys.point_to_point" title="control.flatsys.point_to_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point_to_point</span></code></a>(sys, timepts[, x0, u0, xf, ...])</p></td>
+<td><p>Compute trajectory between an initial and final conditions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.solve_flat_ocp.html#control.flatsys.solve_flat_ocp" title="control.flatsys.solve_flat_ocp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">solve_flat_ocp</span></code></a>(sys, timepts[, x0, u0, ...])</p></td>
+<td><p>Compute trajectory between an initial and final conditions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/control.matlab.unwrap.html" class="btn btn-neutral float-left" title="control.matlab.unwrap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/control.flatsys.BasisFamily.html" class="btn btn-neutral float-right" title="control.flatsys.BasisFamily" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

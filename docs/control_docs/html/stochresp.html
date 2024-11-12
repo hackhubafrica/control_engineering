@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stochastic Response &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Vehicle steering" href="steering.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Stochastic Response</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/stochresp.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="Stochastic-Response">
+<h1>Stochastic Response<a class="headerlink" href="#Stochastic-Response" title="Permalink to this heading">¶</a></h1>
+<p>Richard M. Murray, 6 Feb 2022</p>
+<p>This notebook illustrates the implementation of random processes and stochastic response. We focus on a system of the form</p>
+<div class="math">
+<p><span class="math">\dot X = A X + F V \qquad X \in {\mathbb R}^n</span></p>
+</div><p>where <span class="math">V</span> is a white noise process and the system is a first order linear system.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[83]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">exp</span>
+
+<span class="c1"># Fix random number seed to avoid spurious figure regeneration</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We begin by defining a simple first order system</p>
+<div class="math">
+<p><span class="math">\frac{dX}{dt} = - a X + V, \qquad Y = c X</span></p>
+</div><p>and a (scalar) white noise signal <span class="math">V</span> with intensity <span class="math">Q</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First order system</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">([[</span><span class="o">-</span><span class="n">a</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="n">c</span><span class="p">]],</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Create the time vector that we want to use</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Create the basis for a white noise signal</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">]])</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$V$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/stochresp_3_0.png" src="_images/stochresp_3_0.png" />
+</div>
+</div>
+<p>Note that the magnitude of the signal seems to be much larger than <span class="math">Q</span>. This is because we have a Gaussian process <span class="math">\implies</span> the signal consists of a sequence of “impulse-like” functions that have magnitude that increases with the time step <span class="math">dt</span> as <span class="math">1/\sqrt{dt}</span> (this gives covariance <span class="math">\mathbb{E}(V(t_1) V^T(t_2)) = Q \delta(t_2 - t_1)</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[85]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the sample properties and make sure they match</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mean(V) [0.0] = &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cov(V) * dt [</span><span class="si">%0.3g</span><span class="s2">] = &quot;</span> <span class="o">%</span> <span class="n">Q</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">V</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+mean(V) [0.0] =  0.17348786109316244
+cov(V) * dt [0.1] =  0.09633133133133133
+</pre></div></div>
+</div>
+<p>The response of the system to white noise can be computed using the <code class="docutils literal notranslate"><span class="pre">input_output_response</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[86]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Response of the first order system</span>
+<span class="n">T</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$Y$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/stochresp_7_0.png" src="_images/stochresp_7_0.png" />
+</div>
+</div>
+<p>This is a first order system, and so we can compute the analytical correlation function and compare this to the sampled data:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[87]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare static properties to what we expect analytically</span>
+<span class="k">def</span> <span class="nf">r</span><span class="p">(</span><span class="n">tau</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Q</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">tau</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* mean(Y) [</span><span class="si">%0.3g</span><span class="s2">] = </span><span class="si">%0.3g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* cov(Y) [</span><span class="si">%0.3g</span><span class="s2">] = </span><span class="si">%0.3g</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+* mean(Y) [0] = 0.165
+* cov(Y) [0.05] = 0.0151
+</pre></div></div>
+</div>
+<p>Finally, we look at the correlation function for the input and the output:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[88]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation function for the input</span>
+<span class="n">tau</span><span class="p">,</span> <span class="n">r_V</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">correlation</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">r_V</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r_V(\tau)$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/stochresp_11_0.png" src="_images/stochresp_11_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[89]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation function for the output</span>
+<span class="n">tau</span><span class="p">,</span> <span class="n">r_Y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">correlation</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">r_Y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\tau$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r_Y(\tau)$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Compare to the analytical answer</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="p">[</span><span class="n">r</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tau</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/stochresp_12_0.png" src="_images/stochresp_12_0.png" />
+</div>
+</div>
+<p>The analytical curve may or may not line up that well with the correlation function based on the sample. Try running the code again with a different random seed to see how things change based on the specific random sequence chosen at the start.</p>
+<p>Note: the <em>right</em> way to compute the correlation function would be to run a lot of different samples of white noise filtered through the system dynamics and compute <span class="math">R(t_1, t_2)</span> across those samples. The <code class="docutils literal notranslate"><span class="pre">correlation</span></code> function computes the covariance between <span class="math">Y(t + \tau)</span> and <span class="math">Y(t)</span> by varying <span class="math">t</span> over the time range.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="steering.html" class="btn btn-neutral float-left" title="Vehicle steering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

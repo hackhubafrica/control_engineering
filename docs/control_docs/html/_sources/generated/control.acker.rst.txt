@@ -1,0 +1,6 @@
+﻿control.acker
+=============
+
+.. currentmodule:: control
+
+.. autofunction:: acker

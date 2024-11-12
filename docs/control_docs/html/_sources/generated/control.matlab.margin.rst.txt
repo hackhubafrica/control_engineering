@@ -1,0 +1,6 @@
+﻿control.matlab.margin
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: margin

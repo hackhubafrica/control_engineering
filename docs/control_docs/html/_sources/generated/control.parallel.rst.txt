@@ -1,0 +1,6 @@
+﻿control.parallel
+================
+
+.. currentmodule:: control
+
+.. autofunction:: parallel

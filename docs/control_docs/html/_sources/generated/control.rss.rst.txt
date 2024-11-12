@@ -1,0 +1,6 @@
+﻿control.rss
+===========
+
+.. currentmodule:: control
+
+.. autofunction:: rss

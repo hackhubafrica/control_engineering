@@ -1,0 +1,6 @@
+﻿control.matlab.ctrb
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: ctrb

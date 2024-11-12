@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Input/output systems &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Describing functions" href="descfcn.html" />
+    <link rel="prev" title="control.flatsys.solve_flat_ocp" href="generated/control.flatsys.solve_flat_ocp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Input/output systems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-features">Additional features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vector-elements-processing">Vector elements processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summing-junction">Summing junction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-connections-using-signal-names">Automatic connections using signal names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-specification-of-signal-names">Advanced specification of signal names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automated-creation-of-state-feedback-systems">Automated creation of state feedback systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-classes-and-functions">Module classes and functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.InputOutputSystem.html">control.InputOutputSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.InterconnectedSystem.html">control.InterconnectedSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.LinearICSystem.html">control.LinearICSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.NonlinearIOSystem.html">control.NonlinearIOSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.find_eqpt.html">control.find_eqpt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.interconnect.html">control.interconnect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.linearize.html">control.linearize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.nlsys.html">control.nlsys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.summing_junction.html">control.summing_junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Input/output systems</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/iosys.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="input-output-systems">
+<span id="iosys-module"></span><h1>Input/output systems<a class="headerlink" href="#input-output-systems" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="module-usage">
+<h2>Module usage<a class="headerlink" href="#module-usage" title="Permalink to this heading">¶</a></h2>
+<p>An input/output system is defined as a dynamical system that has a system
+state as well as inputs and outputs (either inputs or states can be empty).
+The dynamics of the system can be in continuous or discrete time.  To simulate
+an input/output system, use the <a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">input_output_response()</span></code></a>
+function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">io_sys</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">resp</span><span class="o">.</span><span class="n">states</span>
+</pre></div>
+</div>
+<p>An input/output system can be linearized around an equilibrium point to obtain
+a <a class="reference internal" href="generated/control.StateSpace.html#control.StateSpace" title="control.StateSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpace</span></code></a> linear system.  Use the
+<a class="reference internal" href="generated/control.find_eqpt.html#control.find_eqpt" title="control.find_eqpt"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_eqpt()</span></code></a> function to obtain an equilibrium point and the
+<a class="reference internal" href="generated/control.linearize.html#control.linearize" title="control.linearize"><code class="xref py py-func docutils literal notranslate"><span class="pre">linearize()</span></code></a> function to linearize about that equilibrium point:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xeq</span><span class="p">,</span> <span class="n">ueq</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">find_eqpt</span><span class="p">(</span><span class="n">io_sys</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">U0</span><span class="p">)</span>
+<span class="n">ss_sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">io_sys</span><span class="p">,</span> <span class="n">xeq</span><span class="p">,</span> <span class="n">ueq</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Input/output systems are automatically created for state space LTI systems
+when using the <a class="reference internal" href="generated/control.ss.html#control.ss" title="control.ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">ss()</span></code></a> function.  Nonlinear input/output
+systems can be created using the <a class="reference internal" href="generated/control.nlsys.html#control.nlsys" title="control.nlsys"><code class="xref py py-func docutils literal notranslate"><span class="pre">nlsys()</span></code></a> function, which
+requires the definition of an update function (for the right hand side of
+the differential or different equation) and an output function (computes
+the outputs from the state):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">io_sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span><span class="n">updfcn</span><span class="p">,</span> <span class="n">outfcn</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">M</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">P</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>More complex input/output systems can be constructed by using the
+<a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> function, which allows a collection of
+input/output subsystems to be combined with internal connections
+between the subsystems and a set of overall system inputs and outputs
+that link to the subsystems:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">steering</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">plant</span><span class="p">,</span> <span class="n">controller</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;system&#39;</span><span class="p">,</span>
+    <span class="n">connections</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;controller.e&#39;</span><span class="p">,</span> <span class="s1">&#39;-plant.y&#39;</span><span class="p">]],</span>
+    <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;controller.e&#39;</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+    <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;plant.y&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Interconnected systems can also be created using block diagram manipulations
+such as the <a class="reference internal" href="generated/control.series.html#control.series" title="control.series"><code class="xref py py-func docutils literal notranslate"><span class="pre">series()</span></code></a>, <a class="reference internal" href="generated/control.parallel.html#control.parallel" title="control.parallel"><code class="xref py py-func docutils literal notranslate"><span class="pre">parallel()</span></code></a>, and
+<a class="reference internal" href="generated/control.feedback.html#control.feedback" title="control.feedback"><code class="xref py py-func docutils literal notranslate"><span class="pre">feedback()</span></code></a> functions.  The <a class="reference internal" href="generated/control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a>
+class also supports various algebraic operations such as <cite>*</cite> (series
+interconnection) and <cite>+</cite> (parallel interconnection).</p>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">¶</a></h2>
+<p>To illustrate the use of the input/output systems module, we create a
+model for a predator/prey system, following the notation and parameter
+values in FBS2e.</p>
+<p>We begin by defining the dynamics of the system</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">predprey_rhs</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Parameter setup</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mf">50.</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mf">0.56</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="mi">125</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">)</span>
+
+    <span class="c1"># Map the states into local variable names</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># Compute the control action (only allow addition of food)</span>
+    <span class="n">u_0</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="c1"># Compute the discrete updates</span>
+    <span class="n">dH</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">u_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">H</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">H</span><span class="o">/</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">H</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">H</span><span class="p">)</span>
+    <span class="n">dL</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">H</span> <span class="o">*</span>  <span class="n">L</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="n">H</span><span class="p">)</span> <span class="o">-</span> <span class="n">d</span> <span class="o">*</span> <span class="n">L</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dH</span><span class="p">,</span> <span class="n">dL</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We now create an input/output system using these dynamics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_predprey</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span>
+    <span class="n">predprey_rhs</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">),</span>
+    <span class="n">states</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;predprey&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that since we have not specified an output function, the entire state
+will be used as the output of the system.</p>
+<p>The <cite>io_predprey</cite> system can now be simulated to obtain the open loop dynamics
+of the system:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>                 <span class="c1"># Initial H, L</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>   <span class="c1"># Simulation 70 years of time</span>
+
+<span class="c1"># Simulate the system</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">io_predprey</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">X0</span><span class="p">)</span>
+
+<span class="c1"># Plot the response</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Hare&#39;</span><span class="p">,</span> <span class="s1">&#39;Lynx&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also create a feedback controller to stabilize a desired population of
+the system.  We begin by finding the (unstable) equilibrium point for the
+system and computing the linearization about that point.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eqpt</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">find_eqpt</span><span class="p">(</span><span class="n">io_predprey</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">xeq</span> <span class="o">=</span> <span class="n">eqpt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                         <span class="c1"># choose the nonzero equilibrium point</span>
+<span class="n">lin_predprey</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">io_predprey</span><span class="p">,</span> <span class="n">xeq</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We next compute a controller that stabilizes the equilibrium point using
+eigenvalue placement and computing the feedforward gain using the number of
+lynxes as the desired output (following FBS2e, Example 7.5):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">place</span><span class="p">(</span><span class="n">lin_predprey</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">lin_predprey</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">])</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">lin_predprey</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">lin_predprey</span><span class="o">.</span><span class="n">B</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>                <span class="c1"># regulated output = number of lynxes</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">C</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="n">K</span><span class="p">)</span> <span class="o">@</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To construct the control law, we build a simple input/output system that
+applies a corrective input based on deviations from the equilibrium point.
+This system has no dynamics, since it is a static (affine) map, and can
+constructed using <a class="reference internal" href="generated/control.nlsys.html#control.nlsys" title="control.nlsys"><code class="xref py py-func docutils literal notranslate"><span class="pre">nlsys()</span></code></a> with no update function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_controller</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span>
+  <span class="kc">None</span><span class="p">,</span>
+  <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="o">-</span><span class="n">K</span> <span class="o">@</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">xeq</span><span class="p">)</span> <span class="o">+</span> <span class="n">kf</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xeq</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+  <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Ld&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;control&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The input to the controller is <cite>u</cite>, consisting of the vector of hare and lynx
+populations followed by the desired lynx population.</p>
+<p>To connect the controller to the predatory-prey model, we use the
+<a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">io_closed</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">io_predprey</span><span class="p">,</span> <span class="n">io_controller</span><span class="p">],</span>       <span class="c1"># systems</span>
+  <span class="n">connections</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;predprey.u&#39;</span><span class="p">,</span> <span class="s1">&#39;control.y[0]&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;control.u1&#39;</span><span class="p">,</span>  <span class="s1">&#39;predprey.H&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;control.u2&#39;</span><span class="p">,</span>  <span class="s1">&#39;predprey.L&#39;</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;control.Ld&#39;</span><span class="p">],</span>
+  <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;predprey.H&#39;</span><span class="p">,</span> <span class="s1">&#39;predprey.L&#39;</span><span class="p">,</span> <span class="s1">&#39;control.y[0]&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we simulate the closed loop system:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulate the system</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">io_closed</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+
+<span class="c1"># Plot the response</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Hare&#39;</span><span class="p">,</span> <span class="s1">&#39;Lynx&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;input&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="additional-features">
+<h2>Additional features<a class="headerlink" href="#additional-features" title="Permalink to this heading">¶</a></h2>
+<p>The I/O systems module has a number of other features that can be used to
+simplify the creation and use of interconnected input/output systems.</p>
+<div class="section" id="vector-elements-processing">
+<h3>Vector elements processing<a class="headerlink" href="#vector-elements-processing" title="Permalink to this heading">¶</a></h3>
+<p>Several I/O system commands perform processing of vector elements
+(such as initial states or input vectors) and broadcast these to the
+proper shape.</p>
+<p>For static elements, such as the initial state in a simulation or the
+nominal state and input for a linearization), the following processing
+is done:</p>
+<ul class="simple">
+<li><p>Scalars are automatically converted to a vector of the appropriate
+size consisting of the scalar value. This is commonly used when
+specifying the origin (‘0’) or a step input (‘1’).</p></li>
+<li><p>Lists of values are concatenated into a single vector.  This is
+often used when you have an interconnected system and you need to
+specify the initial condition or input value for each subsystem
+(e.g., [X1eq, X2eq, …]).</p></li>
+<li><p>Vector elements are zero padded to the required length. If you
+specify only a portion of the values for states or inputs, the
+remaining values are taken as zero.  (If the final element in the
+given vector is non-zero, a warning is issued.)</p></li>
+</ul>
+<p>Similar processing is done for input time series, used for the
+<a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">input_output_response()</span></code></a> and
+<a class="reference internal" href="generated/control.forced_response.html#control.forced_response" title="control.forced_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">forced_response()</span></code></a> commands, with the following
+additional feature:</p>
+<ul class="simple">
+<li><p>Time series elements are broadcast to match the number of time points
+specified.  If a list of time series and static elements are given (as a
+list), static elements are broadcast to the proper number of time points,
+and the overall list of elements concatenated to provide the full input
+vector.</p></li>
+</ul>
+<p>As an example, suppose we have an interconnected system consisting of three
+subsystems, a controlled process, an estimator, and a (static) controller:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proc</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">estim</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xhat[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;xhat[1]&#39;</span><span class="p">)</span>
+<span class="n">ctrl</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;xhat[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;xhat[1]&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">])</span>
+
+<span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">proc</span><span class="p">,</span> <span class="n">estim</span><span class="p">,</span> <span class="n">ctrl</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>To linearize the system around the origin, we can utilize the scalar
+processing feature of vector elements:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this command, the states and the inputs are broadcast to the size of the
+state and input vectors, respectively.</p>
+<p>If we want to linearize the closed loop system around a process state
+<code class="docutils literal notranslate"><span class="pre">x0</span></code> (with two elements) and an estimator state <code class="docutils literal notranslate"><span class="pre">0</span></code> (for both states),
+we can use the list processing feature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">clsys</span><span class="o">.</span><span class="n">linearize</span><span class="p">([</span><span class="n">x0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that this also utilizes the zero-padding functionality, since the
+second argument in the list <code class="docutils literal notranslate"><span class="pre">[x0,</span> <span class="pre">0]</span></code> is a scalar and so the vector
+<code class="docutils literal notranslate"><span class="pre">[x0,</span> <span class="pre">0]</span></code> only has three elements instead of the required four.</p>
+<p>To run an input/output simulation with a sinusoidal signal for the first
+input, a constant for the second input, and no external disturbance, we can
+use the list processing feature combined with time series broadcasting:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">u1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">timepts</span><span class="p">)</span>
+<span class="n">u2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>In this command, the second and third arguments will be broadcast to match
+the number of time points.</p>
+</div>
+<div class="section" id="summing-junction">
+<h3>Summing junction<a class="headerlink" href="#summing-junction" title="Permalink to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="generated/control.summing_junction.html#control.summing_junction" title="control.summing_junction"><code class="xref py py-func docutils literal notranslate"><span class="pre">summing_junction()</span></code></a> function can be used to create an
+input/output system that takes the sum of an arbitrary number of inputs.  For
+example, to create an input/output system that takes the sum of three inputs,
+use the command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sumblk</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">summing_junction</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, the name of the inputs will be of the form <code class="docutils literal notranslate"><span class="pre">u[i]</span></code> and the output
+will be <code class="docutils literal notranslate"><span class="pre">y</span></code>.  This can be changed by giving an explicit list of names:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sumblk</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">summing_junction</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A more typical usage would be to define an input/output system that compares a
+reference signal to the output of the process and computes the error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sumblk</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">summing_junction</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note the use of the minus sign as a means of setting the sign of the input ‘y’
+to be negative instead of positive.</p>
+<p>It is also possible to define “vector” summing blocks that take
+multi-dimensional inputs and produce a multi-dimensional output.  For example,
+the command</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sumblk</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">summing_junction</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will produce an input/output block that implements <code class="docutils literal notranslate"><span class="pre">e[0]</span> <span class="pre">=</span> <span class="pre">r[0]</span> <span class="pre">-</span> <span class="pre">y[0]</span></code> and
+<code class="docutils literal notranslate"><span class="pre">e[1]</span> <span class="pre">=</span> <span class="pre">r[1]</span> <span class="pre">-</span> <span class="pre">y[1]</span></code>.</p>
+</div>
+<div class="section" id="automatic-connections-using-signal-names">
+<h3>Automatic connections using signal names<a class="headerlink" href="#automatic-connections-using-signal-names" title="Permalink to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> function allows the interconnection of
+multiple systems by using signal names of the form <code class="docutils literal notranslate"><span class="pre">sys.signal</span></code>.  In many
+situations, it can be cumbersome to explicitly connect all of the appropriate
+inputs and outputs.  As an alternative, if the <code class="docutils literal notranslate"><span class="pre">connections</span></code> keyword is
+omitted, the <a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> function will connect all signals
+of the same name to each other.  This can allow for simplified methods of
+interconnecting systems, especially when combined with the
+<a class="reference internal" href="generated/control.summing_junction.html#control.summing_junction" title="control.summing_junction"><code class="xref py py-func docutils literal notranslate"><span class="pre">summing_junction()</span></code></a> function.  For example, the following code
+will create a unity gain, negative feedback system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<span class="n">sumblk</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">summing_junction</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">([</span><span class="n">P</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">sumblk</span><span class="p">],</span> <span class="n">inplist</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">outlist</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a signal name appears in multiple outputs then that signal will be summed
+when it is interconnected.  Similarly, if a signal name appears in multiple
+inputs then all systems using that signal name will receive the same input.
+The <a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> function will generate an error if a signal
+listed in <code class="docutils literal notranslate"><span class="pre">inplist</span></code> or <code class="docutils literal notranslate"><span class="pre">outlist</span></code> (corresponding to the inputs and outputs
+of the interconnected system) is not found, but inputs and outputs of
+individual systems that are not connected to other systems are left
+unconnected (so be careful!).</p>
+</div>
+<div class="section" id="advanced-specification-of-signal-names">
+<h3>Advanced specification of signal names<a class="headerlink" href="#advanced-specification-of-signal-names" title="Permalink to this heading">¶</a></h3>
+<p>In addition to manual specification of signal names and automatic
+connection of signals with the same name, the
+<a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> has a variety of other mechanisms
+available for specifying signal names.  The following forms are
+recognized for the <cite>connections</cite>, <cite>inplist</cite>, and <cite>outlist</cite>
+parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">subsys</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">gain</span><span class="p">)</span>             <span class="nb">tuple</span> <span class="n">form</span> <span class="k">with</span> <span class="n">integer</span> <span class="n">indices</span>
+<span class="p">(</span><span class="s1">&#39;sysname&#39;</span><span class="p">,</span> <span class="s1">&#39;signal&#39;</span><span class="p">,</span> <span class="n">gain</span><span class="p">)</span>       <span class="nb">tuple</span> <span class="n">form</span> <span class="k">with</span> <span class="n">name</span> <span class="n">lookup</span>
+<span class="s1">&#39;sysname.signal[i]&#39;</span>               <span class="n">string</span> <span class="n">form</span> <span class="p">(</span><span class="n">gain</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="s1">&#39;-sysname.signal[i]&#39;</span>              <span class="nb">set</span> <span class="n">gain</span> <span class="n">to</span> <span class="o">-</span><span class="mi">1</span>
+<span class="p">(</span><span class="n">subsys</span><span class="p">,</span> <span class="p">[</span><span class="n">i1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">iN</span><span class="p">],</span> <span class="n">gain</span><span class="p">)</span>     <span class="n">signals</span> <span class="k">with</span> <span class="n">indices</span> <span class="n">i1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="ow">in</span>
+<span class="s1">&#39;sysname.signal[i:j]&#39;</span>             <span class="nb">range</span> <span class="n">of</span> <span class="n">signal</span> <span class="n">names</span><span class="p">,</span> <span class="n">i</span> <span class="n">through</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span>
+<span class="s1">&#39;sysname&#39;</span>                         <span class="nb">all</span> <span class="nb">input</span> <span class="ow">or</span> <span class="n">outputs</span> <span class="n">of</span> <span class="n">system</span>
+<span class="s1">&#39;signal&#39;</span>                          <span class="nb">all</span> <span class="n">matching</span> <span class="n">signals</span> <span class="p">(</span><span class="ow">in</span> <span class="nb">any</span> <span class="n">subsystem</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For tuple forms, mixed specifications using integer indices and
+strings are possible.</p>
+<p>For the index range form <cite>sysname.signal[i:j]</cite>, if either <cite>i</cite> or <cite>j</cite>
+is not specified, then it defaults to the minimum or maximum value of
+the signal range.  Note that despite the similarity to slice notation,
+negative indices and step specifications are not supported.</p>
+<p>Using   these  various   forms  can   simplfy  the   specification  of
+interconnections.  For example, consider a process with inputs ‘u’ and
+‘v’,  each of  dimension  2, and  two  outputs ‘w’  and  ‘y’, each  of
+dimension 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">rss</span><span class="p">(</span>
+      <span class="n">states</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="n">strictly_proper</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;u[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;v[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;v[1]&#39;</span><span class="p">],</span>
+      <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;y[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;z[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;z[1]&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Suppose we construct a controller with 2 inputs and 2 outputs that
+takes the (2-dimensional) error <cite>e</cite> and outputs and control signal <cite>u</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">rss</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">input_prefix</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">output_prefix</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, we include a summing block that will take the difference between
+the reference input <cite>r</cite> and the measured output <cite>y</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sumblk</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">summing_junction</span><span class="p">(</span>
+  <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The closed loop system should close the loop around the process
+outputs <cite>y</cite> and inputs <cite>u</cite>, leaving the process inputs <cite>v</cite> and outputs
+‘w’, as well as the reference input <cite>r</cite>.  We would like the output of
+the closed loop system to consist of all system outputs <cite>y</cite> and <cite>z</cite>,
+as well as the controller input <cite>u</cite>.</p>
+<p>This collection of systems can be combined in a variety of ways.  The
+most explict would specify every signal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clsys1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">sumblk</span><span class="p">],</span>
+  <span class="n">connections</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;P.u[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u[0]&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;P.u[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u[1]&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;C.e[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;sum.e[0]&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;C.e[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;sum.e[1]&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;sum.y[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.y[0]&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;sum.y[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.y[1]&#39;</span><span class="p">],</span>
+  <span class="p">],</span>
+  <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum.r[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;sum.r[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.v[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.v[1]&#39;</span><span class="p">],</span>
+  <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P.y[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.y[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.z[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.z[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u[1]&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This connections can be simplified using signal ranges:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clsys2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">sumblk</span><span class="p">],</span>
+  <span class="n">connections</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;P.u[0:2]&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u[0:2]&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;C.e[0:2]&#39;</span><span class="p">,</span> <span class="s1">&#39;sum.e[0:2]&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;sum.y[0:2]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.y[0:2]&#39;</span><span class="p">]</span>
+  <span class="p">],</span>
+  <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum.r[0:2]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.v[0:2]&#39;</span><span class="p">],</span>
+  <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P.y[0:2]&#39;</span><span class="p">,</span> <span class="s1">&#39;P.z[0:2]&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u[0:2]&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>An even simpler form can be used by omitting the range specification
+when all signals with the same prefix are used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clsys3</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">sumblk</span><span class="p">],</span>
+  <span class="n">connections</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;P.u&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;C.e&#39;</span><span class="p">,</span> <span class="s1">&#39;sum.e&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;sum.y&#39;</span><span class="p">,</span> <span class="s1">&#39;P.y&#39;</span><span class="p">]],</span>
+  <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum.r&#39;</span><span class="p">,</span> <span class="s1">&#39;P.v&#39;</span><span class="p">],</span> <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P.y&#39;</span><span class="p">,</span> <span class="s1">&#39;P.z&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>A further simplification is possible when all of the inputs or outputs
+of an individual system are used in a given specification:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clsys4</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">sumblk</span><span class="p">],</span>
+  <span class="n">connections</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;P.u&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;sum.y&#39;</span><span class="p">,</span> <span class="s1">&#39;P.y&#39;</span><span class="p">]],</span>
+  <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum.r&#39;</span><span class="p">,</span> <span class="s1">&#39;P.v&#39;</span><span class="p">],</span> <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>And finally, since we have named the signals throughout the system in a
+consistent way, we could let <a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> do all of the
+work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clsys5</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+  <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">sumblk</span><span class="p">],</span> <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sum.r&#39;</span><span class="p">,</span> <span class="s1">&#39;P.v&#39;</span><span class="p">],</span> <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;C.u&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Various other simplifications are possible, but it can sometimes be
+complicated to debug error message when things go wrong.  Setting
+<cite>debug=True</cite> when calling <a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> prints out
+information about how the arguments are processed that may be helpful
+in understanding what is going wrong.</p>
+</div>
+<div class="section" id="automated-creation-of-state-feedback-systems">
+<h3>Automated creation of state feedback systems<a class="headerlink" href="#automated-creation-of-state-feedback-systems" title="Permalink to this heading">¶</a></h3>
+<p>The <a class="reference internal" href="generated/control.create_statefbk_iosystem.html#control.create_statefbk_iosystem" title="control.create_statefbk_iosystem"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_statefbk_iosystem()</span></code></a> function can be used to
+create an I/O system consisting of a state feedback gain (with
+optional integral action and gain scheduling) and an estimator.  A
+basic state feedback controller of the form</p>
+<div class="math">
+<p><span class="math">u = u_\text{d} - K (x - x_\text{d})</span></p>
+</div><p>can be created with the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ctrl</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>sys</cite> is the process dynamics and <cite>K</cite> is the state feedback gain
+(e.g., from LQR).  The function returns the controller <cite>ctrl</cite> and the
+closed loop systems <cite>clsys</cite>, both as I/O systems.  The input to the
+controller is the vector of desired states <span class="math">x_\text{d}</span>, desired
+inputs <span class="math">u_\text{d}</span>, and system states <span class="math">x</span>.</p>
+<p>If the full system state is not available, the output of a state
+estimator can be used to construct the controller using the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ctrl</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="n">estim</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>estim</cite> is the state estimator I/O system.  The controller will
+have the same form as above, but with the system state <span class="math">x</span>
+replaced by the estimated state <span class="math">\hat x</span> (output of <cite>estim</cite>).
+The closed loop controller will include both the state feedback and
+the estimator.</p>
+<p>Integral action can be included using the <cite>integral_action</cite> keyword.
+The value of this keyword can either be a matrix (ndarray) or a
+function.  If a matrix <span class="math">C</span> is specified, the difference between
+the desired state and system state will be multiplied by this matrix
+and integrated.  The controller gain should then consist of a set of
+proportional gains <span class="math">K_\text{p}</span> and integral gains
+<span class="math">K_\text{i}</span> with</p>
+<div class="math">
+<p><span class="math">K = \begin{bmatrix} K_\text{p} \\ K_\text{i} \end{bmatrix}</span></p>
+</div><p>and the control action will be given by</p>
+<div class="math">
+<p><span class="math">u = u_\text{d} - K\text{p} (x - x_\text{d}) -
+    K_\text{i} \int C (x - x_\text{d}) dt.</span></p>
+</div><p>If <cite>integral_action</cite> is a function <cite>h</cite>, that function will be called
+with the signature <cite>h(t, x, u, params)</cite> to obtain the outputs that
+should be integrated.  The number of outputs that are to be integrated
+must match the number of additional columns in the <cite>K</cite> matrix.  If an
+estimator is specified, <span class="math">\hat x</span> will be used in place of
+<span class="math">x</span>.</p>
+<p>Finally, gain scheduling on the desired state, desired input, or
+system state can be implemented by setting the gain to a 2-tuple
+consisting of a list of gains and a list of points at which the gains
+were computed, as well as a description of the scheduling variables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ctrl</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span>
+    <span class="n">sys</span><span class="p">,</span> <span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">gN</span><span class="p">],</span> <span class="p">[</span><span class="n">p1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">pN</span><span class="p">]),</span> <span class="n">gainsched_indices</span><span class="o">=</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">sq</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The list of indices can either be integers indicating the offset into
+the controller input vector <span class="math">(x_\text{d}, u_\text{d}, x)</span> or a
+list of strings matching the names of the input signals.  The
+controller implemented in this case has the form</p>
+<div class="math">
+<p><span class="math">u = u_\text{d} - K(\mu) (x - x_\text{d})</span></p>
+</div><p>where <span class="math">\mu</span> represents the scheduling variables.  See
+<a class="reference internal" href="steering-gainsched.html#steering-gainsched-py"><span class="std std-ref">Gain scheduled control for vehicle steeering (I/O system)</span></a> for an example implementation of a gain
+scheduled controller (in the alternative formulation section at the
+bottom of the file).</p>
+<p>Integral action and state estimation can also be used with gain
+scheduled controllers.</p>
+</div>
+</div>
+<div class="section" id="module-classes-and-functions">
+<h2>Module classes and functions<a class="headerlink" href="#module-classes-and-functions" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a>([name, inputs, outputs, ...])</p></td>
+<td><p>A class for representing input/output systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.InterconnectedSystem.html#control.InterconnectedSystem" title="control.InterconnectedSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InterconnectedSystem</span></code></a>(syslist[, connections, ...])</p></td>
+<td><p>Interconnection of a set of input/output systems.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.LinearICSystem.html#control.LinearICSystem" title="control.LinearICSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearICSystem</span></code></a>(io_sys[, ss_sys, connection_type])</p></td>
+<td><p>Interconnection of a set of linear input/output systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.NonlinearIOSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NonlinearIOSystem</span></code></a>(updfcn[, outfcn, params])</p></td>
+<td><p>Nonlinear I/O system.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.find_eqpt.html#control.find_eqpt" title="control.find_eqpt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_eqpt</span></code></a>(sys, x0[, u0, y0, t, params, iu, ...])</p></td>
+<td><p>Find the equilibrium point for an input/output system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interconnect</span></code></a>(syslist[, connections, ...])</p></td>
+<td><p>Interconnect a set of input/output systems.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_output_response</span></code></a>(sys, T[, U, X0, ...])</p></td>
+<td><p>Compute the output response of a system to a given input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.linearize.html#control.linearize" title="control.linearize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linearize</span></code></a>(sys, xeq[, ueq, t, params])</p></td>
+<td><p>Linearize an input/output system at a given state and input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.nlsys.html#control.nlsys" title="control.nlsys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nlsys</span></code></a>(updfcn[, outfcn, inputs, outputs, states])</p></td>
+<td><p>Create a nonlinear input/output system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.summing_junction.html#control.summing_junction" title="control.summing_junction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summing_junction</span></code></a>([inputs, output, ...])</p></td>
+<td><p>Create a summing junction as an input/output system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/control.flatsys.solve_flat_ocp.html" class="btn btn-neutral float-left" title="control.flatsys.solve_flat_ocp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="descfcn.html" class="btn btn-neutral float-right" title="Describing functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

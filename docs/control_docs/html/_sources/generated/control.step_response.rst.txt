@@ -1,0 +1,6 @@
+﻿control.step\_response
+======================
+
+.. currentmodule:: control
+
+.. autofunction:: step_response

@@ -1,0 +1,6 @@
+﻿control.singular\_values\_plot
+==============================
+
+.. currentmodule:: control
+
+.. autofunction:: singular_values_plot

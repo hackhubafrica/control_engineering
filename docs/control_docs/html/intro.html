@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Library conventions" href="conventions.html" />
+    <link rel="prev" title="Python Control Systems Library" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview-of-the-toolbox">Overview of the toolbox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#some-differences-from-matlab">Some differences from MATLAB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting started</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/intro.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h1>
+<p>Welcome to the Python Control Systems Toolbox (python-control) User’s
+Manual.  This manual contains information on using the python-control
+package, including documentation for all functions in the package and
+examples illustrating their use.</p>
+<div class="section" id="overview-of-the-toolbox">
+<h2>Overview of the toolbox<a class="headerlink" href="#overview-of-the-toolbox" title="Permalink to this heading">¶</a></h2>
+<p>The python-control package is a set of python classes and functions that
+implement common operations for the analysis and design of feedback control
+systems.  The initial goal is to implement all of the functionality required
+to work through the examples in the textbook <a class="reference external" href="http://fbsbook.org">Feedback Systems</a> by Astrom and Murray. A <a class="reference internal" href="matlab.html#matlab-module"><span class="std std-ref">MATLAB compatibility module</span></a> is
+available that provides many of the common functions corresponding to
+commands available in the MATLAB Control Systems Toolbox.</p>
+</div>
+<div class="section" id="some-differences-from-matlab">
+<h2>Some differences from MATLAB<a class="headerlink" href="#some-differences-from-matlab" title="Permalink to this heading">¶</a></h2>
+<p>The python-control package makes use of <a class="reference external" href="http://www.numpy.org">NumPy</a> and
+<a class="reference external" href="https://www.scipy.org">SciPy</a>.  A list of general differences between
+NumPy and MATLAB can be found <a class="reference external" href="https://docs.scipy.org/doc/numpy/user/numpy-for-matlab-users.html">here</a>.</p>
+<p>In terms of the python-control package more specifically, here are
+some things to keep in mind:</p>
+<ul class="simple">
+<li><p>You must include commas in vectors.  So [1 2 3] must be [1, 2, 3].</p></li>
+<li><p>Functions that return multiple arguments use tuples.</p></li>
+<li><p>You cannot use braces for collections; use tuples instead.</p></li>
+<li><p>Time series data have time as the final index (see
+<a class="reference internal" href="conventions.html#time-series-convention"><span class="std std-ref">Time series data</span></a>).</p></li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<p>The <cite>python-control</cite> package can be installed using conda or pip.  The
+package requires <a class="reference external" href="http://www.numpy.org">NumPy</a> and <a class="reference external" href="https://www.scipy.org">SciPy</a>, and the plotting routines
+require <a class="reference external" href="https://matplotlib.org">Matplotlib</a>.  In addition, some
+routines require the <a class="reference external" href="https://github.com/python-control/Slycot">Slycot</a> library in order to
+implement more advanced features (including some MIMO functionality).</p>
+<p>For users with the Anaconda distribution of Python, the following
+command can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">control</span> <span class="n">slycot</span>
+</pre></div>
+</div>
+<p>This installs <cite>slycot</cite> and <cite>python-control</cite> from conda-forge, including the
+<cite>openblas</cite> package.  NumPy, SciPy, and Matplotlib will also be installed if
+they are not already present.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mixing packages from conda-forge and the default conda channel
+can sometimes cause problems with dependencies, so it is usually best to
+instally NumPy, SciPy, and Matplotlib from conda-forge as well.</p>
+</div>
+<p>To install using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">slycot</span>   <span class="c1"># optional</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">control</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you install Slycot using pip you’ll need a development
+environment (e.g., Python development files, C and Fortran compilers).
+Pip installation can be particularly complicated for Windows.</p>
+</div>
+<p>Many parts of <cite>python-control</cite> will work without <cite>slycot</cite>, but some
+functionality is limited or absent, and installation of <cite>slycot</cite> is
+recommended. Users can check to insure that slycot is installed
+correctly by running the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;import slycot&quot;</span>
+</pre></div>
+</div>
+<p>and verifying that no error message appears. More information on the
+Slycot package can be obtained from the <a class="reference external" href="https://github.com/python-control/Slycot">Slycot project page</a>.</p>
+<p>Alternatively, to install from source, first <a class="reference external" href="https://github.com/python-control/python-control/releases">download the source</a> and unpack it.
+To install in your home directory, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading">¶</a></h2>
+<p>There are two different ways to use the package.  For the default interface
+described in <a class="reference internal" href="control.html#function-ref"><span class="std std-ref">Function reference</span></a>, simply import the control package as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+</pre></div>
+</div>
+<p>If you want to have a MATLAB-like environment, use the <a class="reference internal" href="matlab.html#matlab-module"><span class="std std-ref">MATLAB compatibility module</span></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">control.matlab</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Python Control Systems Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="conventions.html" class="btn btn-neutral float-right" title="Library conventions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

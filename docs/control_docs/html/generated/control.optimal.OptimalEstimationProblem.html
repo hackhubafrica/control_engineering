@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.optimal.OptimalEstimationProblem &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.optimal.OptimalEstimationResult" href="control.optimal.OptimalEstimationResult.html" />
+    <link rel="prev" title="control.optimal.OptimalControlResult" href="control.optimal.OptimalControlResult.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../optimal.html">Optimization-based control</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../optimal.html#optimal-control-problem-setup">Optimal control problem setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimal.html#optimal-estimation-problem-setup">Optimal estimation problem setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimal.html#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimal.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimal.html#optimization-tips">Optimization Tips</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../optimal.html#module-classes-and-functions">Module classes and functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.OptimalControlProblem.html">control.optimal.OptimalControlProblem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.OptimalControlResult.html">control.optimal.OptimalControlResult</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.optimal.OptimalEstimationProblem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.optimal.OptimalEstimationProblem"><code class="docutils literal notranslate"><span class="pre">OptimalEstimationProblem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.OptimalEstimationResult.html">control.optimal.OptimalEstimationResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.create_mpc_iosystem.html">control.optimal.create_mpc_iosystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.disturbance_range_constraint.html">control.optimal.disturbance_range_constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.gaussian_likelihood_cost.html">control.optimal.gaussian_likelihood_cost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.input_poly_constraint.html">control.optimal.input_poly_constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.input_range_constraint.html">control.optimal.input_range_constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.output_poly_constraint.html">control.optimal.output_poly_constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.output_range_constraint.html">control.optimal.output_range_constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.quadratic_cost.html">control.optimal.quadratic_cost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.solve_ocp.html">control.optimal.solve_ocp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.state_poly_constraint.html">control.optimal.state_poly_constraint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.optimal.state_range_constraint.html">control.optimal.state_range_constraint</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../optimal.html">Optimization-based control</a></li>
+      <li class="breadcrumb-item active">control.optimal.OptimalEstimationProblem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.optimal.OptimalEstimationProblem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-optimal-optimalestimationproblem">
+<h1>control.optimal.OptimalEstimationProblem<a class="headerlink" href="#control-optimal-optimalestimationproblem" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.optimal.OptimalEstimationProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.optimal.</span></span><span class="sig-name descname"><span class="pre">OptimalEstimationProblem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timepts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral_cost</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal_cost</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory_constraints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disturbance_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/optimal.py#L1224-L1871"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.optimal.OptimalEstimationProblem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Description of a finite horizon, optimal estimation problem.</p>
+<p>The <cite>OptimalEstimationProblem</cite> class holds all of the information
+required to specify an optimal estimation problem: the system dynamics,
+cost function (negative of the log likelihood), and constraints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><em>InputOutputSystem</em></a>) – I/O system for which the optimal input will be computed.</p></li>
+<li><p><strong>timepts</strong> (<em>1D array</em>) – Set up time points at which the inputs and outputs are given.</p></li>
+<li><p><strong>integral_cost</strong> (<em>callable</em>) – Function that returns the integral cost given the estimated state,
+system inputs, and output error.  Called as integral_cost(xhat, u,
+v, w) where xhat is the estimated state, u is the appplied input to
+the system, v is the estimated disturbance input, and w is the
+difference between the measured and the estimated output.</p></li>
+<li><p><strong>trajectory_constraints</strong> (<em>list</em><em> of </em><em>constraints</em><em>, </em><em>optional</em>) – List of constraints that should hold at each point in the time
+vector.  Each element of the list should be an object of type
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.LinearConstraint.html#scipy.optimize.LinearConstraint" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">LinearConstraint</span></code></a> with arguments <cite>(A, lb,
+ub)</cite> or <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.NonlinearConstraint.html#scipy.optimize.NonlinearConstraint" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NonlinearConstraint</span></code></a> with arguments
+<cite>(fun, lb, ub)</cite>.  The constraints will be applied at each time point
+along the trajectory.</p></li>
+<li><p><strong>terminal_cost</strong> (<em>callable</em><em>, </em><em>optional</em>) – Function that returns the terminal cost given the initial estimated
+state and expected value.  Called as terminal_cost(xhat, x0).</p></li>
+<li><p><strong>control_indices</strong> (<em>int</em><em>, </em><em>slice</em><em>, or </em><em>list</em><em> of </em><em>int</em><em> or </em><em>string</em><em>, </em><em>optional</em>) – Specify the indices in the system input vector that correspond to
+the control inputs.  These inputs will be used as known control
+inputs for the estimator.  If value is an integer <cite>m</cite>, the first
+<cite>m</cite> system inputs are used.  Otherwise, the value should be a slice
+or a list of indices.  The list of indices can be specified as
+either integer offsets or as system input signal names.  If not
+specified, defaults to the complement of the disturbance indices
+(see also notes below).</p></li>
+<li><p><strong>disturbance_indices</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>int</em><em>, or </em><em>slice</em><em>, </em><em>optional</em>) – Specify the indices in the system input vector that correspond to
+the process disturbances.  If value is an integer <cite>m</cite>, the last <cite>m</cite>
+system inputs are used.  Otherwise, the value should be a slice or
+a list of indices, as describedf for <cite>control_indices</cite>.  If not
+specified, defaults to the complement of the control indicies (see
+also notes below).</p></li>
+<li><p><strong>terminal_constraints</strong> (<em>list</em><em> of </em><em>constraints</em><em>, </em><em>optional</em>) – List of constraints that should hold at the terminal point in time,
+in the same form as <cite>trajectory_constraints</cite>.</p></li>
+<li><p><strong>solve_ivp_method</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the method used by <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code></a>.</p></li>
+<li><p><strong>solve_ivp_kwargs</strong> (<em>str</em><em>, </em><em>optional</em>) – Pass additional keywords to <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code></a>.</p></li>
+<li><p><strong>minimize_method</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the method used by <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>.</p></li>
+<li><p><strong>minimize_options</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the options keyword used by <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>.</p></li>
+<li><p><strong>minimize_kwargs</strong> (<em>str</em><em>, </em><em>optional</em>) – Pass additional keywords to <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>oep</strong> – Optimal estimation problem object, to be used in computing optimal
+estimates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#control.optimal.OptimalEstimationProblem" title="control.optimal.OptimalEstimationProblem">OptimalEstimationProblem</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>To describe an optimal estimation problem we need an input/output system,
+a set of time points, applied inputs and measured outputs, a cost
+function, and (optionally) a set of constraints on the state and/or inputs
+along the trajectory (and at the terminal time).  This class sets up an
+optimization over the state and disturbances at each point in time, using
+the integral and terminal costs as well as the trajectory constraints.
+The <a class="reference internal" href="#control.optimal.OptimalEstimationProblem.compute_estimate" title="control.optimal.OptimalEstimationProblem.compute_estimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_estimate()</span></code></a>
+method solves the underling optimization problem using
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html#scipy.optimize.minimize" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.minimize()</span></code></a>.</p>
+<p>The control input and disturbance indices can be specified using the
+<cite>control_indices</cite> and <cite>disturbance_indices</cite> keywords.  If only one is
+given, the other is assumed to be the remaining indices in the system
+input.  If neither is given, the disturbance inputs are assumed to be
+the same as the control inputs.</p>
+<p>The “cost” (e.g. negative of the log likelihood) of the estimated
+trajectory is computed using the estimated state, the disturbances and
+noise, and the measured output.  This is done by calling a user-defined
+function for the integral_cost along the trajectory and then adding the
+value of a user-defined terminal cost at the initial point in the
+trajectory.</p>
+<p>The constraint functions are evaluated at each point on the trajectory
+generated by the proposed estimate and disturbances.  As in the case of
+the cost function, the constraints are evaluated at the estimated
+state, inputs, and measured outputs along each point on the trajectory.
+This information is compared against the constraint upper and lower
+bounds.  The constraint function is processed in the class initializer,
+so that it only needs to be computed once.</p>
+<p>The default values for <code class="docutils literal notranslate"><span class="pre">minimize_method</span></code>, <code class="docutils literal notranslate"><span class="pre">minimize_options</span></code>,
+<code class="docutils literal notranslate"><span class="pre">minimize_kwargs</span></code>, <code class="docutils literal notranslate"><span class="pre">solve_ivp_method</span></code>, and <code class="docutils literal notranslate"><span class="pre">solve_ivp_options</span></code>
+can be set using config.defaults[‘optimal.&lt;keyword&gt;’].</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.optimal.OptimalEstimationProblem.compute_estimate" title="control.optimal.OptimalEstimationProblem.compute_estimate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_estimate</span></code></a></p></td>
+<td><p>Compute the optimal input at state x</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.optimal.OptimalEstimationProblem.create_mhe_iosystem" title="control.optimal.OptimalEstimationProblem.create_mhe_iosystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_mhe_iosystem</span></code></a></p></td>
+<td><p>Create an I/O system implementing an MPC controller</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.optimal.OptimalEstimationProblem.compute_estimate">
+<span class="sig-name descname"><span class="pre">compute_estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">U</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_guess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_summary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/optimal.py#L1661-L1739"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.optimal.OptimalEstimationProblem.compute_estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the optimal input at state x</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Y</strong> (<em>2D array</em>) – Measured outputs at each time point.</p></li>
+<li><p><strong>U</strong> (<em>2D array</em>) – Applied inputs at each time point.</p></li>
+<li><p><strong>X0</strong> (<em>1D array</em>) – Expected initial value of the state.</p></li>
+<li><p><strong>initial_guess</strong> (<em>2-tuple</em><em> of </em><em>2D arrays</em>) – A 2-tuple consisting of the estimated states and disturbance
+values to use as a guess for the optimal estimated trajectory.</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True and if the system has a single disturbance input and
+single measured output, return the system input and output as a
+1D array rather than a 2D array.  If False, return the system
+output as a 2D array even if the system is SISO.  Default value
+set by config.defaults[‘control.squeeze_time_response’].</p></li>
+<li><p><strong>print_summary</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <cite>True</cite> (default), print a short summary of the computation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>res</strong> (<em>OptimalEstimationResult</em>) – Bundle object with the results of the optimal estimation problem.</p></li>
+<li><p><strong>res.success</strong> (<em>bool</em>) – Boolean flag indicating whether the optimization was successful.</p></li>
+<li><p><strong>res.time</strong> (<em>array</em>) – Time values of the input (same as self.timepts).</p></li>
+<li><p><strong>res.inputs</strong> (<em>array</em>) – Estimated disturbance inputs for the system trajectory.</p></li>
+<li><p><strong>res.states</strong> (<em>array</em>) – Time evolution of the estimated state vector.</p></li>
+<li><p><strong>res.outputs</strong> (<em>array</em>) – Estimated measurement noise for the system trajectory.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.optimal.OptimalEstimationProblem.create_mhe_iosystem">
+<span class="sig-name descname"><span class="pre">create_mhe_iosystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estimate_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measurement_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/optimal.py#L1749-L1871"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.optimal.OptimalEstimationProblem.create_mhe_iosystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an I/O system implementing an MPC controller</p>
+<p>This function creates an input/output system that implements a
+moving horizon estimator for a an optimal estimation problem.  The
+I/O system takes the system measurements and applied inputs as as
+inputs and outputs the estimated state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>estimate_labels</strong> (<em>str</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Set the name of the signals to use for the estimated state
+(estimator outputs).  If a single string is specified, it
+should be a format string using the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> as an index.
+Otherwise, a list of strings matching the size of the estimated
+state should be used.  Default is “xhat[{i}]”.  These settings
+can also be overriden using the <cite>outputs</cite> keyword.</p></li>
+<li><p><strong>measurement_labels</strong> (<em>str</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Set the name of the measurement and control signal names
+(estimator inputs).  If a single string is specified, it should
+be a format string using the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> as an index.
+Otherwise, a list of strings matching the size of the system
+inputs and outputs should be used.  Default is the signal names
+for the system outputs and control inputs. These settings can
+also be overriden using the <cite>inputs</cite> keyword.</p></li>
+<li><p><strong>control_labels</strong> (<em>str</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Set the name of the measurement and control signal names
+(estimator inputs).  If a single string is specified, it should
+be a format string using the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> as an index.
+Otherwise, a list of strings matching the size of the system
+inputs and outputs should be used.  Default is the signal names
+for the system outputs and control inputs. These settings can
+also be overriden using the <cite>inputs</cite> keyword.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments to set system, input, and output
+signal names; see <a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-func docutils literal notranslate"><span class="pre">InputOutputSystem()</span></code></a>.</p></li>
+<li><p><strong>optional</strong> – Additional keyword arguments to set system, input, and output
+signal names; see <a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-func docutils literal notranslate"><span class="pre">InputOutputSystem()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>estim</strong> – An I/O system taking the measured output and applied input for
+the model system and returning the estimated state of the
+system, as determined by solving the optimal estimation problem.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem">InputOutputSystem</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The labels for the input signals for the system are determined
+based on the signal names for the system model used in the optimal
+estimation problem.  The system name and signal names can be
+overridden using the <cite>name</cite>, <cite>input</cite>, and <cite>output</cite> keywords, as
+described in <a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-func docutils literal notranslate"><span class="pre">InputOutputSystem()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.optimal.OptimalControlResult.html" class="btn btn-neutral float-left" title="control.optimal.OptimalControlResult" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.optimal.OptimalEstimationResult.html" class="btn btn-neutral float-right" title="control.optimal.OptimalEstimationResult" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

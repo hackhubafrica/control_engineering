@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.time_response_plot &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.phaseplot.boxgrid" href="control.phaseplot.boxgrid.html" />
+    <link rel="prev" title="control.singular_values_plot" href="control.singular_values_plot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nyquist_plot.html">control.nyquist_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phase_plane_plot.html">control.phase_plane_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.equilpoints.html">control.phaseplot.equilpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.separatrices.html">control.phaseplot.separatrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.streamlines.html">control.phaseplot.streamlines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.vectorfield.html">control.phaseplot.vectorfield</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_plot.html">control.pole_zero_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_plot.html">control.root_locus_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_plot.html">control.singular_values_plot</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.time_response_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.time_response_plot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.time_response_plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-time-response-plot">
+<h1>control.time_response_plot<a class="headerlink" href="#control-time-response-plot" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.time_response_plot">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">time_response_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transpose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_traces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlay_signals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_initial_zero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/timeplot.py#L41-L673"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.time_response_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the time response of an input/output system.</p>
+<p>This function creates a standard set of plots for the input/output
+response of a system, with the data provided via a <cite>TimeResponseData</cite>
+object, which is the standard output for python-control simulation
+functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><em>TimeResponseData</em></a>) – Data to be plotted.</p></li>
+<li><p><strong>plot_inputs</strong> (<em>bool</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>Sets how and where to plot the inputs:</dt><dd><ul>
+<li><p>False: don’t plot the inputs</p></li>
+<li><p>None: use value from time response data (default)</p></li>
+<li><p>’overlay`: plot inputs overlaid with outputs</p></li>
+<li><p>True: plot the inputs on their own axes</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>plot_outputs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False, suppress plotting of the outputs.</p></li>
+<li><p><strong>overlay_traces</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to True, combine all traces onto a single row instead of
+plotting a separate row for each trace.</p></li>
+<li><p><strong>overlay_signals</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to True, combine all input and output signals onto a single
+plot (for each).</p></li>
+<li><p><strong>sharex</strong> (<em>str</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) – Determine whether and how x- and y-axis limits are shared between
+subplots.  Can be set set to ‘row’ to share across all subplots in
+a row, ‘col’ to set across all subplots in a column, ‘all’ to share
+across all subplots, or <cite>False</cite> to allow independent limits.
+Default values are <cite>False</cite> for <cite>sharex’ and ‘col’ for `sharey</cite>, and
+can be set using config.defaults[‘timeplot.sharex’] and
+config.defaults[‘timeplot.sharey’].</p></li>
+<li><p><strong>sharey</strong> (<em>str</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) – Determine whether and how x- and y-axis limits are shared between
+subplots.  Can be set set to ‘row’ to share across all subplots in
+a row, ‘col’ to set across all subplots in a column, ‘all’ to share
+across all subplots, or <cite>False</cite> to allow independent limits.
+Default values are <cite>False</cite> for <cite>sharex’ and ‘col’ for `sharey</cite>, and
+can be set using config.defaults[‘timeplot.sharex’] and
+config.defaults[‘timeplot.sharey’].</p></li>
+<li><p><strong>transpose</strong> (<em>bool</em><em>, </em><em>optional</em>) – If transpose is False (default), signals are plotted from top to
+bottom, starting with outputs (if plotted) and then inputs.
+Multi-trace plots are stacked horizontally.  If transpose is True,
+signals are plotted from left to right, starting with the inputs
+(if plotted) and then the outputs.  Multi-trace responses are
+stacked vertically.</p></li>
+<li><p><strong>*fmt</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot()</span></code></a> format string, optional) – Passed to <cite>matplotlib</cite> as the format string for all lines in the plot.</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot()</span></code></a> keyword properties, optional) – Additional keywords passed to <cite>matplotlib</cite> to specify line properties.</p></li>
+<li><p><strong>add_initial_zero</strong> (<em>bool</em>) – Add an initial point of zero at the first time point for all
+inputs with type ‘step’.  Default is True.</p></li>
+<li><p><strong>ax</strong> (<em>array</em><em> of </em><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><em>matplotlib.axes.Axes</em></a><em>, </em><em>optional</em>) – The matplotlib axes to draw the figure on.  If not specified, the
+axes for the current figure are used or, if there is no current
+figure with the correct number and shape of axes, a new figure is
+created.  The shape of the array must match the shape of the
+plotted data.</p></li>
+<li><p><strong>input_props</strong> (<em>array</em><em> of </em><em>dicts</em>) – List of line properties to use when plotting combined inputs.  The
+default values are set by config.defaults[‘timeplot.input_props’].</p></li>
+<li><p><strong>label</strong> (<em>str</em><em> or </em><em>array_like</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – If present, replace automatically generated label(s) with the given
+label(s).  If more than one line is being generated, an array of
+labels should be provided with label[trace, :, 0] representing the
+output labels and label[trace, :, 1] representing the input labels.</p></li>
+<li><p><strong>legend_map</strong> (<em>array</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Location of the legend for multi-axes plots.  Specifies an array
+of legend location strings matching the shape of the subplots, with
+each entry being either None (for no legend) or a legend location
+string (see <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.legend.html#matplotlib.pyplot.legend" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">legend()</span></code></a>).</p></li>
+<li><p><strong>legend_loc</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Include a legend in the given location. Default is ‘center right’,
+with no legend for a single response.  Use False to suppress legend.</p></li>
+<li><p><strong>output_props</strong> (<em>array</em><em> of </em><em>dicts</em><em>, </em><em>optional</em>) – List of line properties to use when plotting combined outputs.  The
+default values are set by config.defaults[‘timeplot.output_props’].</p></li>
+<li><p><strong>rcParams</strong> (<em>dict</em>) – Override the default parameters used for generating plots.
+Default is set by config.default[‘ctrlplot.rcParams’].</p></li>
+<li><p><strong>relabel</strong> (<em>bool</em><em>, </em><em>optional</em>) – (deprecated) By default, existing figures and axes are relabeled
+when new data are added.  If set to <cite>False</cite>, just plot new data on
+existing axes.</p></li>
+<li><p><strong>show_legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Force legend to be shown if <code class="docutils literal notranslate"><span class="pre">True</span></code> or hidden if <code class="docutils literal notranslate"><span class="pre">False</span></code>.  If
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, then show legend when there is more than one line on an
+axis or <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code> or <code class="docutils literal notranslate"><span class="pre">legend_map</span></code> has been specified.</p></li>
+<li><p><strong>time_label</strong> (<em>str</em><em>, </em><em>optional</em>) – Label to use for the time axis.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the title of the plot.  Defaults to plot type and system name(s).</p></li>
+<li><p><strong>trace_labels</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Replace the default trace labels with the given labels.</p></li>
+<li><p><strong>trace_props</strong> (<em>array</em><em> of </em><em>dicts</em>) – List of line properties to use when plotting combined outputs.  The
+default values are set by config.defaults[‘timeplot.trace_props’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>cplt</strong> –</p>
+<p>Object containing the data that were plotted:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>cplt.lines: Array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code></a> objects
+for each line in the plot.  The shape of the array matches the
+subplots shape and the value of the array is a list of Line2D
+objects in that subplot.</p></li>
+<li><p>cplt.axes: 2D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a> for the plot.</p></li>
+<li><p>cplt.figure: <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></a> containing the plot.</p></li>
+<li><p>cplt.legend: legend object(s) contained in the plot</p></li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> for more detailed information.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> object</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>A new figure will be generated if there is no current figure or
+the current figure has an incompatible number of axes.  To
+force the creation of a new figures, use <cite>plt.figure()</cite>.  To reuse
+a portion of an existing figure, use the <cite>ax</cite> keyword.</p></li>
+<li><p>The line properties (color, linestyle, etc) can be set for the
+entire plot using the <cite>fmt</cite> and/or <cite>kwargs</cite> parameter, which
+are passed on to <cite>matplotlib</cite>.  When combining signals or
+traces, the <cite>input_props</cite>, <cite>output_props</cite>, and <cite>trace_props</cite>
+parameters can be used to pass a list of dictionaries
+containing the line properties to use.  These input/output
+properties are combined with the trace properties and finally
+the kwarg properties to determine the final line properties.</p></li>
+<li><p>The default plot properties, such as font sizes, can be set using
+config.defaults[‘’timeplot.rcParams’].</p></li>
+</ol>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.singular_values_plot.html" class="btn btn-neutral float-left" title="control.singular_values_plot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.phaseplot.boxgrid.html" class="btn btn-neutral float-right" title="control.phaseplot.boxgrid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

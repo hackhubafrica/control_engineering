@@ -1,0 +1,6 @@
+﻿control.norm
+============
+
+.. currentmodule:: control
+
+.. autofunction:: norm

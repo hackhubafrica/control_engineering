@@ -1,0 +1,6 @@
+﻿control.lqr
+===========
+
+.. currentmodule:: control
+
+.. autofunction:: lqr

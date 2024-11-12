@@ -1,0 +1,6 @@
+﻿control.optimal.output\_range\_constraint
+=========================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: output_range_constraint

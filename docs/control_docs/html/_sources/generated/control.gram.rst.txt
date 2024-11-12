@@ -1,0 +1,6 @@
+﻿control.gram
+============
+
+.. currentmodule:: control
+
+.. autofunction:: gram

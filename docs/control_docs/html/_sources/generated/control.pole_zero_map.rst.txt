@@ -1,0 +1,6 @@
+﻿control.pole\_zero\_map
+=======================
+
+.. currentmodule:: control
+
+.. autofunction:: pole_zero_map

@@ -1,0 +1,6 @@
+﻿control.phase\_crossover\_frequencies
+=====================================
+
+.. currentmodule:: control
+
+.. autofunction:: phase_crossover_frequencies

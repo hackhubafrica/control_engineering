@@ -1,0 +1,6 @@
+﻿control.matlab.pole
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: pole

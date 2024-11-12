@@ -1,0 +1,6 @@
+﻿control.matlab.lqr
+==================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: lqr

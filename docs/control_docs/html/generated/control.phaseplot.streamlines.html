@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.phaseplot.streamlines &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.phaseplot.vectorfield" href="control.phaseplot.vectorfield.html" />
+    <link rel="prev" title="control.phaseplot.separatrices" href="control.phaseplot.separatrices.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nyquist_plot.html">control.nyquist_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phase_plane_plot.html">control.phase_plane_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.equilpoints.html">control.phaseplot.equilpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.separatrices.html">control.phaseplot.separatrices</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.phaseplot.streamlines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.vectorfield.html">control.phaseplot.vectorfield</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_plot.html">control.pole_zero_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_plot.html">control.root_locus_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_plot.html">control.singular_values_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.time_response_plot.html">control.time_response_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.phaseplot.streamlines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.phaseplot.streamlines.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-phaseplot-streamlines">
+<h1>control.phaseplot.streamlines<a class="headerlink" href="#control-phaseplot-streamlines" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.phaseplot.streamlines">
+<span class="sig-prename descclassname"><span class="pre">control.phaseplot.</span></span><span class="sig-name descname"><span class="pre">streamlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timedata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridspec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_check_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suppress_warnings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/phaseplot.py#L333-L451"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.phaseplot.streamlines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot stream lines in the phase plane.</p>
+<p>This function plots stream lines for a two-dimensional state space
+system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<a class="reference internal" href="control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.NonlinearIOSystem"><em>NonlinearIOSystem</em></a><em> or </em><em>callable</em><em>(</em><em>t</em><em>, </em><em>x</em><em>, </em><em>...</em><em>)</em>) – I/O system or function used to generate phase plane data.  If a
+function is given, the remaining arguments are drawn from the
+<cite>params</cite> keyword.</p></li>
+<li><p><strong>pointdata</strong> (<em>list</em><em> or </em><em>2D array</em>) – List of the form [xmin, xmax, ymin, ymax] describing the
+boundaries of the phase plot or an array of shape (N, 2)
+giving points of at which to plot the vector field.</p></li>
+<li><p><strong>timedata</strong> (<em>int</em><em> or </em><em>list</em><em> of </em><em>int</em>) – Time to simulate each streamline.  If a list is given, a different
+time can be used for each initial condition in <cite>pointdata</cite>.</p></li>
+<li><p><strong>gridtype</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of grid to use for generating initial conditions:
+‘meshgrid’ (default) generates a mesh of initial conditions within
+the specified boundaries, ‘boxgrid’ generates initial conditions
+along the edges of the boundary, ‘circlegrid’ generates a circle of
+initial conditions around each point in point data.</p></li>
+<li><p><strong>gridspec</strong> (<em>list</em><em>, </em><em>optional</em>) – If the gridtype is ‘meshgrid’ and ‘boxgrid’, <cite>gridspec</cite> gives the
+size of the grid in the x and y axes on which to generate points.
+If gridtype is ‘circlegrid’, then <cite>gridspec</cite> is a 2-tuple
+specifying the radius and number of points around each point in the
+<cite>pointdata</cite> array.</p></li>
+<li><p><strong>dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Direction to draw streamlines: ‘forward’ to flow forward in time
+from the reference points, ‘reverse’ to flow backward in time, or
+‘both’ to flow both forward and backward.  The amount of time to
+simulate in each direction is given by the <code class="docutils literal notranslate"><span class="pre">timedata</span></code> argument.</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – Parameters to pass to system. For an I/O system, <cite>params</cite> should be
+a dict of parameters and values. For a callable, <cite>params</cite> should be
+dict with key ‘args’ and value given by a tuple (passed to callable).</p></li>
+<li><p><strong>color</strong> (<em>str</em>) – Plot the streamlines in the given color.</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><em>matplotlib.axes.Axes</em></a>) – Use the given axes for the plot, otherwise use the current axes.</p></li>
+<li><p><strong>rcParams</strong> (<em>dict</em>) – Override the default parameters used for generating plots.
+Default is set by config.default[‘ctrlplot.rcParams’].</p></li>
+<li><p><strong>suppress_warnings</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to <cite>True</cite>, suppress warning messages in generating trajectories.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of Line2D objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.phaseplot.separatrices.html" class="btn btn-neutral float-left" title="control.phaseplot.separatrices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.phaseplot.vectorfield.html" class="btn btn-neutral float-right" title="control.phaseplot.vectorfield" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

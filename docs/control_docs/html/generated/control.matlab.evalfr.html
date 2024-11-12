@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.matlab.evalfr &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.matlab.rlocus" href="control.matlab.rlocus.html" />
+    <link rel="prev" title="control.matlab.freqresp" href="control.matlab.freqresp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#creating-linear-models">Creating linear models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#utility-functions-and-conversions">Utility functions and conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#system-gain-and-dynamics">System gain and dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#time-domain-analysis">Time-domain analysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../matlab.html#frequency-domain-analysis">Frequency-domain analysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.bode.html">control.matlab.bode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.nyquist.html">control.matlab.nyquist</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.nichols.html">control.matlab.nichols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.margin.html">control.matlab.margin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.matlab.freqresp.html">control.matlab.freqresp</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.matlab.evalfr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.matlab.evalfr"><code class="docutils literal notranslate"><span class="pre">evalfr()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#compensator-design">Compensator design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#state-space-ss-models">State-space (SS) models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#model-simplification">Model simplification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#time-delays">Time delays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#matrix-equation-solvers-and-linear-algebra">Matrix equation solvers and linear algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#additional-functions">Additional functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../matlab.html#functions-imported-from-other-modules">Functions imported from other modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../matlab.html">MATLAB compatibility module</a></li>
+      <li class="breadcrumb-item active">control.matlab.evalfr</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.matlab.evalfr.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-matlab-evalfr">
+<h1>control.matlab.evalfr<a class="headerlink" href="#control-matlab-evalfr" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.matlab.evalfr">
+<span class="sig-prename descclassname"><span class="pre">control.matlab.</span></span><span class="sig-name descname"><span class="pre">evalfr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L318-L372"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.matlab.evalfr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the transfer function of an LTI system for complex frequency x.</p>
+<p>Returns the complex frequency response <cite>sys(x)</cite> where <cite>x</cite> is <cite>s</cite> for
+continuous-time systems and <cite>z</cite> for discrete-time systems, with
+<cite>m = sys.ninputs</cite> number of inputs and <cite>p = sys.noutputs</cite> number of
+outputs.</p>
+<p>To evaluate at a frequency omega in radians per second, enter
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">omega</span> <span class="pre">*</span> <span class="pre">1j</span></code> for continuous-time systems, or
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">exp(1j</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">*</span> <span class="pre">dt)</span></code> for discrete-time systems, or use
+<code class="docutils literal notranslate"><span class="pre">freqresp(sys,</span> <span class="pre">omega)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<a class="reference internal" href="control.StateSpace.html#control.StateSpace" title="control.StateSpace"><em>StateSpace</em></a><em> or </em><a class="reference internal" href="control.TransferFunction.html#control.TransferFunction" title="control.TransferFunction"><em>TransferFunction</em></a>) – Linear system</p></li>
+<li><p><strong>x</strong> (<em>complex scalar</em><em> or </em><em>1D array_like</em>) – Complex frequency(s)</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em><em> (</em><em>default=True</em><em>)</em>) – If squeeze=True, remove single-dimensional entries from the shape of
+the output even if the system is not SISO. If squeeze=False, keep all
+indices (output, input and, if omega is array_like, frequency) even if
+the system is SISO. The default value can be set using
+config.defaults[‘control.squeeze_frequency_response’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fresp</strong> – The frequency response of the system.  If the system is SISO and
+squeeze is not True, the shape of the array matches the shape of
+omega.  If the system is not SISO or squeeze is False, the first two
+dimensions of the array are indices for the output and input and the
+remaining dimensions match omega.  If <code class="docutils literal notranslate"><span class="pre">squeeze</span></code> is True then
+single-dimensional axes are removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex ndarray</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="control.matlab.freqresp.html#control.matlab.freqresp" title="control.matlab.freqresp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqresp</span></code></a>, <a class="reference internal" href="control.matlab.bode.html#control.matlab.bode" title="control.matlab.bode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bode</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>This function is a wrapper for <code class="xref py py-meth docutils literal notranslate"><span class="pre">StateSpace.__call__()</span></code> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">TransferFunction.__call__()</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">9</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fresp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">evalfr</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span>  <span class="c1"># evaluate at s = 1j</span>
+</pre></div>
+</div>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Add example with MIMO system</p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.matlab.freqresp.html" class="btn btn-neutral float-left" title="control.matlab.freqresp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.matlab.rlocus.html" class="btn btn-neutral float-right" title="control.matlab.rlocus" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

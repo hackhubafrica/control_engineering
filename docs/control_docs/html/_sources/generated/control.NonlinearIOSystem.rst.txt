@@ -1,0 +1,38 @@
+﻿control.NonlinearIOSystem
+=========================
+
+.. currentmodule:: control
+
+.. autoclass:: NonlinearIOSystem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~NonlinearIOSystem.copy
+      ~NonlinearIOSystem.dynamics
+      ~NonlinearIOSystem.feedback
+      ~NonlinearIOSystem.find_input
+      ~NonlinearIOSystem.find_inputs
+      ~NonlinearIOSystem.find_output
+      ~NonlinearIOSystem.find_outputs
+      ~NonlinearIOSystem.find_state
+      ~NonlinearIOSystem.find_states
+      ~NonlinearIOSystem.isctime
+      ~NonlinearIOSystem.isdtime
+      ~NonlinearIOSystem.issiso
+      ~NonlinearIOSystem.linearize
+      ~NonlinearIOSystem.output
+      ~NonlinearIOSystem.set_inputs
+      ~NonlinearIOSystem.set_outputs
+      ~NonlinearIOSystem.set_states
+      ~NonlinearIOSystem.update_names
+   
+   

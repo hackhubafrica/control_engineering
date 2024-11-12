@@ -1,0 +1,6 @@
+﻿control.ssdata
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: ssdata

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.zeros &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.pzmap" href="control.pzmap.html" />
+    <link rel="prev" title="control.poles" href="control.poles.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../control.html">Function reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../control.html#available-subpackages">Available subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-creation">System creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#frequency-domain-plotting">Frequency domain plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#time-domain-simulation">Time domain simulation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../control.html#control-system-analysis">Control system analysis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.dcgain.html">control.dcgain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.describing_function.html">control.describing_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.frequency_response.html">control.frequency_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.get_input_ff_index.html">control.get_input_ff_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.get_output_fb_index.html">control.get_output_fb_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.ispassive.html">control.ispassive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.margin.html">control.margin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.stability_margins.html">control.stability_margins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.step_info.html">control.step_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.phase_crossover_frequencies.html">control.phase_crossover_frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.poles.html">control.poles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.zeros</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.zeros"><code class="docutils literal notranslate"><span class="pre">zeros()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.pzmap.html">control.pzmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.root_locus.html">control.root_locus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.sisotool.html">control.sisotool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.StateSpace.__call__.html">control.StateSpace.__call__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.TransferFunction.__call__.html">control.TransferFunction.__call__</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#matrix-computations">Matrix computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-synthesis">Control system synthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#model-simplification-tools">Model simplification tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#nonlinear-system-support">Nonlinear system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#stochastic-system-support">Stochastic system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#utility-functions-and-conversions">Utility functions and conversions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.zeros</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.zeros.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-zeros">
+<h1>control.zeros<a class="headerlink" href="#control-zeros" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.zeros">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L232-L254"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.zeros" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute system zeros.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sys</strong> (<a class="reference internal" href="control.StateSpace.html#control.StateSpace" title="control.StateSpace"><em>StateSpace</em></a><em> or </em><a class="reference internal" href="control.TransferFunction.html#control.TransferFunction" title="control.TransferFunction"><em>TransferFunction</em></a>) – Linear system</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>zeros</strong> – Array that contains the system’s zeros.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="control.poles.html#control.poles" title="control.poles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">poles</span></code></a>, <a class="reference internal" href="control.StateSpace.html#control.StateSpace.zeros" title="control.StateSpace.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateSpace.zeros</span></code></a>, <a class="reference internal" href="control.TransferFunction.html#control.TransferFunction.zeros" title="control.TransferFunction.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransferFunction.zeros</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.poles.html" class="btn btn-neutral float-left" title="control.poles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.pzmap.html" class="btn btn-neutral float-right" title="control.pzmap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

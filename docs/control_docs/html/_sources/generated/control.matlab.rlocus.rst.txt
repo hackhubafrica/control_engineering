@@ -1,0 +1,6 @@
+﻿control.matlab.rlocus
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: rlocus

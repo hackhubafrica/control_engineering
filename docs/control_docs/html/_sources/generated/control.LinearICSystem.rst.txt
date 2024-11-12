@@ -1,0 +1,59 @@
+﻿control.LinearICSystem
+======================
+
+.. currentmodule:: control
+
+.. autoclass:: LinearICSystem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~LinearICSystem.append
+      ~LinearICSystem.bandwidth
+      ~LinearICSystem.check_unused_signals
+      ~LinearICSystem.connection_table
+      ~LinearICSystem.copy
+      ~LinearICSystem.damp
+      ~LinearICSystem.dcgain
+      ~LinearICSystem.dynamics
+      ~LinearICSystem.feedback
+      ~LinearICSystem.find_input
+      ~LinearICSystem.find_inputs
+      ~LinearICSystem.find_output
+      ~LinearICSystem.find_outputs
+      ~LinearICSystem.find_state
+      ~LinearICSystem.find_states
+      ~LinearICSystem.freqresp
+      ~LinearICSystem.frequency_response
+      ~LinearICSystem.horner
+      ~LinearICSystem.isctime
+      ~LinearICSystem.isdtime
+      ~LinearICSystem.ispassive
+      ~LinearICSystem.issiso
+      ~LinearICSystem.lft
+      ~LinearICSystem.linearize
+      ~LinearICSystem.minreal
+      ~LinearICSystem.output
+      ~LinearICSystem.poles
+      ~LinearICSystem.returnScipySignalLTI
+      ~LinearICSystem.sample
+      ~LinearICSystem.set_connect_map
+      ~LinearICSystem.set_input_map
+      ~LinearICSystem.set_inputs
+      ~LinearICSystem.set_output_map
+      ~LinearICSystem.set_outputs
+      ~LinearICSystem.set_states
+      ~LinearICSystem.slycot_laub
+      ~LinearICSystem.unused_signals
+      ~LinearICSystem.update_names
+      ~LinearICSystem.zeros
+   
+   

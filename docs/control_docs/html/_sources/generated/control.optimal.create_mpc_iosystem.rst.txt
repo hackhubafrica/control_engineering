@@ -1,0 +1,6 @@
+﻿control.optimal.create\_mpc\_iosystem
+=====================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: create_mpc_iosystem

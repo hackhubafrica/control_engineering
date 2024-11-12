@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plotting data &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="control.describing_function_response" href="generated/control.describing_function_response.html" />
+    <link rel="prev" title="control.LinearICSystem" href="generated/control.LinearICSystem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plotting data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#response-and-plotting-functions">Response and plotting functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#response-functions">Response functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.describing_function_response.html">control.describing_function_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.frequency_response.html">control.frequency_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.forced_response.html">control.forced_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.gangof4_response.html">control.gangof4_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.impulse_response.html">control.impulse_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.initial_response.html">control.initial_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.nyquist_response.html">control.nyquist_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.pole_zero_map.html">control.pole_zero_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.root_locus_map.html">control.root_locus_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.singular_values_response.html">control.singular_values_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.step_response.html">control.step_response</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-functions">Plotting functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.nyquist_plot.html">control.nyquist_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.phase_plane_plot.html">control.phase_plane_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.phaseplot.equilpoints.html">control.phaseplot.equilpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.phaseplot.separatrices.html">control.phaseplot.separatrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.phaseplot.streamlines.html">control.phaseplot.streamlines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.phaseplot.vectorfield.html">control.phaseplot.vectorfield</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.pole_zero_plot.html">control.pole_zero_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.root_locus_plot.html">control.root_locus_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.singular_values_plot.html">control.singular_values_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.time_response_plot.html">control.time_response_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#utility-functions">Utility functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.phaseplot.boxgrid.html">control.phaseplot.boxgrid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.combine_time_responses.html">control.combine_time_responses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.pole_zero_subplots.html">control.pole_zero_subplots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.reset_rcParams.html">control.reset_rcParams</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#response-and-plotting-classes">Response and plotting classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.ControlPlot.html">control.ControlPlot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.DescribingFunctionResponse.html">control.DescribingFunctionResponse</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.FrequencyResponseData.html">control.FrequencyResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.FrequencyResponseList.html">control.FrequencyResponseList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.NyquistResponseData.html">control.NyquistResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.PoleZeroData.html">control.PoleZeroData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.TimeResponseData.html">control.TimeResponseData</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/control.TimeResponseList.html">control.TimeResponseList</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Plotting data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/plotting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="plotting-data">
+<span id="plotting-module"></span><h1>Plotting data<a class="headerlink" href="#plotting-data" title="Permalink to this heading">¶</a></h1>
+<p>The Python Control Systems Toolbox contains a number of functions for
+plotting input/output responses in the time and frequency domain, root
+locus diagrams, and other standard charts used in control system analysis,
+for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bode_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">nyquist_plot</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">])</span>
+<span class="n">phase_plane_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">limits</span><span class="p">)</span>
+<span class="n">pole_zero_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">root_locus_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While plotting functions can be called directly, the standard pattern used
+in the toolbox is to provide a function that performs the basic computation
+or analysis (e.g., computation of the time or frequency response) and
+returns and object representing the output data.  A separate plotting
+function, typically ending in <cite>_plot</cite> is then used to plot the data,
+resulting in the following standard pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nyquist_response</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">])</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">count</span>          <span class="c1"># number of encirclements of -1</span>
+<span class="n">cplt</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nyquist_plot</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>  <span class="c1"># Nyquist plot</span>
+</pre></div>
+</div>
+<p>Plotting commands return a <a class="reference internal" href="generated/control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> object that
+provides access to the individual lines in the generated plot using
+<cite>cplt.lines</cite>, allowing various aspects of the plot to be modified to
+suit specific needs.</p>
+<p>The plotting function is also available via the <cite>plot()</cite> method of the
+analysis object, allowing the following type of calls:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">step_response</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">frequency_response</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">nyquist_response</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">streamlines</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">limits</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">root_locus_map</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The remainder of this chapter provides additional documentation on how
+these response and plotting functions can be customized.</p>
+<div class="section" id="time-response-data">
+<h2>Time response data<a class="headerlink" href="#time-response-data" title="Permalink to this heading">¶</a></h2>
+<p>Input/output time responses are produced one of several python-control
+functions: <a class="reference internal" href="generated/control.forced_response.html#control.forced_response" title="control.forced_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">forced_response()</span></code></a>,
+<a class="reference internal" href="generated/control.impulse_response.html#control.impulse_response" title="control.impulse_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">impulse_response()</span></code></a>, <a class="reference internal" href="generated/control.initial_response.html#control.initial_response" title="control.initial_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">initial_response()</span></code></a>,
+<a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">input_output_response()</span></code></a>, <a class="reference internal" href="generated/control.step_response.html#control.step_response" title="control.step_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">step_response()</span></code></a>.
+Each of these return a <a class="reference internal" href="generated/control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a> object, which
+contains the time, input, state, and output vectors associated with the
+simulation. Time response data can be plotted with the
+<a class="reference internal" href="generated/control.time_response_plot.html#control.time_response_plot" title="control.time_response_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">time_response_plot()</span></code></a> function, which is also available as
+the <a class="reference internal" href="generated/control.TimeResponseData.html#control.TimeResponseData.plot" title="control.TimeResponseData.plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot()</span></code></a> method.  For example, the step
+response for a two-input, two-output can be plotted using the commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys_mimo</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf2ss</span><span class="p">(</span>
+    <span class="p">[[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]],</span> <span class="p">[[</span><span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]],</span>
+    <span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sys_mimo&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which produces the following plot:</p>
+<img alt="_images/timeplot-mimo_step-default.png" src="_images/timeplot-mimo_step-default.png" />
+<p>The  <a class="reference internal" href="generated/control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a> object can also be used to access
+the data from the simulation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">inputs</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">inputs</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">axs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>A number of options are available in the <cite>plot</cite> method to customize
+the appearance of input output data.  For data produced by the
+<a class="reference internal" href="generated/control.impulse_response.html#control.impulse_response" title="control.impulse_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">impulse_response()</span></code></a> and <a class="reference internal" href="generated/control.step_response.html#control.step_response" title="control.step_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">step_response()</span></code></a>
+commands, the inputs are not shown.  This behavior can be changed
+using the <cite>plot_inputs</cite> keyword.  It is also possible to combine
+multiple lines onto a single graph, using either the <cite>overlay_signals</cite>
+keyword (which puts all outputs out a single graph and all inputs on a
+single graph) or the <cite>overlay_traces</cite> keyword, which puts different
+traces (e.g., corresponding to step inputs in different channels) on
+the same graph, with appropriate labeling via a legend on selected
+axes.</p>
+<p>For example, using <cite>plot_input=True</cite> and <cite>overlay_signals=True</cite> yields the
+following plot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+  <span class="n">plot_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">overlay_signals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Step response for 2x2 MIMO system &quot;</span> <span class="o">+</span>
+  <span class="s2">&quot;[plot_inputs, overlay_signals]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/timeplot-mimo_step-pi_cs.png" src="_images/timeplot-mimo_step-pi_cs.png" />
+<p>Input/output response plots created with either the
+<a class="reference internal" href="generated/control.forced_response.html#control.forced_response" title="control.forced_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">forced_response()</span></code></a> or the
+<a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">input_output_response()</span></code></a> functions include the input signals by
+default. These can be plotted on separate axes, but also “overlaid” on the
+output axes (useful when the input and output signals are being compared to
+each other).  The following plot shows the use of <cite>plot_inputs=’overlay’</cite>
+as well as the ability to reposition the legends using the <cite>legend_map</cite>
+keyword:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">timepts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">timepts</span><span class="p">)])</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">plot_inputs</span><span class="o">=</span><span class="s1">&#39;overlay&#39;</span><span class="p">,</span>
+    <span class="n">legend_map</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s1">&#39;lower right&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;lower right&#39;</span><span class="p">]]),</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;I/O response for 2x2 MIMO system &quot;</span> <span class="o">+</span>
+    <span class="s2">&quot;[plot_inputs=&#39;overlay&#39;, legend_map]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/timeplot-mimo_ioresp-ov_lm.png" src="_images/timeplot-mimo_ioresp-ov_lm.png" />
+<p>Another option that is available is to use the <cite>transpose</cite> keyword so that
+instead of plotting the outputs on the top and inputs on the bottom, the
+inputs are plotted on the left and outputs on the right, as shown in the
+following figure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">U1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">timepts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">timepts</span><span class="p">)])</span>
+<span class="n">resp1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">U1</span><span class="p">)</span>
+
+<span class="n">U2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">timepts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">timepts</span><span class="p">)])</span>
+<span class="n">resp2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">U2</span><span class="p">)</span>
+
+<span class="n">ct</span><span class="o">.</span><span class="n">combine_time_responses</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">resp1</span><span class="p">,</span> <span class="n">resp2</span><span class="p">],</span> <span class="n">trace_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Scenario #1&quot;</span><span class="p">,</span> <span class="s2">&quot;Scenario #2&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;I/O responses for 2x2 MIMO system, multiple traces &quot;</span>
+        <span class="s2">&quot;[transpose]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/timeplot-mimo_ioresp-mt_tr.png" src="_images/timeplot-mimo_ioresp-mt_tr.png" />
+<p>This figure also illustrates the ability to create “multi-trace” plots
+using the <a class="reference internal" href="generated/control.combine_time_responses.html#control.combine_time_responses" title="control.combine_time_responses"><code class="xref py py-func docutils literal notranslate"><span class="pre">combine_time_responses()</span></code></a> function.  The line
+properties that are used when combining signals and traces are set by
+the <cite>input_props</cite>, <cite>output_props</cite> and <cite>trace_props</cite> parameters for
+<a class="reference internal" href="generated/control.time_response_plot.html#control.time_response_plot" title="control.time_response_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">time_response_plot()</span></code></a>.</p>
+<p>Additional customization is possible using the <cite>input_props</cite>,
+<cite>output_props</cite>, and <cite>trace_props</cite> keywords to set complementary line colors
+and styles for various signals and traces:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cplt</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">step_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">plot_inputs</span><span class="o">=</span><span class="s1">&#39;overlay&#39;</span><span class="p">,</span> <span class="n">overlay_signals</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">overlay_traces</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">output_props</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">}</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]],</span>
+    <span class="n">input_props</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="n">c</span><span class="p">}</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">]],</span>
+    <span class="n">trace_props</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="n">s</span><span class="p">}</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">]])</span>
+</pre></div>
+</div>
+<img alt="_images/timeplot-mimo_step-linestyle.png" src="_images/timeplot-mimo_step-linestyle.png" />
+</div>
+<div class="section" id="frequency-response-data">
+<h2>Frequency response data<a class="headerlink" href="#frequency-response-data" title="Permalink to this heading">¶</a></h2>
+<p>Linear time invariant (LTI) systems can be analyzed in terms of their
+frequency response and python-control provides a variety of tools for
+carrying out frequency response analysis.  The most basic of these is
+the <a class="reference internal" href="generated/control.frequency_response.html#control.frequency_response" title="control.frequency_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">frequency_response()</span></code></a> function, which will compute
+the frequency response for one or more linear systems:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys1&#39;</span><span class="p">)</span>
+<span class="n">sys2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys2&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">frequency_response</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>A Bode plot provide a graphical view of the response an LTI system and can
+be generated using the <a class="reference internal" href="generated/control.bode_plot.html#control.bode_plot" title="control.bode_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">bode_plot()</span></code></a> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">bode_plot</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">initial_phase</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-siso_bode-default.png" src="_images/freqplot-siso_bode-default.png" />
+<p>Computing the response for multiple systems at the same time yields a
+common frequency range that covers the features of all listed systems.</p>
+<p>Bode plots can also be created directly using the
+<a class="reference internal" href="generated/control.FrequencyResponseData.html#control.FrequencyResponseData.plot" title="control.FrequencyResponseData.plot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">plot()</span></code></a> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys_mimo</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span>
+    <span class="p">[[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">]],</span> <span class="p">[[</span><span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]],</span>
+    <span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sys_mimo&quot;</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">frequency_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-mimo_bode-default.png" src="_images/freqplot-mimo_bode-default.png" />
+<p>A variety of options are available for customizing Bode plots, for
+example allowing the display of the phase to be turned off or
+overlaying the inputs or outputs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">frequency_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">plot_phase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">overlay_inputs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">overlay_outputs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-mimo_bode-magonly.png" src="_images/freqplot-mimo_bode-magonly.png" />
+<p>The <a class="reference internal" href="generated/control.singular_values_response.html#control.singular_values_response" title="control.singular_values_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">singular_values_response()</span></code></a> function can be used to
+generate Bode plots that show the singular values of a transfer
+function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">singular_values_response</span><span class="p">(</span><span class="n">sys_mimo</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-mimo_svplot-default.png" src="_images/freqplot-mimo_svplot-default.png" />
+<p>Different types of plots can also be specified for a given frequency
+response.  For example, to plot the frequency response using a a Nichols
+plot, use <cite>plot_type=’nichols’</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot_type</span><span class="o">=</span><span class="s1">&#39;nichols&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-siso_nichols-default.png" src="_images/freqplot-siso_nichols-default.png" />
+<p>Another response function that can be used to generate Bode plots is the
+<a class="reference internal" href="generated/control.gangof4_response.html#control.gangof4_response" title="control.gangof4_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">gangof4_response()</span></code></a> function, which computes the four primary
+sensitivity functions for a feedback control system in standard form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proc</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;process&quot;</span><span class="p">)</span>
+<span class="n">ctrl</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;control&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">gangof4_response</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span> <span class="n">ctrl</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">bode_plot</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>        <span class="c1"># or response.plot()</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-gangof4.png" src="_images/freqplot-gangof4.png" />
+<p>Nyquist analysis can be done using the <a class="reference internal" href="generated/control.nyquist_response.html#control.nyquist_response" title="control.nyquist_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">nyquist_response()</span></code></a>
+function, which evaluates an LTI system along the Nyquist contour, and
+the <a class="reference internal" href="generated/control.nyquist_plot.html#control.nyquist_plot" title="control.nyquist_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">nyquist_plot()</span></code></a> function, which generates a Nyquist plot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys&#39;</span><span class="p">)</span>
+<span class="n">nyquist_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-nyquist-default.png" src="_images/freqplot-nyquist-default.png" />
+<p>The <a class="reference internal" href="generated/control.nyquist_response.html#control.nyquist_response" title="control.nyquist_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">nyquist_response()</span></code></a> function can be used to compute
+the number of encirclements of the -1 point and can return the Nyquist
+contour that was used to generate the Nyquist curve.</p>
+<p>By default, the Nyquist response will generate small semicircles around
+poles that are on the imaginary axis.  In addition, portions of the Nyquist
+curve that are far from the origin are scaled to a maximum value, while the
+line style is changed to reflect the scaling, and it is possible to offset
+the scaled portions to separate out the portions of the Nyquist curve at
+<span class="math">\infty</span>.  A number of keyword parameters for both are available for
+<a class="reference internal" href="generated/control.nyquist_response.html#control.nyquist_response" title="control.nyquist_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">nyquist_response()</span></code></a> and <a class="reference internal" href="generated/control.nyquist_plot.html#control.nyquist_plot" title="control.nyquist_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">nyquist_plot()</span></code></a> to tune
+the computation of the Nyquist curve and the way the data are plotted:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">nyqresp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nyquist_response</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">nyqresp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">max_curve_magnitude</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_curve_offset</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">arrows</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.925</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sys&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Encirclements =&quot;</span><span class="p">,</span> <span class="n">nyqresp</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-nyquist-custom.png" src="_images/freqplot-nyquist-custom.png" />
+<p>All frequency domain plotting functions will automatically compute the
+range of frequencies to plot based on the poles and zeros of the frequency
+response.  Frequency points can be explicitly specified by including an
+array of frequencies as a second argument (after the list of systems):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys1&#39;</span><span class="p">)</span>
+<span class="n">sys2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys2&#39;</span><span class="p">)</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">frequency_response</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">],</span> <span class="n">omega</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">initial_phase</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/freqplot-siso_bode-omega.png" src="_images/freqplot-siso_bode-omega.png" />
+<p>Alternatively, frequency ranges can be specified by passing a list of the
+form <code class="docutils literal notranslate"><span class="pre">[wmin,</span> <span class="pre">wmax]</span></code>, where <code class="docutils literal notranslate"><span class="pre">wmin</span></code> and <code class="docutils literal notranslate"><span class="pre">wmax</span></code> are the minimum and
+maximum frequencies in the (log-spaced) frequency range:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">frequency_response</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">],</span> <span class="p">[</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The number of (log-spaced) points in the frequency can be specified using
+the <code class="docutils literal notranslate"><span class="pre">omega_num</span></code> keyword parameter.</p>
+</div>
+<div class="section" id="pole-zero-data">
+<h2>Pole/zero data<a class="headerlink" href="#pole-zero-data" title="Permalink to this heading">¶</a></h2>
+<p>Pole/zero maps and root locus diagrams provide insights into system
+response based on the locations of system poles and zeros in the complex
+plane.  The <a class="reference internal" href="generated/control.pole_zero_map.html#control.pole_zero_map" title="control.pole_zero_map"><code class="xref py py-func docutils literal notranslate"><span class="pre">pole_zero_map()</span></code></a> function returns the poles and
+zeros and can be used to generate a pole/zero plot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;SISO transfer function&#39;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">pole_zero_map</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">pole_zero_plot</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/pzmap-siso_ctime-default.png" src="_images/pzmap-siso_ctime-default.png" />
+<p>A root locus plot shows the location of the closed loop poles of a system
+as a function of the loop gain:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span><span class="o">.</span><span class="n">root_locus_map</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/rlocus-siso_ctime-default.png" src="_images/rlocus-siso_ctime-default.png" />
+<p>The grid in the left hand plane shows lines of constant damping ratio as
+well as arcs corresponding to the frequency of the complex pole.  The grid
+can be turned off using the <cite>grid</cite> keyword.  Setting <cite>grid</cite> to <cite>False</cite> will
+turn off the grid but show the real and imaginary axis.  To completely
+remove all lines except the root loci, use <cite>grid=’empty’</cite>.</p>
+<p>On systems that support interactive plots, clicking on a location on the
+root locus diagram will mark the pole locations on all branches of the
+diagram and display the gain and damping ratio for the clicked point below
+the plot title:</p>
+<img alt="_images/rlocus-siso_ctime-clicked.png" src="_images/rlocus-siso_ctime-clicked.png" />
+<p>Root locus diagrams are also supported for discrete time systems, in which
+case the grid is show inside the unit circle:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sysd</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">root_locus_plot</span><span class="p">(</span><span class="n">sysd</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/rlocus-siso_dtime-default.png" src="_images/rlocus-siso_dtime-default.png" />
+<p>Lists of systems can also be given, in which case the root locus diagram
+for each system is plotted in different colors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys1&#39;</span><span class="p">)</span>
+<span class="n">sys2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys2&#39;</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">root_locus_plot</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">],</span> <span class="n">grid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/rlocus-siso_multiple-nogrid.png" src="_images/rlocus-siso_multiple-nogrid.png" />
+</div>
+<div class="section" id="phase-plane-plots">
+<h2>Phase plane plots<a class="headerlink" href="#phase-plane-plots" title="Permalink to this heading">¶</a></h2>
+<p>Insight into nonlinear systems can often be obtained by looking at phase
+plane diagrams.  The <a class="reference internal" href="generated/control.phase_plane_plot.html#control.phase_plane_plot" title="control.phase_plane_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">phase_plane_plot()</span></code></a> function allows the
+creation of a 2-dimensional phase plane diagram for a system.  This
+functionality is supported by a set of mapping functions that are part of
+the <cite>phaseplot</cite> module.</p>
+<p>The default method for generating a phase plane plot is to provide a
+2D dynamical system along with a range of coordinates and time limit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span> <span class="o">@</span> <span class="n">x</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">,</span> <span class="s1">&#39;velocity&#39;</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;damped oscillator&#39;</span><span class="p">)</span>
+<span class="n">axis_limits</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">phase_plane_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">axis_limits</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/phaseplot-dampedosc-default.png" src="_images/phaseplot-dampedosc-default.png" />
+<p>By default, the plot includes streamlines generated from starting
+points on limits of the plot, with arrows showing the flow of the
+system, as well as any equilibrium points for the system.  A variety
+of options are available to modify the information that is plotted,
+including plotting a grid of vectors instead of streamlines and
+turning on and off various features of the plot.</p>
+<p>To illustrate some of these possibilities, consider a phase plane plot for
+an inverted pendulum system, which is created using a mesh grid:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">invpend_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">b</span><span class="o">/</span><span class="n">m</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">g</span> <span class="o">*</span> <span class="n">l</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">m</span><span class="p">]</span>
+<span class="n">invpend</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span><span class="n">invpend_update</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;invpend&#39;</span><span class="p">)</span>
+
+<span class="n">ct</span><span class="o">.</span><span class="n">phase_plane_plot</span><span class="p">(</span>
+    <span class="n">invpend</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">gridtype</span><span class="o">=</span><span class="s1">&#39;meshgrid&#39;</span><span class="p">,</span> <span class="n">gridspec</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">arrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">plot_equilpoints</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;gridspec&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">]},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$ [rad]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\dot\theta$ [rad/sec]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/phaseplot-invpend-meshgrid.png" src="_images/phaseplot-invpend-meshgrid.png" />
+<p>This figure shows several features of more complex phase plane plots:
+multiple equilibrium points are shown, with saddle points showing
+separatrices, and streamlines generated along a 5x8 mesh of initial
+conditions.  At each mesh point, a streamline is created that goes 5 time
+units forward and backward in time.  A separate grid specification is used
+to find equilibrium points and separatrices (since the course grid spacing
+of 5x8 does not find all possible equilibrium points).  Together, the
+multiple features in the phase plane plot give a good global picture of the
+topological structure of solutions of the dynamical system.</p>
+<p>Phase plots can be built up by hand using a variety of helper functions that
+are part of the <code class="xref py py-mod docutils literal notranslate"><span class="pre">phaseplot</span></code> (pp) module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">control.phaseplot</span> <span class="k">as</span> <span class="nn">pp</span>
+
+<span class="k">def</span> <span class="nf">oscillator_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span>
+            <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)]</span>
+<span class="n">oscillator</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nlsys</span><span class="p">(</span>
+    <span class="n">oscillator_update</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nonlinear oscillator&#39;</span><span class="p">)</span>
+
+<span class="n">ct</span><span class="o">.</span><span class="n">phase_plane_plot</span><span class="p">(</span><span class="n">oscillator</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span> <span class="mf">0.9</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">streamlines</span><span class="p">(</span>
+    <span class="n">oscillator</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">gridtype</span><span class="o">=</span><span class="s1">&#39;circlegrid&#39;</span><span class="p">,</span> <span class="n">gridspec</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">pp</span><span class="o">.</span><span class="n">streamlines</span><span class="p">(</span>
+    <span class="n">oscillator</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span> <span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/phaseplot-oscillator-helpers.png" src="_images/phaseplot-oscillator-helpers.png" />
+<p>The following helper functions are available:</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phaseplot.equilpoints.html#control.phaseplot.equilpoints" title="control.phaseplot.equilpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.equilpoints</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot equilibrium points in the phase plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.phaseplot.separatrices.html#control.phaseplot.separatrices" title="control.phaseplot.separatrices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.separatrices</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot separatrices in the phase plane.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phaseplot.streamlines.html#control.phaseplot.streamlines" title="control.phaseplot.streamlines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.streamlines</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot stream lines in the phase plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.phaseplot.vectorfield.html#control.phaseplot.vectorfield" title="control.phaseplot.vectorfield"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.vectorfield</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot a vector field in the phase plane.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <a class="reference internal" href="generated/control.phase_plane_plot.html#control.phase_plane_plot" title="control.phase_plane_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">phase_plane_plot()</span></code></a> function calls these helper functions
+based on the options it is passed.</p>
+<p>Note that unlike other plotting functions, phase plane plots do not involve
+computing a response and then plotting the result via a <cite>plot()</cite> method.
+Instead, the plot is generated directly be a call to the
+<a class="reference internal" href="generated/control.phase_plane_plot.html#control.phase_plane_plot" title="control.phase_plane_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">phase_plane_plot()</span></code></a> function (or one of the
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">phaseplot</span></code> helper functions.</p>
+</div>
+<div class="section" id="customizing-control-plots">
+<h2>Customizing control plots<a class="headerlink" href="#customizing-control-plots" title="Permalink to this heading">¶</a></h2>
+<p>A set of common options are available to customize control plots in
+various ways.  The following general rules apply:</p>
+<ul>
+<li><p>If a plotting function is called multiple times with data that generate
+control plots with the same shape for the array of subplots, the new data
+will be overlaid with the old data, with a change in color(s) for the
+new data (chosen from the standard matplotlib color cycle).  If not
+overridden, the plot title and legends will be updated to reflect all
+data shown on the plot.</p></li>
+<li><p>If a plotting function is called and the shape for the array of subplots
+does not match the currently displayed plot, a new figure is created.
+Note that only the shape is checked, so if two different types of
+plotting commands that generate the same shape of subplots are called
+sequentially, the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.figure()</span></code></a> command should be used
+to explicitly create a new figure.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ax</span></code> keyword argument can be used to direct the plotting function
+to use a specific axes or array of axes.  The value of the <code class="docutils literal notranslate"><span class="pre">ax</span></code> keyword
+must have the proper number of axes for the plot (so a plot generating a
+2x2 array of subplots should be given a 2x2 array of axes for the <code class="docutils literal notranslate"><span class="pre">ax</span></code>
+keyword).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">color</span></code>, <code class="docutils literal notranslate"><span class="pre">linestyle</span></code>, <code class="docutils literal notranslate"><span class="pre">linewidth</span></code>, and other matplotlib line
+property arguments can be used to override the default line properties.
+If these arguments are absent, the default matplotlib line properties are
+used and the color cycles through the default matplotlib color cycle.</p>
+<p>The <a class="reference internal" href="generated/control.bode_plot.html#control.bode_plot" title="control.bode_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">bode_plot()</span></code></a>, <a class="reference internal" href="generated/control.time_response_plot.html#control.time_response_plot" title="control.time_response_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">time_response_plot()</span></code></a>,
+and selected other commands can also accept a matplotlib format
+string (e.g., <code class="docutils literal notranslate"><span class="pre">'r--'</span></code>).  The format string must appear as a positional
+argument right after the required data argument.</p>
+<p>Note that line property arguments are the same for all lines generated as
+part of a single plotting command call, including when multiple responses
+are passed as a list to the plotting command.  For this reason it is
+often easiest to call multiple plot commands in sequence, with each
+command setting the line properties for that system/trace.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">label</span></code> keyword argument can be used to override the line labels
+that are used in generating the title and legend.  If more than one line
+is being plotted in a given call to a plot command, the <code class="docutils literal notranslate"><span class="pre">label</span></code>
+argument value should be a list of labels, one for each line, in the
+order they will appear in the legend.</p>
+<p>For input/output plots (frequency and time responses), the labels that
+appear in the legend are of the form “&lt;output name&gt;, &lt;input name&gt;, &lt;trace
+name&gt;, &lt;system name&gt;”.  The trace name is used only for multi-trace time
+plots (for example, step responses for MIMO systems).  Common information
+present in all traces is removed, so that the labels appearing in the
+legend represent the unique characteristics of each line.</p>
+<p>For non-input/output plots (e.g., Nyquist plots, pole/zero plots, root
+locus plots), the default labels are the system name.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">label</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, individual lines are still given
+labels, but no legend is generated in the plot. (This can also be
+accomplished by setting <code class="docutils literal notranslate"><span class="pre">legend_map</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p>
+<p>Note: the <code class="docutils literal notranslate"><span class="pre">label</span></code> keyword argument is not implemented for describing
+function plots or phase plane plots, since these plots are primarily
+intended to be for a single system.  Standard <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> commands can
+be used to customize these plots for displaying information for multiple
+systems.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code>, <code class="docutils literal notranslate"><span class="pre">legend_map</span></code> and <code class="docutils literal notranslate"><span class="pre">show_legend</span></code> keyword arguments
+can be used to customize the locations for legends.  By default, a
+minimal number of legends are used such that lines can be uniquely
+identified and no legend is generated if there is only one line in the
+plot.  Setting <code class="docutils literal notranslate"><span class="pre">show_legend</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code> will suppress the legend and
+setting it to <code class="docutils literal notranslate"><span class="pre">True</span></code> will force the legend to be displayed even if
+there is only a single line in each axes.  In addition, if the value of
+the <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code> keyword argument is set to a string or integer, it
+will set the position of the legend as described in the
+<code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.legend()</span></code> documentation.  Finally, <code class="docutils literal notranslate"><span class="pre">legend_map</span></code> can be
+set to an array that matches the shape of the subplots, with each item
+being a string indicating the location of the legend for that axes (or
+<code class="docutils literal notranslate"><span class="pre">None</span></code> for no legend).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">rcParams</span></code> keyword argument can be used to override the default
+matplotlib style parameters used when creating a plot.  The default
+parameters for all control plots are given by the <code class="docutils literal notranslate"><span class="pre">ct.rcParams</span></code>
+dictionary and have the following values:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>‘axes.labelsize’</p></td>
+<td><p>‘small’</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘axes.titlesize’</p></td>
+<td><p>‘small’</p></td>
+</tr>
+<tr class="row-even"><td><p>‘figure.titlesize’</p></td>
+<td><p>‘medium’</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘legend.fontsize’</p></td>
+<td><p>‘x-small’</p></td>
+</tr>
+<tr class="row-even"><td><p>‘xtick.labelsize’</p></td>
+<td><p>‘small’</p></td>
+</tr>
+<tr class="row-odd"><td><p>‘ytick.labelsize’</p></td>
+<td><p>‘small’</p></td>
+</tr>
+</tbody>
+</table>
+<p>Only those values that should be changed from the default need to be
+specified in the <code class="docutils literal notranslate"><span class="pre">rcParams</span></code> keyword argument.  To override the defaults
+for all control plots, update the <code class="docutils literal notranslate"><span class="pre">ct.rcParams</span></code> dictionary entries.</p>
+<p>The default values for style parameters for control plots can be restored
+using <a class="reference internal" href="generated/control.reset_rcParams.html#control.reset_rcParams" title="control.reset_rcParams"><code class="xref py py-func docutils literal notranslate"><span class="pre">reset_rcParams()</span></code></a>.</p>
+</li>
+<li><p>For multi-input, multi-output time and frequency domain plots, the
+<cite>sharex</cite> and <cite>sharey</cite> keyword arguments can be used to determine whether
+and how axis limits are shared between the individual subplots.  Setting
+the keyword to ‘row’ will share the axes limits across all subplots in a
+row, ‘col’ will share across all subplots in a column, ‘all’ will share
+across all subplots in the figure, and <cite>False</cite> will allow independent
+limits for each subplot.</p>
+<p>For Bode plots, the <cite>share_magnitude</cite> and <cite>share_phase</cite> keyword arguments
+can be used to independently control axis limit sharing for the magnitude
+and phase portions of the plot, and <cite>share_frequency</cite> can be used instead
+of <cite>sharex</cite>.</p>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">title</span></code> keyword can be used to override the automatic creation of
+the plot title.  The default title is a string of the form “&lt;Type&gt; plot
+for &lt;syslist&gt;” where &lt;syslist&gt; is a list of the sys names contained in
+the plot (which can be updated if the plotting is called multiple times).
+Use <code class="docutils literal notranslate"><span class="pre">title=False</span></code> to suppress the title completely.  The title can also
+be updated using the <a class="reference internal" href="generated/control.ControlPlot.html#control.ControlPlot.set_plot_title" title="control.ControlPlot.set_plot_title"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_plot_title()</span></code></a> method
+for the returned control plot object.</p>
+<p>The plot title is only generated if <code class="docutils literal notranslate"><span class="pre">ax</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</li>
+</ul>
+<p>The following code illustrates the use of some of these customization
+features:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mf">0.02</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>   <span class="c1"># servomechanism</span>
+<span class="n">C1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>          <span class="c1"># unstable</span>
+<span class="n">L1</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="n">C1</span>
+<span class="n">C2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># stable</span>
+<span class="n">L2</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="n">C2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">rcParams</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">ax_mag</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax_phase</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax_nyquist</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ct</span><span class="o">.</span><span class="n">bode_plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="p">[</span><span class="n">ax_mag</span><span class="p">,</span> <span class="n">ax_phase</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;$L_1$ (unstable)&quot;</span><span class="p">,</span> <span class="s2">&quot;$L_2$ (unstable)&quot;</span><span class="p">],</span>
+    <span class="n">show_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax_mag</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bode plot for $L_1$, $L_2$&quot;</span><span class="p">)</span>
+<span class="n">ax_mag</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelbottom</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">align_labels</span><span class="p">()</span>
+
+<span class="n">ct</span><span class="o">.</span><span class="n">nyquist_plot</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax_nyquist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_1$ (unstable)&quot;</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">nyquist_plot</span><span class="p">(</span>
+    <span class="n">L2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax_nyquist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_2$ (stable)&quot;</span><span class="p">,</span>
+    <span class="n">max_curve_magnitude</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">ax_nyquist</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Nyquist plot for $L_1$, $L_2$&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Loop analysis for servomechanism control design&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/ctrlplot-servomech.png" src="_images/ctrlplot-servomech.png" />
+<p>As this example illustrates, python-control plotting functions and
+Matplotlib plotting functions can generally be intermixed.  One type of
+plot for which this does not currently work is pole/zero plots with a
+continuous time omega-damping grid (including root locus diagrams), due to
+the way that axes grids are implemented.  As a workaround, the
+<a class="reference internal" href="generated/control.pole_zero_subplots.html#control.pole_zero_subplots" title="control.pole_zero_subplots"><code class="xref py py-func docutils literal notranslate"><span class="pre">pole_zero_subplots()</span></code></a> command can be used to create an array
+of subplots with different grid types, as illustrated in the following
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ax_array</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">pole_zero_subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<span class="n">sys1</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys1&#39;</span><span class="p">)</span>
+<span class="n">sys2</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sys2&#39;</span><span class="p">)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">root_locus_plot</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax_array</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">cplt</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">root_locus_plot</span><span class="p">([</span><span class="n">sys1</span><span class="p">,</span> <span class="n">sys2</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax_array</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">cplt</span><span class="o">.</span><span class="n">set_plot_title</span><span class="p">(</span><span class="s2">&quot;Root locus plots (w/ specified axes)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/ctrlplot-pole_zero_subplots.png" src="_images/ctrlplot-pole_zero_subplots.png" />
+<p>Alternatively, turning off the omega-damping grid (using <code class="docutils literal notranslate"><span class="pre">grid=False</span></code> or
+<code class="docutils literal notranslate"><span class="pre">grid='empty'</span></code>) allows use of Matplotlib layout commands.</p>
+</div>
+<div class="section" id="response-and-plotting-functions">
+<h2>Response and plotting functions<a class="headerlink" href="#response-and-plotting-functions" title="Permalink to this heading">¶</a></h2>
+<div class="section" id="response-functions">
+<h3>Response functions<a class="headerlink" href="#response-functions" title="Permalink to this heading">¶</a></h3>
+<p>Response functions take a system or list of systems and return a response
+object that can be used to retrieve information about the system (e.g., the
+number of encirclements for a Nyquist plot) as well as plotting (via the
+<code class="docutils literal notranslate"><span class="pre">plot</span></code> method).</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.describing_function_response.html#control.describing_function_response" title="control.describing_function_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">describing_function_response</span></code></a>(H, F, A[, ...])</p></td>
+<td><p>Compute the describing function response of a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.frequency_response.html#control.frequency_response" title="control.frequency_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frequency_response</span></code></a>(sysdata[, omega, ...])</p></td>
+<td><p>Frequency response of an LTI system at multiple angular frequencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.forced_response.html#control.forced_response" title="control.forced_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forced_response</span></code></a>(sysdata[, T, U, X0, ...])</p></td>
+<td><p>Compute the output of a linear system given the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.gangof4_response.html#control.gangof4_response" title="control.gangof4_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gangof4_response</span></code></a>(P, C[, omega, ...])</p></td>
+<td><p>Compute the response of the &quot;Gang of 4&quot; transfer functions for a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.impulse_response.html#control.impulse_response" title="control.impulse_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impulse_response</span></code></a>(sysdata[, T, input, ...])</p></td>
+<td><p>Compute the impulse response for a linear system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.initial_response.html#control.initial_response" title="control.initial_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initial_response</span></code></a>(sysdata[, T, X0, output, ...])</p></td>
+<td><p>Compute the initial condition response for a linear system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_output_response</span></code></a>(sys, T[, U, X0, ...])</p></td>
+<td><p>Compute the output response of a system to a given input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.nyquist_response.html#control.nyquist_response" title="control.nyquist_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nyquist_response</span></code></a>(sysdata[, omega, ...])</p></td>
+<td><p>Nyquist response for a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.pole_zero_map.html#control.pole_zero_map" title="control.pole_zero_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pole_zero_map</span></code></a>(sysdata)</p></td>
+<td><p>Compute the pole/zero map for an LTI system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.root_locus_map.html#control.root_locus_map" title="control.root_locus_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root_locus_map</span></code></a>(sysdata[, gains])</p></td>
+<td><p>Compute the root locus map for an LTI system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.singular_values_response.html#control.singular_values_response" title="control.singular_values_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">singular_values_response</span></code></a>(sysdata[, omega, ...])</p></td>
+<td><p>Singular value response for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.step_response.html#control.step_response" title="control.step_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_response</span></code></a>(sysdata[, T, X0, input, ...])</p></td>
+<td><p>Compute the step response for a linear system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plotting-functions">
+<h3>Plotting functions<a class="headerlink" href="#plotting-functions" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.bode_plot.html#control.bode_plot" title="control.bode_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bode_plot</span></code></a>(data[, omega, ax, omega_limits, ...])</p></td>
+<td><p>Bode plot for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.describing_function_plot.html#control.describing_function_plot" title="control.describing_function_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">describing_function_plot</span></code></a>(data, *args, **kwargs)</p></td>
+<td><p>Plot a Nyquist plot with a describing function for a nonlinear system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.nichols_plot.html#control.nichols_plot" title="control.nichols_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nichols_plot</span></code></a>(data[, omega, grid, title, ax, ...])</p></td>
+<td><p>Nichols plot for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.nyquist_plot.html#control.nyquist_plot" title="control.nyquist_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nyquist_plot</span></code></a>(data[, omega, plot, ...])</p></td>
+<td><p>Nyquist plot for a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phase_plane_plot.html#control.phase_plane_plot" title="control.phase_plane_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_plane_plot</span></code></a>(sys[, pointdata, timedata, ...])</p></td>
+<td><p>Plot phase plane diagram.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.phaseplot.equilpoints.html#control.phaseplot.equilpoints" title="control.phaseplot.equilpoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.equilpoints</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot equilibrium points in the phase plane.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phaseplot.separatrices.html#control.phaseplot.separatrices" title="control.phaseplot.separatrices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.separatrices</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot separatrices in the phase plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.phaseplot.streamlines.html#control.phaseplot.streamlines" title="control.phaseplot.streamlines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.streamlines</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot stream lines in the phase plane.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phaseplot.vectorfield.html#control.phaseplot.vectorfield" title="control.phaseplot.vectorfield"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.vectorfield</span></code></a>(sys, pointdata[, ...])</p></td>
+<td><p>Plot a vector field in the phase plane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.pole_zero_plot.html#control.pole_zero_plot" title="control.pole_zero_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pole_zero_plot</span></code></a>(data[, plot, grid, title, ...])</p></td>
+<td><p>Plot a pole/zero map for a linear system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.root_locus_plot.html#control.root_locus_plot" title="control.root_locus_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root_locus_plot</span></code></a>(sysdata[, gains, grid, plot])</p></td>
+<td><p>Root locus plot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.singular_values_plot.html#control.singular_values_plot" title="control.singular_values_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">singular_values_plot</span></code></a>(data[, omega, plot, ...])</p></td>
+<td><p>Plot the singular values for a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.time_response_plot.html#control.time_response_plot" title="control.time_response_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_response_plot</span></code></a>(data, *fmt[, ax, ...])</p></td>
+<td><p>Plot the time response of an input/output system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utility-functions">
+<h3>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this heading">¶</a></h3>
+<p>These additional functions can be used to manipulate response data or
+carry out other operations in creating control plots.</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phaseplot.boxgrid.html#control.phaseplot.boxgrid" title="control.phaseplot.boxgrid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseplot.boxgrid</span></code></a>(xvals, yvals)</p></td>
+<td><p>Generate list of points along the edge of box.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.combine_time_responses.html#control.combine_time_responses" title="control.combine_time_responses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_time_responses</span></code></a>(response_list[, ...])</p></td>
+<td><p>Combine multiple individual time responses into a multi-trace response.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.pole_zero_subplots.html#control.pole_zero_subplots" title="control.pole_zero_subplots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pole_zero_subplots</span></code></a>(nrows, ncols[, grid, dt, ...])</p></td>
+<td><p>Create axes for pole/zero plot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.reset_rcParams.html#control.reset_rcParams" title="control.reset_rcParams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_rcParams</span></code></a>()</p></td>
+<td><p>Reset rcParams to default values for control plots.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response-and-plotting-classes">
+<h3>Response and plotting classes<a class="headerlink" href="#response-and-plotting-classes" title="Permalink to this heading">¶</a></h3>
+<p>The following classes are used in generating response data.</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ControlPlot</span></code></a>(lines[, axes, figure, legend])</p></td>
+<td><p>A class for returning control figures.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.DescribingFunctionResponse.html#control.DescribingFunctionResponse" title="control.DescribingFunctionResponse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DescribingFunctionResponse</span></code></a>(response, N_vals, ...)</p></td>
+<td><p>Results of describing function analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.FrequencyResponseData.html#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a>(d, w[, smooth])</p></td>
+<td><p>A class for models defined by frequency response data (FRD).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.FrequencyResponseList.html#control.FrequencyResponseList" title="control.FrequencyResponseList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FrequencyResponseList</span></code></a>([iterable])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.NyquistResponseData.html#control.NyquistResponseData" title="control.NyquistResponseData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NyquistResponseData</span></code></a>(count, contour, response, dt)</p></td>
+<td><p>Nyquist response data object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.PoleZeroData.html#control.PoleZeroData" title="control.PoleZeroData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoleZeroData</span></code></a>(poles, zeros[, gains, loci, ...])</p></td>
+<td><p>Pole/zero data object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a>(time, outputs[, states, ...])</p></td>
+<td><p>A class for returning time responses.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.TimeResponseList.html#control.TimeResponseList" title="control.TimeResponseList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeResponseList</span></code></a>([iterable])</p></td>
+<td><p>This class consist of a list of <a class="reference internal" href="generated/control.TimeResponseData.html#control.TimeResponseData" title="control.TimeResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">TimeResponseData</span></code></a> objects.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/control.LinearICSystem.html" class="btn btn-neutral float-left" title="control.LinearICSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/control.describing_function_response.html" class="btn btn-neutral float-right" title="control.describing_function_response" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

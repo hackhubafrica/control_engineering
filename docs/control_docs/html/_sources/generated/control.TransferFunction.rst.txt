@@ -1,0 +1,47 @@
+﻿control.TransferFunction
+========================
+
+.. currentmodule:: control
+
+.. autoclass:: TransferFunction
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~TransferFunction.bandwidth
+      ~TransferFunction.copy
+      ~TransferFunction.damp
+      ~TransferFunction.dcgain
+      ~TransferFunction.feedback
+      ~TransferFunction.find_input
+      ~TransferFunction.find_inputs
+      ~TransferFunction.find_output
+      ~TransferFunction.find_outputs
+      ~TransferFunction.find_state
+      ~TransferFunction.find_states
+      ~TransferFunction.freqresp
+      ~TransferFunction.frequency_response
+      ~TransferFunction.horner
+      ~TransferFunction.isctime
+      ~TransferFunction.isdtime
+      ~TransferFunction.ispassive
+      ~TransferFunction.issiso
+      ~TransferFunction.minreal
+      ~TransferFunction.poles
+      ~TransferFunction.returnScipySignalLTI
+      ~TransferFunction.sample
+      ~TransferFunction.set_inputs
+      ~TransferFunction.set_outputs
+      ~TransferFunction.set_states
+      ~TransferFunction.update_names
+      ~TransferFunction.zeros
+   
+   

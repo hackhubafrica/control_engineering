@@ -1,0 +1,6 @@
+﻿control.create\_statefbk\_iosystem
+==================================
+
+.. currentmodule:: control
+
+.. autofunction:: create_statefbk_iosystem

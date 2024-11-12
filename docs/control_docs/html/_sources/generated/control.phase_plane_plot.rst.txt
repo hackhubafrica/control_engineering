@@ -1,0 +1,6 @@
+﻿control.phase\_plane\_plot
+==========================
+
+.. currentmodule:: control
+
+.. autofunction:: phase_plane_plot

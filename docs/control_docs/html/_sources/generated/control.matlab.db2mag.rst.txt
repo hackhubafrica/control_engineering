@@ -1,0 +1,6 @@
+﻿control.matlab.db2mag
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: db2mag

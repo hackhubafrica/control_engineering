@@ -1,0 +1,6 @@
+﻿control.dare
+============
+
+.. currentmodule:: control
+
+.. autofunction:: dare

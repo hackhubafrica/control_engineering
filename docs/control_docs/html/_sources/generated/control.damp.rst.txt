@@ -1,0 +1,6 @@
+﻿control.damp
+============
+
+.. currentmodule:: control
+
+.. autofunction:: damp

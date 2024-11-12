@@ -1,0 +1,6 @@
+﻿control.use\_matlab\_defaults
+=============================
+
+.. currentmodule:: control
+
+.. autofunction:: use_matlab_defaults

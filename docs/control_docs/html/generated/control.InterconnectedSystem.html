@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.InterconnectedSystem &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.LinearICSystem" href="control.LinearICSystem.html" />
+    <link rel="prev" title="control.NonlinearIOSystem" href="control.NonlinearIOSystem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../iosys.html">Input/output systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#additional-features">Additional features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../iosys.html#module-classes-and-functions">Module classes and functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.InputOutputSystem.html">control.InputOutputSystem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.InterconnectedSystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.InterconnectedSystem"><code class="docutils literal notranslate"><span class="pre">InterconnectedSystem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.LinearICSystem.html">control.LinearICSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.NonlinearIOSystem.html">control.NonlinearIOSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.find_eqpt.html">control.find_eqpt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.interconnect.html">control.interconnect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.linearize.html">control.linearize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.nlsys.html">control.nlsys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.summing_junction.html">control.summing_junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Control system classes</a></li>
+      <li class="breadcrumb-item active">control.InterconnectedSystem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.InterconnectedSystem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-interconnectedsystem">
+<h1>control.InterconnectedSystem<a class="headerlink" href="#control-interconnectedsystem" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.InterconnectedSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">InterconnectedSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">syslist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connections</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_duplicate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L579-L1212"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.nlsys.NonlinearIOSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">NonlinearIOSystem</span></code></a></p>
+<p>Interconnection of a set of input/output systems.</p>
+<p>This class is used to implement a system that is an interconnection of
+input/output systems.  The sys consists of a collection of subsystems
+whose inputs and outputs are connected via a connection map.  The overall
+system inputs and outputs are subsets of the subsystem inputs and outputs.</p>
+<p>The function <a class="reference internal" href="control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a> should be used to create an
+interconnected I/O system since it performs additional argument
+processing and checking.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.check_unused_signals" title="control.InterconnectedSystem.check_unused_signals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_unused_signals</span></code></a></p></td>
+<td><p>Check for unused subsystem inputs and outputs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.connection_table" title="control.InterconnectedSystem.connection_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connection_table</span></code></a></p></td>
+<td><p>Print table of connections inside an interconnected system model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.copy" title="control.InterconnectedSystem.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a></p></td>
+<td><p>Make a copy of an input/output system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.dynamics" title="control.InterconnectedSystem.dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamics</span></code></a></p></td>
+<td><p>Compute the dynamics of a differential or difference equation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.feedback" title="control.InterconnectedSystem.feedback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feedback</span></code></a></p></td>
+<td><p>Feedback interconnection between two input/output systems</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.find_input" title="control.InterconnectedSystem.find_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_input</span></code></a></p></td>
+<td><p>Find the index for an input given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.find_inputs" title="control.InterconnectedSystem.find_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_inputs</span></code></a></p></td>
+<td><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.find_output" title="control.InterconnectedSystem.find_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_output</span></code></a></p></td>
+<td><p>Find the index for an output given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.find_outputs" title="control.InterconnectedSystem.find_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_outputs</span></code></a></p></td>
+<td><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.find_state" title="control.InterconnectedSystem.find_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_state</span></code></a></p></td>
+<td><p>Find the index for a state given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.find_states" title="control.InterconnectedSystem.find_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_states</span></code></a></p></td>
+<td><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.isctime" title="control.InterconnectedSystem.isctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isctime</span></code></a></p></td>
+<td><p>Check to see if a system is a continuous-time system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.isdtime" title="control.InterconnectedSystem.isdtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isdtime</span></code></a></p></td>
+<td><p>Check to see if a system is a discrete-time system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.issiso" title="control.InterconnectedSystem.issiso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">issiso</span></code></a></p></td>
+<td><p>Check to see if a system is single input, single output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.linearize" title="control.InterconnectedSystem.linearize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linearize</span></code></a></p></td>
+<td><p>Linearize an input/output system at a given state and input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.output" title="control.InterconnectedSystem.output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code></a></p></td>
+<td><p>Compute the output of the system</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.set_connect_map" title="control.InterconnectedSystem.set_connect_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_connect_map</span></code></a></p></td>
+<td><p>Set the connection map for an interconnected I/O system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.set_input_map" title="control.InterconnectedSystem.set_input_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_input_map</span></code></a></p></td>
+<td><p>Set the input map for an interconnected I/O system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.set_inputs" title="control.InterconnectedSystem.set_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inputs</span></code></a></p></td>
+<td><p>Set the number/names of the system inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.set_output_map" title="control.InterconnectedSystem.set_output_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_output_map</span></code></a></p></td>
+<td><p>Set the output map for an interconnected I/O system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.set_outputs" title="control.InterconnectedSystem.set_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outputs</span></code></a></p></td>
+<td><p>Set the number/names of the system outputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.set_states" title="control.InterconnectedSystem.set_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_states</span></code></a></p></td>
+<td><p>Set the number/names of the system states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InterconnectedSystem.unused_signals" title="control.InterconnectedSystem.unused_signals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unused_signals</span></code></a></p></td>
+<td><p>Find unused subsystem inputs and outputs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InterconnectedSystem.update_names" title="control.InterconnectedSystem.update_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_names</span></code></a></p></td>
+<td><p>Update signal and system names for an I/O system.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L263-L282"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add two input/output systems (parallel interconnection)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L164-L197"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a (static) nonlinearity at a given input value</p>
+<p>If a nonlinear I/O system has no internal state, then evaluating the
+system at an input <cite>u</cite> gives the output <cite>y = F(u)</cite>, determined by the
+output function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameter values for the system. Passed to the evaluation function
+for the system as default values, overriding internal defaults.</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True and if the system has a single output, return the system
+output as a 1D array rather than a 2D array.  If False, return the
+system output as a 2D array even if the system is SISO.  Default
+value set by config.defaults[‘control.squeeze_time_response’].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__mul__">
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L199-L229"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply two input/output systems (series interconnection)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__neg__">
+<span class="sig-name descname"><span class="pre">__neg__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L337-L349"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__neg__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Negate an input/output system (rescale)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__radd__">
+<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L284-L303"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__radd__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parallel addition of input/output system to a compatible object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__rmul__">
+<span class="sig-name descname"><span class="pre">__rmul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L231-L261"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__rmul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pre-multiply an input/output systems by a scalar/matrix</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__rsub__">
+<span class="sig-name descname"><span class="pre">__rsub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L329-L335"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__rsub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parallel subtraction of I/O system to a compatible object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__sub__">
+<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L305-L327"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtract two input/output systems (parallel interconnection)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.__truediv__">
+<span class="sig-name descname"><span class="pre">__truediv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L351-L356"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Division of input/output system (by scalar or array)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.check_unused_signals">
+<span class="sig-name descname"><span class="pre">check_unused_signals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ignore_inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L1108-L1212"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.check_unused_signals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for unused subsystem inputs and outputs</p>
+<p>Check to see if there are any unused signals and return a list of
+unused input and output signal descriptions.  If <cite>warning</cite> is True
+and any unused inputs or outputs are found, emit a warning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ignore_inputs</strong> (<em>list</em><em> of </em><em>input-spec</em>) – <dl class="simple">
+<dt>Subsystem inputs known to be unused.  input-spec can be any of:</dt><dd><p>’sig’, ‘sys.sig’, (isys, isig), (‘sys’, isig)</p>
+</dd>
+</dl>
+<p>If the ‘sig’ form is used, all subsystem inputs with that
+name are considered ignored.</p>
+</p></li>
+<li><p><strong>ignore_outputs</strong> (<em>list</em><em> of </em><em>output-spec</em>) – <dl class="simple">
+<dt>Subsystem outputs known to be unused.  output-spec can be any of:</dt><dd><p>’sig’, ‘sys.sig’, (isys, isig), (‘sys’, isig)</p>
+</dd>
+</dl>
+<p>If the ‘sig’ form is used, all subsystem outputs with that
+name are considered ignored.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>dropped_inputs</strong> (<em>list of tuples</em>) – A list of the dropped input signals, with each element of the
+list in the form of (isys, isig).</p></li>
+<li><p><strong>dropped_outputs</strong> (<em>list of tuples</em>) – A list of the dropped output signals, with each element of the
+list in the form of (osys, osig).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.connection_table">
+<span class="sig-name descname"><span class="pre">connection_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">show_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L1008-L1080"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.connection_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print table of connections inside an interconnected system model.</p>
+<p>Intended primarily for <code class="xref py py-class docutils literal notranslate"><span class="pre">InterconnectedSystems</span></code> that have been
+connected implicitly using signal names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>show_names</strong> (<em>bool</em><em>, </em><em>optional</em>) – Instead of printing out the system number, print out the name of
+each system. Default is False because system name is not usually
+specified when performing implicit interconnection using
+<a class="reference internal" href="control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-func docutils literal notranslate"><span class="pre">interconnect()</span></code></a>.</p></li>
+<li><p><strong>column_width</strong> (<em>int</em><em>, </em><em>optional</em>) – Character width of printed columns.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">P</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="mf">.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span><span class="o">.</span><span class="n">connection_table</span><span class="p">(</span><span class="n">show_names</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="go">signal    | source                        | destination</span>
+<span class="go">--------------------------------------------------------------------</span>
+<span class="go">e         | input                         | C</span>
+<span class="go">u         | C                             | P</span>
+<span class="go">y         | P                             | output</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_prefix_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L247-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a copy of an input/output system</p>
+<p>A copy of the system is made, with a new name.  The <cite>name</cite> keyword
+can be used to specify a specific name for the system.  If no name
+is given and <cite>use_prefix_suffix</cite> is True, the name is constructed
+by prepending config.defaults[‘iosys.duplicate_system_name_prefix’]
+and appending config.defaults[‘iosys.duplicate_system_name_suffix’].
+Otherwise, a generic system name of the form <cite>sys[&lt;id&gt;]</cite> is used,
+where <cite>&lt;id&gt;</cite> is based on an internal counter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.dynamics">
+<span class="sig-name descname"><span class="pre">dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L375-L411"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the dynamics of a differential or difference equation.</p>
+<p>Given time <cite>t</cite>, input <cite>u</cite> and state <cite>x</cite>, returns the value of the
+right hand side of the dynamical system. If the system is continuous,
+returns the time derivative</p>
+<blockquote>
+<div><p>dx/dt = f(t, x, u[, params])</p>
+</div></blockquote>
+<p>where <cite>f</cite> is the system’s (possibly nonlinear) dynamics function.
+If the system is discrete-time, returns the next value of <cite>x</cite>:</p>
+<blockquote>
+<div><p>x[t+dt] = f(t, x[t], u[t][, params])</p>
+</div></blockquote>
+<p>where <cite>t</cite> is a scalar.</p>
+<p>The inputs <cite>x</cite> and <cite>u</cite> must be of the correct length.  The <cite>params</cite>
+argument is an optional dictionary of parameter values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em>) – the time at which to evaluate</p></li>
+<li><p><strong>x</strong> (<em>array_like</em>) – current state</p></li>
+<li><p><strong>u</strong> (<em>array_like</em>) – input</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – system parameter values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dx/dt or x[t+dt]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.feedback">
+<span class="sig-name descname"><span class="pre">feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L463-L516"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedback interconnection between two input/output systems</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys1</strong> (<a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><em>InputOutputSystem</em></a>) – The primary process.</p></li>
+<li><p><strong>sys2</strong> (<a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><em>InputOutputSystem</em></a>) – The feedback process (often a feedback controller).</p></li>
+<li><p><strong>sign</strong> (<em>scalar</em><em>, </em><em>optional</em>) – The sign of feedback.  <cite>sign</cite> = -1 indicates negative feedback,
+and <cite>sign</cite> = 1 indicates positive feedback.  <cite>sign</cite> is an optional
+argument; it assumes a value of -1 if not specified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem">InputOutputSystem</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ValueError</strong> – if the inputs, outputs, or timebases of the systems are
+incompatible.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.find_input">
+<span class="sig-name descname"><span class="pre">find_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L292-L294"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.find_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an input given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.find_inputs">
+<span class="sig-name descname"><span class="pre">find_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L296-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.find_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.find_output">
+<span class="sig-name descname"><span class="pre">find_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L325-L327"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.find_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an output given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.find_outputs">
+<span class="sig-name descname"><span class="pre">find_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L329-L331"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.find_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.find_state">
+<span class="sig-name descname"><span class="pre">find_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L358-L360"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.find_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for a state given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.find_states">
+<span class="sig-name descname"><span class="pre">find_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L362-L364"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.find_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.isctime">
+<span class="sig-name descname"><span class="pre">isctime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L416-L431"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.isctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a continuous-time system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<em>Named I/O system</em>) – System to be checked</p></li>
+<li><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.isdtime">
+<span class="sig-name descname"><span class="pre">isdtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L433-L449"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.isdtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a discrete-time system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.issiso">
+<span class="sig-name descname"><span class="pre">issiso</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L451-L453"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.issiso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is single input, single output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.linearize">
+<span class="sig-name descname"><span class="pre">linearize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L518-L576"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.linearize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linearize an input/output system at a given state and input.</p>
+<p>Return the linearization of an input/output system at a given state
+and input value as a StateSpace system.  See
+<a class="reference internal" href="control.linearize.html#control.linearize" title="control.linearize"><code class="xref py py-func docutils literal notranslate"><span class="pre">linearize()</span></code></a> for complete documentation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.ninputs">
+<span class="sig-name descname"><span class="pre">ninputs</span></span><a class="headerlink" href="#control.InterconnectedSystem.ninputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system inputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.noutputs">
+<span class="sig-name descname"><span class="pre">noutputs</span></span><a class="headerlink" href="#control.InterconnectedSystem.noutputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system outputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.nstates">
+<span class="sig-name descname"><span class="pre">nstates</span></span><a class="headerlink" href="#control.InterconnectedSystem.nstates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system states.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L434-L461"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the output of the system</p>
+<p>Given time <cite>t</cite>, input <cite>u</cite> and state <cite>x</cite>, returns the output of the
+system:</p>
+<blockquote>
+<div><p>y = g(t, x, u[, params])</p>
+</div></blockquote>
+<p>The inputs <cite>x</cite> and <cite>u</cite> must be of the correct length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em>) – the time at which to evaluate</p></li>
+<li><p><strong>x</strong> (<em>array_like</em>) – current state</p></li>
+<li><p><strong>u</strong> (<em>array_like</em>) – input</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – system parameter values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>y</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.set_connect_map">
+<span class="sig-name descname"><span class="pre">set_connect_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connect_map</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L906-L919"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.set_connect_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the connection map for an interconnected I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>connect_map</strong> (<em>2D array</em>) – Specify the matrix that will be used to multiply the vector of
+subsystem outputs to obtain the vector of subsystem inputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.set_input_map">
+<span class="sig-name descname"><span class="pre">set_input_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_map</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L921-L939"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.set_input_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the input map for an interconnected I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_map</strong> (<em>2D array</em>) – Specify the matrix that will be used to multiply the vector of
+system inputs to obtain the vector of subsystem inputs.  These
+values are added to the inputs specified in the connection map.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.set_inputs">
+<span class="sig-name descname"><span class="pre">set_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L272-L290"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system inputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>inputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘u’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.set_output_map">
+<span class="sig-name descname"><span class="pre">set_output_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_map</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L941-L967"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.set_output_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the output map for an interconnected I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>output_map</strong> (<em>2D array</em>) – Specify the matrix that will be used to multiply the vector of
+subsystem outputs concatenated with subsystem inputs to obtain
+the vector of system outputs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.set_outputs">
+<span class="sig-name descname"><span class="pre">set_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L305-L323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.set_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system outputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>outputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘y’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.set_states">
+<span class="sig-name descname"><span class="pre">set_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L338-L356"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.set_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system states.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>states</cite> is an integer, create the names of the states using
+the given prefix (default = ‘x’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.unused_signals">
+<span class="sig-name descname"><span class="pre">unused_signals</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L969-L1006"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.unused_signals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find unused subsystem inputs and outputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>unused_inputs</strong> (<em>dict</em>) – A mapping from tuple of indices (isys, isig) to string
+‘{sys}.{sig}’, for all unused subsystem inputs.</p></li>
+<li><p><strong>unused_outputs</strong> (<em>dict</em>) – A mapping from tuple of indices (osys, osig) to string
+‘{sys}.{sig}’, for all unused subsystem outputs.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InterconnectedSystem.update_names">
+<span class="sig-name descname"><span class="pre">update_names</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L372-L413"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InterconnectedSystem.update_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update signal and system names for an I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – New system name.</p></li>
+<li><p><strong>inputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – List of strings that name the individual input signals.  If
+given as an integer or None, signal names default to the form
+<cite>u[i]</cite>.  See <a class="reference internal" href="control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a> for more information.</p></li>
+<li><p><strong>outputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of output signals; defaults to <cite>y[i]</cite>.</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of system states; defaults to <cite>x[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.NonlinearIOSystem.html" class="btn btn-neutral float-left" title="control.NonlinearIOSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.LinearICSystem.html" class="btn btn-neutral float-right" title="control.LinearICSystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

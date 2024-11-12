@@ -1,0 +1,6 @@
+﻿control.balanced\_reduction
+===========================
+
+.. currentmodule:: control
+
+.. autofunction:: balanced_reduction

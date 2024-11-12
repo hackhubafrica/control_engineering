@@ -1,0 +1,6 @@
+﻿control.impulse\_response
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: impulse_response

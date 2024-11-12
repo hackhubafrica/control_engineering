@@ -1,0 +1,6 @@
+﻿control.matlab.unwrap
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: unwrap

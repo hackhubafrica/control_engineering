@@ -1,0 +1,6 @@
+﻿control.connect
+===============
+
+.. currentmodule:: control
+
+.. autofunction:: connect

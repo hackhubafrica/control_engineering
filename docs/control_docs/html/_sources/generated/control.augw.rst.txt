@@ -1,0 +1,6 @@
+﻿control.augw
+============
+
+.. currentmodule:: control
+
+.. autofunction:: augw

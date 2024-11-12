@@ -1,0 +1,6 @@
+﻿control.describing\_function\_plot
+==================================
+
+.. currentmodule:: control
+
+.. autofunction:: describing_function_plot

@@ -1,0 +1,6 @@
+﻿control.matlab.connect
+======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: connect

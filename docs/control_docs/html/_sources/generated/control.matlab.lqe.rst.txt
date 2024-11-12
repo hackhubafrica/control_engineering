@@ -1,0 +1,6 @@
+﻿control.matlab.lqe
+==================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: lqe

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.similarity_transform &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.ss2tf" href="control.ss2tf.html" />
+    <link rel="prev" title="control.set_defaults" href="control.set_defaults.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../control.html">Function reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../control.html#available-subpackages">Available subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-creation">System creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#frequency-domain-plotting">Frequency domain plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#time-domain-simulation">Time domain simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-analysis">Control system analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#matrix-computations">Matrix computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-synthesis">Control system synthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#model-simplification-tools">Model simplification tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#nonlinear-system-support">Nonlinear system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#stochastic-system-support">Stochastic system support</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../control.html#utility-functions-and-conversions">Utility functions and conversions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.augw.html">control.augw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.bdschur.html">control.bdschur</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.canonical_form.html">control.canonical_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.damp.html">control.damp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.db2mag.html">control.db2mag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.isctime.html">control.isctime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.isdtime.html">control.isdtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.issiso.html">control.issiso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.issys.html">control.issys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.mag2db.html">control.mag2db</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.modal_form.html">control.modal_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.norm.html">control.norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.observable_form.html">control.observable_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.pade.html">control.pade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.reachable_form.html">control.reachable_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.reset_defaults.html">control.reset_defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.sample_system.html">control.sample_system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.set_defaults.html">control.set_defaults</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.similarity_transform</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.similarity_transform"><code class="docutils literal notranslate"><span class="pre">similarity_transform()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.ss2tf.html">control.ss2tf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.ssdata.html">control.ssdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.tf2ss.html">control.tf2ss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.tfdata.html">control.tfdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.timebase.html">control.timebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.unwrap.html">control.unwrap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.use_fbs_defaults.html">control.use_fbs_defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.use_matlab_defaults.html">control.use_matlab_defaults</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.similarity_transform</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.similarity_transform.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-similarity-transform">
+<h1>control.similarity_transform<a class="headerlink" href="#control-similarity-transform" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.similarity_transform">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">similarity_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xsys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timescale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/canonical.py#L193-L250"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.similarity_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a similarity transformation, with option time rescaling.</p>
+<p>Transform a linear state space system to a new state space representation
+z = T x, or x = T z, where T is an invertible matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xsys</strong> (<em>StateSpace object</em>) – System to transform</p></li>
+<li><p><strong>T</strong> (<em>(</em><em>M</em><em>, </em><em>M</em><em>) </em><em>array_like</em>) – The matrix <cite>T</cite> defines the new set of coordinates z = T x.</p></li>
+<li><p><strong>timescale</strong> (<em>float</em><em>, </em><em>optional</em>) – If present, also rescale the time unit to tau = timescale * t</p></li>
+<li><p><strong>inverse</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True (default), transform so z = T x.  If False, transform
+so x = T z.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>zsys</strong> – System in transformed coordinates, with state ‘z’</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StateSpace object</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Gs</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf2ss</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gs</span><span class="o">.</span><span class="n">A</span>
+<span class="go">array([[-3., -2.],</span>
+<span class="go">       [ 1.,  0.]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gt</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">similarity_transform</span><span class="p">(</span><span class="n">Gs</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Gt</span><span class="o">.</span><span class="n">A</span>
+<span class="go">array([[ 0.,  1.],</span>
+<span class="go">       [-2., -3.]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.set_defaults.html" class="btn btn-neutral float-left" title="control.set_defaults" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.ss2tf.html" class="btn btn-neutral float-right" title="control.ss2tf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

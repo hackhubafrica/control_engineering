@@ -1,0 +1,6 @@
+﻿control.phase\_plot
+===================
+
+.. currentmodule:: control
+
+.. autofunction:: phase_plot

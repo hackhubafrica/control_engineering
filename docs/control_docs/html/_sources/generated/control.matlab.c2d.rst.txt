@@ -1,0 +1,6 @@
+﻿control.matlab.c2d
+==================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: c2d

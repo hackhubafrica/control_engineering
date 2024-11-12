@@ -1,0 +1,6 @@
+﻿control.linearize
+=================
+
+.. currentmodule:: control
+
+.. autofunction:: linearize

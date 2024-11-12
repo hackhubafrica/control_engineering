@@ -1,0 +1,6 @@
+﻿control.minimal\_realization
+============================
+
+.. currentmodule:: control
+
+.. autofunction:: minimal_realization

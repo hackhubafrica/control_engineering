@@ -1,0 +1,31 @@
+﻿control.optimal.OptimalControlResult
+====================================
+
+.. currentmodule:: control.optimal
+
+.. autoclass:: OptimalControlResult
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OptimalControlResult.clear
+      ~OptimalControlResult.copy
+      ~OptimalControlResult.fromkeys
+      ~OptimalControlResult.get
+      ~OptimalControlResult.items
+      ~OptimalControlResult.keys
+      ~OptimalControlResult.pop
+      ~OptimalControlResult.popitem
+      ~OptimalControlResult.setdefault
+      ~OptimalControlResult.update
+      ~OptimalControlResult.values
+   
+   

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.pole_zero_plot &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.root_locus_plot" href="control.root_locus_plot.html" />
+    <link rel="prev" title="control.phaseplot.vectorfield" href="control.phaseplot.vectorfield.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nyquist_plot.html">control.nyquist_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phase_plane_plot.html">control.phase_plane_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.equilpoints.html">control.phaseplot.equilpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.separatrices.html">control.phaseplot.separatrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.streamlines.html">control.phaseplot.streamlines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.vectorfield.html">control.phaseplot.vectorfield</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.pole_zero_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_plot.html">control.root_locus_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_plot.html">control.singular_values_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.time_response_plot.html">control.time_response_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.pole_zero_plot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.pole_zero_plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-pole-zero-plot">
+<h1>control.pole_zero_plot<a class="headerlink" href="#control-pole-zero-plot" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.pole_zero_plot">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">pole_zero_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_gain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/pzmap.py#L174-L515"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.pole_zero_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a pole/zero map for a linear system.</p>
+<p>If the system data include root loci, a root locus diagram for the
+system is plotted.  When the root locus for a single system is plotted,
+clicking on a location on the root locus will mark the gain on all
+branches of the diagram and show the system gain and damping for the
+given pole in the axes title.  Set to False to turn off this behavior.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>List</em><em> of </em><em>PoleZeroData objects</em><em> or </em><em>LTI systems</em>) – List of pole/zero response data objects generated by pzmap_response()
+or rootlocus_response() that are to be plotted.  If a list of systems
+is given, the poles and zeros of those systems will be plotted.</p></li>
+<li><p><strong>grid</strong> (<em>bool</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – If <cite>True</cite> plot omega-damping grid, if <cite>False</cite> show imaginary axis
+for continuous time systems, unit circle for discrete time systems.
+If <cite>empty</cite>, do not draw any additonal lines.  Default value is set
+by config.default[‘pzmap.grid’] or config.default[‘rlocus.grid’].</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – (legacy) If <code class="docutils literal notranslate"><span class="pre">True</span></code> a graph is generated with Matplotlib,
+otherwise the poles and zeros are only computed and returned.
+If this argument is present, the legacy value of poles and
+zeros is returned.</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><em>matplotlib.axes.Axes</em></a><em>, </em><em>optional</em>) – The matplotlib axes to draw the figure on.  If not specified and
+the current figure has a single axes, that axes is used.
+Otherwise, a new figure is created.</p></li>
+<li><p><strong>color</strong> (<em>matplotlib color spec</em><em>, </em><em>optional</em>) – Specify the color of the markers and lines.</p></li>
+<li><p><strong>initial_gain</strong> (<em>float</em><em>, </em><em>optional</em>) – If given, the specified system gain will be marked on the plot.</p></li>
+<li><p><strong>interactive</strong> (<em>bool</em><em>, </em><em>optional</em>) – Turn off interactive mode for root locus plots.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em> or </em><em>array_like</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – If present, replace automatically generated label(s) with given
+label(s).  If data is a list, strings should be specified for each
+system.</p></li>
+<li><p><strong>legend_loc</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Include a legend in the given location. Default is ‘upper right’,
+with no legend for a single response.  Use False to suppress legend.</p></li>
+<li><p><strong>marker_color</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the color of the markers used for poles and zeros.</p></li>
+<li><p><strong>marker_size</strong> (<em>int</em><em>, </em><em>optional</em>) – Set the size of the markers used for poles and zeros.</p></li>
+<li><p><strong>marker_width</strong> (<em>int</em><em>, </em><em>optional</em>) – Set the line width of the markers used for poles and zeros.</p></li>
+<li><p><strong>rcParams</strong> (<em>dict</em>) – Override the default parameters used for generating plots.
+Default is set by config.default[‘ctrlplot.rcParams’].</p></li>
+<li><p><strong>scaling</strong> (<em>str</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – Set the type of axis scaling.  Can be ‘equal’ (default), ‘auto’, or
+a list of the form [xmin, xmax, ymin, ymax].</p></li>
+<li><p><strong>show_legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Force legend to be shown if <code class="docutils literal notranslate"><span class="pre">True</span></code> or hidden if <code class="docutils literal notranslate"><span class="pre">False</span></code>.  If
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, then show legend when there is more than one line on the
+plot or <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code> has been specified.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the title of the plot.  Defaults to plot type and system name(s).</p></li>
+<li><p><strong>xlim</strong> (<em>list</em><em>, </em><em>optional</em>) – Set the limits for the x axis.</p></li>
+<li><p><strong>ylim</strong> (<em>list</em><em>, </em><em>optional</em>) – Set the limits for the y axis.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul>
+<li><p><strong>cplt</strong> (<a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> object) –</p>
+<p>Object containing the data that were plotted:</p>
+<blockquote>
+<div><ul>
+<li><p>cplt.lines: Array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code></a> objects
+for each set of markers in the plot. The shape of the array is
+given by (<cite>nsys</cite>, 2) where <cite>nsys</cite> is the number of systems or
+responses passed to the function.  The second index specifies
+the pzmap object type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>lines[idx, 0]: poles</p></li>
+<li><p>lines[idx, 1]: zeros</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>cplt.axes: 2D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a> for the plot.</p></li>
+<li><p>cplt.figure: <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></a> containing the plot.</p></li>
+<li><p>cplt.legend: legend object(s) contained in the plot</p></li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> for more detailed information.</p>
+</li>
+<li><p><strong>poles, zeros</strong> (<em>list of arrays</em>) – (legacy) If the <cite>plot</cite> keyword is given, the system poles and zeros
+are returned.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>By default, the pzmap function calls matplotlib.pyplot.axis(‘equal’),
+which means that trying to reset the axis limits may not behave as
+expected.  To change the axis limits, use the <cite>scaling</cite> keyword of
+use matplotlib.pyplot.gca().axis(‘auto’) and then set the axis
+limits to the desired values.</p></li>
+<li><p>Pole/zero plots that use the continuous time omega-damping grid do
+not work with the <code class="docutils literal notranslate"><span class="pre">ax</span></code> keyword argument, due to the way that axes
+grids are implemented.  The <code class="docutils literal notranslate"><span class="pre">grid</span></code> argument must be set to
+<code class="docutils literal notranslate"><span class="pre">False</span></code> or <code class="docutils literal notranslate"><span class="pre">'empty'</span></code> when using the <code class="docutils literal notranslate"><span class="pre">ax</span></code> keyword argument.</p></li>
+</ol>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.phaseplot.vectorfield.html" class="btn btn-neutral float-left" title="control.phaseplot.vectorfield" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.root_locus_plot.html" class="btn btn-neutral float-right" title="control.root_locus_plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

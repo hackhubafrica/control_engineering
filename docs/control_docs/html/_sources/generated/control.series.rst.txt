@@ -1,0 +1,6 @@
+﻿control.series
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: series

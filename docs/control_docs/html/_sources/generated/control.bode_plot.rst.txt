@@ -1,0 +1,6 @@
+﻿control.bode\_plot
+==================
+
+.. currentmodule:: control
+
+.. autofunction:: bode_plot

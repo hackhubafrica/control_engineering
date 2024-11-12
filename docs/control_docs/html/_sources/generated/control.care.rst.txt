@@ -1,0 +1,6 @@
+﻿control.care
+============
+
+.. currentmodule:: control
+
+.. autofunction:: care

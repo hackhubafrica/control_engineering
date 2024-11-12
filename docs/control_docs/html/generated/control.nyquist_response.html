@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.nyquist_response &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.pole_zero_map" href="control.pole_zero_map.html" />
+    <link rel="prev" title="control.gangof4_response" href="control.gangof4_response.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_response.html">control.describing_function_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.frequency_response.html">control.frequency_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.forced_response.html">control.forced_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.gangof4_response.html">control.gangof4_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.impulse_response.html">control.impulse_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.initial_response.html">control.initial_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.nyquist_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_map.html">control.pole_zero_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_map.html">control.root_locus_map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_response.html">control.singular_values_response</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.step_response.html">control.step_response</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.nyquist_response</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.nyquist_response.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-nyquist-response">
+<h1>control.nyquist_response<a class="headerlink" href="#control-nyquist-response" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.nyquist_response">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">nyquist_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sysdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_contour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_encirclements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_nyquist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_check_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/freqplot.py#L1162-L1504"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.nyquist_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nyquist response for a system.</p>
+<p>Computes a Nyquist contour for the system over a (optional) frequency
+range and evaluates the number of net encirclements.  The curve is
+computed by evaluating the Nyqist segment along the positive imaginary
+axis, with a mirror image generated to reflect the negative imaginary
+axis.  Poles on or near the imaginary axis are avoided using a small
+indentation.  The portion of the Nyquist contour at infinity is not
+explicitly computed (since it maps to a constant value for any system
+with a proper transfer function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sysdata</strong> (<a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><em>LTI</em></a><em> or </em><em>list</em><em> of </em><a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><em>LTI</em></a>) – List of linear input/output systems (single system is OK). Nyquist
+curves for each system are plotted on the same graph.</p></li>
+<li><p><strong>omega</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Set of frequencies to be evaluated, in rad/sec.</p></li>
+<li><p><strong>encirclement_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – Define the threshold for generating a warning if the number of net
+encirclements is a non-integer value.  Default value is 0.05 and can
+be set using config.defaults[‘nyquist.encirclement_threshold’].</p></li>
+<li><p><strong>indent_direction</strong> (<em>str</em><em>, </em><em>optional</em>) – For poles on the imaginary axis, set the direction of indentation to
+be ‘right’ (default), ‘left’, or ‘none’.</p></li>
+<li><p><strong>indent_points</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of points to insert in the Nyquist contour around poles that
+are at or near the imaginary axis.</p></li>
+<li><p><strong>indent_radius</strong> (<em>float</em><em>, </em><em>optional</em>) – Amount to indent the Nyquist contour around poles on or near the
+imaginary axis. Portions of the Nyquist plot corresponding to indented
+portions of the contour are plotted using a different line style.</p></li>
+<li><p><strong>omega_limits</strong> (<em>array_like</em><em> of </em><em>two values</em>) – Set limits for plotted frequency range. If Hz=True the limits are
+in Hz otherwise in rad/s.  Specifying <code class="docutils literal notranslate"><span class="pre">omega</span></code> as a list of two
+elements is equivalent to providing <code class="docutils literal notranslate"><span class="pre">omega_limits</span></code>.</p></li>
+<li><p><strong>omega_num</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to use for the frequeny range.  Defaults to
+config.defaults[‘freqplot.number_of_samples’].</p></li>
+<li><p><strong>warn_nyquist</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to ‘False’, turn off warnings about frequencies above Nyquist.</p></li>
+<li><p><strong>warn_encirclements</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to ‘False’, turn off warnings about number of encirclements not
+meeting the Nyquist criterion.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>responses</strong> (list of <a class="reference internal" href="control.NyquistResponseData.html#control.NyquistResponseData" title="control.NyquistResponseData"><code class="xref py py-class docutils literal notranslate"><span class="pre">NyquistResponseData</span></code></a>) – For each system, a Nyquist response data object is returned.  If
+<cite>sysdata</cite> is a single system, a single elemeent is returned (not a
+list).  For each response, the following information is available:</p></li>
+<li><p><strong>response.count</strong> (<em>int</em>) – Number of encirclements of the point -1 by the Nyquist curve.  If
+multiple systems are given, an array of counts is returned.</p></li>
+<li><p><strong>response.contour</strong> (<em>ndarray</em>) – The contour used to create the primary Nyquist curve segment.  To
+obtain the Nyquist curve values, evaluate system(s) along contour.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>If a discrete time model is given, the frequency response is computed
+along the upper branch of the unit circle, using the mapping <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span>
+<span class="pre">exp(1j</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">*</span> <span class="pre">dt)</span></code> where <cite>omega</cite> ranges from 0 to <cite>pi/dt</cite> and <cite>dt</cite>
+is the discrete timebase.  If timebase not specified (<code class="docutils literal notranslate"><span class="pre">dt=True</span></code>),
+<cite>dt</cite> is set to 1.</p></li>
+<li><p>If a continuous-time system contains poles on or near the imaginary
+axis, a small indentation will be used to avoid the pole.  The radius
+of the indentation is given by <cite>indent_radius</cite> and it is taken to the
+right of stable poles and the left of unstable poles.  If a pole is
+exactly on the imaginary axis, the <cite>indent_direction</cite> parameter can be
+used to set the direction of indentation.  Setting <cite>indent_direction</cite>
+to <cite>none</cite> will turn off indentation.</p></li>
+<li><p>For those portions of the Nyquist plot in which the contour is
+indented to avoid poles, resuling in a scaling of the Nyquist plot,
+the line styles are according to the settings of the <cite>primary_style</cite>
+and <cite>mirror_style</cite> keywords.  By default the scaled portions of the
+primary curve use a dotted line style and the scaled portion of the
+mirror image use a dashdot line style.</p></li>
+<li><p>If the legacy keyword <cite>return_contour</cite> is specified as True, the
+response object can be iterated over to return <cite>count, contour</cite>.
+This behavior is deprecated and will be removed in a future release.</p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="control.nyquist_plot.html#control.nyquist_plot" title="control.nyquist_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nyquist_plot</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zpk</span><span class="p">([],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">gain</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">response</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nyquist_response</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">count</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lines</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.gangof4_response.html" class="btn btn-neutral float-left" title="control.gangof4_response" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.pole_zero_map.html" class="btn btn-neutral float-right" title="control.pole_zero_map" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

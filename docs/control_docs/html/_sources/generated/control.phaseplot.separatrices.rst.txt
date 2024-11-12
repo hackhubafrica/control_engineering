@@ -1,0 +1,6 @@
+﻿control.phaseplot.separatrices
+==============================
+
+.. currentmodule:: control.phaseplot
+
+.. autofunction:: separatrices

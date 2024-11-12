@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.flatsys.LinearFlatSystem &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.flatsys.PolyFamily" href="control.flatsys.PolyFamily.html" />
+    <link rel="prev" title="control.flatsys.FlatSystem" href="control.flatsys.FlatSystem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../flatsys.html#overview-of-differential-flatness">Overview of differential flatness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatsys.html#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../flatsys.html#example">Example</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../flatsys.html#module-classes-and-functions">Module classes and functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.BasisFamily.html">control.flatsys.BasisFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.BezierFamily.html">control.flatsys.BezierFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.BSplineFamily.html">control.flatsys.BSplineFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.FlatSystem.html">control.flatsys.FlatSystem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.flatsys.LinearFlatSystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.flatsys.LinearFlatSystem"><code class="docutils literal notranslate"><span class="pre">LinearFlatSystem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.PolyFamily.html">control.flatsys.PolyFamily</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.SystemTrajectory.html">control.flatsys.SystemTrajectory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.flatsys.html">control.flatsys.flatsys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.point_to_point.html">control.flatsys.point_to_point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.flatsys.solve_flat_ocp.html">control.flatsys.solve_flat_ocp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../flatsys.html">Differentially flat systems</a></li>
+      <li class="breadcrumb-item active">control.flatsys.LinearFlatSystem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.flatsys.LinearFlatSystem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-flatsys-linearflatsystem">
+<h1>control.flatsys.LinearFlatSystem<a class="headerlink" href="#control-flatsys-linearflatsystem" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.flatsys.</span></span><span class="sig-name descname"><span class="pre">LinearFlatSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">linsys</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/flatsys/linflat.py#L44-L149"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="control.flatsys.FlatSystem.html#control.flatsys.FlatSystem" title="control.flatsys.flatsys.FlatSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">FlatSystem</span></code></a>, <a class="reference internal" href="control.StateSpace.html#control.StateSpace" title="control.statesp.StateSpace"><code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpace</span></code></a></p>
+<p>Base class for a linear, differentially flat system.</p>
+<p>This class is used to create a differentially flat system representation
+from a linear system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>linsys</strong> (<a class="reference internal" href="control.StateSpace.html#control.StateSpace" title="control.StateSpace"><em>StateSpace</em></a>) – LTI StateSpace system to be converted</p></li>
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Description of the system inputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>s[i]</cite> (where <cite>s</cite> is one of <cite>u</cite>, <cite>y</cite>, or <cite>x</cite>).  If
+this parameter is not given or given as <cite>None</cite>, the relevant
+quantity will be determined when possible based on other
+information provided to functions using the system.</p></li>
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Description of the system outputs.  Same format as <cite>inputs</cite>.</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of the system states.  Same format as <cite>inputs</cite>.</p></li>
+<li><p><strong>dt</strong> (<em>None</em><em>, </em><em>True</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – System timebase.  None (default) indicates continuous
+time, True indicates discrete time with undefined sampling
+time, positive number is discrete time with specified
+sampling time.</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameter values for the systems.  Passed to the evaluation
+functions for the system as default values, overriding internal
+defaults.</p></li>
+<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – System name (used for specifying signals)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.append" title="control.flatsys.LinearFlatSystem.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a></p></td>
+<td><p>Append a second model to the present model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.bandwidth" title="control.flatsys.LinearFlatSystem.bandwidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bandwidth</span></code></a></p></td>
+<td><p>Evaluate the bandwidth of the LTI system for a given dB drop.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.copy" title="control.flatsys.LinearFlatSystem.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a></p></td>
+<td><p>Make a copy of an input/output system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.damp" title="control.flatsys.LinearFlatSystem.damp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">damp</span></code></a></p></td>
+<td><p>Natural frequency, damping ratio of system poles</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.dcgain" title="control.flatsys.LinearFlatSystem.dcgain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcgain</span></code></a></p></td>
+<td><p>Return the zero-frequency gain</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.dynamics" title="control.flatsys.LinearFlatSystem.dynamics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamics</span></code></a></p></td>
+<td><p>Compute the dynamics of the system</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.feedback" title="control.flatsys.LinearFlatSystem.feedback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feedback</span></code></a></p></td>
+<td><p>Feedback interconnection between two LTI systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.find_input" title="control.flatsys.LinearFlatSystem.find_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_input</span></code></a></p></td>
+<td><p>Find the index for an input given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.find_inputs" title="control.flatsys.LinearFlatSystem.find_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_inputs</span></code></a></p></td>
+<td><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.find_output" title="control.flatsys.LinearFlatSystem.find_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_output</span></code></a></p></td>
+<td><p>Find the index for an output given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.find_outputs" title="control.flatsys.LinearFlatSystem.find_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_outputs</span></code></a></p></td>
+<td><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.find_state" title="control.flatsys.LinearFlatSystem.find_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_state</span></code></a></p></td>
+<td><p>Find the index for a state given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.find_states" title="control.flatsys.LinearFlatSystem.find_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_states</span></code></a></p></td>
+<td><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.forward" title="control.flatsys.LinearFlatSystem.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a></p></td>
+<td><p>Compute the flat flag given the states and input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.freqresp" title="control.flatsys.LinearFlatSystem.freqresp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">freqresp</span></code></a></p></td>
+<td><p>(deprecated) Evaluate transfer function at complex frequencies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.frequency_response" title="control.flatsys.LinearFlatSystem.frequency_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frequency_response</span></code></a></p></td>
+<td><p>Evaluate the linear time-invariant system at an array of angular frequencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.horner" title="control.flatsys.LinearFlatSystem.horner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">horner</span></code></a></p></td>
+<td><p>Evaluate system's transfer function at complex frequency using Laub's or Horner's method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.isctime" title="control.flatsys.LinearFlatSystem.isctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isctime</span></code></a></p></td>
+<td><p>Check to see if a system is a continuous-time system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.isdtime" title="control.flatsys.LinearFlatSystem.isdtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isdtime</span></code></a></p></td>
+<td><p>Check to see if a system is a discrete-time system</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ispassive</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.issiso" title="control.flatsys.LinearFlatSystem.issiso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">issiso</span></code></a></p></td>
+<td><p>Check to see if a system is single input, single output.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.lft" title="control.flatsys.LinearFlatSystem.lft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lft</span></code></a></p></td>
+<td><p>Return the Linear Fractional Transformation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.linearize" title="control.flatsys.LinearFlatSystem.linearize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linearize</span></code></a></p></td>
+<td><p>Linearize an input/output system at a given state and input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.minreal" title="control.flatsys.LinearFlatSystem.minreal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minreal</span></code></a></p></td>
+<td><p>Calculate a minimal realization, removes unobservable and uncontrollable states</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.output" title="control.flatsys.LinearFlatSystem.output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code></a></p></td>
+<td><p>Compute the output of the system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.poles" title="control.flatsys.LinearFlatSystem.poles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">poles</span></code></a></p></td>
+<td><p>Compute the poles of a state space system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.returnScipySignalLTI" title="control.flatsys.LinearFlatSystem.returnScipySignalLTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">returnScipySignalLTI</span></code></a></p></td>
+<td><p>Return a list of a list of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lti.html#scipy.signal.lti" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.lti</span></code></a> objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.reverse" title="control.flatsys.LinearFlatSystem.reverse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse</span></code></a></p></td>
+<td><p>Compute the states and input given the flat flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.sample" title="control.flatsys.LinearFlatSystem.sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code></a></p></td>
+<td><p>Convert a continuous time system to discrete time</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.set_inputs" title="control.flatsys.LinearFlatSystem.set_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inputs</span></code></a></p></td>
+<td><p>Set the number/names of the system inputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.set_outputs" title="control.flatsys.LinearFlatSystem.set_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outputs</span></code></a></p></td>
+<td><p>Set the number/names of the system outputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.set_states" title="control.flatsys.LinearFlatSystem.set_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_states</span></code></a></p></td>
+<td><p>Set the number/names of the system states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.slycot_laub" title="control.flatsys.LinearFlatSystem.slycot_laub"><code class="xref py py-obj docutils literal notranslate"><span class="pre">slycot_laub</span></code></a></p></td>
+<td><p>Evaluate system's transfer function at complex frequency using Laub's method from Slycot.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.update_names" title="control.flatsys.LinearFlatSystem.update_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_names</span></code></a></p></td>
+<td><p>Update signal and system names for an I/O system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.flatsys.LinearFlatSystem.zeros" title="control.flatsys.LinearFlatSystem.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeros</span></code></a></p></td>
+<td><p>Compute the zeros of a state space system.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.A">
+<span class="sig-name descname"><span class="pre">A</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamics matrix.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.B">
+<span class="sig-name descname"><span class="pre">B</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.B" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input matrix.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.C">
+<span class="sig-name descname"><span class="pre">C</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.C" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output matrix.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.D">
+<span class="sig-name descname"><span class="pre">D</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Direct term.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__add__">
+<span class="sig-name descname"><span class="pre">__add__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L580-L626"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__add__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add two LTI systems (parallel connection).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L729-L766"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate system’s frequency response at complex frequencies.</p>
+<p>Returns the complex frequency response <cite>sys(x)</cite> where <cite>x</cite> is <cite>s</cite> for
+continuous-time systems and <cite>z</cite> for discrete-time systems.</p>
+<p>To evaluate at a frequency omega in radians per second, enter
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">omega</span> <span class="pre">*</span> <span class="pre">1j</span></code>, for continuous-time systems, or
+<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">exp(1j</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">*</span> <span class="pre">dt)</span></code> for discrete-time systems. Or use
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">StateSpace.frequency_response()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>complex</em><em> or </em><em>complex 1D array_like</em>) – Complex frequencies</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squeeze=True, remove single-dimensional entries from the shape
+of the output even if the system is not SISO. If squeeze=False,
+keep all indices (output, input and, if omega is array_like,
+frequency) even if the system is SISO. The default value can be
+set using config.defaults[‘control.squeeze_frequency_response’].</p></li>
+<li><p><strong>warn_infinite</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to <cite>False</cite>, don’t warn if frequency response is infinite.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fresp</strong> – The frequency response of the system.  If the system is SISO and
+squeeze is not True, the shape of the array matches the shape of
+omega.  If the system is not SISO or squeeze is False, the first
+two dimensions of the array are indices for the output and input
+and the remaining dimensions match omega.  If <code class="docutils literal notranslate"><span class="pre">squeeze</span></code> is True
+then single-dimensional axes are removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1217-L1235"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__getitem__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array style access</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__mul__">
+<span class="sig-name descname"><span class="pre">__mul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L643-L691"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__mul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply two LTI objects (serial connection).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__neg__">
+<span class="sig-name descname"><span class="pre">__neg__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L575-L577"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__neg__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Negate a state space system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__radd__">
+<span class="sig-name descname"><span class="pre">__radd__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L629-L631"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__radd__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Right add two LTI systems (parallel connection).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__rmul__">
+<span class="sig-name descname"><span class="pre">__rmul__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L695-L719"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__rmul__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Right multiply two LTI objects (serial connection).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__rsub__">
+<span class="sig-name descname"><span class="pre">__rsub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L638-L640"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__rsub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Right subtract two LTI systems.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__sub__">
+<span class="sig-name descname"><span class="pre">__sub__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L634-L636"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__sub__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subtract two LTI systems.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.__truediv__">
+<span class="sig-name descname"><span class="pre">__truediv__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L722-L727"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.__truediv__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Division of state space systems by TFs, FRDs, scalars, and arrays</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1190-L1215"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a second model to the present model.</p>
+<p>The second model is converted to state-space if necessary, inputs and
+outputs are appended and their order is preserved</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.bandwidth">
+<span class="sig-name descname"><span class="pre">bandwidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbdrop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-3</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L139-L199"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.bandwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the bandwidth of the LTI system for a given dB drop.</p>
+<p>Evaluate the first frequency that the response magnitude is lower than
+DC gain by dbdrop dB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dpdrop</strong> (<em>float</em><em>, </em><em>optional</em>) – A strictly negative scalar in dB (default = -3) defines the
+amount of gain drop for deciding bandwidth.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>bandwidth</strong> – The first frequency (rad/time-unit) where the gain drops below
+dbdrop of the dc gain of the system, or nan if the system has
+infinite dc gain, inf if the gain does not drop for all frequency</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – if ‘sys’ is not an SISO LTI instance</p></li>
+<li><p><strong>ValueError</strong> – if ‘dbdrop’ is not a negative scalar</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_prefix_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L247-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a copy of an input/output system</p>
+<p>A copy of the system is made, with a new name.  The <cite>name</cite> keyword
+can be used to specify a specific name for the system.  If no name
+is given and <cite>use_prefix_suffix</cite> is True, the name is constructed
+by prepending config.defaults[‘iosys.duplicate_system_name_prefix’]
+and appending config.defaults[‘iosys.duplicate_system_name_suffix’].
+Otherwise, a generic system name of the form <cite>sys[&lt;id&gt;]</cite> is used,
+where <cite>&lt;id&gt;</cite> is based on an internal counter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.damp">
+<span class="sig-name descname"><span class="pre">damp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L38-L58"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.damp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Natural frequency, damping ratio of system poles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>wn</strong> (<em>array</em>) – Natural frequency for each system pole</p></li>
+<li><p><strong>zeta</strong> (<em>array</em>) – Damping ratio for each system pole</p></li>
+<li><p><strong>poles</strong> (<em>array</em>) – System pole locations</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.dcgain">
+<span class="sig-name descname"><span class="pre">dcgain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">warn_infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1326-L1358"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.dcgain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the zero-frequency gain</p>
+<p>The zero-frequency gain of a continuous-time state-space
+system is given by:</p>
+<p>and of a discrete-time state-space system by:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>warn_infinite</strong> (<em>bool</em><em>, </em><em>optional</em>) – By default, don’t issue a warning message if the zero-frequency
+gain is infinite.  Setting <cite>warn_infinite</cite> to generate the warning
+message.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>gain</strong> – Array or scalar value for SISO systems, depending on
+config.defaults[‘control.squeeze_frequency_response’].
+The value of the array elements or the scalar is either the
+zero-frequency (or DC) gain, or <cite>inf</cite>, if the frequency response
+is singular.</p>
+<p>For real valued systems, the empty imaginary part of the
+complex zero-frequency response is discarded and a real array or
+scalar is returned.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(noutputs, ninputs) ndarray or scalar</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.dynamics">
+<span class="sig-name descname"><span class="pre">dynamics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1360-L1407"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the dynamics of the system</p>
+<p>Given input <cite>u</cite> and state <cite>x</cite>, returns the dynamics of the state-space
+system. If the system is continuous, returns the time derivative dx/dt</p>
+<blockquote>
+<div><p>dx/dt = A x + B u</p>
+</div></blockquote>
+<p>where A and B are the state-space matrices of the system. If the
+system is discrete-time, returns the next value of <cite>x</cite>:</p>
+<blockquote>
+<div><p>x[t+dt] = A x[t] + B u[t]</p>
+</div></blockquote>
+<p>The inputs <cite>x</cite> and <cite>u</cite> must be of the correct length for the system.</p>
+<p>The first argument <cite>t</cite> is ignored because <code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpace</span></code> systems
+are time-invariant. It is included so that the dynamics can be passed
+to numerical integrators, such as <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.solve_ivp.html#scipy.integrate.solve_ivp" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.integrate.solve_ivp()</span></code></a>
+and for consistency with <code class="xref py py-class docutils literal notranslate"><span class="pre">IOSystem</span></code> systems.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em><em> (</em><em>ignored</em><em>)</em>) – time</p></li>
+<li><p><strong>x</strong> (<em>array_like</em>) – current state</p></li>
+<li><p><strong>u</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) – input, zero if omitted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dx/dt or x[t+dt]</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.feedback">
+<span class="sig-name descname"><span class="pre">feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L965-L1020"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedback interconnection between two LTI systems.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.find_input">
+<span class="sig-name descname"><span class="pre">find_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L292-L294"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.find_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an input given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.find_inputs">
+<span class="sig-name descname"><span class="pre">find_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L296-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.find_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.find_output">
+<span class="sig-name descname"><span class="pre">find_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L325-L327"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.find_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an output given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.find_outputs">
+<span class="sig-name descname"><span class="pre">find_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L329-L331"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.find_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.find_state">
+<span class="sig-name descname"><span class="pre">find_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L358-L360"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.find_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for a state given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.find_states">
+<span class="sig-name descname"><span class="pre">find_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L362-L364"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.find_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/flatsys/linflat.py#L113-L127"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the flat flag given the states and input.</p>
+<p>See <a class="reference internal" href="control.flatsys.FlatSystem.html#control.flatsys.FlatSystem.forward" title="control.flatsys.FlatSystem.forward"><code class="xref py py-func docutils literal notranslate"><span class="pre">control.flatsys.FlatSystem.forward()</span></code></a> for more info.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.freqresp">
+<span class="sig-name descname"><span class="pre">freqresp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L898-L910"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.freqresp" title="Permalink to this definition">¶</a></dt>
+<dd><p>(deprecated) Evaluate transfer function at complex frequencies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.frequency_response">
+<span class="sig-name descname"><span class="pre">frequency_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/lti.py#L60-L124"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.frequency_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate the linear time-invariant system at an array of angular
+frequencies.</p>
+<p>For continuous time systems, computes the frequency response as</p>
+<blockquote>
+<div><p>G(j*omega) = mag * exp(j*phase)</p>
+</div></blockquote>
+<p>For discrete time systems, the response is evaluated around the
+unit circle such that</p>
+<blockquote>
+<div><p>G(exp(j*omega*dt)) = mag * exp(j*phase).</p>
+</div></blockquote>
+<p>In general the system may be multiple input, multiple output (MIMO),
+where <cite>m = self.ninputs</cite> number of inputs and <cite>p = self.noutputs</cite>
+number of outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>omega</strong> (<em>float</em><em> or </em><em>1D array_like</em>) – A list, tuple, array, or scalar value of frequencies in
+radians/sec at which the system will be evaluated.</p></li>
+<li><p><strong>squeeze</strong> (<em>bool</em><em>, </em><em>optional</em>) – If squeeze=True, remove single-dimensional entries from the shape
+of the output even if the system is not SISO. If squeeze=False,
+keep all indices (output, input and, if omega is array_like,
+frequency) even if the system is SISO. The default value can be
+set using config.defaults[‘control.squeeze_frequency_response’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>response</strong> – Frequency response data object representing the frequency
+response.  This object can be assigned to a tuple using</p>
+<blockquote>
+<div><p>mag, phase, omega = response</p>
+</div></blockquote>
+<p>where <code class="docutils literal notranslate"><span class="pre">mag</span></code> is the magnitude (absolute value, not dB or log10)
+of the system frequency response, <code class="docutils literal notranslate"><span class="pre">phase</span></code> is the wrapped phase
+in radians of the system frequency response, and <code class="docutils literal notranslate"><span class="pre">omega</span></code> is
+the (sorted) frequencies at which the response was evaluated.
+If the system is SISO and squeeze is not True, <code class="docutils literal notranslate"><span class="pre">magnitude</span></code> and
+<code class="docutils literal notranslate"><span class="pre">phase</span></code> are 1D, indexed by frequency.  If the system is not
+SISO or squeeze is False, the array is 3D, indexed by the
+output, input, and, if omega is array_like, frequency.  If
+<code class="docutils literal notranslate"><span class="pre">squeeze</span></code> is True then single-dimensional axes are removed.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.horner">
+<span class="sig-name descname"><span class="pre">horner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_infinite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L823-L896"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.horner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate system’s transfer function at complex frequency
+using Laub’s or Horner’s method.</p>
+<p>Evaluates <cite>sys(x)</cite> where <cite>x</cite> is <cite>s</cite> for continuous-time systems and <cite>z</cite>
+for discrete-time systems.</p>
+<p>Expects inputs and outputs to be formatted correctly. Use <code class="docutils literal notranslate"><span class="pre">sys(x)</span></code>
+for a more user-friendly interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>complex array_like</em><em> or </em><em>complex</em>) – Complex frequencies</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>output</strong> – Frequency response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(self.noutputs, self.ninputs, len(x)) complex ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Attempts to use Laub’s method from Slycot library, with a
+fall-back to python code.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.isctime">
+<span class="sig-name descname"><span class="pre">isctime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L416-L431"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.isctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a continuous-time system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<em>Named I/O system</em>) – System to be checked</p></li>
+<li><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.isdtime">
+<span class="sig-name descname"><span class="pre">isdtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L433-L449"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.isdtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a discrete-time system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.issiso">
+<span class="sig-name descname"><span class="pre">issiso</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L451-L453"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.issiso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is single input, single output.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.lft">
+<span class="sig-name descname"><span class="pre">lft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ny</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1022-L1118"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.lft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Linear Fractional Transformation.</p>
+<p>A definition of the LFT operator can be found in Appendix A.7,
+page 512 in the 2nd Edition, Multivariable Feedback Control by
+Sigurd Skogestad.</p>
+<p>An alternative definition can be found here:
+<a class="reference external" href="https://www.mathworks.com/help/control/ref/lft.html">https://www.mathworks.com/help/control/ref/lft.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> (<a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><em>LTI</em></a>) – The lower LTI system</p></li>
+<li><p><strong>ny</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension of (plant) measurement output.</p></li>
+<li><p><strong>nu</strong> (<em>int</em><em>, </em><em>optional</em>) – Dimension of (plant) control input.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.linearize">
+<span class="sig-name descname"><span class="pre">linearize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L518-L576"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.linearize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linearize an input/output system at a given state and input.</p>
+<p>Return the linearization of an input/output system at a given state
+and input value as a StateSpace system.  See
+<a class="reference internal" href="control.linearize.html#control.linearize" title="control.linearize"><code class="xref py py-func docutils literal notranslate"><span class="pre">linearize()</span></code></a> for complete documentation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.minreal">
+<span class="sig-name descname"><span class="pre">minreal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1120-L1137"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.minreal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate a minimal realization, removes unobservable and
+uncontrollable states</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.ninputs">
+<span class="sig-name descname"><span class="pre">ninputs</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.ninputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system inputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.noutputs">
+<span class="sig-name descname"><span class="pre">noutputs</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.noutputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system outputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.nstates">
+<span class="sig-name descname"><span class="pre">nstates</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.nstates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system states.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1409-L1453"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the output of the system</p>
+<p>Given input <cite>u</cite> and state <cite>x</cite>, returns the output <cite>y</cite> of the
+state-space system:</p>
+<blockquote>
+<div><p>y = C x + D u</p>
+</div></blockquote>
+<p>where A and B are the state-space matrices of the system.</p>
+<p>The first argument <cite>t</cite> is ignored because <code class="xref py py-class docutils literal notranslate"><span class="pre">StateSpace</span></code> systems
+are time-invariant. It is included so that the dynamics can be passed
+to most numerical integrators, such as scipy’s <cite>integrate.solve_ivp</cite>
+and for consistency with <code class="xref py py-class docutils literal notranslate"><span class="pre">IOSystem</span></code> systems.</p>
+<p>The inputs <cite>x</cite> and <cite>u</cite> must be of the correct length for the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em><em> (</em><em>ignored</em><em>)</em>) – time</p></li>
+<li><p><strong>x</strong> (<em>array_like</em>) – current state</p></li>
+<li><p><strong>u</strong> (<em>array_like</em><em> (</em><em>optional</em><em>)</em>) – input (zero if omitted)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>y</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.poles">
+<span class="sig-name descname"><span class="pre">poles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L913-L917"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.poles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the poles of a state space system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.returnScipySignalLTI">
+<span class="sig-name descname"><span class="pre">returnScipySignalLTI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1139-L1188"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.returnScipySignalLTI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of a list of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lti.html#scipy.signal.lti" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.lti</span></code></a> objects.</p>
+<p>For instance,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">ssobject</span><span class="o">.</span><span class="n">returnScipySignalLTI</span><span class="p">()</span>               
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>                                           
+</pre></div>
+</div>
+<p>is a <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lti.html#scipy.signal.lti" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.lti</span></code></a> object corresponding to the transfer
+function from the 6th input to the 4th output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>True (default):</dt><dd><p>The timebase <cite>ssobject.dt</cite> cannot be None; it must
+be continuous (0) or discrete (True or &gt; 0).</p>
+</dd>
+<dt>False:</dt><dd><p>If <cite>ssobject.dt</cite> is None, continuous time
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lti.html#scipy.signal.lti" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.lti</span></code></a> objects are returned.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – continuous time (inheriting from <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.lti.html#scipy.signal.lti" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.lti</span></code></a>)
+or discrete time (inheriting from <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.dlti.html#scipy.signal.dlti" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.dlti</span></code></a>)
+SISO objects</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of list of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.StateSpace.html#scipy.signal.StateSpace" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.signal.StateSpace</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zflag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/flatsys/linflat.py#L130-L139"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.reverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the states and input given the flat flag.</p>
+<p>See <a class="reference internal" href="control.flatsys.FlatSystem.html#control.flatsys.FlatSystem.reverse" title="control.flatsys.FlatSystem.reverse"><code class="xref py py-func docutils literal notranslate"><span class="pre">control.flatsys.FlatSystem.reverse()</span></code></a> for more info.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zoh'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prewarp_frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copy_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L1237-L1324"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a continuous time system to discrete time</p>
+<p>Creates a discrete-time system from a continuous-time system by
+sampling.  Multiple methods of conversion are supported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ts</strong> (<em>float</em>) – Sampling period</p></li>
+<li><p><strong>method</strong> (<em>{&quot;gbt&quot;</em><em>, </em><em>&quot;bilinear&quot;</em><em>, </em><em>&quot;euler&quot;</em><em>, </em><em>&quot;backward_diff&quot;</em><em>, </em><em>&quot;zoh&quot;}</em>) – <p>Which method to use:</p>
+<ul>
+<li><p>gbt: generalized bilinear transformation</p></li>
+<li><p>bilinear: Tustin’s approximation (“gbt” with alpha=0.5)</p></li>
+<li><p>euler: Euler (or forward differencing) method (“gbt” with
+alpha=0)</p></li>
+<li><p>backward_diff: Backwards differencing (“gbt” with alpha=1.0)</p></li>
+<li><p>zoh: zero-order hold (default)</p></li>
+</ul>
+</p></li>
+<li><p><strong>alpha</strong> (<em>float within</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The generalized bilinear transformation weighting parameter, which
+should only be specified with method=”gbt”, and is ignored
+otherwise</p></li>
+<li><p><strong>prewarp_frequency</strong> (<em>float within</em><em> [</em><em>0</em><em>, </em><em>infinity</em><em>)</em>) – The frequency [rad/s] at which to match with the input continuous-
+time system’s magnitude and phase (the gain=1 crossover frequency,
+for example). Should only be specified with method=’bilinear’ or
+‘gbt’ with alpha=0.5 and ignored otherwise.</p></li>
+<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – Set the name of the sampled system.  If not specified and
+if <cite>copy_names</cite> is <cite>False</cite>, a generic name &lt;sys[id]&gt; is generated
+with a unique integer id.  If <cite>copy_names</cite> is <cite>True</cite>, the new system
+name is determined by adding the prefix and suffix strings in
+config.defaults[‘iosys.sampled_system_name_prefix’] and
+config.defaults[‘iosys.sampled_system_name_suffix’], with the
+default being to add the suffix ‘$sampled’.</p></li>
+<li><p><strong>copy_names</strong> (<em>bool</em><em>, </em><em>Optional</em>) – If True, copy the names of the input signals, output
+signals, and states to the sampled system.</p></li>
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Description of the system inputs.  If not specified, the origional
+system inputs are used.  See <code class="xref py py-class docutils literal notranslate"><span class="pre">InputOutputSystem</span></code> for more
+information.</p></li>
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em> or </em><em>None</em><em>, </em><em>optional</em>) – Description of the system outputs.  Same format as <cite>inputs</cite>.</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of the system states.  Same format as <cite>inputs</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>sysd</strong> – Discrete-time system, with sampling rate Ts</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.StateSpace.html#control.StateSpace" title="control.StateSpace">StateSpace</a></p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Uses <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.cont2discrete.html#scipy.signal.cont2discrete" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.signal.cont2discrete()</span></code></a></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sysd</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.set_inputs">
+<span class="sig-name descname"><span class="pre">set_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L272-L290"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system inputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>inputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘u’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.set_outputs">
+<span class="sig-name descname"><span class="pre">set_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L305-L323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.set_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system outputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>outputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘y’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.set_states">
+<span class="sig-name descname"><span class="pre">set_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L338-L356"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.set_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system states.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>states</cite> is an integer, create the names of the states using
+the given prefix (default = ‘x’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.slycot_laub">
+<span class="sig-name descname"><span class="pre">slycot_laub</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L768-L821"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.slycot_laub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate system’s transfer function at complex frequency
+using Laub’s method from Slycot.</p>
+<p>Expects inputs and outputs to be formatted correctly. Use <code class="docutils literal notranslate"><span class="pre">sys(x)</span></code>
+for a more user-friendly interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>complex array_like</em><em> or </em><em>complex</em>) – Complex frequency</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>output</strong> – Frequency response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>(number_outputs, number_inputs, len(x)) complex ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.states">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#control.flatsys.LinearFlatSystem.states" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.update_names">
+<span class="sig-name descname"><span class="pre">update_names</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L372-L413"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.update_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update signal and system names for an I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – New system name.</p></li>
+<li><p><strong>inputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – List of strings that name the individual input signals.  If
+given as an integer or None, signal names default to the form
+<cite>u[i]</cite>.  See <code class="xref py py-class docutils literal notranslate"><span class="pre">InputOutputSystem</span></code> for more information.</p></li>
+<li><p><strong>outputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of output signals; defaults to <cite>y[i]</cite>.</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of system states; defaults to <cite>x[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.flatsys.LinearFlatSystem.zeros">
+<span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statesp.py#L919-L962"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.flatsys.LinearFlatSystem.zeros" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the zeros of a state space system.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.flatsys.FlatSystem.html" class="btn btn-neutral float-left" title="control.flatsys.FlatSystem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.flatsys.PolyFamily.html" class="btn btn-neutral float-right" title="control.flatsys.PolyFamily" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

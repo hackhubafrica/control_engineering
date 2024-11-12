@@ -1,0 +1,6 @@
+﻿control.feedback
+================
+
+.. currentmodule:: control
+
+.. autofunction:: feedback

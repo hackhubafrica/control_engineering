@@ -1,0 +1,6 @@
+﻿control.gangof4\_response
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: gangof4_response

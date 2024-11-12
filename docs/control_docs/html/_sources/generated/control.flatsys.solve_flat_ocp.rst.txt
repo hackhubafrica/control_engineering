@@ -1,0 +1,6 @@
+﻿control.flatsys.solve\_flat\_ocp
+================================
+
+.. currentmodule:: control.flatsys
+
+.. autofunction:: solve_flat_ocp

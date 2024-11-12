@@ -1,0 +1,6 @@
+﻿control.observable\_form
+========================
+
+.. currentmodule:: control
+
+.. autofunction:: observable_form

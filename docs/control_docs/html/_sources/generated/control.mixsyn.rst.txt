@@ -1,0 +1,6 @@
+﻿control.mixsyn
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: mixsyn

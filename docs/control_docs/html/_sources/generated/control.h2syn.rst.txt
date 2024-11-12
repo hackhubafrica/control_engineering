@@ -1,0 +1,6 @@
+﻿control.h2syn
+=============
+
+.. currentmodule:: control
+
+.. autofunction:: h2syn

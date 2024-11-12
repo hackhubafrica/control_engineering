@@ -1,0 +1,6 @@
+﻿control.matlab.sisotool
+=======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: sisotool

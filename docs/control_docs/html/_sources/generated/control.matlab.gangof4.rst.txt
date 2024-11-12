@@ -1,0 +1,6 @@
+﻿control.matlab.gangof4
+======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: gangof4

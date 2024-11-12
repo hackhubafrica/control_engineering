@@ -1,0 +1,6 @@
+﻿control.create\_estimator\_iosystem
+===================================
+
+.. currentmodule:: control
+
+.. autofunction:: create_estimator_iosystem

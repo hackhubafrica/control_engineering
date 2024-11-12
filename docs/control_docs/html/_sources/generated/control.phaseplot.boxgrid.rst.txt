@@ -1,0 +1,6 @@
+﻿control.phaseplot.boxgrid
+=========================
+
+.. currentmodule:: control.phaseplot
+
+.. autofunction:: boxgrid

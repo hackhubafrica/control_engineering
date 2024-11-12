@@ -1,0 +1,6 @@
+﻿control.isctime
+===============
+
+.. currentmodule:: control
+
+.. autofunction:: isctime

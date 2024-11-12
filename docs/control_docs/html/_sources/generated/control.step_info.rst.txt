@@ -1,0 +1,6 @@
+﻿control.step\_info
+==================
+
+.. currentmodule:: control
+
+.. autofunction:: step_info

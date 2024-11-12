@@ -1,0 +1,6 @@
+﻿control.flatsys.point\_to\_point
+================================
+
+.. currentmodule:: control.flatsys
+
+.. autofunction:: point_to_point

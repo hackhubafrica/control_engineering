@@ -1,0 +1,6 @@
+﻿control.matlab.freqresp
+=======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: freqresp

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.find_eqpt &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.linearize" href="control.linearize.html" />
+    <link rel="prev" title="control.markov" href="control.markov.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../iosys.html">Input/output systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#additional-features">Additional features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../iosys.html#module-classes-and-functions">Module classes and functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.InputOutputSystem.html">control.InputOutputSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.InterconnectedSystem.html">control.InterconnectedSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.LinearICSystem.html">control.LinearICSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.NonlinearIOSystem.html">control.NonlinearIOSystem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.find_eqpt</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.find_eqpt"><code class="docutils literal notranslate"><span class="pre">find_eqpt()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.interconnect.html">control.interconnect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.linearize.html">control.linearize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.nlsys.html">control.nlsys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.summing_junction.html">control.summing_junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.find_eqpt</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.find_eqpt.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-find-eqpt">
+<h1>control.find_eqpt<a class="headerlink" href="#control-find-eqpt" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.find_eqpt">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">find_eqpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iu</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">idx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/nlsys.py#L1666-L1924"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.find_eqpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the equilibrium point for an input/output system.</p>
+<p>Returns the value of an equilibrium point given the initial state and
+either input value or desired output value for the equilibrium point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<a class="reference internal" href="control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.NonlinearIOSystem"><em>NonlinearIOSystem</em></a>) – I/O system for which the equilibrium point is sought.</p></li>
+<li><p><strong>x0</strong> (<em>list</em><em> of </em><em>initial state values</em>) – Initial guess for the value of the state near the equilibrium point.</p></li>
+<li><p><strong>u0</strong> (<em>list</em><em> of </em><em>input values</em><em>, </em><em>optional</em>) – If <cite>y0</cite> is not specified, sets the equilibrium value of the input.  If
+<cite>y0</cite> is given, provides an initial guess for the value of the input.
+Can be omitted if the system does not have any inputs.</p></li>
+<li><p><strong>y0</strong> (<em>list</em><em> of </em><em>output values</em><em>, </em><em>optional</em>) – If specified, sets the desired values of the outputs at the
+equilibrium point.</p></li>
+<li><p><strong>t</strong> (<em>float</em><em>, </em><em>optional</em>) – Evaluation time, for time-varying systems</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameter values for the system.  Passed to the evaluation functions
+for the system as default values, overriding internal defaults.</p></li>
+<li><p><strong>iu</strong> (<em>list</em><em> of </em><em>input indices</em><em>, </em><em>optional</em>) – If specified, only the inputs with the given indices will be fixed at
+the specified values in solving for an equilibrium point.  All other
+inputs will be varied.  Input indices can be listed in any order.</p></li>
+<li><p><strong>iy</strong> (<em>list</em><em> of </em><em>output indices</em><em>, </em><em>optional</em>) – If specified, only the outputs with the given indices will be fixed at
+the specified values in solving for an equilibrium point.  All other
+outputs will be varied.  Output indices can be listed in any order.</p></li>
+<li><p><strong>ix</strong> (<em>list</em><em> of </em><em>state indices</em><em>, </em><em>optional</em>) – If specified, states with the given indices will be fixed at the
+specified values in solving for an equilibrium point.  All other
+states will be varied.  State indices can be listed in any order.</p></li>
+<li><p><strong>dx0</strong> (<em>list</em><em> of </em><em>update values</em><em>, </em><em>optional</em>) – If specified, the value of update map must match the listed value
+instead of the default value of 0.</p></li>
+<li><p><strong>idx</strong> (<em>list</em><em> of </em><em>state indices</em><em>, </em><em>optional</em>) – If specified, state updates with the given indices will have their
+update maps fixed at the values given in <cite>dx0</cite>.  All other update
+values will be ignored in solving for an equilibrium point.  State
+indices can be listed in any order.  By default, all updates will be
+fixed at <cite>dx0</cite> in searching for an equilibrium point.</p></li>
+<li><p><strong>return_y</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return the value of output at the equilibrium point.</p></li>
+<li><p><strong>return_result</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, return the <cite>result</cite> option from the
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html#scipy.optimize.root" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.root()</span></code></a> function used to compute the equilibrium
+point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>xeq</strong> (<em>array of states</em>) – Value of the states at the equilibrium point, or <cite>None</cite> if no
+equilibrium point was found and <cite>return_result</cite> was False.</p></li>
+<li><p><strong>ueq</strong> (<em>array of input values</em>) – Value of the inputs at the equilibrium point, or <cite>None</cite> if no
+equilibrium point was found and <cite>return_result</cite> was False.</p></li>
+<li><p><strong>yeq</strong> (<em>array of output values, optional</em>) – If <cite>return_y</cite> is True, returns the value of the outputs at the
+equilibrium point, or <cite>None</cite> if no equilibrium point was found and
+<cite>return_result</cite> was False.</p></li>
+<li><p><strong>result</strong> (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.OptimizeResult.html#scipy.optimize.OptimizeResult" title="(in SciPy v1.14.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">scipy.optimize.OptimizeResult</span></code></a>, optional) – If <cite>return_result</cite> is True, returns the <cite>result</cite> from the
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html#scipy.optimize.root" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.optimize.root()</span></code></a> function.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>For continuous time systems, equilibrium points are defined as points for
+which the right hand side of the differential equation is zero:
+<span class="math">f(t, x_e, u_e) = 0</span>. For discrete time systems, equilibrium points
+are defined as points for which the right hand side of the difference
+equation returns the current state: <span class="math">f(t, x_e, u_e) = x_e</span>.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.markov.html" class="btn btn-neutral float-left" title="control.markov" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.linearize.html" class="btn btn-neutral float-right" title="control.linearize" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

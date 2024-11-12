@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cruise control design example (as a nonlinear I/O system) &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Gain scheduled control for vehicle steeering (I/O system)" href="steering-gainsched.html" />
+    <link rel="prev" title="Hinf synthesis, based on Scherer et al. 1997 example 7" href="scherer_etal_ex7_Hinf_hinfsyn.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="secord-matlab.html">Secord order system (MATLAB module example)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-nested.html">Inner/outer control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr.html">LQR control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss-balred.html">Balanced model reduction examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="phase_plane_plots.html">Phase  plot examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_siso.html">SISO robust control example (SP96, Example 2.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_mimo.html">MIMO robust control example (SP96, Example 3.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_H2_h2syn.html">H2 synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_Hinf_hinfsyn.html">Hinf synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cruise control design example (as a nonlinear I/O system)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="steering-gainsched.html">Gain scheduled control for vehicle steeering (I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-optimal.html">Optimal control for vehicle steering (lane change)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-flatsys.html">Differentially flat system - kinematic car</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_mit.html">Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_lyapunov.html">Model-Reference Adaptive Control (MRAC) SISO, direct Lyapunov rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="markov.html">Estimation of Makrov parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="era_msd.html">ERA example, mass spring damper system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Cruise control design example (as a nonlinear I/O system)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cruise-control.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="cruise-control-design-example-as-a-nonlinear-i-o-system">
+<h1>Cruise control design example (as a nonlinear I/O system)<a class="headerlink" href="#cruise-control-design-example-as-a-nonlinear-i-o-system" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># cruise-control.py - Cruise control example from FBS</span>
+<span class="linenos">  2</span><span class="c1"># RMM, 16 May 2019</span>
+<span class="linenos">  3</span><span class="c1">#</span>
+<span class="linenos">  4</span><span class="c1"># The cruise control system of a car is a common feedback system encountered</span>
+<span class="linenos">  5</span><span class="c1"># in everyday life. The system attempts to maintain a constant velocity in the</span>
+<span class="linenos">  6</span><span class="c1"># presence of disturbances primarily caused by changes in the slope of a</span>
+<span class="linenos">  7</span><span class="c1"># road. The controller compensates for these unknowns by measuring the speed</span>
+<span class="linenos">  8</span><span class="c1"># of the car and adjusting the throttle appropriately.</span>
+<span class="linenos">  9</span><span class="c1">#</span>
+<span class="linenos"> 10</span><span class="c1"># This file explores the dynamics and control of the cruise control system,</span>
+<span class="linenos"> 11</span><span class="c1"># following the material presented in Feedback Systems by Astrom and Murray.</span>
+<span class="linenos"> 12</span><span class="c1"># A full nonlinear model of the vehicle dynamics is used, with both PI and</span>
+<span class="linenos"> 13</span><span class="c1"># state space control laws.  Different methods of constructing control systems</span>
+<span class="linenos"> 14</span><span class="c1"># are shown, all using the InputOutputSystem class (and subclasses).</span>
+<span class="linenos"> 15</span>
+<span class="linenos"> 16</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 17</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 18</span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="linenos"> 19</span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="linenos"> 20</span>
+<span class="linenos"> 21</span><span class="c1">#</span>
+<span class="linenos"> 22</span><span class="c1"># Section 4.1: Cruise control modeling and control</span>
+<span class="linenos"> 23</span><span class="c1">#</span>
+<span class="linenos"> 24</span>
+<span class="linenos"> 25</span><span class="c1"># Vehicle model: vehicle()</span>
+<span class="linenos"> 26</span><span class="c1">#</span>
+<span class="linenos"> 27</span><span class="c1"># To develop a mathematical model we start with a force balance for</span>
+<span class="linenos"> 28</span><span class="c1"># the car body. Let v be the speed of the car, m the total mass</span>
+<span class="linenos"> 29</span><span class="c1"># (including passengers), F the force generated by the contact of the</span>
+<span class="linenos"> 30</span><span class="c1"># wheels with the road, and Fd the disturbance force due to gravity,</span>
+<span class="linenos"> 31</span><span class="c1"># friction, and aerodynamic drag.</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="k">def</span> <span class="nf">vehicle_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos"> 34</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vehicle dynamics for cruise control system.</span>
+<span class="linenos"> 35</span>
+<span class="linenos"> 36</span><span class="sd">    Parameters</span>
+<span class="linenos"> 37</span><span class="sd">    ----------</span>
+<span class="linenos"> 38</span><span class="sd">    x : array</span>
+<span class="linenos"> 39</span><span class="sd">         System state: car velocity in m/s</span>
+<span class="linenos"> 40</span><span class="sd">    u : array</span>
+<span class="linenos"> 41</span><span class="sd">         System input: [throttle, gear, road_slope], where throttle is</span>
+<span class="linenos"> 42</span><span class="sd">         a float between 0 and 1, gear is an integer between 1 and 5,</span>
+<span class="linenos"> 43</span><span class="sd">         and road_slope is in rad.</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="sd">    Returns</span>
+<span class="linenos"> 46</span><span class="sd">    -------</span>
+<span class="linenos"> 47</span><span class="sd">    float</span>
+<span class="linenos"> 48</span><span class="sd">        Vehicle acceleration</span>
+<span class="linenos"> 49</span>
+<span class="linenos"> 50</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos"> 51</span>    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">copysign</span><span class="p">,</span> <span class="n">sin</span>
+<span class="linenos"> 52</span>    <span class="n">sign</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">copysign</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>         <span class="c1"># define the sign() function</span>
+<span class="linenos"> 53</span>    
+<span class="linenos"> 54</span>    <span class="c1"># Set up the system parameters</span>
+<span class="linenos"> 55</span>    <span class="n">m</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="mf">1600.</span><span class="p">)</span>
+<span class="linenos"> 56</span>    <span class="n">g</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="mf">9.8</span><span class="p">)</span>
+<span class="linenos"> 57</span>    <span class="n">Cr</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Cr&#39;</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="linenos"> 58</span>    <span class="n">Cd</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Cd&#39;</span><span class="p">,</span> <span class="mf">0.32</span><span class="p">)</span>
+<span class="linenos"> 59</span>    <span class="n">rho</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rho&#39;</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span>
+<span class="linenos"> 60</span>    <span class="n">A</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">)</span>
+<span class="linenos"> 61</span>    <span class="n">alpha</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+<span class="linenos"> 62</span>        <span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>      <span class="c1"># gear ratio / wheel radius</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span>    <span class="c1"># Define variables for vehicle state and inputs</span>
+<span class="linenos"> 65</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                           <span class="c1"># vehicle velocity</span>
+<span class="linenos"> 66</span>    <span class="n">throttle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>     <span class="c1"># vehicle throttle</span>
+<span class="linenos"> 67</span>    <span class="n">gear</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>                        <span class="c1"># vehicle gear</span>
+<span class="linenos"> 68</span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>                       <span class="c1"># road slope</span>
+<span class="linenos"> 69</span>
+<span class="linenos"> 70</span>    <span class="c1"># Force generated by the engine</span>
+<span class="linenos"> 71</span>
+<span class="linenos"> 72</span>    <span class="n">omega</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">gear</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span>      <span class="c1"># engine angular speed</span>
+<span class="linenos"> 73</span>    <span class="n">F</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">gear</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">motor_torque</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="n">throttle</span>
+<span class="linenos"> 74</span>
+<span class="linenos"> 75</span>    <span class="c1"># Disturbance forces</span>
+<span class="linenos"> 76</span>    <span class="c1">#</span>
+<span class="linenos"> 77</span>    <span class="c1"># The disturbance force Fd has three major components: Fg, the forces due</span>
+<span class="linenos"> 78</span>    <span class="c1"># to gravity; Fr, the forces due to rolling friction; and Fa, the</span>
+<span class="linenos"> 79</span>    <span class="c1"># aerodynamic drag.</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span>    <span class="c1"># Letting the slope of the road be \theta (theta), gravity gives the</span>
+<span class="linenos"> 82</span>    <span class="c1"># force Fg = m g sin \theta.</span>
+<span class="linenos"> 83</span>    
+<span class="linenos"> 84</span>    <span class="n">Fg</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="linenos"> 85</span>
+<span class="linenos"> 86</span>    <span class="c1"># A simple model of rolling friction is Fr = m g Cr sgn(v), where Cr is</span>
+<span class="linenos"> 87</span>    <span class="c1"># the coefficient of rolling friction and sgn(v) is the sign of v (+/- 1) or</span>
+<span class="linenos"> 88</span>    <span class="c1"># zero if v = 0.</span>
+<span class="linenos"> 89</span>    
+<span class="linenos"> 90</span>    <span class="n">Fr</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">Cr</span> <span class="o">*</span> <span class="n">sign</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos"> 91</span>
+<span class="linenos"> 92</span>    <span class="c1"># The aerodynamic drag is proportional to the square of the speed: Fa =</span>
+<span class="linenos"> 93</span>    <span class="c1"># 1/\rho Cd A |v| v, where \rho is the density of air, Cd is the</span>
+<span class="linenos"> 94</span>    <span class="c1"># shape-dependent aerodynamic drag coefficient, and A is the frontal area</span>
+<span class="linenos"> 95</span>    <span class="c1"># of the car.</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>    <span class="n">Fa</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">Cd</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span>
+<span class="linenos"> 98</span>    
+<span class="linenos"> 99</span>    <span class="c1"># Final acceleration on the car</span>
+<span class="linenos">100</span>    <span class="n">Fd</span> <span class="o">=</span> <span class="n">Fg</span> <span class="o">+</span> <span class="n">Fr</span> <span class="o">+</span> <span class="n">Fa</span>
+<span class="linenos">101</span>    <span class="n">dv</span> <span class="o">=</span> <span class="p">(</span><span class="n">F</span> <span class="o">-</span> <span class="n">Fd</span><span class="p">)</span> <span class="o">/</span> <span class="n">m</span>
+<span class="linenos">102</span>    
+<span class="linenos">103</span>    <span class="k">return</span> <span class="n">dv</span>
+<span class="linenos">104</span>
+<span class="linenos">105</span><span class="c1"># Engine model: motor_torque</span>
+<span class="linenos">106</span><span class="c1">#</span>
+<span class="linenos">107</span><span class="c1"># The force F is generated by the engine, whose torque is proportional to</span>
+<span class="linenos">108</span><span class="c1"># the rate of fuel injection, which is itself proportional to a control</span>
+<span class="linenos">109</span><span class="c1"># signal 0 &lt;= u &lt;= 1 that controls the throttle position. The torque also</span>
+<span class="linenos">110</span><span class="c1"># depends on engine speed omega.</span>
+<span class="linenos">111</span>    
+<span class="linenos">112</span><span class="k">def</span> <span class="nf">motor_torque</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos">113</span>    <span class="c1"># Set up the system parameters</span>
+<span class="linenos">114</span>    <span class="n">Tm</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Tm&#39;</span><span class="p">,</span> <span class="mf">190.</span><span class="p">)</span>             <span class="c1"># engine torque constant</span>
+<span class="linenos">115</span>    <span class="n">omega_m</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;omega_m&#39;</span><span class="p">,</span> <span class="mf">420.</span><span class="p">)</span>   <span class="c1"># peak engine angular speed</span>
+<span class="linenos">116</span>    <span class="n">beta</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>          <span class="c1"># peak engine rolloff</span>
+<span class="linenos">117</span>
+<span class="linenos">118</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">Tm</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="p">(</span><span class="n">omega</span><span class="o">/</span><span class="n">omega_m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="linenos">119</span>
+<span class="linenos">120</span><span class="c1"># Define the input/output system for the vehicle</span>
+<span class="linenos">121</span><span class="n">vehicle</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+<span class="linenos">122</span>    <span class="n">vehicle_update</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;vehicle&#39;</span><span class="p">,</span>
+<span class="linenos">123</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;gear&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">),</span> <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">),</span> <span class="n">states</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">))</span>
+<span class="linenos">124</span>
+<span class="linenos">125</span><span class="c1"># Figure 1.11: A feedback system for controlling the speed of a vehicle. In</span>
+<span class="linenos">126</span><span class="c1"># this example, the speed of the vehicle is measured and compared to the</span>
+<span class="linenos">127</span><span class="c1"># desired speed.  The controller is a PI controller represented as a transfer</span>
+<span class="linenos">128</span><span class="c1"># function.  In the textbook, the simulations are done for LTI systems, but</span>
+<span class="linenos">129</span><span class="c1"># here we simulate the full nonlinear system.</span>
+<span class="linenos">130</span>
+<span class="linenos">131</span><span class="c1"># Construct a PI controller with rolloff, as a transfer function</span>
+<span class="linenos">132</span><span class="n">Kp</span> <span class="o">=</span> <span class="mf">0.5</span>                        <span class="c1"># proportional gain</span>
+<span class="linenos">133</span><span class="n">Ki</span> <span class="o">=</span> <span class="mf">0.1</span>                        <span class="c1"># integral gain</span>
+<span class="linenos">134</span><span class="n">control_tf</span> <span class="o">=</span><span class="n">ct</span><span class="o">.</span><span class="n">TransferFunction</span><span class="p">(</span>
+<span class="linenos">135</span>    <span class="p">[</span><span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="o">*</span><span class="n">Ki</span><span class="o">/</span><span class="n">Kp</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;control&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span><span class="c1"># Construct the closed loop control system</span>
+<span class="linenos">138</span><span class="c1"># Inputs: vref, gear, theta</span>
+<span class="linenos">139</span><span class="c1"># Outputs: v (vehicle velocity)</span>
+<span class="linenos">140</span><span class="n">cruise_tf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">InterconnectedSystem</span><span class="p">(</span>
+<span class="linenos">141</span>    <span class="p">(</span><span class="n">control_tf</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cruise&#39;</span><span class="p">,</span>
+<span class="linenos">142</span>    <span class="n">connections</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">143</span>        <span class="p">[</span><span class="s1">&#39;control.u&#39;</span><span class="p">,</span> <span class="s1">&#39;-vehicle.v&#39;</span><span class="p">],</span>
+<span class="linenos">144</span>        <span class="p">[</span><span class="s1">&#39;vehicle.u&#39;</span><span class="p">,</span> <span class="s1">&#39;control.y&#39;</span><span class="p">]],</span>
+<span class="linenos">145</span>    <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;control.u&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.gear&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.theta&#39;</span><span class="p">],</span>
+<span class="linenos">146</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vref&#39;</span><span class="p">,</span> <span class="s1">&#39;gear&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">],</span>
+<span class="linenos">147</span>    <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vehicle.v&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.u&#39;</span><span class="p">],</span>
+<span class="linenos">148</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">])</span>
+<span class="linenos">149</span>
+<span class="linenos">150</span><span class="c1"># Define the time and input vectors</span>
+<span class="linenos">151</span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="linenos">152</span><span class="n">vref</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">153</span><span class="n">gear</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">154</span><span class="n">theta0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">155</span>
+<span class="linenos">156</span><span class="c1"># Now simulate the effect of a hill at t = 5 seconds</span>
+<span class="linenos">157</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="linenos">158</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Response to change in road slope&#39;</span><span class="p">)</span>
+<span class="linenos">159</span><span class="n">vel_axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">160</span><span class="n">inp_axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">161</span><span class="n">theta_hill</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="linenos">162</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="k">else</span>
+<span class="linenos">163</span>    <span class="mf">4.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="k">else</span>
+<span class="linenos">164</span>    <span class="mf">4.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">])</span>
+<span class="linenos">165</span>
+<span class="linenos">166</span><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">2000</span><span class="p">):</span>
+<span class="linenos">167</span>    <span class="c1"># Compute the equilibrium state for the system</span>
+<span class="linenos">168</span>    <span class="n">X0</span><span class="p">,</span> <span class="n">U0</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">find_eqpt</span><span class="p">(</span>
+<span class="linenos">169</span>        <span class="n">cruise_tf</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">vref</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">vref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gear</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta0</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> 
+<span class="linenos">170</span>        <span class="n">iu</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="n">vref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="n">iy</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="n">m</span><span class="p">})</span>
+<span class="linenos">171</span>
+<span class="linenos">172</span>    <span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">173</span>        <span class="n">cruise_tf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">gear</span><span class="p">,</span> <span class="n">theta_hill</span><span class="p">],</span> <span class="n">X0</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;m&#39;</span><span class="p">:</span> <span class="n">m</span><span class="p">})</span>
+<span class="linenos">174</span>
+<span class="linenos">175</span>    <span class="c1"># Plot the velocity</span>
+<span class="linenos">176</span>    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">vel_axes</span><span class="p">)</span>
+<span class="linenos">177</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">178</span>
+<span class="linenos">179</span>    <span class="c1"># Plot the input</span>
+<span class="linenos">180</span>    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">inp_axes</span><span class="p">)</span>
+<span class="linenos">181</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">182</span>
+<span class="linenos">183</span><span class="c1"># Add labels to the plots</span>
+<span class="linenos">184</span><span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">vel_axes</span><span class="p">)</span>
+<span class="linenos">185</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Speed [m/s]&#39;</span><span class="p">)</span>
+<span class="linenos">186</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;m = 1000 kg&#39;</span><span class="p">,</span> <span class="s1">&#39;m = 2000 kg&#39;</span><span class="p">,</span> <span class="s1">&#39;m = 3000 kg&#39;</span><span class="p">],</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">187</span>
+<span class="linenos">188</span><span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">inp_axes</span><span class="p">)</span>
+<span class="linenos">189</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Throttle&#39;</span><span class="p">)</span>
+<span class="linenos">190</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">)</span>
+<span class="linenos">191</span>
+<span class="linenos">192</span><span class="c1"># Figure 4.2: Torque curves for a typical car engine. The graph on the</span>
+<span class="linenos">193</span><span class="c1"># left shows the torque generated by the engine as a function of the</span>
+<span class="linenos">194</span><span class="c1"># angular velocity of the engine, while the curve on the right shows</span>
+<span class="linenos">195</span><span class="c1"># torque as a function of car speed for different gears.</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span><span class="c1"># Figure 4.2</span>
+<span class="linenos">198</span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="linenos">199</span>
+<span class="linenos">200</span><span class="c1"># (a) - single torque curve as function of omega</span>
+<span class="linenos">201</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">202</span><span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">701</span><span class="p">)</span>
+<span class="linenos">203</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">motor_torque</span><span class="p">(</span><span class="n">omega</span><span class="p">))</span>
+<span class="linenos">204</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Angular velocity $\omega$ [rad/s]&#39;</span><span class="p">)</span>
+<span class="linenos">205</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Torque $T$ [Nm]&#39;</span><span class="p">)</span>
+<span class="linenos">206</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+<span class="linenos">207</span>
+<span class="linenos">208</span><span class="c1"># (b) - torque curves in different gears, as function of velocity</span>
+<span class="linenos">209</span><span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">210</span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">71</span><span class="p">)</span>
+<span class="linenos">211</span><span class="n">alpha</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="linenos">212</span><span class="k">for</span> <span class="n">gear</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="linenos">213</span>    <span class="n">omega</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="n">gear</span><span class="p">]</span> <span class="o">*</span> <span class="n">v</span>
+<span class="linenos">214</span>    <span class="n">T</span> <span class="o">=</span> <span class="n">motor_torque</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+<span class="linenos">215</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1f77b4&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;solid&#39;</span><span class="p">)</span>
+<span class="linenos">216</span>
+<span class="linenos">217</span><span class="c1"># Set up the axes and style</span>
+<span class="linenos">218</span><span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+<span class="linenos">219</span><span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+<span class="linenos">220</span>
+<span class="linenos">221</span><span class="c1"># Add labels</span>
+<span class="linenos">222</span><span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">11.5</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;$n$=1&#39;</span><span class="p">)</span>
+<span class="linenos">223</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;$n$=2&#39;</span><span class="p">)</span>
+<span class="linenos">224</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">42.5</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;$n$=3&#39;</span><span class="p">)</span>
+<span class="linenos">225</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">58.5</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;$n$=4&#39;</span><span class="p">)</span>
+<span class="linenos">226</span><span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">58.5</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="s1">&#39;$n$=5&#39;</span><span class="p">)</span>
+<span class="linenos">227</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Velocity $v$ [m/s]&#39;</span><span class="p">)</span>
+<span class="linenos">228</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Torque $T$ [Nm]&#39;</span><span class="p">)</span>
+<span class="linenos">229</span>
+<span class="linenos">230</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Torque curves for typical car engine&#39;</span><span class="p">)</span>
+<span class="linenos">231</span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="linenos">232</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">233</span>
+<span class="linenos">234</span><span class="c1"># Figure 4.3: Car with cruise control encountering a sloping road</span>
+<span class="linenos">235</span>
+<span class="linenos">236</span><span class="c1"># PI controller model: control_pi()</span>
+<span class="linenos">237</span><span class="c1">#</span>
+<span class="linenos">238</span><span class="c1"># We add to this model a feedback controller that attempts to regulate the</span>
+<span class="linenos">239</span><span class="c1"># speed of the car in the presence of disturbances. We shall use a</span>
+<span class="linenos">240</span><span class="c1"># proportional-integral controller</span>
+<span class="linenos">241</span>
+<span class="linenos">242</span><span class="k">def</span> <span class="nf">pi_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos">243</span>    <span class="c1"># Get the controller parameters that we need</span>
+<span class="linenos">244</span>    <span class="n">ki</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ki&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">245</span>    <span class="n">kaw</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kaw&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># anti-windup gain</span>
+<span class="linenos">246</span>
+<span class="linenos">247</span>    <span class="c1"># Assign variables for inputs and states (for readability)</span>
+<span class="linenos">248</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                    <span class="c1"># current velocity</span>
+<span class="linenos">249</span>    <span class="n">vref</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>                 <span class="c1"># reference velocity</span>
+<span class="linenos">250</span>    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                    <span class="c1"># integrated error</span>
+<span class="linenos">251</span>
+<span class="linenos">252</span>    <span class="c1"># Compute the nominal controller output (needed for anti-windup)</span>
+<span class="linenos">253</span>    <span class="n">u_a</span> <span class="o">=</span> <span class="n">pi_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="linenos">254</span>
+<span class="linenos">255</span>    <span class="c1"># Compute anti-windup compensation (scale by ki to account for structure)</span>
+<span class="linenos">256</span>    <span class="n">u_aw</span> <span class="o">=</span> <span class="n">kaw</span><span class="o">/</span><span class="n">ki</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u_a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">u_a</span><span class="p">)</span> <span class="k">if</span> <span class="n">ki</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="linenos">257</span>
+<span class="linenos">258</span>    <span class="c1"># State is the integrated error, minus anti-windup compensation</span>
+<span class="linenos">259</span>    <span class="k">return</span> <span class="p">(</span><span class="n">vref</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="n">u_aw</span>
+<span class="linenos">260</span>
+<span class="linenos">261</span><span class="k">def</span> <span class="nf">pi_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos">262</span>    <span class="c1"># Get the controller parameters that we need</span>
+<span class="linenos">263</span>    <span class="n">kp</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kp&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="linenos">264</span>    <span class="n">ki</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ki&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="linenos">265</span>
+<span class="linenos">266</span>    <span class="c1"># Assign variables for inputs and states (for readability)</span>
+<span class="linenos">267</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                    <span class="c1"># current velocity</span>
+<span class="linenos">268</span>    <span class="n">vref</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>                 <span class="c1"># reference velocity</span>
+<span class="linenos">269</span>    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                    <span class="c1"># integrated error</span>
+<span class="linenos">270</span>
+<span class="linenos">271</span>    <span class="c1"># PI controller</span>
+<span class="linenos">272</span>    <span class="k">return</span> <span class="n">kp</span> <span class="o">*</span> <span class="p">(</span><span class="n">vref</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">z</span>
+<span class="linenos">273</span>
+<span class="linenos">274</span><span class="n">control_pi</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+<span class="linenos">275</span>    <span class="n">pi_update</span><span class="p">,</span> <span class="n">pi_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;control&#39;</span><span class="p">,</span>
+<span class="linenos">276</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;vref&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">],</span> <span class="n">states</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">],</span>
+<span class="linenos">277</span>    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;kp&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">})</span>
+<span class="linenos">278</span>
+<span class="linenos">279</span><span class="c1"># Create the closed loop system</span>
+<span class="linenos">280</span><span class="n">cruise_pi</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">InterconnectedSystem</span><span class="p">(</span>
+<span class="linenos">281</span>    <span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">control_pi</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cruise&#39;</span><span class="p">,</span>
+<span class="linenos">282</span>    <span class="n">connections</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">283</span>        <span class="p">[</span><span class="s1">&#39;vehicle.u&#39;</span><span class="p">,</span> <span class="s1">&#39;control.u&#39;</span><span class="p">],</span>
+<span class="linenos">284</span>        <span class="p">[</span><span class="s1">&#39;control.v&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.v&#39;</span><span class="p">]],</span>
+<span class="linenos">285</span>    <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;control.vref&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.gear&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.theta&#39;</span><span class="p">],</span>
+<span class="linenos">286</span>    <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;control.u&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.v&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">])</span>
+<span class="linenos">287</span>
+<span class="linenos">288</span><span class="c1"># Figure 4.3b shows the response of the closed loop system.  The figure shows</span>
+<span class="linenos">289</span><span class="c1"># that even if the hill is so steep that the throttle changes from 0.17 to</span>
+<span class="linenos">290</span><span class="c1"># almost full throttle, the largest speed error is less than 1 m/s, and the</span>
+<span class="linenos">291</span><span class="c1"># desired velocity is recovered after 20 s.</span>
+<span class="linenos">292</span>
+<span class="linenos">293</span><span class="c1"># Define a function for creating a &quot;standard&quot; cruise control plot</span>
+<span class="linenos">294</span><span class="k">def</span> <span class="nf">cruise_plot</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t_hill</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vref</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">antiwindup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="linenos">295</span>                <span class="n">linetype</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="linenos">296</span>    <span class="k">if</span> <span class="n">subplots</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">297</span>        <span class="n">subplots</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+<span class="linenos">298</span>    <span class="c1"># Figure out the plot bounds and indices</span>
+<span class="linenos">299</span>    <span class="n">v_min</span> <span class="o">=</span> <span class="n">vref</span><span class="o">-</span><span class="mf">1.2</span><span class="p">;</span> <span class="n">v_max</span> <span class="o">=</span> <span class="n">vref</span><span class="o">+</span><span class="mf">0.5</span><span class="p">;</span> <span class="n">v_ind</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">find_output</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)</span>
+<span class="linenos">300</span>    <span class="n">u_min</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">u_max</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">antiwindup</span> <span class="k">else</span> <span class="mi">1</span><span class="p">;</span> <span class="n">u_ind</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">find_output</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<span class="linenos">301</span>
+<span class="linenos">302</span>    <span class="c1"># Make sure the upper and lower bounds on v are OK</span>
+<span class="linenos">303</span>    <span class="k">while</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">v_ind</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">v_max</span><span class="p">:</span> <span class="n">v_max</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">304</span>    <span class="k">while</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">v_ind</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">v_min</span><span class="p">:</span> <span class="n">v_min</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">305</span>
+<span class="linenos">306</span>    <span class="c1"># Create arrays for return values</span>
+<span class="linenos">307</span>    <span class="n">subplot_axes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">subplots</span><span class="p">)</span>
+<span class="linenos">308</span>
+<span class="linenos">309</span>    <span class="c1"># Velocity profile</span>
+<span class="linenos">310</span>    <span class="k">if</span> <span class="n">subplot_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">311</span>        <span class="n">subplot_axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">312</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">313</span>        <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">subplots</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">314</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">v_ind</span><span class="p">],</span> <span class="n">linetype</span><span class="p">)</span>
+<span class="linenos">315</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vref</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+<span class="linenos">316</span>    <span class="k">if</span> <span class="n">t_hill</span><span class="p">:</span>
+<span class="linenos">317</span>        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">t_hill</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t hill&#39;</span><span class="p">)</span>
+<span class="linenos">318</span>    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">v_min</span><span class="p">,</span> <span class="n">v_max</span><span class="p">])</span>
+<span class="linenos">319</span>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time $t$ [s]&#39;</span><span class="p">)</span>
+<span class="linenos">320</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity $v$ [m/s]&#39;</span><span class="p">)</span>
+<span class="linenos">321</span>
+<span class="linenos">322</span>    <span class="c1"># Commanded input profile</span>
+<span class="linenos">323</span>    <span class="k">if</span> <span class="n">subplot_axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">324</span>        <span class="n">subplot_axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="linenos">325</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">326</span>        <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">subplots</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">327</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">u_ind</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span> <span class="k">if</span> <span class="n">antiwindup</span> <span class="k">else</span> <span class="n">linetype</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="linenos">328</span>    <span class="c1"># Applied input profile</span>
+<span class="linenos">329</span>    <span class="k">if</span> <span class="n">antiwindup</span><span class="p">:</span>
+<span class="linenos">330</span>        <span class="c1"># TODO: plot the actual signal from the process?</span>
+<span class="linenos">331</span>        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">u_ind</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">linetype</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Applied&#39;</span><span class="p">)</span>
+<span class="linenos">332</span>    <span class="k">if</span> <span class="n">t_hill</span><span class="p">:</span>
+<span class="linenos">333</span>        <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">t_hill</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="linenos">334</span>    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+<span class="linenos">335</span>        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">336</span>    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">u_min</span><span class="p">,</span> <span class="n">u_max</span><span class="p">])</span>
+<span class="linenos">337</span>    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time $t$ [s]&#39;</span><span class="p">)</span>
+<span class="linenos">338</span>    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Throttle $u$&#39;</span><span class="p">)</span>
+<span class="linenos">339</span>
+<span class="linenos">340</span>    <span class="k">return</span> <span class="n">subplot_axes</span>
+<span class="linenos">341</span>
+<span class="linenos">342</span><span class="c1"># Define the time and input vectors</span>
+<span class="linenos">343</span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="linenos">344</span><span class="n">vref</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">345</span><span class="n">gear</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">346</span><span class="n">theta0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">347</span>
+<span class="linenos">348</span><span class="c1"># Compute the equilibrium throttle setting for the desired speed (solve for x</span>
+<span class="linenos">349</span><span class="c1"># and u given the gear, slope, and desired output velocity)</span>
+<span class="linenos">350</span><span class="n">X0</span><span class="p">,</span> <span class="n">U0</span><span class="p">,</span> <span class="n">Y0</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">find_eqpt</span><span class="p">(</span>
+<span class="linenos">351</span>    <span class="n">cruise_pi</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">vref</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gear</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theta0</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+<span class="linenos">352</span>    <span class="n">y0</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">vref</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">iu</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">iy</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">return_y</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">353</span>
+<span class="linenos">354</span><span class="c1"># Now simulate the effect of a hill at t = 5 seconds</span>
+<span class="linenos">355</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="linenos">356</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Car with cruise control encountering sloping road&#39;</span><span class="p">)</span>
+<span class="linenos">357</span><span class="n">theta_hill</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">358</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="k">else</span>
+<span class="linenos">359</span>    <span class="mf">4.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="k">else</span>
+<span class="linenos">360</span>    <span class="mf">4.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]</span>
+<span class="linenos">361</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">cruise_pi</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">gear</span><span class="p">,</span> <span class="n">theta_hill</span><span class="p">],</span> <span class="n">X0</span><span class="p">)</span>
+<span class="linenos">362</span><span class="n">cruise_plot</span><span class="p">(</span><span class="n">cruise_pi</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t_hill</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos">363</span>
+<span class="linenos">364</span><span class="c1">#</span>
+<span class="linenos">365</span><span class="c1"># Example 7.8: State space feedback with integral action</span>
+<span class="linenos">366</span><span class="c1">#</span>
+<span class="linenos">367</span>
+<span class="linenos">368</span><span class="c1"># State space controller model: control_sf_ia()</span>
+<span class="linenos">369</span><span class="c1">#</span>
+<span class="linenos">370</span><span class="c1"># Construct a state space controller with integral action, linearized around</span>
+<span class="linenos">371</span><span class="c1"># an equilibrium point.  The controller is constructed around the equilibrium</span>
+<span class="linenos">372</span><span class="c1"># point (x_d, u_d) and includes both feedforward and feedback compensation.</span>
+<span class="linenos">373</span><span class="c1">#</span>
+<span class="linenos">374</span><span class="c1"># Controller inputs: (x, y, r)    system states, system output, reference</span>
+<span class="linenos">375</span><span class="c1"># Controller state:  z            integrated error (y - r)</span>
+<span class="linenos">376</span><span class="c1"># Controller output: u            state feedback control</span>
+<span class="linenos">377</span><span class="c1">#</span>
+<span class="linenos">378</span><span class="c1"># Note: to make the structure of the controller more clear, we implement this</span>
+<span class="linenos">379</span><span class="c1"># as a &quot;nonlinear&quot; input/output module, even though the actual input/output</span>
+<span class="linenos">380</span><span class="c1"># system is linear.  This also allows the use of parameters to set the</span>
+<span class="linenos">381</span><span class="c1"># operating point and gains for the controller.</span>
+<span class="linenos">382</span>
+<span class="linenos">383</span><span class="k">def</span> <span class="nf">sf_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos">384</span>    <span class="n">y</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">385</span>    <span class="k">return</span> <span class="n">y</span> <span class="o">-</span> <span class="n">r</span>
+<span class="linenos">386</span>
+<span class="linenos">387</span><span class="k">def</span> <span class="nf">sf_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{}):</span>
+<span class="linenos">388</span>    <span class="c1"># Get the controller parameters that we need</span>
+<span class="linenos">389</span>    <span class="n">K</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">390</span>    <span class="n">ki</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ki&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">391</span>    <span class="n">kf</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kf&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">392</span>    <span class="n">xd</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xd&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">393</span>    <span class="n">yd</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;yd&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">394</span>    <span class="n">ud</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ud&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="linenos">395</span>
+<span class="linenos">396</span>    <span class="c1"># Get the system state and reference input</span>
+<span class="linenos">397</span>    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="linenos">398</span>
+<span class="linenos">399</span>    <span class="k">return</span> <span class="n">ud</span> <span class="o">-</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xd</span><span class="p">)</span> <span class="o">-</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">z</span> <span class="o">+</span> <span class="n">kf</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">yd</span><span class="p">)</span>
+<span class="linenos">400</span>
+<span class="linenos">401</span><span class="c1"># Create the input/output system for the controller</span>
+<span class="linenos">402</span><span class="n">control_sf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+<span class="linenos">403</span>    <span class="n">sf_update</span><span class="p">,</span> <span class="n">sf_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;control&#39;</span><span class="p">,</span>
+<span class="linenos">404</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">),</span>
+<span class="linenos">405</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">),</span>
+<span class="linenos">406</span>    <span class="n">states</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">))</span>
+<span class="linenos">407</span>
+<span class="linenos">408</span><span class="c1"># Create the closed loop system for the state space controller</span>
+<span class="linenos">409</span><span class="n">cruise_sf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">InterconnectedSystem</span><span class="p">(</span>
+<span class="linenos">410</span>    <span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">control_sf</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cruise&#39;</span><span class="p">,</span>
+<span class="linenos">411</span>    <span class="n">connections</span><span class="o">=</span><span class="p">[</span>
+<span class="linenos">412</span>        <span class="p">[</span><span class="s1">&#39;vehicle.u&#39;</span><span class="p">,</span> <span class="s1">&#39;control.u&#39;</span><span class="p">],</span>
+<span class="linenos">413</span>        <span class="p">[</span><span class="s1">&#39;control.x&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.v&#39;</span><span class="p">],</span>
+<span class="linenos">414</span>        <span class="p">[</span><span class="s1">&#39;control.y&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.v&#39;</span><span class="p">]],</span>
+<span class="linenos">415</span>    <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;control.r&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.gear&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.theta&#39;</span><span class="p">],</span>
+<span class="linenos">416</span>    <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;control.u&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.v&#39;</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">])</span>
+<span class="linenos">417</span>
+<span class="linenos">418</span><span class="c1"># Compute the linearization of the dynamics around the equilibrium point</span>
+<span class="linenos">419</span>
+<span class="linenos">420</span><span class="c1"># Y0 represents the steady state with PI control =&gt; we can use it to</span>
+<span class="linenos">421</span><span class="c1"># identify the steady state velocity and required throttle setting.</span>
+<span class="linenos">422</span><span class="n">xd</span> <span class="o">=</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">423</span><span class="n">ud</span> <span class="o">=</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="linenos">424</span><span class="n">yd</span> <span class="o">=</span> <span class="n">Y0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="linenos">425</span>
+<span class="linenos">426</span><span class="c1"># Compute the linearized system at the eq pt</span>
+<span class="linenos">427</span><span class="n">cruise_linearized</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="p">[</span><span class="n">ud</span><span class="p">,</span> <span class="n">gear</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">])</span>
+<span class="linenos">428</span>
+<span class="linenos">429</span><span class="c1"># Construct the gain matrices for the system</span>
+<span class="linenos">430</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">cruise_linearized</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">cruise_linearized</span><span class="o">.</span><span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">cruise_linearized</span><span class="o">.</span><span class="n">C</span>
+<span class="linenos">431</span><span class="n">K</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="linenos">432</span><span class="n">kf</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">*</span> <span class="n">K</span><span class="p">)</span> <span class="o">*</span> <span class="n">B</span><span class="p">)</span>
+<span class="linenos">433</span>
+<span class="linenos">434</span><span class="c1"># Response of the system with no integral feedback term</span>
+<span class="linenos">435</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="linenos">436</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Cruise control with proportional and PI control&#39;</span><span class="p">)</span>
+<span class="linenos">437</span><span class="n">theta_hill</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">438</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">8</span> <span class="k">else</span>
+<span class="linenos">439</span>    <span class="mf">4.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">9</span> <span class="k">else</span>
+<span class="linenos">440</span>    <span class="mf">4.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]</span>
+<span class="linenos">441</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">442</span>    <span class="n">cruise_sf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">gear</span><span class="p">,</span> <span class="n">theta_hill</span><span class="p">],</span> <span class="p">[</span><span class="n">X0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">443</span>    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="s1">&#39;kf&#39;</span><span class="p">:</span> <span class="n">kf</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;kf&#39;</span><span class="p">:</span> <span class="n">kf</span><span class="p">,</span> <span class="s1">&#39;xd&#39;</span><span class="p">:</span> <span class="n">xd</span><span class="p">,</span> <span class="s1">&#39;ud&#39;</span><span class="p">:</span> <span class="n">ud</span><span class="p">,</span> <span class="s1">&#39;yd&#39;</span><span class="p">:</span> <span class="n">yd</span><span class="p">})</span>
+<span class="linenos">444</span><span class="n">subplots</span> <span class="o">=</span> <span class="n">cruise_plot</span><span class="p">(</span><span class="n">cruise_sf</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Proportional&#39;</span><span class="p">,</span> <span class="n">linetype</span><span class="o">=</span><span class="s1">&#39;b--&#39;</span><span class="p">)</span>
+<span class="linenos">445</span>
+<span class="linenos">446</span><span class="c1"># Response of the system with state feedback + integral action</span>
+<span class="linenos">447</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">448</span>    <span class="n">cruise_sf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">gear</span><span class="p">,</span> <span class="n">theta_hill</span><span class="p">],</span> <span class="p">[</span><span class="n">X0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span>
+<span class="linenos">449</span>    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span> <span class="s1">&#39;kf&#39;</span><span class="p">:</span> <span class="n">kf</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;kf&#39;</span><span class="p">:</span> <span class="n">kf</span><span class="p">,</span> <span class="s1">&#39;xd&#39;</span><span class="p">:</span> <span class="n">xd</span><span class="p">,</span> <span class="s1">&#39;ud&#39;</span><span class="p">:</span> <span class="n">ud</span><span class="p">,</span> <span class="s1">&#39;yd&#39;</span><span class="p">:</span> <span class="n">yd</span><span class="p">})</span>
+<span class="linenos">450</span><span class="n">cruise_plot</span><span class="p">(</span><span class="n">cruise_sf</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PI control&#39;</span><span class="p">,</span> <span class="n">t_hill</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">linetype</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span>
+<span class="linenos">451</span>            <span class="n">subplots</span><span class="o">=</span><span class="n">subplots</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">452</span>
+<span class="linenos">453</span><span class="c1"># Example 11.5: simulate the effect of a (steeper) hill at t = 5 seconds</span>
+<span class="linenos">454</span><span class="c1">#</span>
+<span class="linenos">455</span><span class="c1"># The windup effect occurs when a car encounters a hill that is so steep (6</span>
+<span class="linenos">456</span><span class="c1"># deg) that the throttle saturates when the cruise controller attempts to</span>
+<span class="linenos">457</span><span class="c1"># maintain speed.</span>
+<span class="linenos">458</span>
+<span class="linenos">459</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="linenos">460</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Cruise control with integrator windup&#39;</span><span class="p">)</span>
+<span class="linenos">461</span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="linenos">462</span><span class="n">vref</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="linenos">463</span><span class="n">theta_hill</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">464</span>    <span class="mi">0</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">5</span> <span class="k">else</span>
+<span class="linenos">465</span>    <span class="mf">6.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">6</span> <span class="k">else</span>
+<span class="linenos">466</span>    <span class="mf">6.</span><span class="o">/</span><span class="mf">180.</span> <span class="o">*</span> <span class="n">pi</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">T</span><span class="p">]</span>
+<span class="linenos">467</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">468</span>    <span class="n">cruise_pi</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">gear</span><span class="p">,</span> <span class="n">theta_hill</span><span class="p">],</span> <span class="n">X0</span><span class="p">,</span>
+<span class="linenos">469</span>    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;kaw&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+<span class="linenos">470</span><span class="n">cruise_plot</span><span class="p">(</span><span class="n">cruise_pi</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Commanded&#39;</span><span class="p">,</span> <span class="n">t_hill</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">antiwindup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos">471</span>            <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">472</span>
+<span class="linenos">473</span><span class="c1"># Example 11.6: add anti-windup compensation</span>
+<span class="linenos">474</span><span class="c1">#</span>
+<span class="linenos">475</span><span class="c1"># Anti-windup can be applied to the system to improve the response. Because of</span>
+<span class="linenos">476</span><span class="c1"># the feedback from the actuator model, the output of the integrator is</span>
+<span class="linenos">477</span><span class="c1"># quickly reset to a value such that the controller output is at the</span>
+<span class="linenos">478</span><span class="c1"># saturation limit.</span>
+<span class="linenos">479</span>
+<span class="linenos">480</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="linenos">481</span><span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Cruise control with integrator anti-windup protection&#39;</span><span class="p">)</span>
+<span class="linenos">482</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">483</span>    <span class="n">cruise_pi</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">gear</span><span class="p">,</span> <span class="n">theta_hill</span><span class="p">],</span> <span class="n">X0</span><span class="p">,</span>
+<span class="linenos">484</span>    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;kaw&#39;</span><span class="p">:</span> <span class="mf">2.</span><span class="p">})</span>
+<span class="linenos">485</span><span class="n">cruise_plot</span><span class="p">(</span><span class="n">cruise_pi</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Commanded&#39;</span><span class="p">,</span> <span class="n">t_hill</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">antiwindup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos">486</span>            <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">487</span>
+<span class="linenos">488</span><span class="c1"># If running as a standalone program, show plots and wait before closing</span>
+<span class="linenos">489</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="linenos">490</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span> <span class="ow">and</span> <span class="s1">&#39;PYCONTROL_TEST_EXAMPLES&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+<span class="linenos">491</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="linenos">492</span><span class="k">else</span><span class="p">:</span>
+<span class="linenos">493</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
+<p>1. The environment variable <cite>PYCONTROL_TEST_EXAMPLES</cite> is used for
+testing to turn off plotting of the outputs.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scherer_etal_ex7_Hinf_hinfsyn.html" class="btn btn-neutral float-left" title="Hinf synthesis, based on Scherer et al. 1997 example 7" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="steering-gainsched.html" class="btn btn-neutral float-right" title="Gain scheduled control for vehicle steeering (I/O system)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

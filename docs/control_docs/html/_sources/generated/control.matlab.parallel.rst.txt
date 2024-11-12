@@ -1,0 +1,6 @@
+﻿control.matlab.parallel
+=======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: parallel

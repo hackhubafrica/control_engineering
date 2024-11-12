@@ -1,0 +1,6 @@
+﻿control.interconnect
+====================
+
+.. currentmodule:: control
+
+.. autofunction:: interconnect

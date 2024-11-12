@@ -1,0 +1,6 @@
+﻿control.nichols\_plot
+=====================
+
+.. currentmodule:: control
+
+.. autofunction:: nichols_plot

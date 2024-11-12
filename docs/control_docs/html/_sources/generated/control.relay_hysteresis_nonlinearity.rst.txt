@@ -1,0 +1,21 @@
+﻿control.relay\_hysteresis\_nonlinearity
+=======================================
+
+.. currentmodule:: control
+
+.. autoclass:: relay_hysteresis_nonlinearity
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~relay_hysteresis_nonlinearity.describing_function
+   
+   

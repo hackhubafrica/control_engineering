@@ -1,0 +1,6 @@
+﻿control.matlab.care
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: care

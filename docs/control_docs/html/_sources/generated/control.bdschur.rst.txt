@@ -1,0 +1,6 @@
+﻿control.bdschur
+===============
+
+.. currentmodule:: control
+
+.. autofunction:: bdschur

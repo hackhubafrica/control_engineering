@@ -1,0 +1,6 @@
+﻿control.matlab.initial
+======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: initial

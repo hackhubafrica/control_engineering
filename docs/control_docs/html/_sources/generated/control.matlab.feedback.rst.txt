@@ -1,0 +1,6 @@
+﻿control.matlab.feedback
+=======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: feedback

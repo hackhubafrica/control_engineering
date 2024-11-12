@@ -1,0 +1,39 @@
+﻿control.LTI
+===========
+
+.. currentmodule:: control
+
+.. autoclass:: LTI
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~LTI.bandwidth
+      ~LTI.copy
+      ~LTI.damp
+      ~LTI.dcgain
+      ~LTI.find_input
+      ~LTI.find_inputs
+      ~LTI.find_output
+      ~LTI.find_outputs
+      ~LTI.find_state
+      ~LTI.find_states
+      ~LTI.frequency_response
+      ~LTI.isctime
+      ~LTI.isdtime
+      ~LTI.ispassive
+      ~LTI.issiso
+      ~LTI.set_inputs
+      ~LTI.set_outputs
+      ~LTI.set_states
+      ~LTI.update_names
+   
+   

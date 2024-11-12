@@ -1,0 +1,55 @@
+﻿control.flatsys.LinearFlatSystem
+================================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: LinearFlatSystem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~LinearFlatSystem.append
+      ~LinearFlatSystem.bandwidth
+      ~LinearFlatSystem.copy
+      ~LinearFlatSystem.damp
+      ~LinearFlatSystem.dcgain
+      ~LinearFlatSystem.dynamics
+      ~LinearFlatSystem.feedback
+      ~LinearFlatSystem.find_input
+      ~LinearFlatSystem.find_inputs
+      ~LinearFlatSystem.find_output
+      ~LinearFlatSystem.find_outputs
+      ~LinearFlatSystem.find_state
+      ~LinearFlatSystem.find_states
+      ~LinearFlatSystem.forward
+      ~LinearFlatSystem.freqresp
+      ~LinearFlatSystem.frequency_response
+      ~LinearFlatSystem.horner
+      ~LinearFlatSystem.isctime
+      ~LinearFlatSystem.isdtime
+      ~LinearFlatSystem.ispassive
+      ~LinearFlatSystem.issiso
+      ~LinearFlatSystem.lft
+      ~LinearFlatSystem.linearize
+      ~LinearFlatSystem.minreal
+      ~LinearFlatSystem.output
+      ~LinearFlatSystem.poles
+      ~LinearFlatSystem.returnScipySignalLTI
+      ~LinearFlatSystem.reverse
+      ~LinearFlatSystem.sample
+      ~LinearFlatSystem.set_inputs
+      ~LinearFlatSystem.set_outputs
+      ~LinearFlatSystem.set_states
+      ~LinearFlatSystem.slycot_laub
+      ~LinearFlatSystem.update_names
+      ~LinearFlatSystem.zeros
+   
+   

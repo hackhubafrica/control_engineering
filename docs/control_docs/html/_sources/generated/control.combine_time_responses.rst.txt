@@ -1,0 +1,6 @@
+﻿control.combine\_time\_responses
+================================
+
+.. currentmodule:: control
+
+.. autofunction:: combine_time_responses

@@ -1,0 +1,6 @@
+﻿control.use\_fbs\_defaults
+==========================
+
+.. currentmodule:: control
+
+.. autofunction:: use_fbs_defaults

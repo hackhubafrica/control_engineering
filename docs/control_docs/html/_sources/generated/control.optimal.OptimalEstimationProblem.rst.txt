@@ -1,0 +1,22 @@
+﻿control.optimal.OptimalEstimationProblem
+========================================
+
+.. currentmodule:: control.optimal
+
+.. autoclass:: OptimalEstimationProblem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OptimalEstimationProblem.compute_estimate
+      ~OptimalEstimationProblem.create_mhe_iosystem
+   
+   

@@ -1,0 +1,6 @@
+﻿control.ss
+==========
+
+.. currentmodule:: control
+
+.. autofunction:: ss

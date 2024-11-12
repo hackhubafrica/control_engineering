@@ -1,0 +1,6 @@
+﻿control.matlab.lyap
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: lyap

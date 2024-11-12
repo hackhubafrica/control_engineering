@@ -1,0 +1,6 @@
+﻿control.use\_legacy\_defaults
+=============================
+
+.. currentmodule:: control
+
+.. autofunction:: use_legacy_defaults

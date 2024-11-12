@@ -1,0 +1,6 @@
+﻿control.pole\_zero\_subplots
+============================
+
+.. currentmodule:: control
+
+.. autofunction:: pole_zero_subplots

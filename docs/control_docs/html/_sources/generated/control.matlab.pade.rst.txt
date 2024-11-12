@@ -1,0 +1,6 @@
+﻿control.matlab.pade
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: pade

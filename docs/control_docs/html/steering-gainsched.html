@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gain scheduled control for vehicle steeering (I/O system) &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Optimal control for vehicle steering (lane change)" href="steering-optimal.html" />
+    <link rel="prev" title="Cruise control design example (as a nonlinear I/O system)" href="cruise-control.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="secord-matlab.html">Secord order system (MATLAB module example)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-nested.html">Inner/outer control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr.html">LQR control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss-balred.html">Balanced model reduction examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="phase_plane_plots.html">Phase  plot examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_siso.html">SISO robust control example (SP96, Example 2.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_mimo.html">MIMO robust control example (SP96, Example 3.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_H2_h2syn.html">H2 synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_Hinf_hinfsyn.html">Hinf synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cruise-control.html">Cruise control design example (as a nonlinear I/O system)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Gain scheduled control for vehicle steeering (I/O system)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="steering-optimal.html">Optimal control for vehicle steering (lane change)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-flatsys.html">Differentially flat system - kinematic car</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_mit.html">Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_lyapunov.html">Model-Reference Adaptive Control (MRAC) SISO, direct Lyapunov rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="markov.html">Estimation of Makrov parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="era_msd.html">ERA example, mass spring damper system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Gain scheduled control for vehicle steeering (I/O system)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/steering-gainsched.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="gain-scheduled-control-for-vehicle-steeering-i-o-system">
+<span id="steering-gainsched-py"></span><h1>Gain scheduled control for vehicle steeering (I/O system)<a class="headerlink" href="#gain-scheduled-control-for-vehicle-steeering-i-o-system" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># steering-gainsched.py - gain scheduled control for vehicle steering</span>
+<span class="linenos">  2</span><span class="c1"># RMM, 8 May 2019</span>
+<span class="linenos">  3</span><span class="c1">#</span>
+<span class="linenos">  4</span><span class="c1"># This file works through Example 1.1 in the &quot;Optimization-Based Control&quot;</span>
+<span class="linenos">  5</span><span class="c1"># course notes by Richard Murray (avaliable at http://fbsbook.org, in the</span>
+<span class="linenos">  6</span><span class="c1"># optimization-based control supplement).  It is intended to demonstrate the</span>
+<span class="linenos">  7</span><span class="c1"># functionality for nonlinear input/output systems in the python-control</span>
+<span class="linenos">  8</span><span class="c1"># package.</span>
+<span class="linenos">  9</span>
+<span class="linenos"> 10</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 11</span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="linenos"> 12</span><span class="kn">from</span> <span class="nn">cmath</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<span class="linenos"> 13</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos"> 14</span>
+<span class="linenos"> 15</span><span class="c1">#</span>
+<span class="linenos"> 16</span><span class="c1"># Vehicle steering dynamics</span>
+<span class="linenos"> 17</span><span class="c1">#</span>
+<span class="linenos"> 18</span><span class="c1"># The vehicle dynamics are given by a simple bicycle model.  We take the state</span>
+<span class="linenos"> 19</span><span class="c1"># of the system as (x, y, theta) where (x, y) is the position of the vehicle</span>
+<span class="linenos"> 20</span><span class="c1"># in the plane and theta is the angle of the vehicle with respect to</span>
+<span class="linenos"> 21</span><span class="c1"># horizontal.  The vehicle input is given by (v, phi) where v is the forward</span>
+<span class="linenos"> 22</span><span class="c1"># velocity of the vehicle and phi is the angle of the steering wheel.  The</span>
+<span class="linenos"> 23</span><span class="c1"># model includes saturation of the vehicle steering angle.</span>
+<span class="linenos"> 24</span><span class="c1">#</span>
+<span class="linenos"> 25</span><span class="c1"># System state: x, y, theta</span>
+<span class="linenos"> 26</span><span class="c1"># System input: v, phi</span>
+<span class="linenos"> 27</span><span class="c1"># System output: x, y</span>
+<span class="linenos"> 28</span><span class="c1"># System parameters: wheelbase, maxsteer</span>
+<span class="linenos"> 29</span><span class="c1">#</span>
+<span class="linenos"> 30</span><span class="k">def</span> <span class="nf">vehicle_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="linenos"> 31</span>    <span class="c1"># Get the parameters for the model</span>
+<span class="linenos"> 32</span>    <span class="n">l</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mf">3.</span><span class="p">)</span>         <span class="c1"># vehicle wheelbase</span>
+<span class="linenos"> 33</span>    <span class="n">phimax</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;maxsteer&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>    <span class="c1"># max steering angle (rad)</span>
+<span class="linenos"> 34</span>
+<span class="linenos"> 35</span>    <span class="c1"># Saturate the steering input</span>
+<span class="linenos"> 36</span>    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">phimax</span><span class="p">,</span> <span class="n">phimax</span><span class="p">)</span>
+<span class="linenos"> 37</span>
+<span class="linenos"> 38</span>    <span class="c1"># Return the derivative of the state</span>
+<span class="linenos"> 39</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="linenos"> 40</span>        <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>            <span class="c1"># xdot = cos(theta) v</span>
+<span class="linenos"> 41</span>        <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>            <span class="c1"># ydot = sin(theta) v</span>
+<span class="linenos"> 42</span>        <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">l</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>        <span class="c1"># thdot = v/l tan(phi)</span>
+<span class="linenos"> 43</span>    <span class="p">])</span>
+<span class="linenos"> 44</span>
+<span class="linenos"> 45</span><span class="k">def</span> <span class="nf">vehicle_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="linenos"> 46</span>    <span class="k">return</span> <span class="n">x</span>                            <span class="c1"># return x, y, theta (full state)</span>
+<span class="linenos"> 47</span>
+<span class="linenos"> 48</span><span class="c1"># Define the vehicle steering dynamics as an input/output system</span>
+<span class="linenos"> 49</span><span class="n">vehicle</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+<span class="linenos"> 50</span>    <span class="n">vehicle_update</span><span class="p">,</span> <span class="n">vehicle_output</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;vehicle&#39;</span><span class="p">,</span>
+<span class="linenos"> 51</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">),</span>
+<span class="linenos"> 52</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">))</span>
+<span class="linenos"> 53</span>
+<span class="linenos"> 54</span><span class="c1">#</span>
+<span class="linenos"> 55</span><span class="c1"># Gain scheduled controller</span>
+<span class="linenos"> 56</span><span class="c1">#</span>
+<span class="linenos"> 57</span><span class="c1"># For this system we use a simple schedule on the forward vehicle velocity and</span>
+<span class="linenos"> 58</span><span class="c1"># place the poles of the system at fixed values.  The controller takes the</span>
+<span class="linenos"> 59</span><span class="c1"># current vehicle position and orientation plus the velocity velocity as</span>
+<span class="linenos"> 60</span><span class="c1"># inputs, and returns the velocity and steering commands.</span>
+<span class="linenos"> 61</span><span class="c1">#</span>
+<span class="linenos"> 62</span><span class="c1"># System state: none</span>
+<span class="linenos"> 63</span><span class="c1"># System input: ex, ey, etheta, vd, phid</span>
+<span class="linenos"> 64</span><span class="c1"># System output: v, phi</span>
+<span class="linenos"> 65</span><span class="c1"># System parameters: longpole, latpole1, latpole2</span>
+<span class="linenos"> 66</span><span class="c1">#</span>
+<span class="linenos"> 67</span><span class="k">def</span> <span class="nf">control_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="linenos"> 68</span>    <span class="c1"># Get the controller parameters</span>
+<span class="linenos"> 69</span>    <span class="n">longpole</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;longpole&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">)</span>
+<span class="linenos"> 70</span>    <span class="n">latpole1</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;latpole1&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 71</span>    <span class="n">latpole2</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;latpole2&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos"> 72</span>    <span class="n">l</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wheelbase&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="linenos"> 73</span>
+<span class="linenos"> 74</span>    <span class="c1"># Extract the system inputs</span>
+<span class="linenos"> 75</span>    <span class="n">ex</span><span class="p">,</span> <span class="n">ey</span><span class="p">,</span> <span class="n">etheta</span><span class="p">,</span> <span class="n">vd</span><span class="p">,</span> <span class="n">phid</span> <span class="o">=</span> <span class="n">u</span>
+<span class="linenos"> 76</span>
+<span class="linenos"> 77</span>    <span class="c1"># Determine the controller gains</span>
+<span class="linenos"> 78</span>    <span class="n">alpha1</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">latpole1</span> <span class="o">+</span> <span class="n">latpole2</span><span class="p">)</span>
+<span class="linenos"> 79</span>    <span class="n">alpha2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">latpole1</span> <span class="o">*</span> <span class="n">latpole2</span><span class="p">)</span>
+<span class="linenos"> 80</span>
+<span class="linenos"> 81</span>    <span class="c1"># Compute and return the control law</span>
+<span class="linenos"> 82</span>    <span class="n">v</span> <span class="o">=</span> <span class="o">-</span><span class="n">longpole</span> <span class="o">*</span> <span class="n">ex</span>          <span class="c1"># Note: no feedfwd (to make plot interesting)</span>
+<span class="linenos"> 83</span>    <span class="k">if</span> <span class="n">vd</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 84</span>        <span class="n">phi</span> <span class="o">=</span> <span class="n">phid</span> <span class="o">+</span> <span class="p">(</span><span class="n">alpha1</span> <span class="o">*</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="n">vd</span> <span class="o">*</span> <span class="n">ey</span> <span class="o">+</span> <span class="p">(</span><span class="n">alpha2</span> <span class="o">*</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="n">vd</span> <span class="o">*</span> <span class="n">etheta</span>
+<span class="linenos"> 85</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 86</span>        <span class="c1"># We aren&#39;t moving, so don&#39;t turn the steering wheel</span>
+<span class="linenos"> 87</span>        <span class="n">phi</span> <span class="o">=</span> <span class="n">phid</span>
+<span class="linenos"> 88</span>
+<span class="linenos"> 89</span>    <span class="k">return</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">v</span><span class="p">,</span> <span class="n">phi</span><span class="p">])</span>
+<span class="linenos"> 90</span>
+<span class="linenos"> 91</span><span class="c1"># Define the controller as an input/output system</span>
+<span class="linenos"> 92</span><span class="n">controller</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+<span class="linenos"> 93</span>    <span class="kc">None</span><span class="p">,</span> <span class="n">control_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span>        <span class="c1"># static system</span>
+<span class="linenos"> 94</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ex&#39;</span><span class="p">,</span> <span class="s1">&#39;ey&#39;</span><span class="p">,</span> <span class="s1">&#39;etheta&#39;</span><span class="p">,</span> <span class="s1">&#39;vd&#39;</span><span class="p">,</span> <span class="s1">&#39;phid&#39;</span><span class="p">),</span>    <span class="c1"># system inputs</span>
+<span class="linenos"> 95</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">)</span>                            <span class="c1"># system outputs</span>
+<span class="linenos"> 96</span><span class="p">)</span>
+<span class="linenos"> 97</span>
+<span class="linenos"> 98</span><span class="c1">#</span>
+<span class="linenos"> 99</span><span class="c1"># Reference trajectory subsystem</span>
+<span class="linenos">100</span><span class="c1">#</span>
+<span class="linenos">101</span><span class="c1"># The reference trajectory block generates a simple trajectory for the system</span>
+<span class="linenos">102</span><span class="c1"># given the desired speed (vref) and lateral position (yref).  The trajectory</span>
+<span class="linenos">103</span><span class="c1"># consists of a straight line of the form (vref * t, yref, 0) with nominal</span>
+<span class="linenos">104</span><span class="c1"># input (vref, 0).</span>
+<span class="linenos">105</span><span class="c1">#</span>
+<span class="linenos">106</span><span class="c1"># System state: none</span>
+<span class="linenos">107</span><span class="c1"># System input: vref, yref</span>
+<span class="linenos">108</span><span class="c1"># System output: xd, yd, thetad, vd, phid</span>
+<span class="linenos">109</span><span class="c1"># System parameters: none</span>
+<span class="linenos">110</span><span class="c1">#</span>
+<span class="linenos">111</span><span class="k">def</span> <span class="nf">trajgen_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="linenos">112</span>    <span class="n">vref</span><span class="p">,</span> <span class="n">yref</span> <span class="o">=</span> <span class="n">u</span>
+<span class="linenos">113</span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vref</span> <span class="o">*</span> <span class="n">t</span><span class="p">,</span> <span class="n">yref</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vref</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="linenos">114</span>
+<span class="linenos">115</span><span class="c1"># Define the trajectory generator as an input/output system</span>
+<span class="linenos">116</span><span class="n">trajgen</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+<span class="linenos">117</span>    <span class="kc">None</span><span class="p">,</span> <span class="n">trajgen_output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;trajgen&#39;</span><span class="p">,</span>
+<span class="linenos">118</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;vref&#39;</span><span class="p">,</span> <span class="s1">&#39;yref&#39;</span><span class="p">),</span>
+<span class="linenos">119</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;xd&#39;</span><span class="p">,</span> <span class="s1">&#39;yd&#39;</span><span class="p">,</span> <span class="s1">&#39;thetad&#39;</span><span class="p">,</span> <span class="s1">&#39;vd&#39;</span><span class="p">,</span> <span class="s1">&#39;phid&#39;</span><span class="p">))</span>
+<span class="linenos">120</span>
+<span class="linenos">121</span><span class="c1">#</span>
+<span class="linenos">122</span><span class="c1"># System construction</span>
+<span class="linenos">123</span><span class="c1">#</span>
+<span class="linenos">124</span><span class="c1"># The input to the full closed loop system is the desired lateral position and</span>
+<span class="linenos">125</span><span class="c1"># the desired forward velocity.  The output for the system is taken as the</span>
+<span class="linenos">126</span><span class="c1"># full vehicle state plus the velocity of the vehicle.  The following diagram</span>
+<span class="linenos">127</span><span class="c1"># summarizes the interconnections:</span>
+<span class="linenos">128</span><span class="c1">#</span>
+<span class="linenos">129</span><span class="c1">#                        +---------+       +---------------&gt; v</span>
+<span class="linenos">130</span><span class="c1">#                        |         |       |</span>
+<span class="linenos">131</span><span class="c1"># [ yref ]               |         v       |</span>
+<span class="linenos">132</span><span class="c1"># [      ] ---&gt; trajgen -+-+-&gt; controller -+-&gt; vehicle -+-&gt; [x, y, theta]</span>
+<span class="linenos">133</span><span class="c1"># [ vref ]                 ^                            |</span>
+<span class="linenos">134</span><span class="c1">#                          |                            |</span>
+<span class="linenos">135</span><span class="c1">#                          +----------- [-1] -----------+</span>
+<span class="linenos">136</span><span class="c1">#</span>
+<span class="linenos">137</span><span class="c1"># We construct the system using the InterconnectedSystem constructor and using</span>
+<span class="linenos">138</span><span class="c1"># signal labels to keep track of everything.</span>
+<span class="linenos">139</span>
+<span class="linenos">140</span><span class="n">steering</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+<span class="linenos">141</span>    <span class="c1"># List of subsystems</span>
+<span class="linenos">142</span>    <span class="p">(</span><span class="n">trajgen</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;steering&#39;</span><span class="p">,</span>
+<span class="linenos">143</span>
+<span class="linenos">144</span>    <span class="c1"># Interconnections between  subsystems</span>
+<span class="linenos">145</span>    <span class="n">connections</span><span class="o">=</span><span class="p">(</span>
+<span class="linenos">146</span>        <span class="p">[</span><span class="s1">&#39;controller.ex&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.xd&#39;</span><span class="p">,</span> <span class="s1">&#39;-vehicle.x&#39;</span><span class="p">],</span>
+<span class="linenos">147</span>        <span class="p">[</span><span class="s1">&#39;controller.ey&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.yd&#39;</span><span class="p">,</span> <span class="s1">&#39;-vehicle.y&#39;</span><span class="p">],</span>
+<span class="linenos">148</span>        <span class="p">[</span><span class="s1">&#39;controller.etheta&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.thetad&#39;</span><span class="p">,</span> <span class="s1">&#39;-vehicle.theta&#39;</span><span class="p">],</span>
+<span class="linenos">149</span>        <span class="p">[</span><span class="s1">&#39;controller.vd&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.vd&#39;</span><span class="p">],</span>
+<span class="linenos">150</span>        <span class="p">[</span><span class="s1">&#39;controller.phid&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.phid&#39;</span><span class="p">],</span>
+<span class="linenos">151</span>        <span class="p">[</span><span class="s1">&#39;vehicle.v&#39;</span><span class="p">,</span> <span class="s1">&#39;controller.v&#39;</span><span class="p">],</span>
+<span class="linenos">152</span>        <span class="p">[</span><span class="s1">&#39;vehicle.phi&#39;</span><span class="p">,</span> <span class="s1">&#39;controller.phi&#39;</span><span class="p">]</span>
+<span class="linenos">153</span>    <span class="p">),</span>
+<span class="linenos">154</span>
+<span class="linenos">155</span>    <span class="c1"># System inputs</span>
+<span class="linenos">156</span>    <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trajgen.vref&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.yref&#39;</span><span class="p">],</span>
+<span class="linenos">157</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;yref&#39;</span><span class="p">,</span> <span class="s1">&#39;vref&#39;</span><span class="p">],</span>
+<span class="linenos">158</span>
+<span class="linenos">159</span>    <span class="c1">#  System outputs</span>
+<span class="linenos">160</span>    <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vehicle.x&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.y&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.theta&#39;</span><span class="p">,</span> <span class="s1">&#39;controller.v&#39;</span><span class="p">,</span>
+<span class="linenos">161</span>             <span class="s1">&#39;controller.phi&#39;</span><span class="p">],</span>
+<span class="linenos">162</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">]</span>
+<span class="linenos">163</span><span class="p">)</span>
+<span class="linenos">164</span>
+<span class="linenos">165</span><span class="c1"># Set up the simulation conditions</span>
+<span class="linenos">166</span><span class="n">yref</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">167</span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="linenos">168</span>
+<span class="linenos">169</span><span class="c1"># Set up a figure for plotting the results</span>
+<span class="linenos">170</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+<span class="linenos">171</span>
+<span class="linenos">172</span><span class="c1"># Plot the reference trajectory for the y position</span>
+<span class="linenos">173</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="n">yref</span><span class="p">,</span> <span class="n">yref</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="linenos">174</span>
+<span class="linenos">175</span><span class="c1"># Find the signals we want to plot</span>
+<span class="linenos">176</span><span class="n">y_index</span> <span class="o">=</span> <span class="n">steering</span><span class="o">.</span><span class="n">find_output</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="linenos">177</span><span class="n">v_index</span> <span class="o">=</span> <span class="n">steering</span><span class="o">.</span><span class="n">find_output</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)</span>
+<span class="linenos">178</span>
+<span class="linenos">179</span><span class="c1"># Do an iteration through different speeds</span>
+<span class="linenos">180</span><span class="k">for</span> <span class="n">vref</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]:</span>
+<span class="linenos">181</span>    <span class="c1"># Simulate the closed loop controller response</span>
+<span class="linenos">182</span>    <span class="n">tout</span><span class="p">,</span> <span class="n">yout</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">183</span>        <span class="n">steering</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span> <span class="n">yref</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">))])</span>
+<span class="linenos">184</span>
+<span class="linenos">185</span>    <span class="c1"># Plot the reference speed</span>
+<span class="linenos">186</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">vref</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="linenos">187</span>
+<span class="linenos">188</span>    <span class="c1"># Plot the system output</span>
+<span class="linenos">189</span>    <span class="n">y_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">yout</span><span class="p">[</span><span class="n">y_index</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>  <span class="c1"># lateral position</span>
+<span class="linenos">190</span>    <span class="n">v_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">yout</span><span class="p">[</span><span class="n">v_index</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>  <span class="c1"># vehicle velocity</span>
+<span class="linenos">191</span>
+<span class="linenos">192</span><span class="c1"># Add axis labels</span>
+<span class="linenos">193</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="linenos">194</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x vel (m/s), y pos (m)&#39;</span><span class="p">)</span>
+<span class="linenos">195</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">v_line</span><span class="p">,</span> <span class="n">y_line</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos">196</span>
+<span class="linenos">197</span><span class="c1">#</span>
+<span class="linenos">198</span><span class="c1"># Alternative formulation, using create_statefbk_iosystem()</span>
+<span class="linenos">199</span><span class="c1">#</span>
+<span class="linenos">200</span><span class="c1"># A different way to implement gain scheduling is to use the gain scheduling</span>
+<span class="linenos">201</span><span class="c1"># functionality built into the create_statefbk_iosystem() function, where we</span>
+<span class="linenos">202</span><span class="c1"># pass a table of gains instead of a single gain.  To generate a more</span>
+<span class="linenos">203</span><span class="c1"># interesting plot, we scale the feedforward input to generate some error.</span>
+<span class="linenos">204</span><span class="c1">#</span>
+<span class="linenos">205</span>
+<span class="linenos">206</span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="linenos">207</span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="linenos">208</span>
+<span class="linenos">209</span><span class="c1"># Define the points for the scheduling variables</span>
+<span class="linenos">210</span><span class="n">speeds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="linenos">211</span><span class="n">angles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="linenos">212</span><span class="n">points</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">speeds</span><span class="p">,</span> <span class="n">angles</span><span class="p">))</span>
+<span class="linenos">213</span>
+<span class="linenos">214</span><span class="c1"># Create controllers at each scheduling point</span>
+<span class="linenos">215</span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="linenos">216</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+<span class="linenos">217</span><span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">lqr</span><span class="p">(</span><span class="n">vehicle</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span>
+<span class="linenos">218</span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">angle</span><span class="p">],</span> <span class="p">[</span><span class="n">speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">speed</span><span class="p">,</span> <span class="n">angle</span> <span class="ow">in</span> <span class="n">points</span><span class="p">]</span>
+<span class="linenos">219</span>
+<span class="linenos">220</span><span class="c1"># Create the gain scheduled system</span>
+<span class="linenos">221</span><span class="n">controller</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span>
+<span class="linenos">222</span>    <span class="n">vehicle</span><span class="p">,</span> <span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">points</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="n">ud_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vd&#39;</span><span class="p">,</span> <span class="s1">&#39;phid&#39;</span><span class="p">],</span>
+<span class="linenos">223</span>    <span class="n">gainsched_indices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vd&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">],</span> <span class="n">gainsched_method</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="linenos">224</span>
+<span class="linenos">225</span><span class="c1"># Connect everything together (note that controller inputs are different)</span>
+<span class="linenos">226</span><span class="n">steering</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+<span class="linenos">227</span>    <span class="c1"># List of subsystems</span>
+<span class="linenos">228</span>    <span class="p">(</span><span class="n">trajgen</span><span class="p">,</span> <span class="n">controller</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;steering&#39;</span><span class="p">,</span>
+<span class="linenos">229</span>
+<span class="linenos">230</span>    <span class="c1"># Interconnections between  subsystems</span>
+<span class="linenos">231</span>    <span class="n">connections</span><span class="o">=</span><span class="p">(</span>
+<span class="linenos">232</span>        <span class="p">[</span><span class="s1">&#39;controller.xd[0]&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.xd&#39;</span><span class="p">],</span>
+<span class="linenos">233</span>        <span class="p">[</span><span class="s1">&#39;controller.xd[1]&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.yd&#39;</span><span class="p">],</span>
+<span class="linenos">234</span>        <span class="p">[</span><span class="s1">&#39;controller.xd[2]&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.thetad&#39;</span><span class="p">],</span>
+<span class="linenos">235</span>        <span class="p">[</span><span class="s1">&#39;controller.x&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.x&#39;</span><span class="p">],</span>
+<span class="linenos">236</span>        <span class="p">[</span><span class="s1">&#39;controller.y&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.y&#39;</span><span class="p">],</span>
+<span class="linenos">237</span>        <span class="p">[</span><span class="s1">&#39;controller.theta&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.theta&#39;</span><span class="p">],</span>
+<span class="linenos">238</span>        <span class="p">[</span><span class="s1">&#39;controller.vd&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;trajgen&#39;</span><span class="p">,</span> <span class="s1">&#39;vd&#39;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)],</span>      <span class="c1"># create some error</span>
+<span class="linenos">239</span>        <span class="p">[</span><span class="s1">&#39;controller.phid&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.phid&#39;</span><span class="p">],</span>
+<span class="linenos">240</span>        <span class="p">[</span><span class="s1">&#39;vehicle.v&#39;</span><span class="p">,</span> <span class="s1">&#39;controller.v&#39;</span><span class="p">],</span>
+<span class="linenos">241</span>        <span class="p">[</span><span class="s1">&#39;vehicle.phi&#39;</span><span class="p">,</span> <span class="s1">&#39;controller.phi&#39;</span><span class="p">]</span>
+<span class="linenos">242</span>    <span class="p">),</span>
+<span class="linenos">243</span>
+<span class="linenos">244</span>    <span class="c1"># System inputs</span>
+<span class="linenos">245</span>    <span class="n">inplist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;trajgen.vref&#39;</span><span class="p">,</span> <span class="s1">&#39;trajgen.yref&#39;</span><span class="p">],</span>
+<span class="linenos">246</span>    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;yref&#39;</span><span class="p">,</span> <span class="s1">&#39;vref&#39;</span><span class="p">],</span>
+<span class="linenos">247</span>
+<span class="linenos">248</span>    <span class="c1">#  System outputs</span>
+<span class="linenos">249</span>    <span class="n">outlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vehicle.x&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.y&#39;</span><span class="p">,</span> <span class="s1">&#39;vehicle.theta&#39;</span><span class="p">,</span> <span class="s1">&#39;controller.v&#39;</span><span class="p">,</span>
+<span class="linenos">250</span>             <span class="s1">&#39;controller.phi&#39;</span><span class="p">],</span>
+<span class="linenos">251</span>    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">]</span>
+<span class="linenos">252</span><span class="p">)</span>
+<span class="linenos">253</span>
+<span class="linenos">254</span><span class="c1"># Plot the results to compare to the previous case</span>
+<span class="linenos">255</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+<span class="linenos">256</span>
+<span class="linenos">257</span><span class="c1"># Plot the reference trajectory for the y position</span>
+<span class="linenos">258</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="n">yref</span><span class="p">,</span> <span class="n">yref</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="linenos">259</span>
+<span class="linenos">260</span><span class="c1"># Find the signals we want to plot</span>
+<span class="linenos">261</span><span class="n">y_index</span> <span class="o">=</span> <span class="n">steering</span><span class="o">.</span><span class="n">find_output</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="linenos">262</span><span class="n">v_index</span> <span class="o">=</span> <span class="n">steering</span><span class="o">.</span><span class="n">find_output</span><span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">)</span>
+<span class="linenos">263</span>
+<span class="linenos">264</span><span class="c1"># Do an iteration through different speeds</span>
+<span class="linenos">265</span><span class="k">for</span> <span class="n">vref</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">]:</span>
+<span class="linenos">266</span>    <span class="c1"># Simulate the closed loop controller response</span>
+<span class="linenos">267</span>    <span class="n">tout</span><span class="p">,</span> <span class="n">yout</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+<span class="linenos">268</span>        <span class="n">steering</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="p">[</span><span class="n">vref</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span> <span class="n">yref</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">))])</span>
+<span class="linenos">269</span>
+<span class="linenos">270</span>    <span class="c1"># Plot the reference speed</span>
+<span class="linenos">271</span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="n">vref</span><span class="p">,</span> <span class="n">vref</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="linenos">272</span>
+<span class="linenos">273</span>    <span class="c1"># Plot the system output</span>
+<span class="linenos">274</span>    <span class="n">y_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">yout</span><span class="p">[</span><span class="n">y_index</span><span class="p">],</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>  <span class="c1"># lateral position</span>
+<span class="linenos">275</span>    <span class="n">v_line</span><span class="p">,</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tout</span><span class="p">,</span> <span class="n">yout</span><span class="p">[</span><span class="n">v_index</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>  <span class="c1"># vehicle velocity</span>
+<span class="linenos">276</span>
+<span class="linenos">277</span><span class="c1"># Add axis labels</span>
+<span class="linenos">278</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="linenos">279</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x vel (m/s), y pos (m)&#39;</span><span class="p">)</span>
+<span class="linenos">280</span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">v_line</span><span class="p">,</span> <span class="n">y_line</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center right&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cruise-control.html" class="btn btn-neutral float-left" title="Cruise control design example (as a nonlinear I/O system)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="steering-optimal.html" class="btn btn-neutral float-right" title="Optimal control for vehicle steering (lane change)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

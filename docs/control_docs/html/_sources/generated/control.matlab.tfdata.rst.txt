@@ -1,0 +1,6 @@
+﻿control.matlab.tfdata
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: tfdata

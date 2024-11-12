@@ -1,0 +1,23 @@
+﻿control.PoleZeroData
+====================
+
+.. currentmodule:: control
+
+.. autoclass:: PoleZeroData
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PoleZeroData.__init__
+      ~PoleZeroData.plot
+   
+   
+
+   
+   
+   

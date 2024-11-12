@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.nyquist_plot &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.gangof4_plot" href="control.gangof4_plot.html" />
+    <link rel="prev" title="control.describing_function_plot" href="control.describing_function_plot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.nyquist_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phase_plane_plot.html">control.phase_plane_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.equilpoints.html">control.phaseplot.equilpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.separatrices.html">control.phaseplot.separatrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.streamlines.html">control.phaseplot.streamlines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.vectorfield.html">control.phaseplot.vectorfield</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_plot.html">control.pole_zero_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.root_locus_plot.html">control.root_locus_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_plot.html">control.singular_values_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.time_response_plot.html">control.time_response_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.nyquist_plot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.nyquist_plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-nyquist-plot">
+<h1>control.nyquist_plot<a class="headerlink" href="#control-nyquist-plot" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.nyquist_plot">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">nyquist_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_contour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_circle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mt_circles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ms_circles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/freqplot.py#L1507-L2022"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.nyquist_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nyquist plot for a system.</p>
+<p>Generates a Nyquist plot for the system over a (optional) frequency
+range.  The curve is computed by evaluating the Nyqist segment along
+the positive imaginary axis, with a mirror image generated to reflect
+the negative imaginary axis.  Poles on or near the imaginary axis are
+avoided using a small indentation.  The portion of the Nyquist contour
+at infinity is not explicitly computed (since it maps to a constant
+value for any system with a proper transfer function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>list</em><em> of </em><a class="reference internal" href="control.LTI.html#control.LTI" title="control.LTI"><em>LTI</em></a><em> or </em><a class="reference internal" href="control.NyquistResponseData.html#control.NyquistResponseData" title="control.NyquistResponseData"><em>NyquistResponseData</em></a>) – List of linear input/output systems (single system is OK) or
+Nyquist ersponses (computed using <a class="reference internal" href="control.nyquist_response.html#control.nyquist_response" title="control.nyquist_response"><code class="xref py py-func docutils literal notranslate"><span class="pre">nyquist_response()</span></code></a>).
+Nyquist curves for each system are plotted on the same graph.</p></li>
+<li><p><strong>omega</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Set of frequencies to be evaluated, in rad/sec. Specifying
+<code class="docutils literal notranslate"><span class="pre">omega</span></code> as a list of two elements is equivalent to providing
+<code class="docutils literal notranslate"><span class="pre">omega_limits</span></code>.</p></li>
+<li><p><strong>unit_circle</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, display the unit circle, to read gain crossover frequency.</p></li>
+<li><p><strong>mt_circles</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Draw circles corresponding to the given magnitudes of sensitivity.</p></li>
+<li><p><strong>ms_circles</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Draw circles corresponding to the given magnitudes of complementary
+sensitivity.</p></li>
+<li><p><strong>**kwargs</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot" title="(in Matplotlib v3.9.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot()</span></code></a> keyword properties, optional) – Additional keywords passed to <cite>matplotlib</cite> to specify line properties.</p></li>
+<li><p><strong>arrows</strong> (<em>int</em><em> or </em><em>1D/2D array</em><em> of </em><em>floats</em><em>, </em><em>optional</em>) – Specify the number of arrows to plot on the Nyquist curve.  If an
+integer is passed. that number of equally spaced arrows will be
+plotted on each of the primary segment and the mirror image.  If a 1D
+array is passed, it should consist of a sorted list of floats between
+0 and 1, indicating the location along the curve to plot an arrow.  If
+a 2D array is passed, the first row will be used to specify arrow
+locations for the primary curve and the second row will be used for
+the mirror image.</p></li>
+<li><p><strong>arrow_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Arrowhead width and length (in display coordinates).  Default value is
+8 and can be set using config.defaults[‘nyquist.arrow_size’].</p></li>
+<li><p><strong>arrow_style</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.patches.ArrowStyle.html#matplotlib.patches.ArrowStyle" title="(in Matplotlib v3.9.2)"><em>matplotlib.patches.ArrowStyle</em></a><em>, </em><em>optional</em>) – Define style used for Nyquist curve arrows (overrides <cite>arrow_size</cite>).</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><em>matplotlib.axes.Axes</em></a><em>, </em><em>optional</em>) – The matplotlib axes to draw the figure on.  If not specified and
+the current figure has a single axes, that axes is used.
+Otherwise, a new figure is created.</p></li>
+<li><p><strong>encirclement_threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – Define the threshold for generating a warning if the number of net
+encirclements is a non-integer value.  Default value is 0.05 and can
+be set using config.defaults[‘nyquist.encirclement_threshold’].</p></li>
+<li><p><strong>indent_direction</strong> (<em>str</em><em>, </em><em>optional</em>) – For poles on the imaginary axis, set the direction of indentation to
+be ‘right’ (default), ‘left’, or ‘none’.</p></li>
+<li><p><strong>indent_points</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of points to insert in the Nyquist contour around poles that
+are at or near the imaginary axis.</p></li>
+<li><p><strong>indent_radius</strong> (<em>float</em><em>, </em><em>optional</em>) – Amount to indent the Nyquist contour around poles on or near the
+imaginary axis. Portions of the Nyquist plot corresponding to indented
+portions of the contour are plotted using a different line style.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em> or </em><em>array_like</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – If present, replace automatically generated label(s) with the given
+label(s).  If sysdata is a list, strings should be specified for each
+system.</p></li>
+<li><p><strong>label_freq</strong> (<em>int</em><em>, </em><em>optiona</em>) – Label every nth frequency on the plot.  If not specified, no labels
+are generated.</p></li>
+<li><p><strong>legend_loc</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Include a legend in the given location. Default is ‘upper right’,
+with no legend for a single response.  Use False to suppress legend.</p></li>
+<li><p><strong>max_curve_magnitude</strong> (<em>float</em><em>, </em><em>optional</em>) – Restrict the maximum magnitude of the Nyquist plot to this value.
+Portions of the Nyquist plot whose magnitude is restricted are
+plotted using a different line style.</p></li>
+<li><p><strong>max_curve_offset</strong> (<em>float</em><em>, </em><em>optional</em>) – When plotting scaled portion of the Nyquist plot, increase/decrease
+the magnitude by this fraction of the max_curve_magnitude to allow
+any overlaps between the primary and mirror curves to be avoided.</p></li>
+<li><p><strong>mirror_style</strong> (<em>[</em><em>str</em><em>, </em><em>str</em><em>] or </em><em>False</em>) – Linestyles for mirror image of the Nyquist curve.  The first element
+is used for unscaled portions of the Nyquist curve, the second element
+is used for portions that are scaled (using max_curve_magnitude).  If
+<cite>False</cite> then omit completely.  Default linestyle ([‘–’, ‘:’]) is
+determined by config.defaults[‘nyquist.mirror_style’].</p></li>
+<li><p><strong>omega_limits</strong> (<em>array_like</em><em> of </em><em>two values</em>) – Set limits for plotted frequency range. If Hz=True the limits are
+in Hz otherwise in rad/s.  Specifying <code class="docutils literal notranslate"><span class="pre">omega</span></code> as a list of two
+elements is equivalent to providing <code class="docutils literal notranslate"><span class="pre">omega_limits</span></code>.</p></li>
+<li><p><strong>omega_num</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of samples to use for the frequeny range.  Defaults to
+config.defaults[‘freqplot.number_of_samples’].  Ignored if data is
+not a list of systems.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – (legacy) If given, <cite>nyquist_plot</cite> returns the legacy return values
+of (counts, contours).  If False, return the values with no plot.</p></li>
+<li><p><strong>primary_style</strong> (<em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Linestyles for primary image of the Nyquist curve.  The first
+element is used for unscaled portions of the Nyquist curve,
+the second element is used for portions that are scaled (using
+max_curve_magnitude).  Default linestyle ([‘-‘, ‘-.’]) is
+determined by config.defaults[‘nyquist.mirror_style’].</p></li>
+<li><p><strong>rcParams</strong> (<em>dict</em>) – Override the default parameters used for generating plots.
+Default is set by config.default[‘ctrlplot.rcParams’].</p></li>
+<li><p><strong>return_contour</strong> (<em>bool</em><em>, </em><em>optional</em>) – (legacy) If ‘True’, return the encirclement count and Nyquist
+contour used to generate the Nyquist plot.</p></li>
+<li><p><strong>show_legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Force legend to be shown if <code class="docutils literal notranslate"><span class="pre">True</span></code> or hidden if <code class="docutils literal notranslate"><span class="pre">False</span></code>.  If
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, then show legend when there is more than one line on the
+plot or <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code> has been specified.</p></li>
+<li><p><strong>start_marker</strong> (<em>str</em><em>, </em><em>optional</em>) – Matplotlib marker to use to mark the starting point of the Nyquist
+plot.  Defaults value is ‘o’ and can be set using
+config.defaults[‘nyquist.start_marker’].</p></li>
+<li><p><strong>start_marker_size</strong> (<em>float</em><em>, </em><em>optional</em>) – Start marker size (in display coordinates).  Default value is
+4 and can be set using config.defaults[‘nyquist.start_marker_size’].</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the title of the plot.  Defaults to plot type and system name(s).</p></li>
+<li><p><strong>title_frame</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the frame of reference used to center the plot title. If set to
+‘axes’ (default), the horizontal position of the title will
+centered relative to the axes.  If set to ‘figure’, it will be
+centered with respect to the figure (faster execution).</p></li>
+<li><p><strong>warn_nyquist</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to ‘False’, turn off warnings about frequencies above Nyquist.</p></li>
+<li><p><strong>warn_encirclements</strong> (<em>bool</em><em>, </em><em>optional</em>) – If set to ‘False’, turn off warnings about number of encirclements not
+meeting the Nyquist criterion.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>cplt</strong> –</p>
+<p>Object containing the data that were plotted:</p>
+<blockquote>
+<div><ul>
+<li><p>cplt.lines: 2D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code></a>
+objects for each line in the plot.  The shape of the array is
+given by (nsys, 4) where nsys is the number of systems or
+Nyquist responses passed to the function.  The second index
+specifies the segment type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>lines[idx, 0]: unscaled portion of the primary curve</p></li>
+<li><p>lines[idx, 1]: scaled portion of the primary curve</p></li>
+<li><p>lines[idx, 2]: unscaled portion of the mirror curve</p></li>
+<li><p>lines[idx, 3]: scaled portion of the mirror curve</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>cplt.axes: 2D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a> for the plot.</p></li>
+<li><p>cplt.figure: <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></a> containing the plot.</p></li>
+<li><p>cplt.legend: legend object(s) contained in the plot</p></li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> for more detailed information.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> object</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="control.nyquist_response.html#control.nyquist_response" title="control.nyquist_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nyquist_response</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<ol class="arabic simple">
+<li><p>If a discrete time model is given, the frequency response is computed
+along the upper branch of the unit circle, using the mapping <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span>
+<span class="pre">exp(1j</span> <span class="pre">*</span> <span class="pre">omega</span> <span class="pre">*</span> <span class="pre">dt)</span></code> where <cite>omega</cite> ranges from 0 to <cite>pi/dt</cite> and <cite>dt</cite>
+is the discrete timebase.  If timebase not specified (<code class="docutils literal notranslate"><span class="pre">dt=True</span></code>),
+<cite>dt</cite> is set to 1.</p></li>
+<li><p>If a continuous-time system contains poles on or near the imaginary
+axis, a small indentation will be used to avoid the pole.  The radius
+of the indentation is given by <cite>indent_radius</cite> and it is taken to the
+right of stable poles and the left of unstable poles.  If a pole is
+exactly on the imaginary axis, the <cite>indent_direction</cite> parameter can be
+used to set the direction of indentation.  Setting <cite>indent_direction</cite>
+to <cite>none</cite> will turn off indentation.  If <cite>return_contour</cite> is True, the
+exact contour used for evaluation is returned.</p></li>
+<li><p>For those portions of the Nyquist plot in which the contour is
+indented to avoid poles, resuling in a scaling of the Nyquist plot,
+the line styles are according to the settings of the <cite>primary_style</cite>
+and <cite>mirror_style</cite> keywords.  By default the scaled portions of the
+primary curve use a dotted line style and the scaled portion of the
+mirror image use a dashdot line style.</p></li>
+</ol>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">G</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">zpk</span><span class="p">([],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">gain</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">nyquist_plot</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.describing_function_plot.html" class="btn btn-neutral float-left" title="control.describing_function_plot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.gangof4_plot.html" class="btn btn-neutral float-right" title="control.gangof4_plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function reference &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="control.ss" href="generated/control.ss.html" />
+    <link rel="prev" title="control.use_legacy_defaults" href="generated/control.use_legacy_defaults.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Function reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#available-subpackages">Available subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-creation">System creation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.ss.html">control.ss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.tf.html">control.tf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.frd.html">control.frd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.zpk.html">control.zpk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.rss.html">control.rss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.drss.html">control.drss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.nlsys.html">control.nlsys</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-interconnections">System interconnections</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.append.html">control.append</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.connect.html">control.connect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.feedback.html">control.feedback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.interconnect.html">control.interconnect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.negate.html">control.negate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.parallel.html">control.parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.series.html">control.series</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.connection_table.html">control.connection_table</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frequency-domain-plotting">Frequency domain plotting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.nyquist_plot.html">control.nyquist_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.gangof4_plot.html">control.gangof4_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.nichols_grid.html">control.nichols_grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#time-domain-simulation">Time domain simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.forced_response.html">control.forced_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.impulse_response.html">control.impulse_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.initial_response.html">control.initial_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.phase_plot.html">control.phase_plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.step_response.html">control.step_response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#control-system-analysis">Control system analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.dcgain.html">control.dcgain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.describing_function.html">control.describing_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.frequency_response.html">control.frequency_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.get_input_ff_index.html">control.get_input_ff_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.get_output_fb_index.html">control.get_output_fb_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.ispassive.html">control.ispassive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.margin.html">control.margin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.stability_margins.html">control.stability_margins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.step_info.html">control.step_info</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.phase_crossover_frequencies.html">control.phase_crossover_frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.poles.html">control.poles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.zeros.html">control.zeros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.pzmap.html">control.pzmap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.root_locus.html">control.root_locus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.sisotool.html">control.sisotool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.StateSpace.__call__.html">control.StateSpace.__call__</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.TransferFunction.__call__.html">control.TransferFunction.__call__</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#matrix-computations">Matrix computations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.care.html">control.care</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.ctrb.html">control.ctrb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.dare.html">control.dare</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.dlyap.html">control.dlyap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.lyap.html">control.lyap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.obsv.html">control.obsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.gram.html">control.gram</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#control-system-synthesis">Control system synthesis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.acker.html">control.acker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.create_statefbk_iosystem.html">control.create_statefbk_iosystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.dlqr.html">control.dlqr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.h2syn.html">control.h2syn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.hinfsyn.html">control.hinfsyn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.lqr.html">control.lqr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.mixsyn.html">control.mixsyn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.place.html">control.place</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.place_varga.html">control.place_varga</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.rootlocus_pid_designer.html">control.rootlocus_pid_designer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#model-simplification-tools">Model simplification tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.minimal_realization.html">control.minimal_realization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.balanced_reduction.html">control.balanced_reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.hankel_singular_values.html">control.hankel_singular_values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.model_reduction.html">control.model_reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.eigensys_realization.html">control.eigensys_realization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.markov.html">control.markov</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#nonlinear-system-support">Nonlinear system support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.describing_function.html">control.describing_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.find_eqpt.html">control.find_eqpt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.linearize.html">control.linearize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.summing_junction.html">control.summing_junction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.flatsys.point_to_point.html">control.flatsys.point_to_point</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#stochastic-system-support">Stochastic system support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.correlation.html">control.correlation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.create_estimator_iosystem.html">control.create_estimator_iosystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.dlqe.html">control.dlqe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.lqe.html">control.lqe</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.white_noise.html">control.white_noise</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utility-functions-and-conversions">Utility functions and conversions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.augw.html">control.augw</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.bdschur.html">control.bdschur</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.canonical_form.html">control.canonical_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.damp.html">control.damp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.db2mag.html">control.db2mag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.isctime.html">control.isctime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.isdtime.html">control.isdtime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.issiso.html">control.issiso</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.issys.html">control.issys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.mag2db.html">control.mag2db</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.modal_form.html">control.modal_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.norm.html">control.norm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.observable_form.html">control.observable_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.pade.html">control.pade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.reachable_form.html">control.reachable_form</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.reset_defaults.html">control.reset_defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.sample_system.html">control.sample_system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.set_defaults.html">control.set_defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.similarity_transform.html">control.similarity_transform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.ss2tf.html">control.ss2tf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.ssdata.html">control.ssdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.tf2ss.html">control.tf2ss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.tfdata.html">control.tfdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.timebase.html">control.timebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.unwrap.html">control.unwrap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.use_fbs_defaults.html">control.use_fbs_defaults</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/control.use_matlab_defaults.html">control.use_matlab_defaults</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Function reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/control.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="function-reference">
+<span id="function-ref"></span><h1>Function reference<a class="headerlink" href="#function-reference" title="Permalink to this heading">¶</a></h1>
+<span class="target" id="module-control"></span><p>The Python Control Systems Library <a class="reference internal" href="#module-control" title="control"><code class="xref py py-mod docutils literal notranslate"><span class="pre">control</span></code></a> provides common functions
+for analyzing and designing feedback control systems.</p>
+<p>Documentation is available in two forms: docstrings provided with the code,
+and the python-control users guide, available from <a class="reference external" href="https://www.python-control.org">the python-control
+homepage</a>.</p>
+<p>The docstring examples assume that the following import commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+</pre></div>
+</div>
+<div class="section" id="available-subpackages">
+<h2>Available subpackages<a class="headerlink" href="#available-subpackages" title="Permalink to this heading">¶</a></h2>
+<p>The main control package includes the most common functions used in
+analysis, design, and simulation of feedback control systems.  Several
+additional subpackages are available that provide more specialized
+functionality:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="flatsys.html#module-control.flatsys" title="control.flatsys"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flatsys</span></code></a>: Differentially flat systems</p></li>
+<li><p><a class="reference internal" href="matlab.html#module-control.matlab" title="control.matlab"><code class="xref py py-mod docutils literal notranslate"><span class="pre">matlab</span></code></a>: MATLAB compatibility module</p></li>
+<li><p><a class="reference internal" href="optimal.html#module-control.optimal" title="control.optimal"><code class="xref py py-mod docutils literal notranslate"><span class="pre">optimal</span></code></a>: Optimization-based control</p></li>
+<li><p><code class="xref py py-mod docutils literal notranslate"><span class="pre">phaseplot</span></code>: 2D phase plane diagrams</p></li>
+</ul>
+</div>
+<div class="section" id="system-creation">
+<h2>System creation<a class="headerlink" href="#system-creation" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.ss.html#control.ss" title="control.ss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ss</span></code></a>(A, B, C, D[, dt])</p></td>
+<td><p>Create a state space system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.tf.html#control.tf" title="control.tf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf</span></code></a>(num, den[, dt])</p></td>
+<td><p>Create a transfer function system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.frd.html#control.frd" title="control.frd"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frd</span></code></a>(response, omega[, dt])</p></td>
+<td><p>Construct a frequency response data (FRD) model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.zpk.html#control.zpk" title="control.zpk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpk</span></code></a>(zeros, poles, gain[, dt])</p></td>
+<td><p>Create a transfer function from zeros, poles, gain.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.rss.html#control.rss" title="control.rss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rss</span></code></a>([states, outputs, inputs, strictly_proper])</p></td>
+<td><p>Create a stable random state space object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.drss.html#control.drss" title="control.drss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drss</span></code></a>([states, outputs, inputs, strictly_proper])</p></td>
+<td><p>Create a stable, discrete-time, random state space system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.nlsys.html#control.nlsys" title="control.nlsys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nlsys</span></code></a>(updfcn[, outfcn, inputs, outputs, states])</p></td>
+<td><p>Create a nonlinear input/output system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="system-interconnections">
+<h2>System interconnections<a class="headerlink" href="#system-interconnections" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.append.html#control.append" title="control.append"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code></a>(sys1, sys2, [..., sysn])</p></td>
+<td><p>Group LTI state space models by appending their inputs and outputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.connect.html#control.connect" title="control.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a>(sys, Q, inputv, outputv)</p></td>
+<td><p>Index-based interconnection of an LTI system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.feedback.html#control.feedback" title="control.feedback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feedback</span></code></a>(sys1[, sys2, sign])</p></td>
+<td><p>Feedback interconnection between two I/O systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.interconnect.html#control.interconnect" title="control.interconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">interconnect</span></code></a>(syslist[, connections, ...])</p></td>
+<td><p>Interconnect a set of input/output systems.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.negate.html#control.negate" title="control.negate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">negate</span></code></a>(sys, **kwargs)</p></td>
+<td><p>Return the negative of a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.parallel.html#control.parallel" title="control.parallel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallel</span></code></a>(sys1, sys2, [..., sysn])</p></td>
+<td><p>Return the parallel connection <cite>sys1</cite> + <cite>sys2</cite> (+ ... + <cite>sysn</cite>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.series.html#control.series" title="control.series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">series</span></code></a>(sys1, sys2, [..., sysn])</p></td>
+<td><p>Return the series connection (<cite>sysn</cite> * ... *) <cite>sys2</cite> * <cite>sys1</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.connection_table.html#control.connection_table" title="control.connection_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connection_table</span></code></a>(sys[, show_names, column_width])</p></td>
+<td><p>Print table of connections inside an interconnected system model.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="frequency-domain-plotting">
+<h2>Frequency domain plotting<a class="headerlink" href="#frequency-domain-plotting" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.bode_plot.html#control.bode_plot" title="control.bode_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bode_plot</span></code></a>(data[, omega, ax, omega_limits, ...])</p></td>
+<td><p>Bode plot for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.describing_function_plot.html#control.describing_function_plot" title="control.describing_function_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">describing_function_plot</span></code></a>(data, *args, **kwargs)</p></td>
+<td><p>Plot a Nyquist plot with a describing function for a nonlinear system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.nyquist_plot.html#control.nyquist_plot" title="control.nyquist_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nyquist_plot</span></code></a>(data[, omega, plot, ...])</p></td>
+<td><p>Nyquist plot for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.gangof4_plot.html#control.gangof4_plot" title="control.gangof4_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gangof4_plot</span></code></a>(*args[, omega, omega_limits, ...])</p></td>
+<td><p>Plot the response of the &quot;Gang of 4&quot; transfer functions for a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.nichols_plot.html#control.nichols_plot" title="control.nichols_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nichols_plot</span></code></a>(data[, omega, grid, title, ax, ...])</p></td>
+<td><p>Nichols plot for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.nichols_grid.html#control.nichols_grid" title="control.nichols_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nichols_grid</span></code></a>([cl_mags, cl_phases, ...])</p></td>
+<td><p>Nichols chart grid.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Note: For plotting commands that create multiple axes on the same plot, the
+individual axes can be retrieved using the axes label (retrieved using the
+<cite>get_label</cite> method for the matplotliib axes object).  The following labels
+are currently defined:</p>
+<ul class="simple">
+<li><p>Bode plots: <cite>control-bode-magnitude</cite>, <cite>control-bode-phase</cite></p></li>
+<li><p>Gang of 4 plots: <cite>control-gangof4-s</cite>, <cite>control-gangof4-cs</cite>,
+<cite>control-gangof4-ps</cite>, <cite>control-gangof4-t</cite></p></li>
+</ul>
+</div>
+<div class="section" id="time-domain-simulation">
+<h2>Time domain simulation<a class="headerlink" href="#time-domain-simulation" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.forced_response.html#control.forced_response" title="control.forced_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forced_response</span></code></a>(sysdata[, T, U, X0, ...])</p></td>
+<td><p>Compute the output of a linear system given the input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.impulse_response.html#control.impulse_response" title="control.impulse_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impulse_response</span></code></a>(sysdata[, T, input, ...])</p></td>
+<td><p>Compute the impulse response for a linear system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.initial_response.html#control.initial_response" title="control.initial_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initial_response</span></code></a>(sysdata[, T, X0, output, ...])</p></td>
+<td><p>Compute the initial condition response for a linear system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_output_response</span></code></a>(sys, T[, U, X0, ...])</p></td>
+<td><p>Compute the output response of a system to a given input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.phase_plot.html#control.phase_plot" title="control.phase_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_plot</span></code></a>(odefun[, X, Y, scale, X0, T, ...])</p></td>
+<td><p>(legacy) Phase plot for 2D dynamical systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.step_response.html#control.step_response" title="control.step_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_response</span></code></a>(sysdata[, T, X0, input, ...])</p></td>
+<td><p>Compute the step response for a linear system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="control-system-analysis">
+<h2>Control system analysis<a class="headerlink" href="#control-system-analysis" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.dcgain.html#control.dcgain" title="control.dcgain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dcgain</span></code></a>(sys)</p></td>
+<td><p>Return the zero-frequency (or DC) gain of the given system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.describing_function.html#control.describing_function" title="control.describing_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">describing_function</span></code></a>(F, A[, num_points, ...])</p></td>
+<td><p>Numerically compute the describing function of a nonlinear function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.frequency_response.html#control.frequency_response" title="control.frequency_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frequency_response</span></code></a>(sysdata[, omega, ...])</p></td>
+<td><p>Frequency response of an LTI system at multiple angular frequencies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.get_input_ff_index.html#control.get_input_ff_index" title="control.get_input_ff_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_input_ff_index</span></code></a>(sys)</p></td>
+<td><p>Return the input feedforward passivity (IFP) index for the system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.get_output_fb_index.html#control.get_output_fb_index" title="control.get_output_fb_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_fb_index</span></code></a>(sys)</p></td>
+<td><p>Return the output feedback passivity (OFP) index for the system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.ispassive.html#control.ispassive" title="control.ispassive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ispassive</span></code></a>(sys[, ofp_index, ifp_index])</p></td>
+<td><p>Indicate if a linear time invariant (LTI) system is passive.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.margin.html#control.margin" title="control.margin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">margin</span></code></a>(sysdata)</p></td>
+<td><p>Calculate gain and phase margins and associated crossover frequencies.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.stability_margins.html#control.stability_margins" title="control.stability_margins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stability_margins</span></code></a>(sysdata[, returnall, ...])</p></td>
+<td><p>Calculate stability margins and associated crossover frequencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.step_info.html#control.step_info" title="control.step_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_info</span></code></a>(sysdata[, T, T_num, yfinal, ...])</p></td>
+<td><p>Step response characteristics (Rise time, Settling Time, Peak and others).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.phase_crossover_frequencies.html#control.phase_crossover_frequencies" title="control.phase_crossover_frequencies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_crossover_frequencies</span></code></a>(sys)</p></td>
+<td><p>Compute frequencies and gains at intersections with real axis in Nyquist plot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.poles.html#control.poles" title="control.poles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">poles</span></code></a>(sys)</p></td>
+<td><p>Compute system poles.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.zeros.html#control.zeros" title="control.zeros"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zeros</span></code></a>(sys)</p></td>
+<td><p>Compute system zeros.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.pzmap.html#control.pzmap" title="control.pzmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pzmap</span></code></a>(data[, plot, grid, title, color, ...])</p></td>
+<td><p>Plot a pole/zero map for a linear system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.root_locus.html#control.root_locus" title="control.root_locus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">root_locus</span></code></a>(sysdata[, gains, grid, plot])</p></td>
+<td><p>Root locus plot.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.sisotool.html#control.sisotool" title="control.sisotool"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sisotool</span></code></a>(sys[, initial_gain, xlim_rlocus, ...])</p></td>
+<td><p>Sisotool style collection of plots inspired by MATLAB's sisotool.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.StateSpace.__call__.html#control.StateSpace.__call__" title="control.StateSpace.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateSpace.__call__</span></code></a>(x[, squeeze, warn_infinite])</p></td>
+<td><p>Evaluate system's frequency response at complex frequencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.TransferFunction.__call__.html#control.TransferFunction.__call__" title="control.TransferFunction.__call__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransferFunction.__call__</span></code></a>(x[, squeeze, ...])</p></td>
+<td><p>Evaluate system's transfer function at complex frequencies.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="matrix-computations">
+<h2>Matrix computations<a class="headerlink" href="#matrix-computations" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.care.html#control.care" title="control.care"><code class="xref py py-obj docutils literal notranslate"><span class="pre">care</span></code></a>(A, B, Q[, R, S, E, stabilizing, ...])</p></td>
+<td><p>Solves the continuous-time algebraic Riccati equation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.ctrb.html#control.ctrb" title="control.ctrb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ctrb</span></code></a>(A, B[, t])</p></td>
+<td><p>Controllabilty matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.dare.html#control.dare" title="control.dare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dare</span></code></a>(A, B, Q, R[, S, E, stabilizing, ...])</p></td>
+<td><p>Solves the discrete-time algebraic Riccati equation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.dlyap.html#control.dlyap" title="control.dlyap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dlyap</span></code></a>(A, Q[, C, E, method])</p></td>
+<td><p>Solves the discrete-time Lyapunov equation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.lyap.html#control.lyap" title="control.lyap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lyap</span></code></a>(A, Q[, C, E, method])</p></td>
+<td><p>Solves the continuous-time Lyapunov equation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.obsv.html#control.obsv" title="control.obsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">obsv</span></code></a>(A, C[, t])</p></td>
+<td><p>Observability matrix.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.gram.html#control.gram" title="control.gram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gram</span></code></a>(sys, type)</p></td>
+<td><p>Gramian (controllability or observability).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="control-system-synthesis">
+<h2>Control system synthesis<a class="headerlink" href="#control-system-synthesis" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.acker.html#control.acker" title="control.acker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acker</span></code></a>(A, B, poles)</p></td>
+<td><p>Pole placement using Ackermann method.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.create_statefbk_iosystem.html#control.create_statefbk_iosystem" title="control.create_statefbk_iosystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_statefbk_iosystem</span></code></a>(sys, gain[, ...])</p></td>
+<td><p>Create an I/O system using a (full) state feedback controller.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.dlqr.html#control.dlqr" title="control.dlqr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dlqr</span></code></a>(A, B, Q, R[, N])</p></td>
+<td><p>Discrete-time linear quadratic regulator design.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.h2syn.html#control.h2syn" title="control.h2syn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">h2syn</span></code></a>(P, nmeas, ncon)</p></td>
+<td><p>H_2 control synthesis for plant P.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.hinfsyn.html#control.hinfsyn" title="control.hinfsyn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hinfsyn</span></code></a>(P, nmeas, ncon)</p></td>
+<td><p>H_{inf} control synthesis for plant P.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.lqr.html#control.lqr" title="control.lqr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lqr</span></code></a>(A, B, Q, R[, N])</p></td>
+<td><p>Linear quadratic regulator design.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.mixsyn.html#control.mixsyn" title="control.mixsyn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mixsyn</span></code></a>(g[, w1, w2, w3])</p></td>
+<td><p>Mixed-sensitivity H-infinity synthesis.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.place.html#control.place" title="control.place"><code class="xref py py-obj docutils literal notranslate"><span class="pre">place</span></code></a>(A, B, p)</p></td>
+<td><p>Place closed loop eigenvalues.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.place_varga.html#control.place_varga" title="control.place_varga"><code class="xref py py-obj docutils literal notranslate"><span class="pre">place_varga</span></code></a>(A, B, p[, dtime, alpha])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param A</dt>
+<dd class="field-odd"><p>Dynamics matrix</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.rootlocus_pid_designer.html#control.rootlocus_pid_designer" title="control.rootlocus_pid_designer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rootlocus_pid_designer</span></code></a>(plant[, gain, sign, ...])</p></td>
+<td><p>Manual PID controller design based on root locus using Sisotool.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="model-simplification-tools">
+<h2>Model simplification tools<a class="headerlink" href="#model-simplification-tools" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.minimal_realization.html#control.minimal_realization" title="control.minimal_realization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimal_realization</span></code></a>(sys[, tol, verbose])</p></td>
+<td><p>Eliminate uncontrollable or unobservable states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.balanced_reduction.html#control.balanced_reduction" title="control.balanced_reduction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">balanced_reduction</span></code></a>(sys, orders[, method, alpha])</p></td>
+<td><p>Balanced reduced order model of sys of a given order.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.hankel_singular_values.html#control.hankel_singular_values" title="control.hankel_singular_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hankel_singular_values</span></code></a>(sys)</p></td>
+<td><p>Calculate the Hankel singular values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.model_reduction.html#control.model_reduction" title="control.model_reduction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">model_reduction</span></code></a>(sys, ELIM[, method])</p></td>
+<td><p>Model reduction by state elimination.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.eigensys_realization.html#control.eigensys_realization" title="control.eigensys_realization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eigensys_realization</span></code></a>(YY, r)</p></td>
+<td><p>Calculate ERA model of order <cite>r</cite> based on impulse-response data <cite>YY</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.markov.html#control.markov" title="control.markov"><code class="xref py py-obj docutils literal notranslate"><span class="pre">markov</span></code></a>(Y, U, [, m])</p></td>
+<td><p>Calculate the first <cite>m</cite> Markov parameters [D CB CAB ...] from data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nonlinear-system-support">
+<h2>Nonlinear system support<a class="headerlink" href="#nonlinear-system-support" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.describing_function.html#control.describing_function" title="control.describing_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">describing_function</span></code></a>(F, A[, num_points, ...])</p></td>
+<td><p>Numerically compute the describing function of a nonlinear function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.find_eqpt.html#control.find_eqpt" title="control.find_eqpt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_eqpt</span></code></a>(sys, x0[, u0, y0, t, params, iu, ...])</p></td>
+<td><p>Find the equilibrium point for an input/output system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.linearize.html#control.linearize" title="control.linearize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linearize</span></code></a>(sys, xeq[, ueq, t, params])</p></td>
+<td><p>Linearize an input/output system at a given state and input.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.input_output_response.html#control.input_output_response" title="control.input_output_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">input_output_response</span></code></a>(sys, T[, U, X0, ...])</p></td>
+<td><p>Compute the output response of a system to a given input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.summing_junction.html#control.summing_junction" title="control.summing_junction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summing_junction</span></code></a>([inputs, output, ...])</p></td>
+<td><p>Create a summing junction as an input/output system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.point_to_point.html#control.flatsys.point_to_point" title="control.flatsys.point_to_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys.point_to_point</span></code></a>(sys, timepts[, x0, ...])</p></td>
+<td><p>Compute trajectory between an initial and final conditions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="stochastic-system-support">
+<h2>Stochastic system support<a class="headerlink" href="#stochastic-system-support" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.correlation.html#control.correlation" title="control.correlation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">correlation</span></code></a>(T, X[, Y, squeeze])</p></td>
+<td><p>Compute the correlation of time signals.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.create_estimator_iosystem.html#control.create_estimator_iosystem" title="control.create_estimator_iosystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_estimator_iosystem</span></code></a>(sys, QN, RN[, P0, ...])</p></td>
+<td><p>Create an I/O system implementing a linear quadratic estimator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.dlqe.html#control.dlqe" title="control.dlqe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dlqe</span></code></a>(A, G, C, QN, RN, [, N])</p></td>
+<td><p>Linear quadratic estimator design (Kalman filter) for discrete-time systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.lqe.html#control.lqe" title="control.lqe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lqe</span></code></a>(A, G, C, QN, RN, [, NN])</p></td>
+<td><p>Linear quadratic estimator design (Kalman filter) for continuous-time systems.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.white_noise.html#control.white_noise" title="control.white_noise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">white_noise</span></code></a>(T, Q[, dt])</p></td>
+<td><p>Generate a white noise signal with specified intensity.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utility-functions-and-conversions">
+<span id="utility-and-conversions"></span><h2>Utility functions and conversions<a class="headerlink" href="#utility-functions-and-conversions" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.augw.html#control.augw" title="control.augw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">augw</span></code></a>(g[, w1, w2, w3])</p></td>
+<td><p>Augment plant for mixed sensitivity problem.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.bdschur.html#control.bdschur" title="control.bdschur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bdschur</span></code></a>(a[, condmax, sort])</p></td>
+<td><p>Block-diagonal Schur decomposition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.canonical_form.html#control.canonical_form" title="control.canonical_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">canonical_form</span></code></a>(xsys[, form])</p></td>
+<td><p>Convert a system into canonical form.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.damp.html#control.damp" title="control.damp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">damp</span></code></a>(sys[, doprint])</p></td>
+<td><p>Compute natural frequencies, damping ratios, and poles of a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.db2mag.html#control.db2mag" title="control.db2mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">db2mag</span></code></a>(db)</p></td>
+<td><p>Convert a gain in decibels (dB) to a magnitude.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.isctime.html#control.isctime" title="control.isctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isctime</span></code></a>([sys, dt, strict])</p></td>
+<td><p>Check to see if a system is a continuous-time system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.isdtime.html#control.isdtime" title="control.isdtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isdtime</span></code></a>([sys, strict, dt])</p></td>
+<td><p>Check to see if a system is a discrete time system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.issiso.html#control.issiso" title="control.issiso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">issiso</span></code></a>(sys[, strict])</p></td>
+<td><p>Check to see if a system is single input, single output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.issys.html#control.issys" title="control.issys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">issys</span></code></a>(obj)</p></td>
+<td><p>Deprecated function to check if an object is an LTI system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.mag2db.html#control.mag2db" title="control.mag2db"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mag2db</span></code></a>(mag)</p></td>
+<td><p>Convert a magnitude to decibels (dB).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.modal_form.html#control.modal_form" title="control.modal_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modal_form</span></code></a>(xsys[, condmax, sort])</p></td>
+<td><p>Convert a system into modal canonical form.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.norm.html#control.norm" title="control.norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">norm</span></code></a>(system[, p, tol, print_warning, method])</p></td>
+<td><p>Computes norm of system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.observable_form.html#control.observable_form" title="control.observable_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">observable_form</span></code></a>(xsys)</p></td>
+<td><p>Convert a system into observable canonical form.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.pade.html#control.pade" title="control.pade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pade</span></code></a>(T[, n, numdeg])</p></td>
+<td><p>Create a linear system that approximates a delay.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.reachable_form.html#control.reachable_form" title="control.reachable_form"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reachable_form</span></code></a>(xsys)</p></td>
+<td><p>Convert a system into reachable canonical form.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.reset_defaults.html#control.reset_defaults" title="control.reset_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_defaults</span></code></a>()</p></td>
+<td><p>Reset configuration values to their default (initial) values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.sample_system.html#control.sample_system" title="control.sample_system"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_system</span></code></a>(sysc, Ts[, method, alpha, ...])</p></td>
+<td><p>Convert a continuous time system to discrete time by sampling.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.set_defaults.html#control.set_defaults" title="control.set_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_defaults</span></code></a>(module, **keywords)</p></td>
+<td><p>Set default values of parameters for a module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.similarity_transform.html#control.similarity_transform" title="control.similarity_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">similarity_transform</span></code></a>(xsys, T[, timescale, ...])</p></td>
+<td><p>Perform a similarity transformation, with option time rescaling.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.ss2tf.html#control.ss2tf" title="control.ss2tf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ss2tf</span></code></a>(sys)</p></td>
+<td><p>Transform a state space system to a transfer function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.ssdata.html#control.ssdata" title="control.ssdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ssdata</span></code></a>(sys)</p></td>
+<td><p>Return state space data objects for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.tf2ss.html#control.tf2ss" title="control.tf2ss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf2ss</span></code></a>(sys)</p></td>
+<td><p>Transform a transfer function to a state space system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.tfdata.html#control.tfdata" title="control.tfdata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tfdata</span></code></a>(sys)</p></td>
+<td><p>Return transfer function data objects for a system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.timebase.html#control.timebase" title="control.timebase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timebase</span></code></a>(sys[, strict])</p></td>
+<td><p>Return the timebase for a system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.unwrap.html#control.unwrap" title="control.unwrap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unwrap</span></code></a>(angle[, period])</p></td>
+<td><p>Unwrap a phase angle to give a continuous curve.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.use_fbs_defaults.html#control.use_fbs_defaults" title="control.use_fbs_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_fbs_defaults</span></code></a>()</p></td>
+<td><p>Use <a class="reference external" href="http://fbsbook.org">Feedback Systems</a> (FBS) compatible settings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.use_matlab_defaults.html#control.use_matlab_defaults" title="control.use_matlab_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">use_matlab_defaults</span></code></a>()</p></td>
+<td><p>Use MATLAB compatible configuration settings.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/control.use_legacy_defaults.html" class="btn btn-neutral float-left" title="control.use_legacy_defaults" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/control.ss.html" class="btn btn-neutral float-right" title="control.ss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+﻿control.similarity\_transform
+=============================
+
+.. currentmodule:: control
+
+.. autofunction:: similarity_transform

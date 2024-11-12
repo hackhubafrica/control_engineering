@@ -1,0 +1,6 @@
+﻿control.unwrap
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: unwrap

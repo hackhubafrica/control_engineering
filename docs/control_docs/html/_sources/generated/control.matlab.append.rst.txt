@@ -1,0 +1,6 @@
+﻿control.matlab.append
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: append

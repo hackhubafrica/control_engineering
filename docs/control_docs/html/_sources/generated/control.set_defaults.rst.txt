@@ -1,0 +1,6 @@
+﻿control.set\_defaults
+=====================
+
+.. currentmodule:: control
+
+.. autofunction:: set_defaults

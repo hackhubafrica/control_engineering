@@ -1,0 +1,34 @@
+﻿control.InputOutputSystem
+=========================
+
+.. currentmodule:: control
+
+.. autoclass:: InputOutputSystem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~InputOutputSystem.copy
+      ~InputOutputSystem.find_input
+      ~InputOutputSystem.find_inputs
+      ~InputOutputSystem.find_output
+      ~InputOutputSystem.find_outputs
+      ~InputOutputSystem.find_state
+      ~InputOutputSystem.find_states
+      ~InputOutputSystem.isctime
+      ~InputOutputSystem.isdtime
+      ~InputOutputSystem.issiso
+      ~InputOutputSystem.set_inputs
+      ~InputOutputSystem.set_outputs
+      ~InputOutputSystem.set_states
+      ~InputOutputSystem.update_names
+   
+   

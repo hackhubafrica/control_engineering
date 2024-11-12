@@ -1,0 +1,6 @@
+﻿control.optimal.input\_poly\_constraint
+=======================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: input_poly_constraint

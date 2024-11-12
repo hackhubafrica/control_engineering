@@ -1,0 +1,6 @@
+﻿control.dlqr
+============
+
+.. currentmodule:: control
+
+.. autofunction:: dlqr

@@ -1,0 +1,6 @@
+﻿control.optimal.state\_poly\_constraint
+=======================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: state_poly_constraint

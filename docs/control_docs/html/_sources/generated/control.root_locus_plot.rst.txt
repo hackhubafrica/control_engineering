@@ -1,0 +1,6 @@
+﻿control.root\_locus\_plot
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: root_locus_plot

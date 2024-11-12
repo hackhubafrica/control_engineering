@@ -1,0 +1,6 @@
+﻿control.find\_eqpt
+==================
+
+.. currentmodule:: control
+
+.. autofunction:: find_eqpt

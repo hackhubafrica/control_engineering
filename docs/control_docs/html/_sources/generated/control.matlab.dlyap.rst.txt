@@ -1,0 +1,6 @@
+﻿control.matlab.dlyap
+====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: dlyap

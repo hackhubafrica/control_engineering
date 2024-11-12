@@ -1,0 +1,6 @@
+﻿control.matlab.drss
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: drss

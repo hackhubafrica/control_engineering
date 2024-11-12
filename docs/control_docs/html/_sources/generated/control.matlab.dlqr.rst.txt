@@ -1,0 +1,6 @@
+﻿control.matlab.dlqr
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: dlqr

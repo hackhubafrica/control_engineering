@@ -1,0 +1,6 @@
+﻿control.optimal.state\_range\_constraint
+========================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: state_range_constraint

@@ -1,0 +1,6 @@
+﻿control.hinfsyn
+===============
+
+.. currentmodule:: control
+
+.. autofunction:: hinfsyn

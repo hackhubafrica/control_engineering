@@ -1,0 +1,6 @@
+﻿control.modal\_form
+===================
+
+.. currentmodule:: control
+
+.. autofunction:: modal_form

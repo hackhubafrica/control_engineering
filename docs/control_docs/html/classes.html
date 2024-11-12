@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control system classes &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="control.InputOutputSystem" href="generated/control.InputOutputSystem.html" />
+    <link rel="prev" title="control.unwrap" href="generated/control.unwrap.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Control system classes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.InputOutputSystem.html">control.InputOutputSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.LTI.html">control.LTI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.StateSpace.html">control.StateSpace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.TransferFunction.html">control.TransferFunction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.FrequencyResponseData.html">control.FrequencyResponseData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.NonlinearIOSystem.html">control.NonlinearIOSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.InterconnectedSystem.html">control.InterconnectedSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/control.LinearICSystem.html">control.LinearICSystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-classes">Additional classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Control system classes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/classes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-system-classes">
+<span id="class-ref"></span><h1>Control system classes<a class="headerlink" href="#control-system-classes" title="Permalink to this heading">¶</a></h1>
+<p>The classes listed below are used to represent models of input/output
+systems (both linear time-invariant and nonlinear).  They are usually
+created from factory functions such as <a class="reference internal" href="generated/control.tf.html#control.tf" title="control.tf"><code class="xref py py-func docutils literal notranslate"><span class="pre">tf()</span></code></a> and <a class="reference internal" href="generated/control.ss.html#control.ss" title="control.ss"><code class="xref py py-func docutils literal notranslate"><span class="pre">ss()</span></code></a>, so the
+user should normally not need to instantiate these directly.</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.InputOutputSystem.html#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a>([name, inputs, outputs, ...])</p></td>
+<td><p>A class for representing input/output systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.LTI.html#control.LTI" title="control.LTI"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LTI</span></code></a>([inputs, outputs, states, name])</p></td>
+<td><p>LTI is a parent class to linear time-invariant (LTI) system objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.StateSpace.html#control.StateSpace" title="control.StateSpace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateSpace</span></code></a>(A, B, C, D[, dt])</p></td>
+<td><p>A class for representing state-space models.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.TransferFunction.html#control.TransferFunction" title="control.TransferFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransferFunction</span></code></a>(num, den[, dt])</p></td>
+<td><p>A class for representing transfer functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.FrequencyResponseData.html#control.FrequencyResponseData" title="control.FrequencyResponseData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FrequencyResponseData</span></code></a>(d, w[, smooth])</p></td>
+<td><p>A class for models defined by frequency response data (FRD).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.NonlinearIOSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NonlinearIOSystem</span></code></a>(updfcn[, outfcn, params])</p></td>
+<td><p>Nonlinear I/O system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.InterconnectedSystem.html#control.InterconnectedSystem" title="control.InterconnectedSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InterconnectedSystem</span></code></a>(syslist[, connections, ...])</p></td>
+<td><p>Interconnection of a set of input/output systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.LinearICSystem.html#control.LinearICSystem" title="control.LinearICSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LinearICSystem</span></code></a>(io_sys[, ss_sys, connection_type])</p></td>
+<td><p>Interconnection of a set of linear input/output systems.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The following figure illustrates the relationship between the classes and
+some of the functions that can be used to convert objects from one class to
+another:</p>
+<a class="reference internal image-reference" href="_images/classes.pdf"><img alt="_images/classes.pdf" src="_images/classes.pdf" style="width: 800px;" /></a>
+<div class="section" id="additional-classes">
+<h2>Additional classes<a class="headerlink" href="#additional-classes" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.DescribingFunctionNonlinearity.html#control.DescribingFunctionNonlinearity" title="control.DescribingFunctionNonlinearity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DescribingFunctionNonlinearity</span></code></a></p></td>
+<td><p>Base class for nonlinear systems with a describing function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.DescribingFunctionResponse.html#control.DescribingFunctionResponse" title="control.DescribingFunctionResponse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DescribingFunctionResponse</span></code></a></p></td>
+<td><p>Results of describing function analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.BasisFamily.html#control.flatsys.BasisFamily" title="control.flatsys.BasisFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys.BasisFamily</span></code></a></p></td>
+<td><p>Base class for implementing basis functions for flat systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.FlatSystem.html#control.flatsys.FlatSystem" title="control.flatsys.FlatSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys.FlatSystem</span></code></a></p></td>
+<td><p>Base class for representing a differentially flat system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.LinearFlatSystem.html#control.flatsys.LinearFlatSystem" title="control.flatsys.LinearFlatSystem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys.LinearFlatSystem</span></code></a></p></td>
+<td><p>Base class for a linear, differentially flat system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.flatsys.PolyFamily.html#control.flatsys.PolyFamily" title="control.flatsys.PolyFamily"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys.PolyFamily</span></code></a></p></td>
+<td><p>Polynomial basis functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.flatsys.SystemTrajectory.html#control.flatsys.SystemTrajectory" title="control.flatsys.SystemTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flatsys.SystemTrajectory</span></code></a></p></td>
+<td><p>Class representing a trajectory for a flat system.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.optimal.OptimalControlProblem.html#control.optimal.OptimalControlProblem" title="control.optimal.OptimalControlProblem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal.OptimalControlProblem</span></code></a></p></td>
+<td><p>Description of a finite horizon, optimal control problem.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.optimal.OptimalControlResult.html#control.optimal.OptimalControlResult" title="control.optimal.OptimalControlResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal.OptimalControlResult</span></code></a></p></td>
+<td><p>Result from solving an optimal control problem.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/control.optimal.OptimalEstimationProblem.html#control.optimal.OptimalEstimationProblem" title="control.optimal.OptimalEstimationProblem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal.OptimalEstimationProblem</span></code></a></p></td>
+<td><p>Description of a finite horizon, optimal estimation problem.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/control.optimal.OptimalEstimationResult.html#control.optimal.OptimalEstimationResult" title="control.optimal.OptimalEstimationResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimal.OptimalEstimationResult</span></code></a></p></td>
+<td><p>Result from solving an optimal estimationproblem.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The use of these classes is described in more detail in the
+<a class="reference internal" href="flatsys.html#flatsys-module"><span class="std std-ref">Differentially flat systems</span></a> module and the <a class="reference internal" href="optimal.html#optimal-module"><span class="std std-ref">Optimization-based control</span></a> module</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/control.unwrap.html" class="btn btn-neutral float-left" title="control.unwrap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/control.InputOutputSystem.html" class="btn btn-neutral float-right" title="control.InputOutputSystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

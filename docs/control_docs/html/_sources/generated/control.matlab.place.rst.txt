@@ -1,0 +1,6 @@
+﻿control.matlab.place
+====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: place

@@ -1,0 +1,6 @@
+﻿control.pade
+============
+
+.. currentmodule:: control
+
+.. autofunction:: pade

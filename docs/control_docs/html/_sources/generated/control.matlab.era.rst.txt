@@ -1,0 +1,6 @@
+﻿control.matlab.era
+==================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: era

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.phase_plot &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.dcgain" href="control.dcgain.html" />
+    <link rel="prev" title="control.input_output_response" href="control.input_output_response.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../control.html">Function reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../control.html#available-subpackages">Available subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-creation">System creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#frequency-domain-plotting">Frequency domain plotting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../control.html#time-domain-simulation">Time domain simulation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.forced_response.html">control.forced_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.impulse_response.html">control.impulse_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.initial_response.html">control.initial_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.phase_plot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.phase_plot"><code class="docutils literal notranslate"><span class="pre">phase_plot()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.step_response.html">control.step_response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-analysis">Control system analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#matrix-computations">Matrix computations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-synthesis">Control system synthesis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#model-simplification-tools">Model simplification tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#nonlinear-system-support">Nonlinear system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#stochastic-system-support">Stochastic system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#utility-functions-and-conversions">Utility functions and conversions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.phase_plot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.phase_plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-phase-plot">
+<h1>control.phase_plot<a class="headerlink" href="#control-phase-plot" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.phase_plot">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">phase_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">odefun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lingrid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lintime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logtime</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timepts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tfirst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/phaseplot.py#L1010-L1270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.phase_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>(legacy) Phase plot for 2D dynamical systems.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.10.1: </span>This function is deprecated; use <a class="reference internal" href="control.phase_plane_plot.html#control.phase_plane_plot" title="control.phase_plane_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">phase_plane_plot()</span></code></a> instead.</p>
+</div>
+<p>Produces a vector field or stream line plot for a planar system.  This
+function has been replaced by the <code class="xref py py-func docutils literal notranslate"><span class="pre">phase_plane_map()</span></code> and
+<a class="reference internal" href="control.phase_plane_plot.html#control.phase_plane_plot" title="control.phase_plane_plot"><code class="xref py py-func docutils literal notranslate"><span class="pre">phase_plane_plot()</span></code></a> functions.</p>
+<dl class="simple">
+<dt>Call signatures:</dt><dd><p>phase_plot(func, X, Y, …) - display vector field on meshgrid
+phase_plot(func, X, Y, scale, …) - scale arrows
+phase_plot(func. X0=(…), T=Tmax, …) - display stream lines
+phase_plot(func, X, Y, X0=[…], T=Tmax, …) - plot both
+phase_plot(func, X0=[…], T=Tmax, lingrid=N, …) - plot both
+phase_plot(func, X0=[…], lintime=N, …) - stream lines with arrows</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em><em>(</em><em>x</em><em>, </em><em>t</em><em>, </em><em>...</em><em>)</em>) – Computes the time derivative of y (compatible with odeint).  The
+function should be the same for as used for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/integrate.html#module-scipy.integrate" title="(in SciPy v1.14.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a>.
+Namely, it should be a function of the form dxdt = F(t, x) that
+accepts a state x of dimension 2 and returns a derivative dx/dt of
+dimension 2.</p></li>
+<li><p><strong>X</strong> (<em>3-element sequences</em><em>, </em><em>optional</em><em>, </em><em>as</em><em> [</em><em>start</em><em>, </em><em>stop</em><em>, </em><em>npts</em><em>]</em>) – Two 3-element sequences specifying x and y coordinates of a
+grid.  These arguments are passed to linspace and meshgrid to
+generate the points at which the vector field is plotted.  If
+absent (or None), the vector field is not plotted.</p></li>
+<li><p><strong>Y</strong> (<em>3-element sequences</em><em>, </em><em>optional</em><em>, </em><em>as</em><em> [</em><em>start</em><em>, </em><em>stop</em><em>, </em><em>npts</em><em>]</em>) – Two 3-element sequences specifying x and y coordinates of a
+grid.  These arguments are passed to linspace and meshgrid to
+generate the points at which the vector field is plotted.  If
+absent (or None), the vector field is not plotted.</p></li>
+<li><p><strong>scale</strong> (<em>float</em><em>, </em><em>optional</em>) – Scale size of arrows; default = 1</p></li>
+<li><p><strong>X0</strong> (<em>ndarray</em><em> of </em><em>initial conditions</em><em>, </em><em>optional</em>) – List of initial conditions from which streamlines are plotted.
+Each initial condition should be a pair of numbers.</p></li>
+<li><p><strong>T</strong> (<em>array-like</em><em> or </em><em>number</em><em>, </em><em>optional</em>) – Length of time to run simulations that generate streamlines.
+If a single number, the same simulation time is used for all
+initial conditions.  Otherwise, should be a list of length
+len(X0) that gives the simulation time for each initial
+condition.  Default value = 50.</p></li>
+<li><p><strong>lingrid</strong> (<em>integer</em><em> or </em><em>2-tuple</em><em> of </em><em>integers</em><em>, </em><em>optional</em>) – Argument is either N or (N, M).  If X0 is given and X, Y are missing,
+a grid of arrows is produced using the limits of the initial
+conditions, with N grid points in each dimension or N grid points in x
+and M grid points in y.</p></li>
+<li><p><strong>lintime</strong> (<em>integer</em><em> or </em><em>tuple</em><em> (</em><em>integer</em><em>, </em><em>float</em><em>)</em><em>, </em><em>optional</em>) – If a single integer N is given, draw N arrows using equally space time
+points.  If a tuple (N, lambda) is given, draw N arrows using
+exponential time constant lambda</p></li>
+<li><p><strong>timepts</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Draw arrows at the given list times [t1, t2, …]</p></li>
+<li><p><strong>tfirst</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, call <cite>func</cite> with signature <cite>func(t, x, …)</cite>.</p></li>
+<li><p><strong>params</strong> (<em>tuple</em><em>, </em><em>optional</em>) – List of parameters to pass to vector field: <cite>func(x, t, *params)</cite></p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">box_grid</span></code></dt><dd><p>construct box-shaped grid of initial conditions</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.input_output_response.html" class="btn btn-neutral float-left" title="control.input_output_response" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.dcgain.html" class="btn btn-neutral float-right" title="control.dcgain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

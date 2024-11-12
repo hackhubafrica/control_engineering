@@ -1,0 +1,6 @@
+﻿control.flatsys.flatsys
+=======================
+
+.. currentmodule:: control.flatsys
+
+.. autofunction:: flatsys

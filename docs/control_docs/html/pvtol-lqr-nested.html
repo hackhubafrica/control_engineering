@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vertical takeoff and landing aircraft &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Output feedback control using LQR and extended Kalman filtering" href="pvtol-outputfbk.html" />
+    <link rel="prev" title="Model Predictive Control: Aircraft Model" href="mpc_aircraft.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Vertical takeoff and landing aircraft</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#System-Description">System Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LQR-state-feedback-controller">LQR state feedback controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Lateral-control-using-inner/outer-loop-design">Lateral control using inner/outer loop design</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Vertical takeoff and landing aircraft</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pvtol-lqr-nested.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="Vertical-takeoff-and-landing-aircraft">
+<h1>Vertical takeoff and landing aircraft<a class="headerlink" href="#Vertical-takeoff-and-landing-aircraft" title="Permalink to this heading">¶</a></h1>
+<p>This notebook demonstrates the use of the python-control package for analysis and design of a controller for a vectored thrust aircraft model that is used as a running example through the text <em>Feedback Systems</em> by Astrom and Murray. This example makes use of MATLAB compatible commands.</p>
+<p>Additional information on this system is available at</p>
+<p><a class="reference external" href="http://www.cds.caltech.edu/~murray/wiki/index.php/Python-control/Example:_Vertical_takeoff_and_landing_aircraft">http://www.cds.caltech.edu/~murray/wiki/index.php/Python-control/Example:_Vertical_takeoff_and_landing_aircraft</a></p>
+<div class="section" id="System-Description">
+<h2>System Description<a class="headerlink" href="#System-Description" title="Permalink to this heading">¶</a></h2>
+<p>This example uses a simplified model for a (planar) vertical takeoff and landing aircraft (PVTOL), as shown below:</p>
+<p><img alt="PVTOL diagram" src="https://murray.cds.caltech.edu/images/murray.cds/7/7d/Pvtol-diagram.png" /></p>
+<p><img alt="PVTOL dynamics" src="https://murray.cds.caltech.edu/images/murray.cds/b/b7/Pvtol-dynamics.png" /></p>
+<p>The position and orientation of the center of mass of the aircraft is denoted by <span class="math">(x,y,\theta)</span>, <span class="math">m</span> is the mass of the vehicle, <span class="math">J</span> the moment of inertia, <span class="math">g</span> the gravitational constant and <span class="math">c</span> the damping coefficient. The forces generated by the main downward thruster and the maneuvering thrusters are modeled as a pair of forces <span class="math">F_1</span> and <span class="math">F_2</span> acting at a distance <span class="math">r</span> below the aircraft (determined by the geometry of the thrusters).</p>
+<p>Letting <span class="math">z=(x,y,\theta, \dot x, \dot y, \dot\theta</span>), the equations can be written in state space form as:</p>
+<div class="math">
+<p><span class="math">\frac{dz}{dt} = \begin{bmatrix}
+                       z_4 \\
+                       z_5 \\
+                       z_6 \\
+                       -\frac{c}{m} z_4 \\
+                       -g- \frac{c}{m} z_5 \\
+                       0
+                  \end{bmatrix}
+                  +
+                  \begin{bmatrix}
+                       0 \\
+                       0 \\
+                       0 \\
+                       \frac{1}{m} \cos \theta F_1 + \frac{1}{m} \sin \theta F_2 \\
+                       \frac{1}{m} \sin \theta F_1 + \frac{1}{m} \cos \theta F_2 \\
+                       \frac{r}{J} F_1
+                  \end{bmatrix}</span></p>
+</div></div>
+<div class="section" id="LQR-state-feedback-controller">
+<h2>LQR state feedback controller<a class="headerlink" href="#LQR-state-feedback-controller" title="Permalink to this heading">¶</a></h2>
+<p>This section demonstrates the design of an LQR state feedback controller for the vectored thrust aircraft example. This example is pulled from Chapter 6 (Linear Systems, Example 6.4) and Chapter 7 (State Feedback, Example 7.9) of <a class="reference external" href="https://fbsbook.org">Astrom and Murray</a>. The python code listed here are contained the the file pvtol-lqr.py.</p>
+<p>To execute this example, we first import the libraries for SciPy, MATLAB plotting and the python-control package:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>             <span class="c1"># Grab all of the NumPy functions</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># Grab MATLAB plotting functions</span>
+<span class="kn">from</span> <span class="nn">control.matlab</span> <span class="kn">import</span> <span class="o">*</span>    <span class="c1"># MATLAB-like functions</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<p>The parameters for the system are given by</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">4</span>                         <span class="c1"># mass of aircraft</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mf">0.0475</span>                    <span class="c1"># inertia around pitch axis</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.25</span>                      <span class="c1"># distance to center of force</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span>                       <span class="c1"># gravitational constant</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.05</span>                      <span class="c1"># damping factor (estimated)</span>
+</pre></div>
+</div>
+</div>
+<p>Choosing equilibrium inputs to be <span class="math">u_e = (0, mg)</span>, the dynamics of the system <span class="math">\frac{dz}{dt}</span>, and their linearization <span class="math">A</span> about equilibrium point <span class="math">z_e = (0, 0, 0, 0, 0, 0)</span> are given by</p>
+<div class="math">
+<p><span class="math">\frac{dz}{dt} = \begin{bmatrix}
+                       z_4 \\
+                       z_5 \\
+                       z_6 \\
+                       -g \sin z_3 -\frac{c}{m} z_4 \\
+                       g(\cos z_3 - 1)- \frac{c}{m} z_5 \\
+                       0
+                  \end{bmatrix}
+\qquad
+A = \begin{bmatrix}
+       0 &amp; 0 &amp; 0 &amp;1&amp;0&amp;0\\
+       0&amp;0&amp;0&amp;0&amp;1&amp;0 \\
+       0&amp;0&amp;0&amp;0&amp;0&amp;1 \\
+       0&amp;0&amp;-g&amp;-c/m&amp;0&amp;0 \\
+       0&amp;0&amp;0&amp;0&amp;-c/m&amp;0 \\
+       0&amp;0&amp;0&amp;0&amp;0&amp;0
+    \end{bmatrix}</span></p>
+</div><div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># State space dynamics</span>
+<span class="n">xe</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>         <span class="c1"># equilibrium point of interest</span>
+<span class="n">ue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">*</span><span class="n">g</span><span class="p">]</span>                   <span class="c1"># (note these are lists, not matrices)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dynamics matrix (use matrix type so that * works for multiplication)</span>
+<span class="c1"># Note that we write A and B here in full generality in case we want</span>
+<span class="c1"># to test different xe and ue.</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span>
+   <span class="p">[[</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">ue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">ue</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">ue</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="n">ue</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span> <span class="p">]])</span>
+
+<span class="c1"># Input matrix</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span>
+   <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">cos</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">m</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">m</span><span class="p">,</span>  <span class="n">cos</span><span class="p">(</span><span class="n">xe</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">m</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">r</span><span class="o">/</span><span class="n">J</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="c1"># Output matrix</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<p>To compute a linear quadratic regulator for the system, we write the cost function as</p>
+<div class="math">
+<p><span class="math">J = \int_0^\infty (\xi^T Q_\xi \xi + v^T Q_v v) dt,</span></p>
+</div><p>where <span class="math">\xi = z - z_e</span> and <span class="math">v = u - u_e</span> represent the local coordinates around the desired equilibrium point <span class="math">(z_e, u_e)</span>. We begin with diagonal matrices for the state and input costs:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Qx1</span> <span class="o">=</span> <span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">Qu1a</span> <span class="o">=</span> <span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span> <span class="o">=</span> <span class="n">lqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Qx1</span><span class="p">,</span> <span class="n">Qu1a</span><span class="p">);</span> <span class="n">K1a</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>This gives a control law of the form <span class="math">v = -K \xi</span>, which can then be used to derive the control law in terms of the original variables:</p>
+<div class="math">
+<p><span class="math">u = v + u_e = - K(z - z_d) + u_d.</span></p>
+</div><p>where <span class="math">u_e = (0, mg)</span> and <span class="math">z_d = (x_d, y_d, 0, 0, 0, 0)</span></p>
+<p>The way we setup the dynamics above, <span class="math">A</span> is already hardcoding <span class="math">u_d</span>, so we don’t need to include it as an external input. So we just need to cascade the <span class="math">-K(z-z_d)</span> controller with the PVTOL aircraft’s dynamics to control it. For didactic purposes, we will cheat in two small ways:</p>
+<ul class="simple">
+<li><p>First, we will only interface our controller with the linearized dynamics. Using the nonlinear dynamics would require the <code class="docutils literal notranslate"><span class="pre">NonlinearIOSystem</span></code> functionalities, which we leave to another notebook to introduce.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Second, as written, our controller requires full state feedback (<span class="math">K</span> multiplies full state vectors <span class="math">z</span>), which we do not have access to because our system, as written above, only returns <span class="math">x</span> and <span class="math">y</span> (because of <span class="math">C</span> matrix). Hence, we would need a state observer, such as a Kalman Filter, to track the state variables. Instead, we assume that we have access to the full state.</p></li>
+</ol>
+<p>The following code implements the closed loop system:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our input to the system will only be (x_d, y_d), so we need to</span>
+<span class="c1"># multiply it by this matrix to turn it into z_d.</span>
+<span class="n">Xd</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+             <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Closed loop dynamics</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="o">*</span><span class="n">K</span><span class="p">,</span><span class="n">B</span><span class="o">*</span><span class="n">K</span><span class="o">*</span><span class="n">Xd</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+
+<span class="c1"># Step response for the first input</span>
+<span class="n">x</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="nb">input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="c1"># Step response for the second input</span>
+<span class="n">y</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="nb">input</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">T</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s1">&#39;Step Response for Inputs&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Yx&#39;</span><span class="p">,</span> <span class="s1">&#39;Yy&#39;</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/pvtol-lqr-nested_12_0.png" src="_images/pvtol-lqr-nested_12_0.png" />
+</div>
+</div>
+<p>The plot above shows the <span class="math">x</span> and <span class="math">y</span> positions of the aircraft when it is commanded to move 1 m in each direction. The following shows the <span class="math">x</span> motion for control weights <span class="math">\rho = 1, 10^2, 10^4</span>. A higher weight of the input term in the cost function causes a more sluggish response. It is created using the code:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Look at different input weightings</span>
+<span class="n">Qu1a</span> <span class="o">=</span> <span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">K1a</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">lqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Qx1</span><span class="p">,</span> <span class="n">Qu1a</span><span class="p">)</span>
+<span class="n">H1ax</span> <span class="o">=</span> <span class="n">H</span> <span class="o">=</span> <span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="o">*</span><span class="n">K1a</span><span class="p">,</span><span class="n">B</span><span class="o">*</span><span class="n">K1a</span><span class="o">*</span><span class="n">Xd</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+
+<span class="n">Qu1b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">40</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">K1b</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">lqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Qx1</span><span class="p">,</span> <span class="n">Qu1b</span><span class="p">)</span>
+<span class="n">H1bx</span> <span class="o">=</span> <span class="n">H</span> <span class="o">=</span> <span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="o">*</span><span class="n">K1b</span><span class="p">,</span><span class="n">B</span><span class="o">*</span><span class="n">K1b</span><span class="o">*</span><span class="n">Xd</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+
+<span class="n">Qu1c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">K1c</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">E</span> <span class="o">=</span> <span class="n">lqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Qx1</span><span class="p">,</span> <span class="n">Qu1c</span><span class="p">)</span>
+<span class="n">H1cx</span> <span class="o">=</span> <span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="o">*</span><span class="n">K1c</span><span class="p">,</span><span class="n">B</span><span class="o">*</span><span class="n">K1c</span><span class="o">*</span><span class="n">Xd</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+
+<span class="p">[</span><span class="n">Y1</span><span class="p">,</span> <span class="n">T1</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">H1ax</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="nb">input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">Y2</span><span class="p">,</span> <span class="n">T2</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">H1bx</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="nb">input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">Y3</span><span class="p">,</span> <span class="n">T3</span><span class="p">]</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">H1cx</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="nb">input</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">T1</span><span class="p">,</span> <span class="n">Y1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">T2</span><span class="p">,</span> <span class="n">Y2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">T3</span><span class="p">,</span> <span class="n">Y3</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="mi">0</span> <span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s1">&#39;Step Response for Inputs&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Position&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">((</span><span class="s1">&#39;Y1&#39;</span><span class="p">,</span><span class="s1">&#39;Y2&#39;</span><span class="p">,</span><span class="s1">&#39;Y3&#39;</span><span class="p">),</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">])</span>
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/pvtol-lqr-nested_15_0.png" src="_images/pvtol-lqr-nested_15_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Lateral-control-using-inner/outer-loop-design">
+<h2>Lateral control using inner/outer loop design<a class="headerlink" href="#Lateral-control-using-inner/outer-loop-design" title="Permalink to this heading">¶</a></h2>
+<p>This section demonstrates the design of loop shaping controller for the vectored thrust aircraft example. This example is pulled from Chapter 11 (Frequency Domain Design) of <a class="reference external" href="https://fbsbook.org">Astrom and Murray</a>.</p>
+<p>To design a controller for the lateral dynamics of the vectored thrust aircraft, we make use of a “inner/outer” loop design methodology. We begin by representing the dynamics using the block diagram</p>
+<p><img alt="4f15412c3f854a19b2fb6a6cfd97e80e" src="https://murray.cds.caltech.edu/images/murray.cds/3/3f/Pvtol-lateraltf.png" /></p>
+<p>The controller is constructed by splitting the process dynamics and controller into two components: an inner loop consisting of the roll dynamics <span class="math">P_i</span> and control <span class="math">C_i</span> and an outer loop consisting of the lateral position dynamics <span class="math">P_o</span> and controller <span class="math">C_o</span>. <img alt="8adf60fa41d0494ab59104bb540dd4af" src="https://murray.cds.caltech.edu/images/murray.cds/f/f1/Pvtol-nested-1.png" /> The closed inner loop dynamics <span class="math">H_i</span> control the roll angle of the aircraft using the vectored thrust while the outer loop controller <span class="math">C_o</span> commands the roll angle to
+regulate the lateral position.</p>
+<p>The following code imports the libraries that are required and defines the dynamics:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># Grab MATLAB plotting functions</span>
+<span class="kn">from</span> <span class="nn">control.matlab</span> <span class="kn">import</span> <span class="o">*</span>    <span class="c1"># MATLAB-like functions</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># System parameters</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">4</span>                         <span class="c1"># mass of aircraft</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mf">0.0475</span>                    <span class="c1"># inertia around pitch axis</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.25</span>                      <span class="c1"># distance to center of force</span>
+<span class="n">g</span> <span class="o">=</span> <span class="mf">9.8</span>                       <span class="c1"># gravitational constant</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">0.05</span>                      <span class="c1"># damping factor (estimated)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transfer functions for dynamics</span>
+<span class="n">Pi</span> <span class="o">=</span> <span class="n">tf</span><span class="p">([</span><span class="n">r</span><span class="p">],</span> <span class="p">[</span><span class="n">J</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># inner loop (roll)</span>
+<span class="n">Po</span> <span class="o">=</span> <span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># outer loop (position)</span>
+</pre></div>
+</div>
+</div>
+<p>For the inner loop, use a lead compensator</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">Ci</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>     <span class="c1"># lead compensator</span>
+<span class="n">Li</span> <span class="o">=</span> <span class="n">Pi</span><span class="o">*</span><span class="n">Ci</span>
+</pre></div>
+</div>
+</div>
+<p>The closed loop dynamics of the inner loop, <span class="math">H_i</span>, are given by</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Hi</span> <span class="o">=</span> <span class="n">parallel</span><span class="p">(</span><span class="n">feedback</span><span class="p">(</span><span class="n">Ci</span><span class="p">,</span> <span class="n">Pi</span><span class="p">),</span> <span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">feedback</span><span class="p">(</span><span class="n">Ci</span><span class="o">*</span><span class="n">Pi</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>Finally, we design the lateral compensator using another lead compenstor</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now design the lateral control system</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">Co</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span><span class="o">*</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>         <span class="c1"># another lead compensator</span>
+<span class="n">Lo</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">Po</span><span class="o">*</span><span class="n">Co</span>
+</pre></div>
+</div>
+</div>
+<p>The performance of the system can be characterized using the sensitivity function and the complementary sensitivity function:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="n">Co</span><span class="o">*</span><span class="n">Hi</span><span class="o">*</span><span class="n">Po</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">feedback</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">feedback</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s2">&quot;Step Response&quot;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">()</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;time (s)&quot;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y(t)&quot;</span><span class="p">)</span>
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/pvtol-lqr-nested_28_0.png" src="_images/pvtol-lqr-nested_28_0.png" />
+</div>
+</div>
+<p>The frequency response and Nyquist plot for the loop transfer function are computed using the commands</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bode</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/pvtol-lqr-nested_30_0.png" src="_images/pvtol-lqr-nested_30_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nyquist</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.0001</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/pvtol-lqr-nested_31_0.png" src="_images/pvtol-lqr-nested_31_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gangof4</span><span class="p">(</span><span class="n">Hi</span><span class="o">*</span><span class="n">Po</span><span class="p">,</span> <span class="n">Co</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/pvtol-lqr-nested_32_0.png" src="_images/pvtol-lqr-nested_32_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mpc_aircraft.html" class="btn btn-neutral float-left" title="Model Predictive Control: Aircraft Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pvtol-outputfbk.html" class="btn btn-neutral float-right" title="Output feedback control using LQR and extended Kalman filtering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

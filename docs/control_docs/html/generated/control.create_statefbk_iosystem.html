@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.create_statefbk_iosystem &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.dlqr" href="control.dlqr.html" />
+    <link rel="prev" title="control.acker" href="control.acker.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../control.html">Function reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../control.html#available-subpackages">Available subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-creation">System creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#system-interconnections">System interconnections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#frequency-domain-plotting">Frequency domain plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#time-domain-simulation">Time domain simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#control-system-analysis">Control system analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#matrix-computations">Matrix computations</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../control.html#control-system-synthesis">Control system synthesis</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="control.acker.html">control.acker</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.create_statefbk_iosystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.create_statefbk_iosystem"><code class="docutils literal notranslate"><span class="pre">create_statefbk_iosystem()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.dlqr.html">control.dlqr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.h2syn.html">control.h2syn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.hinfsyn.html">control.hinfsyn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.lqr.html">control.lqr</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.mixsyn.html">control.mixsyn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.place.html">control.place</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.place_varga.html">control.place_varga</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.rootlocus_pid_designer.html">control.rootlocus_pid_designer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#model-simplification-tools">Model simplification tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#nonlinear-system-support">Nonlinear system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#stochastic-system-support">Stochastic system support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../control.html#utility-functions-and-conversions">Utility functions and conversions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../control.html">Function reference</a></li>
+      <li class="breadcrumb-item active">control.create_statefbk_iosystem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.create_statefbk_iosystem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-create-statefbk-iosystem">
+<h1>control.create_statefbk_iosystem<a class="headerlink" href="#control-create-statefbk-iosystem" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.create_statefbk_iosystem">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">create_statefbk_iosystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">integral_action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">estimator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">controller_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xd_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ud_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gainsched_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gainsched_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_indices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/statefbk.py#L583-L991"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.create_statefbk_iosystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an I/O system using a (full) state feedback controller.</p>
+<p>This function creates an input/output system that implements a
+state feedback controller of the form</p>
+<div class="math">
+<p><span class="math">u = u_d - K_p (x - x_d) - K_i \int(C x - C x_d)</span></p>
+</div><p>It can be called in the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ctrl</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <cite>sys</cite> is the process dynamics and <cite>K</cite> is the state (+ integral)
+feedback gain (eg, from LQR).  The function returns the controller
+<cite>ctrl</cite> and the closed loop systems <cite>clsys</cite>, both as I/O systems.</p>
+<p>A gain scheduled controller can also be created, by passing a list of
+gains and a corresponding list of values of a set of scheduling
+variables.  In this case, the controller has the form</p>
+<div class="math">
+<p><span class="math">u = u_d - K_p(\mu) (x - x_d) - K_i(\mu) \int(C x - C x_d)</span></p>
+</div><p>where <span class="math">\mu</span> represents the scheduling variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<a class="reference internal" href="control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.NonlinearIOSystem"><em>NonlinearIOSystem</em></a>) – The I/O system that represents the process dynamics.  If no estimator
+is given, the output of this system should represent the full state.</p></li>
+<li><p><strong>gain</strong> (<em>ndarray</em><em>, </em><em>tuple</em><em>, or </em><em>I/O system</em>) – <p>If an array is given, it represents the state feedback gain (<cite>K</cite>).
+This matrix defines the gains to be applied to the system.  If
+<cite>integral_action</cite> is None, then the dimensions of this array
+should be (sys.ninputs, sys.nstates).  If <cite>integral action</cite> is
+set to a matrix or a function, then additional columns
+represent the gains of the integral states of the controller.</p>
+<p>If a tuple is given, then it specifies a gain schedule.  The tuple
+should be of the form <cite>(gains, points)</cite> where gains is a list of
+gains <cite>K_j</cite> and points is a list of values <cite>mu_j</cite> at which the
+gains are computed.  The <cite>gainsched_indices</cite> parameter should be
+used to specify the scheduling variables.</p>
+<p>If an I/O system is given, the error e = x - xd is passed to the
+system and the output is used as the feedback compensation term.</p>
+</p></li>
+<li><p><strong>xd_labels</strong> (<em>str</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Set the name of the signals to use for the desired state and
+inputs.  If a single string is specified, it should be a format
+string using the variable <cite>i</cite> as an index.  Otherwise, a list of
+strings matching the size of <cite>x_d</cite> and <cite>u_d</cite>, respectively, should
+be used.  Default is “xd[{i}]” for xd_labels and “ud[{i}]” for
+ud_labels.  These settings can also be overridden using the
+<cite>inputs</cite> keyword.</p></li>
+<li><p><strong>ud_labels</strong> (<em>str</em><em> or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – Set the name of the signals to use for the desired state and
+inputs.  If a single string is specified, it should be a format
+string using the variable <cite>i</cite> as an index.  Otherwise, a list of
+strings matching the size of <cite>x_d</cite> and <cite>u_d</cite>, respectively, should
+be used.  Default is “xd[{i}]” for xd_labels and “ud[{i}]” for
+ud_labels.  These settings can also be overridden using the
+<cite>inputs</cite> keyword.</p></li>
+<li><p><strong>integral_action</strong> (<em>ndarray</em><em>, </em><em>optional</em>) – If this keyword is specified, the controller can include integral
+action in addition to state feedback.  The value of the
+<cite>integral_action</cite> keyword should be an ndarray that will be
+multiplied by the current and desired state to generate the error
+for the internal integrator states of the control law.</p></li>
+<li><p><strong>estimator</strong> (<a class="reference internal" href="control.NonlinearIOSystem.html#control.NonlinearIOSystem" title="control.NonlinearIOSystem"><em>NonlinearIOSystem</em></a><em>, </em><em>optional</em>) – If an estimator is provided, use the states of the estimator as
+the system inputs for the controller.</p></li>
+<li><p><strong>gainsched_indices</strong> (<em>int</em><em>, </em><em>slice</em><em>, or </em><em>list</em><em> of </em><em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – If a gain scheduled controller is specified, specify the indices of
+the controller input to use for scheduling the gain. The input to
+the controller is the desired state <cite>x_d</cite>, the desired input <cite>u_d</cite>,
+and the system state <cite>x</cite> (or state estimate <cite>xhat</cite>, if an
+estimator is given). If value is an integer <cite>q</cite>, the first <cite>q</cite>
+values of the <cite>[x_d, u_d, x]</cite> vector are used.  Otherwise, the
+value should be a slice or a list of indices.  The list of indices
+can be specified as either integer offsets or as signal names. The
+default is to use the desired state <cite>x_d</cite>.</p></li>
+<li><p><strong>gainsched_method</strong> (<em>str</em><em>, </em><em>optional</em>) – The method to use for gain scheduling.  Possible values are ‘linear’
+(default), ‘nearest’, and ‘cubic’.  More information is available in
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.griddata.html#scipy.interpolate.griddata" title="(in SciPy v1.14.1)"><code class="xref py py-func docutils literal notranslate"><span class="pre">scipy.interpolate.griddata()</span></code></a>. For points outside of the convex
+hull of the scheduling points, the gain at the nearest point is
+used.</p></li>
+<li><p><strong>controller_type</strong> (<em>'linear'</em><em> or </em><em>'nonlinear'</em><em>, </em><em>optional</em>) – Set the type of controller to create. The default for a linear gain
+is a linear controller implementing the LQR regulator. If the type
+is ‘nonlinear’, a :class:NonlinearIOSystem is created instead, with
+the gain <cite>K</cite> as a parameter (allowing modifications of the gain at
+runtime). If the gain parameter is a tuple, then a nonlinear,
+gain-scheduled controller is created.</p></li>
+<li><p><strong>control_indices</strong> (<em>int</em><em>, </em><em>slice</em><em>, or </em><em>list</em><em> of </em><em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Specify the indices of the system inputs that should be determined
+by the state feedback controller.  If value is an integer <cite>m</cite>, the
+first <cite>m</cite> system inputs are used.  Otherwise, the value should be a
+slice or a list of indices.  The list of indices can be specified
+as either integer offsets or as system input signal names.  If not
+specified, defaults to the system inputs.</p></li>
+<li><p><strong>state_indices</strong> (<em>int</em><em>, </em><em>slice</em><em>, or </em><em>list</em><em> of </em><em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Specify the indices of the system (or estimator) outputs that should
+be used by the state feedback controller.  If value is an integer
+<cite>n</cite>, the first <cite>n</cite> system states are used.  Otherwise, the value
+should be a slice or a list of indices.  The list of indices can be
+specified as either integer offsets or as estimator/system output
+signal names.  If not specified, defaults to the system states.</p></li>
+<li><p><strong>inputs</strong> (<em>str</em><em>, or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – List of strings that name the individual signals of the transformed
+system.  If not given, the inputs, outputs, and states are the same
+as the original system.</p></li>
+<li><p><strong>outputs</strong> (<em>str</em><em>, or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – List of strings that name the individual signals of the transformed
+system.  If not given, the inputs, outputs, and states are the same
+as the original system.</p></li>
+<li><p><strong>states</strong> (<em>str</em><em>, or </em><em>list</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – List of strings that name the individual signals of the transformed
+system.  If not given, the inputs, outputs, and states are the same
+as the original system.</p></li>
+<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – System name. If unspecified, a generic name &lt;sys[id]&gt; is generated
+with a unique integer id.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ctrl</strong> (<em>NonlinearIOSystem</em>) – Input/output system representing the controller.  This system
+takes as inputs the desired state <cite>x_d</cite>, the desired input
+<cite>u_d</cite>, and either the system state <cite>x</cite> or the estimated state
+<cite>xhat</cite>.  It outputs the controller action <cite>u</cite> according to the
+formula <cite>u = u_d - K(x - x_d)</cite>.  If the keyword
+<cite>integral_action</cite> is specified, then an additional set of
+integrators is included in the control system (with the gain
+matrix <cite>K</cite> having the integral gains appended after the state
+gains).  If a gain scheduled controller is specified, the gain
+(proportional and integral) are evaluated using the scheduling
+variables specified by <cite>gainsched_indices</cite>.</p></li>
+<li><p><strong>clsys</strong> (<em>NonlinearIOSystem</em>) – Input/output system representing the closed loop system.  This
+system takes as inputs the desired trajectory <cite>(x_d, u_d)</cite> and
+outputs the system state <cite>x</cite> and the applied input <cite>u</cite>
+(vertically stacked).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">K</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">lqr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="n">R</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ctrl</span><span class="p">,</span> <span class="n">clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.acker.html" class="btn btn-neutral float-left" title="control.acker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.dlqr.html" class="btn btn-neutral float-right" title="control.dlqr" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

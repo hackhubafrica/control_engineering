@@ -1,0 +1,6 @@
+﻿control.optimal.input\_range\_constraint
+========================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: input_range_constraint

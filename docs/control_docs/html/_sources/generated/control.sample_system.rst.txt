@@ -1,0 +1,6 @@
+﻿control.sample\_system
+======================
+
+.. currentmodule:: control
+
+.. autofunction:: sample_system

@@ -1,0 +1,6 @@
+﻿control.negate
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: negate

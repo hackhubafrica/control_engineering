@@ -1,0 +1,6 @@
+﻿control.summing\_junction
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: summing_junction

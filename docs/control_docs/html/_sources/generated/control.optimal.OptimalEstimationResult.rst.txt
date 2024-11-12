@@ -1,0 +1,31 @@
+﻿control.optimal.OptimalEstimationResult
+=======================================
+
+.. currentmodule:: control.optimal
+
+.. autoclass:: OptimalEstimationResult
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~OptimalEstimationResult.clear
+      ~OptimalEstimationResult.copy
+      ~OptimalEstimationResult.fromkeys
+      ~OptimalEstimationResult.get
+      ~OptimalEstimationResult.items
+      ~OptimalEstimationResult.keys
+      ~OptimalEstimationResult.pop
+      ~OptimalEstimationResult.popitem
+      ~OptimalEstimationResult.setdefault
+      ~OptimalEstimationResult.update
+      ~OptimalEstimationResult.values
+   
+   

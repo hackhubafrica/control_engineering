@@ -1,0 +1,6 @@
+﻿control.nyquist\_response
+=========================
+
+.. currentmodule:: control
+
+.. autofunction:: nyquist_response

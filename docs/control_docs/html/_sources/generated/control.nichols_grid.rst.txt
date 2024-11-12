@@ -1,0 +1,6 @@
+﻿control.nichols\_grid
+=====================
+
+.. currentmodule:: control
+
+.. autofunction:: nichols_grid

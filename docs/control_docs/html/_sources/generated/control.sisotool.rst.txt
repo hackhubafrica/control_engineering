@@ -1,0 +1,6 @@
+﻿control.sisotool
+================
+
+.. currentmodule:: control
+
+.. autofunction:: sisotool

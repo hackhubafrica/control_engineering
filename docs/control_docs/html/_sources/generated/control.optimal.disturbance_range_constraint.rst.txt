@@ -1,0 +1,6 @@
+﻿control.optimal.disturbance\_range\_constraint
+==============================================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: disturbance_range_constraint

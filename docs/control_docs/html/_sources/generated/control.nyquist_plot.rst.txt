@@ -1,0 +1,6 @@
+﻿control.nyquist\_plot
+=====================
+
+.. currentmodule:: control
+
+.. autofunction:: nyquist_plot

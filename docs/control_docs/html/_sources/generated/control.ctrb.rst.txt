@@ -1,0 +1,6 @@
+﻿control.ctrb
+============
+
+.. currentmodule:: control
+
+.. autofunction:: ctrb

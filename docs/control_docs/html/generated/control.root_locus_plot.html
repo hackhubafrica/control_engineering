@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.root_locus_plot &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.singular_values_plot" href="control.singular_values_plot.html" />
+    <link rel="prev" title="control.pole_zero_plot" href="control.pole_zero_plot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotting.html">Plotting data</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#time-response-data">Time response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#frequency-response-data">Frequency response data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#pole-zero-data">Pole/zero data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#phase-plane-plots">Phase plane plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting.html#customizing-control-plots">Customizing control plots</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../plotting.html#response-and-plotting-functions">Response and plotting functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-functions">Response functions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../plotting.html#plotting-functions">Plotting functions</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="control.bode_plot.html">control.bode_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.describing_function_plot.html">control.describing_function_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nichols_plot.html">control.nichols_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.nyquist_plot.html">control.nyquist_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phase_plane_plot.html">control.phase_plane_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.equilpoints.html">control.phaseplot.equilpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.separatrices.html">control.phaseplot.separatrices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.streamlines.html">control.phaseplot.streamlines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.phaseplot.vectorfield.html">control.phaseplot.vectorfield</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.pole_zero_plot.html">control.pole_zero_plot</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">control.root_locus_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.singular_values_plot.html">control.singular_values_plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="control.time_response_plot.html">control.time_response_plot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#utility-functions">Utility functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plotting.html#response-and-plotting-classes">Response and plotting classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../plotting.html">Plotting data</a></li>
+      <li class="breadcrumb-item active">control.root_locus_plot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.root_locus_plot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-root-locus-plot">
+<h1>control.root_locus_plot<a class="headerlink" href="#control-root-locus-plot" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="control.root_locus_plot">
+<span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">root_locus_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sysdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/rlocus.py#L101-L224"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.root_locus_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root locus plot.</p>
+<p>Calculate the root locus by finding the roots of 1 + k * G(s) where G
+is a linear system and k varies over a range of gains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sysdata</strong> (<em>PoleZeroMap</em><em> or </em><em>LTI object</em><em> or </em><em>list</em>) – Linear input/output systems (SISO only, for now).</p></li>
+<li><p><strong>gains</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Gains to use in computing plot of closed-loop poles.  If not given,
+gains are chosen to include the main features of the root locus map.</p></li>
+<li><p><strong>xlim</strong> (<em>tuple</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – Set limits of x axis, normally with tuple
+(see <a class="reference external" href="https://matplotlib.org/stable/api/axes_api.html" title="(in Matplotlib v3.9.2)"><span>matplotlib.axes</span></a>).</p></li>
+<li><p><strong>ylim</strong> (<em>tuple</em><em> or </em><em>list</em><em>, </em><em>optional</em>) – Set limits of y axis, normally with tuple
+(see <a class="reference external" href="https://matplotlib.org/stable/api/axes_api.html" title="(in Matplotlib v3.9.2)"><span>matplotlib.axes</span></a>).</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – (legacy) If given, <cite>root_locus_plot</cite> returns the legacy return values
+of roots and gains.  If False, just return the values with no plot.</p></li>
+<li><p><strong>grid</strong> (<em>bool</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – If <cite>True</cite> plot omega-damping grid, if <cite>False</cite> show imaginary axis
+for continuous time systems, unit circle for discrete time systems.
+If <cite>empty</cite>, do not draw any additonal lines.  Default value is set
+by config.default[‘rlocus.grid’].</p></li>
+<li><p><strong>initial_gain</strong> (<em>float</em><em>, </em><em>optional</em>) – Mark the point on the root locus diagram corresponding to the
+given gain.</p></li>
+<li><p><strong>color</strong> (<em>matplotlib color spec</em><em>, </em><em>optional</em>) – Specify the color of the markers and lines.</p></li>
+<li><p><strong>ax</strong> (<a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><em>matplotlib.axes.Axes</em></a><em>, </em><em>optional</em>) – The matplotlib axes to draw the figure on.  If not specified and
+the current figure has a single axes, that axes is used.
+Otherwise, a new figure is created.</p></li>
+<li><p><strong>label</strong> (<em>str</em><em> or </em><em>array_like</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – If present, replace automatically generated label(s) with the given
+label(s).  If sysdata is a list, strings should be specified for each
+system.</p></li>
+<li><p><strong>legend_loc</strong> (<em>int</em><em> or </em><em>str</em><em>, </em><em>optional</em>) – Include a legend in the given location. Default is ‘center right’,
+with no legend for a single response.  Use False to suppress legend.</p></li>
+<li><p><strong>show_legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Force legend to be shown if <code class="docutils literal notranslate"><span class="pre">True</span></code> or hidden if <code class="docutils literal notranslate"><span class="pre">False</span></code>.  If
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, then show legend when there is more than one line on the
+plot or <code class="docutils literal notranslate"><span class="pre">legend_loc</span></code> has been specified.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Set the title of the plot.  Defaults to plot type and system name(s).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul>
+<li><p><strong>cplt</strong> (<a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> object) –</p>
+<p>Object containing the data that were plotted:</p>
+<blockquote>
+<div><ul>
+<li><p>cplt.lines: Array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.lines.Line2D</span></code></a> objects
+for each set of markers in the plot. The shape of the array is
+given by (nsys, 3) where nsys is the number of systems or
+responses passed to the function.  The second index specifies
+the object type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>lines[idx, 0]: poles</p></li>
+<li><p>lines[idx, 1]: zeros</p></li>
+<li><p>lines[idx, 2]: loci</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>cplt.axes: 2D array of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.axes.Axes</span></code></a> for the plot.</p></li>
+<li><p>cplt.figure: <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.9.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.figure.Figure</span></code></a> containing the plot.</p></li>
+</ul>
+</div></blockquote>
+<p>See <a class="reference internal" href="control.ControlPlot.html#control.ControlPlot" title="control.ControlPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">ControlPlot</span></code></a> for more detailed information.</p>
+</li>
+<li><p><strong>roots, gains</strong> (<em>ndarray</em>) – (legacy) If the <cite>plot</cite> keyword is given, returns the closed-loop
+root locations, arranged such that each row corresponds to a gain,
+and the array of gains (same as <cite>gains</cite> keyword argument if provided).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The root_locus_plot function calls matplotlib.pyplot.axis(‘equal’), which
+means that trying to reset the axis limits may not behave as expected.
+To change the axis limits, use matplotlib.pyplot.gca().axis(‘auto’) and
+then set the axis limits to the desired values.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.pole_zero_plot.html" class="btn btn-neutral float-left" title="control.pole_zero_plot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.singular_values_plot.html" class="btn btn-neutral float-right" title="control.singular_values_plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+﻿control.lqe
+===========
+
+.. currentmodule:: control
+
+.. autofunction:: lqe

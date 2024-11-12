@@ -1,0 +1,6 @@
+﻿control.matlab.nichols
+======================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: nichols

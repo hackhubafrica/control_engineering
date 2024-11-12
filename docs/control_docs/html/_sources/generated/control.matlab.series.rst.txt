@@ -1,0 +1,6 @@
+﻿control.matlab.series
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: series

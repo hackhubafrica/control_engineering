@@ -1,0 +1,22 @@
+﻿control.flatsys.SystemTrajectory
+================================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: SystemTrajectory
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~SystemTrajectory.eval
+      ~SystemTrajectory.response
+   
+   

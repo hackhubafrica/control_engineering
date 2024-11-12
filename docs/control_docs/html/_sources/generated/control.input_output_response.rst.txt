@@ -1,0 +1,6 @@
+﻿control.input\_output\_response
+===============================
+
+.. currentmodule:: control
+
+.. autofunction:: input_output_response

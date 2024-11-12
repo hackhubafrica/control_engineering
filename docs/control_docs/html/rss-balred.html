@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balanced model reduction examples &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Phase plot examples" href="phase_plane_plots.html" />
+    <link rel="prev" title="LQR control design for vertical takeoff and landing aircraft" href="pvtol-lqr.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="secord-matlab.html">Secord order system (MATLAB module example)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-nested.html">Inner/outer control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr.html">LQR control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Balanced model reduction examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="phase_plane_plots.html">Phase  plot examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_siso.html">SISO robust control example (SP96, Example 2.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_mimo.html">MIMO robust control example (SP96, Example 3.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_H2_h2syn.html">H2 synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_Hinf_hinfsyn.html">Hinf synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cruise-control.html">Cruise control design example (as a nonlinear I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-gainsched.html">Gain scheduled control for vehicle steeering (I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-optimal.html">Optimal control for vehicle steering (lane change)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-flatsys.html">Differentially flat system - kinematic car</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_mit.html">Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_lyapunov.html">Model-Reference Adaptive Control (MRAC) SISO, direct Lyapunov rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="markov.html">Estimation of Makrov parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="era_msd.html">ERA example, mass spring damper system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Balanced model reduction examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rss-balred.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="balanced-model-reduction-examples">
+<h1>Balanced model reduction examples<a class="headerlink" href="#balanced-model-reduction-examples" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="ch">#!/usr/bin/env python</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="linenos"> 6</span><span class="kn">import</span> <span class="nn">control.modelsimp</span> <span class="k">as</span> <span class="nn">msimp</span>
+<span class="linenos"> 7</span><span class="kn">import</span> <span class="nn">control.matlab</span> <span class="k">as</span> <span class="nn">mt</span>
+<span class="linenos"> 8</span><span class="kn">from</span> <span class="nn">control.statesp</span> <span class="kn">import</span> <span class="n">StateSpace</span>
+<span class="linenos"> 9</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="c1"># controllable canonical realization computed in MATLAB for the</span>
+<span class="linenos">14</span><span class="c1"># transfer function: num = [1 11 45 32], den = [1 15 60 200 60]</span>
+<span class="linenos">15</span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="linenos">16</span>    <span class="p">[</span><span class="o">-</span><span class="mf">15.</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.25</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.875</span><span class="p">],</span>
+<span class="linenos">17</span>    <span class="p">[</span><span class="mf">8.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+<span class="linenos">18</span>    <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+<span class="linenos">19</span>    <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="linenos">20</span><span class="p">])</span>
+<span class="linenos">21</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="linenos">22</span>    <span class="p">[</span><span class="mf">2.</span><span class="p">],</span>
+<span class="linenos">23</span>    <span class="p">[</span><span class="mf">0.</span><span class="p">],</span>
+<span class="linenos">24</span>    <span class="p">[</span><span class="mf">0.</span><span class="p">],</span>
+<span class="linenos">25</span>    <span class="p">[</span><span class="mf">0.</span><span class="p">]</span>
+<span class="linenos">26</span><span class="p">])</span>
+<span class="linenos">27</span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6875</span><span class="p">,</span> <span class="mf">0.7031</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="linenos">28</span><span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">]])</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># The full system</span>
+<span class="linenos">31</span><span class="n">fsys</span> <span class="o">=</span> <span class="n">StateSpace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># The reduced system, truncating the order by 1</span>
+<span class="linenos">34</span><span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="linenos">35</span><span class="n">rsys</span> <span class="o">=</span> <span class="n">msimp</span><span class="o">.</span><span class="n">balred</span><span class="p">(</span><span class="n">fsys</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;truncate&#39;</span><span class="p">)</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span><span class="c1"># Comparison of the step responses of the full and reduced systems</span>
+<span class="linenos">38</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">fsys</span><span class="p">)</span>
+<span class="linenos">40</span><span class="n">yr</span><span class="p">,</span> <span class="n">tr</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">rsys</span><span class="p">)</span>
+<span class="linenos">41</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">42</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">yr</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="c1"># Repeat balanced reduction, now with 100-dimensional random state space</span>
+<span class="linenos">45</span><span class="n">sysrand</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">rss</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="linenos">46</span><span class="n">rsysrand</span> <span class="o">=</span> <span class="n">msimp</span><span class="o">.</span><span class="n">balred</span><span class="p">(</span><span class="n">sysrand</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;truncate&#39;</span><span class="p">)</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span><span class="c1"># Comparison of the impulse responses of the full and reduced random systems</span>
+<span class="linenos">49</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="linenos">50</span><span class="n">yrand</span><span class="p">,</span> <span class="n">trand</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">impulse</span><span class="p">(</span><span class="n">sysrand</span><span class="p">)</span>
+<span class="linenos">51</span><span class="n">yrandr</span><span class="p">,</span> <span class="n">trandr</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">impulse</span><span class="p">(</span><span class="n">rsysrand</span><span class="p">)</span>
+<span class="linenos">52</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trand</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">yrand</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">trandr</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">yrandr</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="linenos">53</span>
+<span class="linenos">54</span><span class="k">if</span> <span class="s1">&#39;PYCONTROL_TEST_EXAMPLES&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+<span class="linenos">55</span>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this heading">¶</a></h2>
+<p>1. The environment variable <cite>PYCONTROL_TEST_EXAMPLES</cite> is used for
+testing to turn off plotting of the outputs.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pvtol-lqr.html" class="btn btn-neutral float-left" title="LQR control design for vertical takeoff and landing aircraft" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phase_plane_plots.html" class="btn btn-neutral float-right" title="Phase plot examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

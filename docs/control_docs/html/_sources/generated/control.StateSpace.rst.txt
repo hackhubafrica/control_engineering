@@ -1,0 +1,53 @@
+﻿control.StateSpace
+==================
+
+.. currentmodule:: control
+
+.. autoclass:: StateSpace
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~StateSpace.append
+      ~StateSpace.bandwidth
+      ~StateSpace.copy
+      ~StateSpace.damp
+      ~StateSpace.dcgain
+      ~StateSpace.dynamics
+      ~StateSpace.feedback
+      ~StateSpace.find_input
+      ~StateSpace.find_inputs
+      ~StateSpace.find_output
+      ~StateSpace.find_outputs
+      ~StateSpace.find_state
+      ~StateSpace.find_states
+      ~StateSpace.freqresp
+      ~StateSpace.frequency_response
+      ~StateSpace.horner
+      ~StateSpace.isctime
+      ~StateSpace.isdtime
+      ~StateSpace.ispassive
+      ~StateSpace.issiso
+      ~StateSpace.lft
+      ~StateSpace.linearize
+      ~StateSpace.minreal
+      ~StateSpace.output
+      ~StateSpace.poles
+      ~StateSpace.returnScipySignalLTI
+      ~StateSpace.sample
+      ~StateSpace.set_inputs
+      ~StateSpace.set_outputs
+      ~StateSpace.set_states
+      ~StateSpace.slycot_laub
+      ~StateSpace.update_names
+      ~StateSpace.zeros
+   
+   

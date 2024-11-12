@@ -1,0 +1,6 @@
+﻿control.get\_input\_ff\_index
+=============================
+
+.. currentmodule:: control
+
+.. autofunction:: get_input_ff_index

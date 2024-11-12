@@ -1,0 +1,6 @@
+﻿control.zpk
+===========
+
+.. currentmodule:: control
+
+.. autofunction:: zpk

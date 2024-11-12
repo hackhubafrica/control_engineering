@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moving Horizon Estimation &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Model Predictive Control: Aircraft Model" href="mpc_aircraft.html" />
+    <link rel="prev" title="Discrete Time Sensor Fusion" href="kincar-fusion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Moving Horizon Estimation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#System-Description">System Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#State-Estimation">State Estimation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Moving-Horizon-Estimation-(MHE)">Moving Horizon Estimation (MHE)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Moving Horizon Estimation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mhe-pvtol.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="Moving-Horizon-Estimation">
+<h1>Moving Horizon Estimation<a class="headerlink" href="#Moving-Horizon-Estimation" title="Permalink to this heading">¶</a></h1>
+<p>Richard M. Murray, 24 Feb 2023</p>
+<p>In this notebook we illustrate the implementation of moving horizon estimation (MHE)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+
+<span class="kn">import</span> <span class="nn">control.optimal</span> <span class="k">as</span> <span class="nn">opt</span>
+<span class="kn">import</span> <span class="nn">control.flatsys</span> <span class="k">as</span> <span class="nn">fs</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="System-Description">
+<h2>System Description<a class="headerlink" href="#System-Description" title="Permalink to this heading">¶</a></h2>
+<p>The dynamics of the system with disturbances on the <span class="math">x</span> and <span class="math">y</span> variables is given by</p>
+<div class="math">
+<p><span class="math">\begin{aligned}
+  m \ddot x &amp;= F_1 \cos\theta - F_2 \sin\theta - c \dot x + d_x, \\
+  m \ddot y &amp;= F_1 \sin\theta + F_2 \cos\theta - c \dot y - m g + d_y, \\
+  J \ddot \theta &amp;= r F_1.
+\end{aligned}</span></p>
+</div><p>The measured values of the system are the position and orientation, with added noise <span class="math">n_x</span>, <span class="math">n_y</span>, and <span class="math">n_\theta</span>:</p>
+<div class="math">
+<p><span class="math">\vec y = \begin{bmatrix} x \\ y \\ \theta \end{bmatrix} +
+\begin{bmatrix} n_x \\ n_y \\ n_z \end{bmatrix}.</span></p>
+</div><div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pvtol = nominal system (no disturbances or noise)</span>
+<span class="c1"># noisy_pvtol = pvtol w/ process disturbances and sensor noise</span>
+<span class="kn">from</span> <span class="nn">pvtol</span> <span class="kn">import</span> <span class="n">pvtol</span><span class="p">,</span> <span class="n">pvtol_noisy</span><span class="p">,</span> <span class="n">plot_results</span>
+<span class="kn">import</span> <span class="nn">pvtol</span> <span class="k">as</span> <span class="nn">pvt</span>
+
+<span class="c1"># Find the equiblirum point corresponding to the origin</span>
+<span class="n">xe</span><span class="p">,</span> <span class="n">ue</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">find_eqpt</span><span class="p">(</span>
+    <span class="n">pvtol</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">iu</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">),</span> <span class="n">iy</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Initial condition = 2 meters right, 1 meter up</span>
+<span class="n">x0</span><span class="p">,</span> <span class="n">u0</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">find_eqpt</span><span class="p">(</span>
+    <span class="n">pvtol</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
+    <span class="n">iu</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">),</span> <span class="n">iy</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Extract the linearization for use in LQR design</span>
+<span class="n">pvtol_lin</span> <span class="o">=</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="n">ue</span><span class="p">)</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">pvtol_lin</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">pvtol_lin</span><span class="o">.</span><span class="n">B</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pvtol</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvtol_noisy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;FlatSystem&gt;: pvtol
+Inputs (2): [&#39;F1&#39;, &#39;F2&#39;]
+Outputs (6): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;]
+States (6): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;]
+
+Update: &lt;function _pvtol_update at 0x113697ac0&gt;
+Output: &lt;function _pvtol_output at 0x113697a30&gt;
+
+Forward: &lt;function _pvtol_flat_forward at 0x167b2fd00&gt;
+Reverse: &lt;function _pvtol_flat_reverse at 0x167b2fbe0&gt;
+
+&lt;NonlinearIOSystem&gt;: pvtol_noisy
+Inputs (7): [&#39;F1&#39;, &#39;F2&#39;, &#39;Dx&#39;, &#39;Dy&#39;, &#39;Nx&#39;, &#39;Ny&#39;, &#39;Nth&#39;]
+Outputs (6): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;]
+States (6): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;]
+
+Update: &lt;function _noisy_update at 0x167b2fc70&gt;
+Output: &lt;function _noisy_output at 0x167b2ff40&gt;
+</pre></div></div>
+</div>
+<div class="section" id="Control-Design">
+<h3>Control Design<a class="headerlink" href="#Control-Design" title="Permalink to this heading">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># LQR design w/ physically motivated weighting</span>
+<span class="c1">#</span>
+<span class="c1"># Shoot for 10 cm error in x, 10 cm error in y.  Try to keep the angle</span>
+<span class="c1"># less than 5 degrees in making the adjustments.  Penalize side forces</span>
+<span class="c1"># due to loss in efficiency.</span>
+<span class="c1">#</span>
+
+<span class="n">Qx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">180</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">Qu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">K</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">lqr</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Qx</span><span class="p">,</span> <span class="n">Qu</span><span class="p">)</span>
+
+<span class="c1"># Compute the full state feedback solution</span>
+<span class="n">lqr_ctrl</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_statefbk_iosystem</span><span class="p">(</span><span class="n">pvtol</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+
+<span class="c1"># Define the closed loop system that will be used to generate trajectories</span>
+<span class="n">lqr_clsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">interconnect</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pvtol_noisy</span><span class="p">,</span> <span class="n">lqr_ctrl</span><span class="p">],</span>
+    <span class="n">inplist</span> <span class="o">=</span> <span class="n">lqr_ctrl</span><span class="o">.</span><span class="n">input_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span> <span class="o">+</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="n">pvtol_noisy</span><span class="o">.</span><span class="n">input_labels</span><span class="p">[</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">:],</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">lqr_ctrl</span><span class="o">.</span><span class="n">input_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span> <span class="o">+</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="n">pvtol_noisy</span><span class="o">.</span><span class="n">input_labels</span><span class="p">[</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">:],</span>
+    <span class="n">outlist</span> <span class="o">=</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">output_labels</span> <span class="o">+</span> <span class="n">lqr_ctrl</span><span class="o">.</span><span class="n">output_labels</span><span class="p">,</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">output_labels</span> <span class="o">+</span> <span class="n">lqr_ctrl</span><span class="o">.</span><span class="n">output_labels</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;InterconnectedSystem&gt;: sys[4]
+Inputs (13): [&#39;xd[0]&#39;, &#39;xd[1]&#39;, &#39;xd[2]&#39;, &#39;xd[3]&#39;, &#39;xd[4]&#39;, &#39;xd[5]&#39;, &#39;ud[0]&#39;, &#39;ud[1]&#39;, &#39;Dx&#39;, &#39;Dy&#39;, &#39;Nx&#39;, &#39;Ny&#39;, &#39;Nth&#39;]
+Outputs (8): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;, &#39;F1&#39;, &#39;F2&#39;]
+States (6): [&#39;pvtol_noisy_x0&#39;, &#39;pvtol_noisy_x1&#39;, &#39;pvtol_noisy_x2&#39;, &#39;pvtol_noisy_x3&#39;, &#39;pvtol_noisy_x4&#39;, &#39;pvtol_noisy_x5&#39;]
+
+Update: &lt;function InterconnectedSystem.__init__.&lt;locals&gt;.updfcn at 0x167b58dc0&gt;
+Output: &lt;function InterconnectedSystem.__init__.&lt;locals&gt;.outfcn at 0x167b58e50&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/murray/src/python-control/murrayrm/control/statefbk.py:783: UserWarning: cannot verify system output is system state
+  warnings.warn(&#34;cannot verify system output is system state&#34;)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Disturbance and noise intensities</span>
+<span class="n">Qv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">])</span>
+<span class="n">Qw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">],</span> <span class="p">[</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">]])</span>
+
+<span class="c1"># Initial state covariance</span>
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the time vector for the simulation</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># Create representative process disturbance and sensor noise vectors</span>
+<span class="c1"># np.random.seed(117)           # avoid figures changing from run to run</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">Qv</span><span class="p">)</span>
+<span class="c1"># V = np.clip(V0, -0.1, 0.1)    # Hold for later</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">Qw</span><span class="p">)</span>
+<span class="c1"># plt.plot(timepts, V0[0], &#39;b--&#39;, label=&quot;V[0]&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;V[0]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;W[0]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_7_0.png" src="_images/mhe-pvtol_7_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Desired trajectory</span>
+<span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">xe</span><span class="p">,</span> <span class="n">ue</span>
+<span class="c1"># xd = np.vstack([</span>
+<span class="c1">#     np.sin(2 * np.pi * timepts / timepts[-1]),</span>
+<span class="c1">#     np.zeros((5, timepts.size))])</span>
+<span class="c1"># ud = np.outer(ue, np.ones_like(timepts))</span>
+
+<span class="c1"># Run a simulation with full state feedback (no noise) to generate a trajectory</span>
+<span class="n">uvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lqr_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">uvec</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>                    <span class="c1"># controller input signals</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span>                <span class="c1"># noisy output signals (noise in pvtol_noisy)</span>
+
+<span class="c1"># Compare to the no noise case</span>
+<span class="n">uvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">,</span> <span class="n">V</span><span class="o">*</span><span class="mi">0</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lqr0_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">uvec</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="n">lqr0_fine</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">uvec</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span>
+                                     <span class="n">t_eval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">timepts</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">))</span>
+<span class="n">U0</span> <span class="o">=</span> <span class="n">lqr0_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">Y0</span> <span class="o">=</span> <span class="n">lqr0_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="c1"># Compare the results</span>
+<span class="c1"># plt.plot(Y0[0], Y0[1], &#39;k--&#39;, linewidth=2, label=&quot;No disturbances&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lqr0_fine</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lqr0_fine</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Noisy&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$ [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y$ [m]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plot_results</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_8_0.png" src="_images/mhe-pvtol_8_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_8_2.png" src="_images/mhe-pvtol_8_2.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility functions for making plots</span>
+<span class="k">def</span> <span class="nf">plot_state_comparison</span><span class="p">(</span>
+    <span class="n">timepts</span><span class="p">,</span> <span class="n">est_states</span><span class="p">,</span> <span class="n">act_states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">estimated_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">hat x_</span><span class="si">{i}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">actual_label</span><span class="o">=</span><span class="s1">&#39;$x_</span><span class="si">{i}</span><span class="s1">$&#39;</span><span class="p">,</span>
+    <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">nstates</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">act_states</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">act_states</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span>
+                     <span class="n">label</span><span class="o">=</span><span class="n">actual_label</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">est_states</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="n">estimated_label</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Define a function to plot out all of the relevant signals</span>
+<span class="k">def</span> <span class="nf">plot_estimator_response</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">estimated</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="c1"># Plot the input signal and disturbance</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+        <span class="c1"># Input signal (the same across all)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;U[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Plot the estimated disturbance signal</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">estimated</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;est&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;actual&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;V[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimated&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;actual&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;measured&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot the output (measured and estimated)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;measured&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">estimated</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;measured&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:]</span> <span class="o">-</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;actual&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Y[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">estimated</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;estimated&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">[</span><span class="n">start</span><span class="p">:],</span> <span class="n">W</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">start</span><span class="p">:],</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;actual&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;W[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [s]&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="State-Estimation">
+<h2>State Estimation<a class="headerlink" href="#State-Estimation" title="Permalink to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new system with only x, y, theta as outputs</span>
+<span class="c1"># TODO: add this to pvtol.py?</span>
+<span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+    <span class="n">pvt</span><span class="o">.</span><span class="n">_noisy_update</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pvtol_noisy&quot;</span><span class="p">,</span>
+    <span class="n">states</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;x</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)],</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;F1&#39;</span><span class="p">,</span> <span class="s1">&#39;F2&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Dx&#39;</span><span class="p">,</span> <span class="s1">&#39;Dy&#39;</span><span class="p">],</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard Kalman filter</span>
+<span class="n">linsys</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">xe</span><span class="p">,</span> <span class="p">[</span><span class="n">ue</span><span class="p">,</span> <span class="n">V</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">0</span><span class="p">])</span>
+<span class="c1"># print(linsys)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">linsys</span><span class="o">.</span><span class="n">B</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">linsys</span><span class="o">.</span><span class="n">B</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">linsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">(</span>
+    <span class="n">linsys</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">linsys</span><span class="o">.</span><span class="n">C</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">state_labels</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">input_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">output_labels</span><span class="p">)</span>
+<span class="c1"># print(linsys)</span>
+
+<span class="n">estim</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_estimator_iosystem</span><span class="p">(</span><span class="n">linsys</span><span class="p">,</span> <span class="n">Qv</span><span class="p">,</span> <span class="n">Qw</span><span class="p">,</span> <span class="n">G</span><span class="o">=</span><span class="n">G</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="n">P0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">estim</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">xe</span><span class="si">=}</span><span class="s1">, </span><span class="si">{</span><span class="n">P0</span><span class="si">=}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">kf_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">estim</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">],</span> <span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="n">xe</span><span class="p">,</span> <span class="n">P0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">kf_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;NonlinearIOSystem&gt;: sys[7]
+Inputs (5): [&#39;y[0]&#39;, &#39;y[1]&#39;, &#39;y[2]&#39;, &#39;F1&#39;, &#39;F2&#39;]
+Outputs (6): [&#39;xhat[0]&#39;, &#39;xhat[1]&#39;, &#39;xhat[2]&#39;, &#39;xhat[3]&#39;, &#39;xhat[4]&#39;, &#39;xhat[5]&#39;]
+States (42): [&#39;xhat[0]&#39;, &#39;xhat[1]&#39;, &#39;xhat[2]&#39;, &#39;xhat[3]&#39;, &#39;xhat[4]&#39;, &#39;xhat[5]&#39;, &#39;P[0,0]&#39;, &#39;P[0,1]&#39;, &#39;P[0,2]&#39;, &#39;P[0,3]&#39;, &#39;P[0,4]&#39;, &#39;P[0,5]&#39;, &#39;P[1,0]&#39;, &#39;P[1,1]&#39;, &#39;P[1,2]&#39;, &#39;P[1,3]&#39;, &#39;P[1,4]&#39;, &#39;P[1,5]&#39;, &#39;P[2,0]&#39;, &#39;P[2,1]&#39;, &#39;P[2,2]&#39;, &#39;P[2,3]&#39;, &#39;P[2,4]&#39;, &#39;P[2,5]&#39;, &#39;P[3,0]&#39;, &#39;P[3,1]&#39;, &#39;P[3,2]&#39;, &#39;P[3,3]&#39;, &#39;P[3,4]&#39;, &#39;P[3,5]&#39;, &#39;P[4,0]&#39;, &#39;P[4,1]&#39;, &#39;P[4,2]&#39;, &#39;P[4,3]&#39;, &#39;P[4,4]&#39;, &#39;P[4,5]&#39;, &#39;P[5,0]&#39;, &#39;P[5,1]&#39;, &#39;P[5,2]&#39;, &#39;P[5,3]&#39;, &#39;P[5,4]&#39;, &#39;P[5,5]&#39;]
+
+Update: &lt;function create_estimator_iosystem.&lt;locals&gt;._estim_update at 0x1685997e0&gt;
+Output: &lt;function create_estimator_iosystem.&lt;locals&gt;._estim_output at 0x16859a4d0&gt;
+xe=array([ 0.000000e+00,  0.000000e+00,  0.000000e+00,  0.000000e+00,
+       -1.766654e-27,  0.000000e+00]), P0=array([[1., 0., 0., 0., 0., 0.],
+       [0., 1., 0., 0., 0., 0.],
+       [0., 0., 1., 0., 0., 0.],
+       [0., 0., 0., 1., 0., 0.],
+       [0., 0., 0., 0., 1., 0.],
+       [0., 0., 0., 0., 0., 1.]])
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_12_1.png" src="_images/mhe-pvtol_12_1.png" />
+</div>
+</div>
+<div class="section" id="Extended-Kalman-filter">
+<h3>Extended Kalman filter<a class="headerlink" href="#Extended-Kalman-filter" title="Permalink to this heading">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the disturbance input and measured output matrices</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">pvtol</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">pvtol</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="n">Qwinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Qw</span><span class="p">)</span>
+
+<span class="c1"># Estimator update law</span>
+<span class="k">def</span> <span class="nf">estimator_update</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Extract the states of the estimator</span>
+    <span class="n">xhat</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">]</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">,</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">)</span>
+
+    <span class="c1"># Extract the inputs to the estimator</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>                  <span class="c1"># just grab the first three outputs</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>                  <span class="c1"># get the inputs that were applied as well</span>
+
+    <span class="c1"># Compute the linearization at the current state</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">A</span><span class="p">(</span><span class="n">xhat</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>        <span class="c1"># A matrix depends on current state</span>
+    <span class="c1"># A = pvtol.A(xe, ue)       # Fixed A matrix (for testing/comparison)</span>
+
+    <span class="c1"># Compute the optimal &quot;gain</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">P</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Qwinv</span>
+
+    <span class="c1"># Update the state estimate</span>
+    <span class="n">xhatdot</span> <span class="o">=</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">updfcn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">xhat</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span> <span class="o">-</span> <span class="n">L</span> <span class="o">@</span> <span class="p">(</span><span class="n">C</span> <span class="o">@</span> <span class="n">xhat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># Update the covariance</span>
+    <span class="n">Pdot</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">P</span> <span class="o">+</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">P</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Qwinv</span> <span class="o">@</span> <span class="n">C</span> <span class="o">@</span> <span class="n">P</span> <span class="o">+</span> <span class="n">F</span> <span class="o">@</span> <span class="n">Qv</span> <span class="o">@</span> <span class="n">F</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># Return the derivative</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">xhatdot</span><span class="p">,</span> <span class="n">Pdot</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="k">def</span> <span class="nf">estimator_output</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="c1"># Return the estimator states</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">]</span>
+
+<span class="n">ekf</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+    <span class="n">estimator_update</span><span class="p">,</span> <span class="n">estimator_output</span><span class="p">,</span>
+    <span class="n">states</span><span class="o">=</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span> <span class="o">+</span> <span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span> <span class="n">pvtol_noisy</span><span class="o">.</span><span class="n">output_labels</span> \
+        <span class="o">+</span> <span class="n">pvtol_noisy</span><span class="o">.</span><span class="n">input_labels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">pvtol</span><span class="o">.</span><span class="n">ninputs</span><span class="p">],</span>
+    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;xh</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pvtol</span><span class="o">.</span><span class="n">nstates</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ekf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;NonlinearIOSystem&gt;: sys[8]
+Inputs (8): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;, &#39;F1&#39;, &#39;F2&#39;]
+Outputs (6): [&#39;xh0&#39;, &#39;xh1&#39;, &#39;xh2&#39;, &#39;xh3&#39;, &#39;xh4&#39;, &#39;xh5&#39;]
+States (42): [&#39;x[0]&#39;, &#39;x[1]&#39;, &#39;x[2]&#39;, &#39;x[3]&#39;, &#39;x[4]&#39;, &#39;x[5]&#39;, &#39;x[6]&#39;, &#39;x[7]&#39;, &#39;x[8]&#39;, &#39;x[9]&#39;, &#39;x[10]&#39;, &#39;x[11]&#39;, &#39;x[12]&#39;, &#39;x[13]&#39;, &#39;x[14]&#39;, &#39;x[15]&#39;, &#39;x[16]&#39;, &#39;x[17]&#39;, &#39;x[18]&#39;, &#39;x[19]&#39;, &#39;x[20]&#39;, &#39;x[21]&#39;, &#39;x[22]&#39;, &#39;x[23]&#39;, &#39;x[24]&#39;, &#39;x[25]&#39;, &#39;x[26]&#39;, &#39;x[27]&#39;, &#39;x[28]&#39;, &#39;x[29]&#39;, &#39;x[30]&#39;, &#39;x[31]&#39;, &#39;x[32]&#39;, &#39;x[33]&#39;, &#39;x[34]&#39;, &#39;x[35]&#39;, &#39;x[36]&#39;, &#39;x[37]&#39;, &#39;x[38]&#39;, &#39;x[39]&#39;, &#39;x[40]&#39;, &#39;x[41]&#39;]
+
+Update: &lt;function estimator_update at 0x1685100d0&gt;
+Output: &lt;function estimator_output at 0x168512170&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ekf_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">ekf</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]],</span>
+    <span class="n">X0</span><span class="o">=</span><span class="p">[</span><span class="n">xe</span><span class="p">,</span> <span class="n">P0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">ekf_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_15_0.png" src="_images/mhe-pvtol_15_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the optimal estimation problem</span>
+<span class="n">traj_cost</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gaussian_likelihood_cost</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">Qv</span><span class="p">,</span> <span class="n">Qw</span><span class="p">)</span>
+<span class="n">init_cost</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">xhat</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">xhat</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">@</span> <span class="n">P0</span> <span class="o">@</span> <span class="p">(</span><span class="n">xhat</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">oep</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">OptimalEstimationProblem</span><span class="p">(</span>
+        <span class="n">sys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">traj_cost</span><span class="p">,</span> <span class="n">terminal_cost</span><span class="o">=</span><span class="n">init_cost</span><span class="p">)</span>
+
+<span class="c1"># Compute the estimate from the noisy signals</span>
+<span class="n">est</span> <span class="o">=</span> <span class="n">oep</span><span class="o">.</span><span class="n">compute_estimate</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">est</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Summary statistics:
+* Cost function calls: 5051
+* Final cost: 354.3319137685172
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_16_1.png" src="_images/mhe-pvtol_16_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the response of the estimator</span>
+<span class="n">plot_estimator_response</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">est</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_17_0.png" src="_images/mhe-pvtol_17_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Noise free and disturbance free =&gt; estimation should be near perfect</span>
+<span class="n">noisefree_cost</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">gaussian_likelihood_cost</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">Qv</span><span class="p">,</span> <span class="n">Qw</span><span class="o">*</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="n">oep0</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">OptimalEstimationProblem</span><span class="p">(</span>
+        <span class="n">sys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">noisefree_cost</span><span class="p">,</span> <span class="n">terminal_cost</span><span class="o">=</span><span class="n">init_cost</span><span class="p">)</span>
+<span class="n">est0</span> <span class="o">=</span> <span class="n">oep0</span><span class="o">.</span><span class="n">compute_estimate</span><span class="p">(</span><span class="n">Y0</span><span class="p">,</span> <span class="n">U0</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">lqr0_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+                            <span class="n">initial_guess</span><span class="o">=</span><span class="p">(</span><span class="n">lqr0_resp</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">V</span> <span class="o">*</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span>
+    <span class="n">timepts</span><span class="p">,</span> <span class="n">est0</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr0_resp</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">estimated_label</span><span class="o">=</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">bar x_</span><span class="si">{i}</span><span class="s1">$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Summary statistics:
+* Cost function calls: 9464
+* Final cost: 212754409.97292745
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_18_1.png" src="_images/mhe-pvtol_18_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_estimator_response</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">est0</span><span class="p">,</span> <span class="n">U0</span><span class="p">,</span> <span class="n">V</span><span class="o">*</span><span class="mi">0</span><span class="p">,</span> <span class="n">Y0</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_19_0.png" src="_images/mhe-pvtol_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Bounded-disturbances">
+<h3>Bounded disturbances<a class="headerlink" href="#Bounded-disturbances" title="Permalink to this heading">¶</a></h3>
+<p>Another thing that the MHE can handled is input distributions that are bounded. We implement that here by carrying out the optimal estimation problem with constraints.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V_clipped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;V[0]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">V_clipped</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;V[0] clipped&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;W[0]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_21_0.png" src="_images/mhe-pvtol_21_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">xe</span><span class="p">,</span> <span class="n">ue</span><span class="p">,</span> <span class="n">V_clipped</span><span class="p">,</span> <span class="n">W</span><span class="p">]</span>
+<span class="n">clipped_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">uvec</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="n">U_clipped</span> <span class="o">=</span> <span class="n">clipped_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>        <span class="c1"># controller input signals</span>
+<span class="n">Y_clipped</span> <span class="o">=</span> <span class="n">clipped_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span>    <span class="c1"># noisy output signals</span>
+
+<span class="n">traj_constraint</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">disturbance_range_constraint</span><span class="p">(</span>
+    <span class="n">sys</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">])</span>
+<span class="n">oep_clipped</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">OptimalEstimationProblem</span><span class="p">(</span>
+        <span class="n">sys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">traj_cost</span><span class="p">,</span> <span class="n">terminal_cost</span><span class="o">=</span><span class="n">init_cost</span><span class="p">,</span>
+        <span class="n">trajectory_constraints</span><span class="o">=</span><span class="n">traj_constraint</span><span class="p">)</span>
+
+<span class="n">est_clipped</span> <span class="o">=</span> <span class="n">oep_clipped</span><span class="o">.</span><span class="n">compute_estimate</span><span class="p">(</span>
+    <span class="n">Y_clipped</span><span class="p">,</span> <span class="n">U_clipped</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="n">lqr0_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">est_clipped</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;MHE with constraints&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ekf_unclipped</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">ekf</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">clipped_resp</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">clipped_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]],</span>
+    <span class="n">X0</span><span class="o">=</span><span class="p">[</span><span class="n">xe</span><span class="p">,</span> <span class="n">P0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">ekf_unclipped</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;EKF w/out constraints&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Summary statistics:
+* Cost function calls: 3572
+* Constraint calls: 3756
+* Final cost: 531.7451775567271
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_22_1.png" src="_images/mhe-pvtol_22_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_22_2.png" src="_images/mhe-pvtol_22_2.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_estimator_response</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">est_clipped</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V_clipped</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_23_0.png" src="_images/mhe-pvtol_23_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Moving-Horizon-Estimation-(MHE)">
+<h2>Moving Horizon Estimation (MHE)<a class="headerlink" href="#Moving-Horizon-Estimation-(MHE)" title="Permalink to this heading">¶</a></h2>
+<p>We can now move to implementation of a moving horizon estimator, using our fixed horizon optimal estimator.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a shorter horizon</span>
+<span class="n">mhe_timepts</span> <span class="o">=</span> <span class="n">timepts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">oep</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">OptimalEstimationProblem</span><span class="p">(</span>
+        <span class="n">sys</span><span class="p">,</span> <span class="n">mhe_timepts</span><span class="p">,</span> <span class="n">traj_cost</span><span class="p">,</span> <span class="n">terminal_cost</span><span class="o">=</span><span class="n">init_cost</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">mhe</span> <span class="o">=</span> <span class="n">oep</span><span class="o">.</span><span class="n">create_mhe_iosystem</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">est_mhe</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+        <span class="n">mhe</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">],</span> <span class="n">X0</span><span class="o">=</span><span class="n">resp</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">est_mhe</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MHE for continuous time systems not implemented&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MHE for continuous time systems not implemented
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create discrete time version of PVTOL</span>
+<span class="n">Ts</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample time: </span><span class="si">{</span><span class="n">Ts</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">dsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">Ts</span> <span class="o">*</span> <span class="n">sys</span><span class="o">.</span><span class="n">updfcn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">outfcn</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">Ts</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">state_labels</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">input_labels</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">output_labels</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dsys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Sample time: Ts=0.1
+&lt;NonlinearIOSystem&gt;: sys[9]
+Inputs (4): [&#39;F1&#39;, &#39;F2&#39;, &#39;Dx&#39;, &#39;Dy&#39;]
+Outputs (3): [&#39;x&#39;, &#39;y&#39;, &#39;theta&#39;]
+States (6): [&#39;x0&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;, &#39;x4&#39;, &#39;x5&#39;]
+
+Update: &lt;function &lt;lambda&gt; at 0x168af1360&gt;
+Output: &lt;function &lt;lambda&gt; at 0x168598940&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new list of time points</span>
+<span class="n">timepts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">Ts</span><span class="p">)</span>
+
+<span class="c1"># Create representative process disturbance and sensor noise vectors</span>
+<span class="c1"># np.random.seed(117)           # avoid figures changing from run to run</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">Qv</span><span class="p">)</span>
+<span class="c1"># V = np.clip(V0, -0.1, 0.1)    # Hold for later</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">Qw</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+<span class="c1"># plt.plot(timepts, V0[0], &#39;b--&#39;, label=&quot;V[0]&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;V[0]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;W[0]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_27_0.png" src="_images/mhe-pvtol_27_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a new trajectory over the longer time vector</span>
+<span class="n">uvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lqr_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">uvec</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>                    <span class="c1"># controller input signals</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span>                <span class="c1"># noisy output signals</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mhe_timepts</span> <span class="o">=</span> <span class="n">timepts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">oep</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">OptimalEstimationProblem</span><span class="p">(</span>
+        <span class="n">dsys</span><span class="p">,</span> <span class="n">mhe_timepts</span><span class="p">,</span> <span class="n">traj_cost</span><span class="p">,</span> <span class="n">terminal_cost</span><span class="o">=</span><span class="n">init_cost</span><span class="p">,</span>
+        <span class="n">disturbance_indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">mhe</span> <span class="o">=</span> <span class="n">oep</span><span class="o">.</span><span class="n">create_mhe_iosystem</span><span class="p">()</span>
+
+<span class="n">mhe_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">mhe</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">],</span> <span class="n">X0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">mhe_resp</span><span class="o">.</span><span class="n">states</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_29_0.png" src="_images/mhe-pvtol_29_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resimulate starting at the origin and moving to the &quot;initial&quot; condition</span>
+<span class="n">uvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">ue</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">W</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lqr_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">lqr_clsys</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="n">uvec</span><span class="p">,</span> <span class="n">xe</span><span class="p">)</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>                    <span class="c1"># controller input signals</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span>                <span class="c1"># noisy output signals</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mhe_timepts</span> <span class="o">=</span> <span class="n">timepts</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">oep</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">OptimalEstimationProblem</span><span class="p">(</span>
+        <span class="n">dsys</span><span class="p">,</span> <span class="n">mhe_timepts</span><span class="p">,</span> <span class="n">traj_cost</span><span class="p">,</span> <span class="n">terminal_cost</span><span class="o">=</span><span class="n">init_cost</span><span class="p">,</span>
+        <span class="n">disturbance_indices</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">mhe</span> <span class="o">=</span> <span class="n">oep</span><span class="o">.</span><span class="n">create_mhe_iosystem</span><span class="p">()</span>
+
+<span class="n">mhe_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">mhe</span><span class="p">,</span> <span class="n">timepts</span><span class="p">,</span> <span class="p">[</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">],</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">plot_state_comparison</span><span class="p">(</span><span class="n">timepts</span><span class="p">,</span> <span class="n">mhe_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">,</span> <span class="n">lqr_resp</span><span class="o">.</span><span class="n">states</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/mhe-pvtol_31_0.png" src="_images/mhe-pvtol_31_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kincar-fusion.html" class="btn btn-neutral float-left" title="Discrete Time Sensor Fusion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mpc_aircraft.html" class="btn btn-neutral float-right" title="Model Predictive Control: Aircraft Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

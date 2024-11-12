@@ -1,0 +1,6 @@
+﻿control.optimal.solve\_ocp
+==========================
+
+.. currentmodule:: control.optimal
+
+.. autofunction:: solve_ocp

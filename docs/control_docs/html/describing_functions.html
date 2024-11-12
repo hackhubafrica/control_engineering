@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Describing function analysis &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interconnect Tutorial" href="interconnect_tutorial.html" />
+    <link rel="prev" title="Cruise control" href="cruise.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Describing function analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Built-in-describing-functions">Built-in describing functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Stability-analysis-using-describing-functions">Stability analysis using describing functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Describing function analysis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/describing_functions.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="Describing-function-analysis">
+<h1>Describing function analysis<a class="headerlink" href="#Describing-function-analysis" title="Permalink to this heading">¶</a></h1>
+<p>Richard M. Murray, 27 Jan 2021</p>
+<p>This Jupyter notebook shows how to use the <code class="docutils literal notranslate"><span class="pre">descfcn</span></code> module of the Python Control Toolbox to perform describing function analysis of a nonlinear system. A brief introduction to describing functions can be found in <a class="reference external" href="https://fbsbook.org">Feedback Systems</a>, Section 10.5 (Generalized Notions of Gain and Phase).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Built-in-describing-functions">
+<h2>Built-in describing functions<a class="headerlink" href="#Built-in-describing-functions" title="Permalink to this heading">¶</a></h2>
+<p>The Python Control Toobox has a number of built-in functions that provide describing functions for some standard nonlinearities.</p>
+<div class="section" id="Saturation-nonlinearity">
+<h3>Saturation nonlinearity<a class="headerlink" href="#Saturation-nonlinearity" title="Permalink to this heading">¶</a></h3>
+<p>A saturation nonlinearity can be obtained using the <code class="docutils literal notranslate"><span class="pre">ct.saturation_nonlinearity</span></code> function. This function takes the saturation level as an argument.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saturation</span><span class="o">=</span><span class="n">ct</span><span class="o">.</span><span class="n">saturation_nonlinearity</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">saturation</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Input, x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Output, y = sat(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Input/output map for a saturation nonlinearity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_4_0.png" src="_images/describing_functions_4_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amp_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amp_range</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">describing_function</span><span class="p">(</span><span class="n">saturation</span><span class="p">,</span> <span class="n">amp_range</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Amplitude A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Describing function, N(A)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Describing function for a saturation nonlinearity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/murray/anaconda3/envs/python3.10-slycot/lib/python3.10/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
+  return np.asarray(x, float)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_5_1.png" src="_images/describing_functions_5_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Backlash-nonlinearity">
+<h3>Backlash nonlinearity<a class="headerlink" href="#Backlash-nonlinearity" title="Permalink to this heading">¶</a></h3>
+<p>A friction-dominated backlash nonlinearity can be obtained using the <code class="docutils literal notranslate"><span class="pre">ct.friction_backlash_nonlinearity</span></code> function. This function takes as is argument the size of the backlash region.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">backlash</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">friction_backlash_nonlinearity</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">backlash</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">x</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Input, x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Output, y = backlash(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Input/output map for a friction-dominated backlash nonlinearity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_7_0.png" src="_images/describing_functions_7_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amp_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">N_a</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">describing_function</span><span class="p">(</span><span class="n">backlash</span><span class="p">,</span> <span class="n">amp_range</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amp_range</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">N_a</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Amplitude A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude of describing function, N(A)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Describing function for a backlash nonlinearity&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amp_range</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">N_a</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Amplitude A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Phase of describing function, N(A)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Describing function for a backlash nonlinearity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_8_0.png" src="_images/describing_functions_8_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_8_1.png" src="_images/describing_functions_8_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="User-defined,-static-nonlinearities">
+<h3>User-defined, static nonlinearities<a class="headerlink" href="#User-defined,-static-nonlinearities" title="Permalink to this heading">¶</a></h3>
+<p>In addition to pre-defined nonlinearies, it is possible to computing describing functions for static nonlinearities. The describing function for any suitable nonlinear function can be computed numerically using the <code class="docutils literal notranslate"><span class="pre">describing_function</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a saturation nonlinearity as a simple function</span>
+<span class="k">def</span> <span class="nf">my_saturation</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">copysign</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">amp_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">amp_range</span><span class="p">,</span> <span class="n">ct</span><span class="o">.</span><span class="n">describing_function</span><span class="p">(</span><span class="n">my_saturation</span><span class="p">,</span> <span class="n">amp_range</span><span class="p">)</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Amplitude A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Describing function, N(A)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Describing function for a saturation nonlinearity&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_10_0.png" src="_images/describing_functions_10_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Stability-analysis-using-describing-functions">
+<h2>Stability analysis using describing functions<a class="headerlink" href="#Stability-analysis-using-describing-functions" title="Permalink to this heading">¶</a></h2>
+<p>Describing functions can be used to assess stability of closed loop systems consisting of a linear system and a static nonlinear using a Nyquist plot.</p>
+<div class="section" id="Limit-cycle-position-for-a-third-order-system-with-saturation-nonlinearity">
+<h3>Limit cycle position for a third order system with saturation nonlinearity<a class="headerlink" href="#Limit-cycle-position-for-a-third-order-system-with-saturation-nonlinearity" title="Permalink to this heading">¶</a></h3>
+<p>Consider a nonlinear feedback system consisting of a third-order linear system with transfer function <span class="math">H(s)</span> and a saturation nonlinearity having describing function <span class="math">N(a)</span>. Stability can be assessed by looking for points at which</p>
+<div class="math">
+<p><span class="math">H(j\omega) N(a) = -1</span></p>
+</div><p>The <code class="docutils literal notranslate"><span class="pre">describing_function_plot</span></code> function plots <span class="math">H(j\omega)</span> and <span class="math">-1/N(a)</span> and prints out the amplitudes and frequencies corresponding to intersections of these curves.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linear dynamics</span>
+<span class="n">H_simple</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Nonlinearity</span>
+<span class="n">F_saturation</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">saturation_nonlinearity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">00</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Describing function plot (return value = amp, freq)</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">describing_function_plot</span><span class="p">(</span><span class="n">H_simple</span><span class="p">,</span> <span class="n">F_saturation</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[(3.343977839541308, 1.4142156916816762)]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_13_1.png" src="_images/describing_functions_13_1.png" />
+</div>
+</div>
+<p>The intersection occurs at amplitude 3.3 and frequency 1.4 rad/sec (= 0.2 Hz) and thus we predict a limit cycle with amplitude 3.3 and period of approximately 5 seconds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an I/O system simulation to see what happens</span>
+<span class="n">io_saturation</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">NonlinearIOSystem</span><span class="p">(</span>
+    <span class="kc">None</span><span class="p">,</span>
+    <span class="k">lambda</span> <span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">F_saturation</span><span class="p">(</span><span class="n">u</span><span class="p">),</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">sys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">feedback</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">(</span><span class="n">H_simple</span><span class="p">),</span> <span class="n">io_saturation</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_15_0.png" src="_images/describing_functions_15_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Limit-cycle-prediction-with-for-a-time-delay-system-with-backlash">
+<h3>Limit cycle prediction with for a time-delay system with backlash<a class="headerlink" href="#Limit-cycle-prediction-with-for-a-time-delay-system-with-backlash" title="Permalink to this heading">¶</a></h3>
+<p>This example demonstrates a more complicated interaction between a (non-static) nonlinearity and a higher order transfer function, resulting in multiple intersection points.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Linear dynamics</span>
+<span class="n">H_simple</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">H_multiple</span> <span class="o">=</span> <span class="n">H_simple</span> <span class="o">*</span> <span class="n">ct</span><span class="o">.</span><span class="n">tf</span><span class="p">(</span><span class="o">*</span><span class="n">ct</span><span class="o">.</span><span class="n">pade</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">*</span> <span class="mi">4</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Nonlinearity</span>
+<span class="n">F_backlash</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">friction_backlash_nonlinearity</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">amp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Describing function plot</span>
+<span class="n">ct</span><span class="o">.</span><span class="n">describing_function_plot</span><span class="p">(</span><span class="n">H_multiple</span><span class="p">,</span> <span class="n">F_backlash</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">mirror_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[(0.6260158833534124, 0.3102619497970334),
+ (0.8741930326860968, 1.2156410944770426)]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/describing_functions_17_1.png" src="_images/describing_functions_17_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cruise.html" class="btn btn-neutral float-left" title="Cruise control" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="interconnect_tutorial.html" class="btn btn-neutral float-right" title="Interconnect Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

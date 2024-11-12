@@ -1,0 +1,6 @@
+﻿control.matlab.markov
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: markov

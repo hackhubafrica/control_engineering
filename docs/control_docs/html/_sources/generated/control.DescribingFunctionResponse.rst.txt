@@ -1,0 +1,23 @@
+﻿control.DescribingFunctionResponse
+==================================
+
+.. currentmodule:: control
+
+.. autoclass:: DescribingFunctionResponse
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DescribingFunctionResponse.__init__
+      ~DescribingFunctionResponse.plot
+   
+   
+
+   
+   
+   

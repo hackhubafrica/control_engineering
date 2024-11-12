@@ -1,0 +1,23 @@
+﻿control.flatsys.BSplineFamily
+=============================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: BSplineFamily
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~BSplineFamily.eval
+      ~BSplineFamily.eval_deriv
+      ~BSplineFamily.var_ncoefs
+   
+   

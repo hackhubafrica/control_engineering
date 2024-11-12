@@ -1,0 +1,6 @@
+﻿control.matlab.dcgain
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: dcgain

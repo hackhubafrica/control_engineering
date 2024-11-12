@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Secord order system (MATLAB module example)" href="secord-matlab.html" />
+    <link rel="prev" title="control.optimal.state_range_constraint" href="generated/control.optimal.state_range_constraint.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#python-scripts">Python scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="secord-matlab.html">Secord order system (MATLAB module example)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-nested.html">Inner/outer control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr.html">LQR control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rss-balred.html">Balanced model reduction examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="phase_plane_plots.html">Phase  plot examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_siso.html">SISO robust control example (SP96, Example 2.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="robust_mimo.html">MIMO robust control example (SP96, Example 3.8)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_H2_h2syn.html">H2 synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scherer_etal_ex7_Hinf_hinfsyn.html">Hinf synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cruise-control.html">Cruise control design example (as a nonlinear I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-gainsched.html">Gain scheduled control for vehicle steeering (I/O system)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering-optimal.html">Optimal control for vehicle steering (lane change)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-flatsys.html">Differentially flat system - kinematic car</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_mit.html">Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mrac_siso_lyapunov.html">Model-Reference Adaptive Control (MRAC) SISO, direct Lyapunov rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="markov.html">Estimation of Makrov parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="era_msd.html">ERA example, mass spring damper system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#jupyter-notebooks">Jupyter notebooks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="examples">
+<span id="id1"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h1>
+<p>The source code for the examples below are available in the <cite>examples/</cite>
+subdirectory of the source code distribution. They can also be accessed online
+via the <a class="reference external" href="https://github.com/python-control/python-control/tree/master/examples">python-control GitHub repository</a>.</p>
+<div class="section" id="python-scripts">
+<h2>Python scripts<a class="headerlink" href="#python-scripts" title="Permalink to this heading">¶</a></h2>
+<p>The following Python scripts document the use of a variety of methods in the
+Python Control Toolbox on examples drawn from standard control textbooks and
+other sources.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="secord-matlab.html">Secord order system (MATLAB module example)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pvtol-nested.html">Inner/outer control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pvtol-lqr.html">LQR control design for vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rss-balred.html">Balanced model reduction examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="phase_plane_plots.html">Phase  plot examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robust_siso.html">SISO robust control example (SP96, Example 2.1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robust_mimo.html">MIMO robust control example (SP96, Example 3.8)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scherer_etal_ex7_H2_h2syn.html">H2 synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scherer_etal_ex7_Hinf_hinfsyn.html">Hinf synthesis, based on Scherer et al. 1997 example 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cruise-control.html">Cruise control design example (as a nonlinear I/O system)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steering-gainsched.html">Gain scheduled control for vehicle steeering (I/O system)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steering-optimal.html">Optimal control for vehicle steering (lane change)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kincar-flatsys.html">Differentially flat system - kinematic car</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrac_siso_mit.html">Model-Reference Adaptive Control (MRAC) SISO, direct MIT rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrac_siso_lyapunov.html">Model-Reference Adaptive Control (MRAC) SISO, direct Lyapunov rule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="markov.html">Estimation of Makrov parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="era_msd.html">ERA example, mass spring damper system</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="jupyter-notebooks">
+<h2>Jupyter notebooks<a class="headerlink" href="#jupyter-notebooks" title="Permalink to this heading">¶</a></h2>
+<p>The examples below use <cite>python-control</cite> in a Jupyter notebook environment.
+These notebooks demonstrate the use of modeling, analysis, and design tools
+using examples from textbooks
+(<a class="reference external" href="https://fbswiki.org/wiki/index.php?title=FBS">FBS</a>,
+<a class="reference external" href="https://fbswiki.org/wiki/index.php?title=OBC">OBC</a>), courses, and other
+online sources.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kincar-fusion.html">Discrete Time Sensor Fusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="google-colab-notebooks">
+<h2>Google Colab Notebooks<a class="headerlink" href="#google-colab-notebooks" title="Permalink to this heading">¶</a></h2>
+<p>A collection of Jupyter notebooks are available on <a class="reference external" href="https://colab.research.google.com">Google Colab</a>, where they can be executed
+through a web browser:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://drive.google.com/drive/folders/1LI2xWVn1kqrZ5lIcM5Ktxr2B7X730cCj?usp=share_link">Caltech CDS 110 Google Colab notebooks</a>:
+Jupyter notebooks created by Richard Murray for CDS 110 (Analysis
+and Design of Feedback Systems) at Caltech.</p></li>
+</ul>
+<p>Note: in order to execute the Jupyter notebooks in this collection,
+you will need a Google account that has access to the Google
+Colaboratory application.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/control.optimal.state_range_constraint.html" class="btn btn-neutral float-left" title="control.optimal.state_range_constraint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="secord-matlab.html" class="btn btn-neutral float-right" title="Secord order system (MATLAB module example)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discrete Time Sensor Fusion &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css" />
+      <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Moving Horizon Estimation" href="mhe-pvtol.html" />
+    <link rel="prev" title="Interconnect Tutorial" href="interconnect_tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iosys.html">Input/output systems</a></li>
+<li class="toctree-l1"><a class="reference internal" href="descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html#python-scripts">Python scripts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="examples.html#jupyter-notebooks">Jupyter notebooks</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="cruise.html">Cruise control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="describing_functions.html">Describing function analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interconnect_tutorial.html">Interconnect Tutorial</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Discrete Time Sensor Fusion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#System-definition">System definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Linear-Quadratic-Estimator">Linear Quadratic Estimator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mhe-pvtol.html">Moving Horizon Estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mpc_aircraft.html">Model Predictive Control: Aircraft Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-lqr-nested.html">Vertical takeoff and landing aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pvtol-outputfbk.html">Output feedback control using LQR and extended Kalman filtering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simulating_discrete_nonlinear.html">Simulating interconnections of systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="steering.html">Vehicle steering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stochresp.html">Stochastic Response</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#google-colab-notebooks">Google Colab Notebooks</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Discrete Time Sensor Fusion</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/kincar-fusion.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="Discrete-Time-Sensor-Fusion">
+<h1>Discrete Time Sensor Fusion<a class="headerlink" href="#Discrete-Time-Sensor-Fusion" title="Permalink to this heading">¶</a></h1>
+<p>RMM, 24 Feb 2022</p>
+<p>In this example we work through estimation of the state of a car changing lanes with two different sensors available: one with good longitudinal accuracy and the other with good lateral accuracy.</p>
+<p>All calculations are done in discrete time, using both a Kalman filter formulation and predictor-corrector form.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">control</span> <span class="k">as</span> <span class="nn">ct</span>
+<span class="kn">import</span> <span class="nn">control.optimal</span> <span class="k">as</span> <span class="nn">opt</span>
+<span class="kn">import</span> <span class="nn">control.flatsys</span> <span class="k">as</span> <span class="nn">fs</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># Define line styles</span>
+<span class="n">ebarstyle</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;elinewidth&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;capsize&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">xdstyle</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+           <span class="s1">&#39;marker&#39;</span><span class="p">:</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;markersize&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="System-definition">
+<h2>System definition<a class="headerlink" href="#System-definition" title="Permalink to this heading">¶</a></h2>
+<p>We consider a bicycle model for an automobile:</p>
+<p><img alt="a3e24c7f77f14772a607d9e31ed5a24e" class="no-scaled-link" src="_images/vehicle-steering.png" style="width: 400px;" /></p>
+<div class="section" id="Continuous-time-model">
+<h3>Continuous time model<a class="headerlink" href="#Continuous-time-model" title="Permalink to this heading">¶</a></h3>
+<p>The dynamics are given by</p>
+<div class="math">
+<p><span class="math">\begin{aligned}
+  \dot x &amp;= \cos\theta \, v, \qquad
+  \dot y &amp;= \sin\theta \, v, \qquad
+  \dot \theta &amp;= \frac{v}{l} \tan\phi,
+\end{aligned}</span></p>
+</div><p>where <span class="math">(x, y, \theta)</span> are the position and orientation of the vehicle, <span class="math">v</span> is the forward velocity, <span class="math">\phi</span> is the steering wheel angle, and <span class="math">l</span> is the wheelbase.</p>
+<p>These dynamics are included in the file <code class="docutils literal notranslate"><span class="pre">vehicle.py</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vehicle steering dynamics</span>
+<span class="c1">#</span>
+<span class="c1"># System state: x, y, theta</span>
+<span class="c1"># System input: v, phi</span>
+<span class="c1"># System output: x, y</span>
+<span class="c1"># System parameters: wheelbase, maxsteer</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">vehicle</span> <span class="kn">import</span> <span class="n">vehicle</span><span class="p">,</span> <span class="n">plot_lanechange</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vehicle</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;FlatSystem&gt;: vehicle
+Inputs (2): [&#39;v&#39;, &#39;delta&#39;]
+Outputs (3): [&#39;x&#39;, &#39;y&#39;, &#39;theta&#39;]
+States (3): [&#39;x&#39;, &#39;y&#39;, &#39;theta&#39;]
+
+Update: &lt;function _vehicle_update at 0x16603bd90&gt;
+Output: &lt;function _vehicle_output at 0x16605c0d0&gt;
+
+Forward: &lt;function _vehicle_flat_forward at 0x10dba2f80&gt;
+Reverse: &lt;function _vehicle_flat_reverse at 0x16603bd00&gt;
+</pre></div></div>
+</div>
+<p>This system is differentially flat and so we can define a trajectory for the system using the <code class="docutils literal notranslate"><span class="pre">flatsys</span></code> module. We generate a motion that corresponds to changing lanes on a road:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a trajectory for the vehicle</span>
+<span class="c1"># Define the endpoints of the trajectory</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">u0</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">xf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">40.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">];</span> <span class="n">uf</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="n">Tf</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># Find a trajectory between the initial condition and the final condition</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">point_to_point</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">Tf</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">xf</span><span class="p">,</span> <span class="n">uf</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="n">fs</span><span class="o">.</span><span class="n">PolyFamily</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Create the desired trajectory between the initial and final condition</span>
+<span class="n">Ts</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="c1"># Ts = 0.5</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Tf</span> <span class="o">+</span> <span class="n">Ts</span><span class="p">,</span> <span class="n">Ts</span><span class="p">)</span>
+<span class="n">xd</span><span class="p">,</span> <span class="n">ud</span> <span class="o">=</span> <span class="n">traj</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">plot_lanechange</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">,</span> <span class="n">ud</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/kincar-fusion_5_0.png" src="_images/kincar-fusion_5_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Discrete-time-system-model">
+<h3>Discrete time system model<a class="headerlink" href="#Discrete-time-system-model" title="Permalink to this heading">¶</a></h3>
+<p>For the model that we use for the Kalman filter, we take a simple discretization using the approximation that <span class="math">\dot x = (x[k+1] - x[k])/T_s</span> where <span class="math">T_s</span> is the sampling time.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Create a discrete time, linear model</span>
+<span class="c1">#</span>
+
+<span class="c1"># Linearize about the starting point</span>
+<span class="n">linsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">linearize</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">u0</span><span class="p">)</span>
+
+<span class="c1"># Create a discrete time model by hand</span>
+<span class="n">Ad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">linsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">)</span> <span class="o">+</span> <span class="n">linsys</span><span class="o">.</span><span class="n">A</span> <span class="o">*</span> <span class="n">Ts</span>
+<span class="n">Bd</span> <span class="o">=</span> <span class="n">linsys</span><span class="o">.</span><span class="n">B</span> <span class="o">*</span> <span class="n">Ts</span>
+<span class="n">discsys</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">ss</span><span class="p">(</span><span class="n">Ad</span><span class="p">,</span> <span class="n">Bd</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">linsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">discsys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;StateSpace&gt;: sys[3]
+Inputs (2): [&#39;u[0]&#39;, &#39;u[1]&#39;]
+Outputs (3): [&#39;y[0]&#39;, &#39;y[1]&#39;, &#39;y[2]&#39;]
+States (3): [&#39;x[0]&#39;, &#39;x[1]&#39;, &#39;x[2]&#39;]
+
+A = [[ 1.0000000e+00  0.0000000e+00 -5.0004445e-07]
+     [ 0.0000000e+00  1.0000000e+00  1.0000000e+00]
+     [ 0.0000000e+00  0.0000000e+00  1.0000000e+00]]
+
+B = [[0.1        0.        ]
+     [0.         0.        ]
+     [0.         0.33333333]]
+
+C = [[1. 0. 0.]
+     [0. 1. 0.]
+     [0. 0. 1.]]
+
+D = [[0. 0.]
+     [0. 0.]
+     [0. 0.]]
+
+dt = 0.1
+
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Sensor-model">
+<h3>Sensor model<a class="headerlink" href="#Sensor-model" title="Permalink to this heading">¶</a></h3>
+<p>We assume that we have two sensors: one with good longitudinal accuracy and the other with good lateral accuracy. For each sensor we define the map from the state space to the sensor outputs, the covariance matrix for the measurements, and a white noise signal (now in discrete time).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sensor #1: longitudinal</span>
+<span class="n">C_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">discsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">)</span>
+<span class="n">Rw_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">W_lon</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Rw_lon</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+
+<span class="c1"># Sensor #2: lateral</span>
+<span class="n">C_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">discsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">)</span>
+<span class="n">Rw_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">W_lat</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">white_noise</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">Rw_lat</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">Ts</span><span class="p">)</span>
+
+<span class="c1"># Plot the noisy signals</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">W_lon</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">xdstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$ position [m]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$y$ position [m]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sensor #1&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">W_lat</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">xdstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$ position [m]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$y$ position [m]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sensor #2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/kincar-fusion_9_0.png" src="_images/kincar-fusion_9_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Linear-Quadratic-Estimator">
+<h2>Linear Quadratic Estimator<a class="headerlink" href="#Linear-Quadratic-Estimator" title="Permalink to this heading">¶</a></h2>
+<p>To estimate the position of the vehicle, we construct an optimal estimator (Kalman filter).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Create an estimator for the system</span>
+<span class="c1">#</span>
+
+<span class="c1"># Disturbance and initial condition model</span>
+<span class="n">Rv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span> <span class="o">*</span> <span class="n">Ts</span>
+<span class="c1"># Rv = np.diag([10, 0.1]) * Ts  # No input data</span>
+<span class="n">P0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+
+<span class="c1"># Combine the sensors</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">C_lon</span><span class="p">,</span> <span class="n">C_lat</span><span class="p">])</span>
+<span class="n">Rw</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">block_diag</span><span class="p">(</span><span class="n">Rw_lon</span><span class="p">,</span> <span class="n">Rw_lat</span><span class="p">)</span>
+
+<span class="n">estim</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">create_estimator_iosystem</span><span class="p">(</span><span class="n">discsys</span><span class="p">,</span> <span class="n">Rv</span><span class="p">,</span> <span class="n">Rw</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">P0</span><span class="o">=</span><span class="n">P0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">estim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;NonlinearIOSystem&gt;: sys[4]
+Inputs (6): [&#39;y[0]&#39;, &#39;y[1]&#39;, &#39;y[2]&#39;, &#39;y[3]&#39;, &#39;u[0]&#39;, &#39;u[1]&#39;]
+Outputs (3): [&#39;xhat[0]&#39;, &#39;xhat[1]&#39;, &#39;xhat[2]&#39;]
+States (12): [&#39;xhat[0]&#39;, &#39;xhat[1]&#39;, &#39;xhat[2]&#39;, &#39;P[0,0]&#39;, &#39;P[0,1]&#39;, &#39;P[0,2]&#39;, &#39;P[1,0]&#39;, &#39;P[1,1]&#39;, &#39;P[1,2]&#39;, &#39;P[2,0]&#39;, &#39;P[2,1]&#39;, &#39;P[2,2]&#39;]
+
+Update: &lt;function create_estimator_iosystem.&lt;locals&gt;._estim_update at 0x166ac1120&gt;
+Output: &lt;function create_estimator_iosystem.&lt;locals&gt;._estim_output at 0x166ac0dc0&gt;
+</pre></div></div>
+</div>
+<p>Finally, we estimate the position of the vehicle based on sensor measurements. We assume that the input to the vehicle (velocity and steering angle) is available, though we can also explore what happens if that information is not available (see commented out code).</p>
+<p>We also carry out a prediction of the position of the vehicle by turning off the correction term in the Kalman filter.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the inputs to the estimator</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">W_lon</span><span class="p">,</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">W_lat</span><span class="p">])</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">Y</span><span class="p">,</span> <span class="n">ud</span><span class="p">])</span>      <span class="c1"># add input to the Kalman filter</span>
+<span class="c1"># U = np.vstack([Y, ud * 0])  # with no input information</span>
+<span class="n">X0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">xd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">P0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+<span class="c1"># Run the estimator on the trajectory</span>
+<span class="n">estim_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span><span class="n">estim</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">X0</span><span class="p">)</span>
+
+<span class="c1"># Run a prediction to see what happens next</span>
+<span class="n">T_predict</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">T</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">Ts</span><span class="p">,</span> <span class="n">Ts</span><span class="p">)</span>
+<span class="n">U_predict</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">U</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">T_predict</span><span class="p">))</span>
+<span class="n">predict_resp</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">input_output_response</span><span class="p">(</span>
+    <span class="n">estim</span><span class="p">,</span> <span class="n">T_predict</span><span class="p">,</span> <span class="n">U_predict</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;correct&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+
+<span class="c1"># Plot the estimated trajectory versus the actual trajectory</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[0,0]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">predict_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[0,0]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$x$ position [m]&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[1,1]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">predict_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[1,1]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="c1"># lims = plt.axis(); plt.axis([lims[0], lims[1], -5, 5])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$y$ position [m]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time $t$ [s]&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/kincar-fusion_13_0.png" src="_images/kincar-fusion_13_0.png" />
+</div>
+</div>
+<p>More insight can be obtained by focusing on the errors in prediction:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the estimated errors</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[0,0]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">predict_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[0,0]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="c1"># lims = plt.axis(); plt.axis([lims[0], lims[1], -2, 0.2])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">estim_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[1,1]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">predict_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">predict_resp</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">estim</span><span class="o">.</span><span class="n">find_state</span><span class="p">(</span><span class="s1">&#39;P[1,1]&#39;</span><span class="p">)],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/kincar-fusion_15_0.png" src="_images/kincar-fusion_15_0.png" />
+</div>
+</div>
+<div class="section" id="Things-to-try">
+<h3>Things to try<a class="headerlink" href="#Things-to-try" title="Permalink to this heading">¶</a></h3>
+<p>To gain a bit more insight into sensor fusion, you can try the following: * Remove the input (and update P0) * Change the sampling rate</p>
+</div>
+<div class="section" id="Predictor-corrector-form">
+<h3>Predictor-corrector form<a class="headerlink" href="#Predictor-corrector-form" title="Permalink to this heading">¶</a></h3>
+<p>Instead of using <code class="docutils literal notranslate"><span class="pre">create_estimator_iosystem</span></code>, we can also compute out the estimate in a more manual fashion, done here using the predictor-corrector form:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># System matrices</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">discsys</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="n">discsys</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">discsys</span><span class="o">.</span><span class="n">B</span>
+
+<span class="c1"># Create an array to store the results</span>
+<span class="n">xhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">discsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">discsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">,</span> <span class="n">discsys</span><span class="o">.</span><span class="n">nstates</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+
+<span class="c1"># Update the estimates at each time</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="c1"># Prediction step</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Use the initial condition</span>
+        <span class="n">xkkm1</span> <span class="o">=</span> <span class="n">xd</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">Pkkm1</span> <span class="o">=</span> <span class="n">P0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xkkm1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">xkk</span> <span class="o">+</span> <span class="n">B</span> <span class="o">@</span> <span class="n">ud</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Pkkm1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">Pkk</span> <span class="o">@</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">F</span> <span class="o">@</span> <span class="n">Rv</span> <span class="o">@</span> <span class="n">F</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># Correction step</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">Pkkm1</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Rw</span> <span class="o">+</span> <span class="n">C</span> <span class="o">@</span> <span class="n">Pkkm1</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">xkk</span> <span class="o">=</span> <span class="n">xkkm1</span> <span class="o">-</span> <span class="n">L</span> <span class="o">@</span> <span class="p">(</span><span class="n">C</span> <span class="o">@</span> <span class="n">xkkm1</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+    <span class="n">Pkk</span> <span class="o">=</span> <span class="n">Pkkm1</span> <span class="o">-</span> <span class="n">L</span> <span class="o">@</span> <span class="n">C</span> <span class="o">@</span> <span class="n">Pkkm1</span>
+
+    <span class="c1"># Save the state estimate and covariance for later plotting</span>
+    <span class="n">xhat</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">P</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xkk</span><span class="p">,</span> <span class="n">Pkk</span>
+    <span class="c1"># xhat[:, i], P[:, :, i] = xkkm1, Pkkm1  # For comparison to Kalman form</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xhat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$x$ position [m]&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xhat</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$x$ position [m]&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/kincar-fusion_18_0.png" src="_images/kincar-fusion_18_0.png" />
+</div>
+</div>
+<p>We can compare the results of the predictor-corrector form to the Kalman filter form used at the top of the notebook:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the estimated errors (and compare to Kalman form)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xhat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">estim_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">xhat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">ebarstyle</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">estim_resp</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">estim_resp</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r--&#39;</span><span class="p">)</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="n">lims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lims</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/kincar-fusion_20_0.png" src="_images/kincar-fusion_20_0.png" />
+</div>
+</div>
+<p>Note that the estimates are not the same! It turns out that to get the correspondence of the two formulations, we need to define <span class="math">\hat{x}_\text{KF}(k) = \hat{x}_\text{PC}(k|k-1)</span> (see commented out code above).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="interconnect_tutorial.html" class="btn btn-neutral float-left" title="Interconnect Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mhe-pvtol.html" class="btn btn-neutral float-right" title="Moving Horizon Estimation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

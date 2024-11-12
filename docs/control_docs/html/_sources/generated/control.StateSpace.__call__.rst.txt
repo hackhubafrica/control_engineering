@@ -1,0 +1,6 @@
+﻿control.StateSpace.\_\_call\_\_
+===============================
+
+.. currentmodule:: control
+
+.. automethod:: StateSpace.__call__

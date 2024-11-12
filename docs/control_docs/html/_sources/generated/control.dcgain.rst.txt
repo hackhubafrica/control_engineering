@@ -1,0 +1,6 @@
+﻿control.dcgain
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: dcgain

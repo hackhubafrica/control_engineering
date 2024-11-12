@@ -1,0 +1,6 @@
+﻿control.place\_varga
+====================
+
+.. currentmodule:: control
+
+.. autofunction:: place_varga

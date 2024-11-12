@@ -1,0 +1,40 @@
+﻿control.flatsys.FlatSystem
+==========================
+
+.. currentmodule:: control.flatsys
+
+.. autoclass:: FlatSystem
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~FlatSystem.copy
+      ~FlatSystem.dynamics
+      ~FlatSystem.feedback
+      ~FlatSystem.find_input
+      ~FlatSystem.find_inputs
+      ~FlatSystem.find_output
+      ~FlatSystem.find_outputs
+      ~FlatSystem.find_state
+      ~FlatSystem.find_states
+      ~FlatSystem.forward
+      ~FlatSystem.isctime
+      ~FlatSystem.isdtime
+      ~FlatSystem.issiso
+      ~FlatSystem.linearize
+      ~FlatSystem.output
+      ~FlatSystem.reverse
+      ~FlatSystem.set_inputs
+      ~FlatSystem.set_outputs
+      ~FlatSystem.set_states
+      ~FlatSystem.update_names
+   
+   

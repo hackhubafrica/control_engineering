@@ -1,0 +1,6 @@
+﻿control.mag2db
+==============
+
+.. currentmodule:: control
+
+.. autofunction:: mag2db

@@ -1,0 +1,6 @@
+﻿control.ss2tf
+=============
+
+.. currentmodule:: control
+
+.. autofunction:: ss2tf

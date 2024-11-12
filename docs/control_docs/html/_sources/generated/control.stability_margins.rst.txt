@@ -1,0 +1,6 @@
+﻿control.stability\_margins
+==========================
+
+.. currentmodule:: control
+
+.. autofunction:: stability_margins

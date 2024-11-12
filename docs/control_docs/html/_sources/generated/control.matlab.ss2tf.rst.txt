@@ -1,0 +1,6 @@
+﻿control.matlab.ss2tf
+====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: ss2tf

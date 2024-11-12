@@ -1,0 +1,6 @@
+﻿control.matlab.evalfr
+=====================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: evalfr

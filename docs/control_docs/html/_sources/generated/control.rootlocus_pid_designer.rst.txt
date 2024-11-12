@@ -1,0 +1,6 @@
+﻿control.rootlocus\_pid\_designer
+================================
+
+.. currentmodule:: control
+
+.. autofunction:: rootlocus_pid_designer

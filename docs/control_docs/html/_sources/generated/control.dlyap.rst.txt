@@ -1,0 +1,6 @@
+﻿control.dlyap
+=============
+
+.. currentmodule:: control
+
+.. autofunction:: dlyap

@@ -1,0 +1,6 @@
+﻿control.matlab.bode
+===================
+
+.. currentmodule:: control.matlab
+
+.. autofunction:: bode

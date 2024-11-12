@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>control.InputOutputSystem &mdash; Python Control Systems Library 0.10.1-8-gcc0020a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="control.LTI" href="control.LTI.html" />
+    <link rel="prev" title="Control system classes" href="../classes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Python Control Systems Library
+          </a>
+              <div class="version">
+                0.10.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conventions.html">Library conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../control.html">Function reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes.html">Control system classes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting.html">Plotting data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab.html">MATLAB compatibility module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flatsys.html">Differentially flat systems</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../iosys.html">Input/output systems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#module-usage">Module usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iosys.html#additional-features">Additional features</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../iosys.html#module-classes-and-functions">Module classes and functions</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">control.InputOutputSystem</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control.InputOutputSystem"><code class="docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="control.InterconnectedSystem.html">control.InterconnectedSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.LinearICSystem.html">control.LinearICSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.NonlinearIOSystem.html">control.NonlinearIOSystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.find_eqpt.html">control.find_eqpt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.interconnect.html">control.interconnect</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.input_output_response.html">control.input_output_response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.linearize.html">control.linearize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.nlsys.html">control.nlsys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="control.summing_junction.html">control.summing_junction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../descfcn.html">Describing functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimal.html">Optimization-based control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Control Systems Library</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../classes.html">Control system classes</a></li>
+      <li class="breadcrumb-item active">control.InputOutputSystem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/control.InputOutputSystem.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="control-inputoutputsystem">
+<h1>control.InputOutputSystem<a class="headerlink" href="#control-inputoutputsystem" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="control.InputOutputSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">control.</span></span><span class="sig-name descname"><span class="pre">InputOutputSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L36-L457"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for representing input/output systems.</p>
+<p>The InputOutputSystem class allows (possibly nonlinear) input/output
+systems to be represented in Python.  It is used as a parent class for
+a set of subclasses that are used to implement specific structures and
+operations for different types of input/output dynamical systems.</p>
+<p>The timebase for the system, dt, is used to specify whether the system
+is operating in continuous or discrete time. It can have the following
+values:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>dt = None       No timebase specified</p></li>
+<li><p>dt = 0          Continuous time system</p></li>
+<li><p>dt &gt; 0          Discrete time system with sampling time dt</p></li>
+<li><p>dt = True       Discrete time system with unspecified sampling time</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system inputs.  This can be given as an integer
+count or a list of strings that name the individual signals.  If an
+integer count is specified, the names of the signal will be of the
+form ‘s[i]’ (where ‘s’ is given by the <cite>input_prefix</cite> parameter and
+has default value ‘u’).  If this parameter is not given or given as
+<cite>None</cite>, the relevant quantity will be determined when possible
+based on other information provided to functions using the system.</p></li>
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system outputs.  Same format as <cite>inputs</cite>, with
+the prefix given by output_prefix (defaults to ‘y’).</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system states.  Same format as <cite>inputs</cite>, with
+the prefix given by state_prefix (defaults to ‘x’).</p></li>
+<li><p><strong>dt</strong> (<em>None</em><em>, </em><em>True</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – System timebase. 0 (default) indicates continuous time, True
+indicates discrete time with unspecified sampling time, positive
+number is discrete time with specified sampling time, None indicates
+unspecified timebase (either continuous or discrete time).</p></li>
+<li><p><strong>name</strong> (<em>string</em><em>, </em><em>optional</em>) – System name (used for specifying signals). If unspecified, a generic
+name &lt;sys[id]&gt; is generated with a unique integer id.</p></li>
+<li><p><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Parameter values for the system.  Passed to the evaluation functions
+for the system as default values, overriding internal defaults.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ninputs,</span> <span class="pre">noutputs,</span> <span class="pre">nstates</span></span></dt>
+<dd><p>Number of input, output and state variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">input_index,</span> <span class="pre">output_index,</span> <span class="pre">state_index</span></span></dt>
+<dd><p>Dictionary of signal names for the inputs, outputs and states and the
+index of the corresponding array</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InputOutputSystem.dt">
+<span class="sig-name descname"><span class="pre">dt</span></span><a class="headerlink" href="#control.InputOutputSystem.dt" title="Permalink to this definition">¶</a></dt>
+<dd><p>System timebase. 0 (default) indicates continuous time, True indicates
+discrete time with unspecified sampling time, positive number is
+discrete time with specified sampling time, None indicates unspecified
+timebase (either continuous or discrete time).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>None, True or float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InputOutputSystem.params">
+<span class="sig-name descname"><span class="pre">params</span></span><a class="headerlink" href="#control.InputOutputSystem.params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parameter values for the systems.  Passed to the evaluation functions
+for the system as default values, overriding internal defaults.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InputOutputSystem.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#control.InputOutputSystem.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>System name (used for specifying signals)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – Set the prefix for input signals.  Default = ‘u’.</p></li>
+<li><p><strong>output_prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – Set the prefix for output signals.  Default = ‘y’.</p></li>
+<li><p><strong>state_prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – Set the prefix for state signals.  Default = ‘x’.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.copy" title="control.InputOutputSystem.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a></p></td>
+<td><p>Make a copy of an input/output system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.find_input" title="control.InputOutputSystem.find_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_input</span></code></a></p></td>
+<td><p>Find the index for an input given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.find_inputs" title="control.InputOutputSystem.find_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_inputs</span></code></a></p></td>
+<td><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.find_output" title="control.InputOutputSystem.find_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_output</span></code></a></p></td>
+<td><p>Find the index for an output given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.find_outputs" title="control.InputOutputSystem.find_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_outputs</span></code></a></p></td>
+<td><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.find_state" title="control.InputOutputSystem.find_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_state</span></code></a></p></td>
+<td><p>Find the index for a state given its name (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.find_states" title="control.InputOutputSystem.find_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_states</span></code></a></p></td>
+<td><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.isctime" title="control.InputOutputSystem.isctime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isctime</span></code></a></p></td>
+<td><p>Check to see if a system is a continuous-time system.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.isdtime" title="control.InputOutputSystem.isdtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isdtime</span></code></a></p></td>
+<td><p>Check to see if a system is a discrete-time system</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.issiso" title="control.InputOutputSystem.issiso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">issiso</span></code></a></p></td>
+<td><p>Check to see if a system is single input, single output.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.set_inputs" title="control.InputOutputSystem.set_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_inputs</span></code></a></p></td>
+<td><p>Set the number/names of the system inputs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.set_outputs" title="control.InputOutputSystem.set_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_outputs</span></code></a></p></td>
+<td><p>Set the number/names of the system outputs.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#control.InputOutputSystem.set_states" title="control.InputOutputSystem.set_states"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_states</span></code></a></p></td>
+<td><p>Set the number/names of the system states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#control.InputOutputSystem.update_names" title="control.InputOutputSystem.update_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_names</span></code></a></p></td>
+<td><p>Update signal and system names for an I/O system.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_prefix_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L247-L270"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a copy of an input/output system</p>
+<p>A copy of the system is made, with a new name.  The <cite>name</cite> keyword
+can be used to specify a specific name for the system.  If no name
+is given and <cite>use_prefix_suffix</cite> is True, the name is constructed
+by prepending config.defaults[‘iosys.duplicate_system_name_prefix’]
+and appending config.defaults[‘iosys.duplicate_system_name_suffix’].
+Otherwise, a generic system name of the form <cite>sys[&lt;id&gt;]</cite> is used,
+where <cite>&lt;id&gt;</cite> is based on an internal counter.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.find_input">
+<span class="sig-name descname"><span class="pre">find_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L292-L294"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.find_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an input given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.find_inputs">
+<span class="sig-name descname"><span class="pre">find_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L296-L298"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.find_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching input spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.find_output">
+<span class="sig-name descname"><span class="pre">find_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L325-L327"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.find_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for an output given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.find_outputs">
+<span class="sig-name descname"><span class="pre">find_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L329-L331"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.find_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching output spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.find_state">
+<span class="sig-name descname"><span class="pre">find_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L358-L360"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.find_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index for a state given its name (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.find_states">
+<span class="sig-name descname"><span class="pre">find_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_list</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L362-L364"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.find_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return list of indices matching state spec (<cite>None</cite> if not found)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.isctime">
+<span class="sig-name descname"><span class="pre">isctime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L416-L431"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.isctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a continuous-time system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sys</strong> (<em>Named I/O system</em>) – System to be checked</p></li>
+<li><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.isdtime">
+<span class="sig-name descname"><span class="pre">isdtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L433-L449"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.isdtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is a discrete-time system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strict</strong> (<em>bool</em><em>, </em><em>optional</em>) – If strict is True, make sure that timebase is not None.  Default
+is False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.issiso">
+<span class="sig-name descname"><span class="pre">issiso</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L451-L453"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.issiso" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check to see if a system is single input, single output.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InputOutputSystem.ninputs">
+<span class="sig-name descname"><span class="pre">ninputs</span></span><a class="headerlink" href="#control.InputOutputSystem.ninputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system inputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InputOutputSystem.noutputs">
+<span class="sig-name descname"><span class="pre">noutputs</span></span><a class="headerlink" href="#control.InputOutputSystem.noutputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system outputs.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="control.InputOutputSystem.nstates">
+<span class="sig-name descname"><span class="pre">nstates</span></span><a class="headerlink" href="#control.InputOutputSystem.nstates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of system states.</p>
+<dl class="field-list simple">
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.set_inputs">
+<span class="sig-name descname"><span class="pre">set_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'u'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L272-L290"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system inputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>inputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘u’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.set_outputs">
+<span class="sig-name descname"><span class="pre">set_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L305-L323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.set_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system outputs.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>outputs</cite> is an integer, create the names of the states using
+the given prefix (default = ‘y’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.set_states">
+<span class="sig-name descname"><span class="pre">set_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">states</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L338-L356"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.set_states" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the number/names of the system states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, or </em><em>None</em>) – Description of the system states.  This can be given as an integer
+count or as a list of strings that name the individual signals.
+If an integer count is specified, the names of the signal will be
+of the form <cite>u[i]</cite> (where the prefix <cite>u</cite> can be changed using the
+optional prefix parameter).</p></li>
+<li><p><strong>prefix</strong> (<em>string</em><em>, </em><em>optional</em>) – If <cite>states</cite> is an integer, create the names of the states using
+the given prefix (default = ‘x’).  The names of the input will be
+of the form <cite>prefix[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="control.InputOutputSystem.update_names">
+<span class="sig-name descname"><span class="pre">update_names</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="optional">]</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/python-control/python-control/blob/main/control/iosys.py#L372-L413"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#control.InputOutputSystem.update_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update signal and system names for an I/O system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – New system name.</p></li>
+<li><p><strong>inputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – List of strings that name the individual input signals.  If
+given as an integer or None, signal names default to the form
+<cite>u[i]</cite>.  See <a class="reference internal" href="#control.InputOutputSystem" title="control.InputOutputSystem"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputOutputSystem</span></code></a> for more information.</p></li>
+<li><p><strong>outputs</strong> (<em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of output signals; defaults to <cite>y[i]</cite>.</p></li>
+<li><p><strong>states</strong> (<em>int</em><em>, </em><em>list</em><em> of </em><em>str</em><em>, </em><em>int</em><em>, or </em><em>None</em><em>, </em><em>optional</em>) – Description of system states; defaults to <cite>x[i]</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../classes.html" class="btn btn-neutral float-left" title="Control system classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="control.LTI.html" class="btn btn-neutral float-right" title="control.LTI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, python-control.org.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

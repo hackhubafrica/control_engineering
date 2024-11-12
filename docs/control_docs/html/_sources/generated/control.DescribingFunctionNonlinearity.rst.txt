@@ -1,0 +1,21 @@
+﻿control.DescribingFunctionNonlinearity
+======================================
+
+.. currentmodule:: control
+
+.. autoclass:: DescribingFunctionNonlinearity
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members:
+
+   
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :nosignatures:
+   
+      ~DescribingFunctionNonlinearity.describing_function
+   
+   
